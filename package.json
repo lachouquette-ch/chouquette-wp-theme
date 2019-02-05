@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)",
   "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fdouchant/chouquette-wp-theme.git"
@@ -18,9 +15,25 @@
   },
   "homepage": "https://github.com/fdouchant/chouquette-wp-theme#readme",
   "devDependencies": {
+    "banner-plugin": "^1.0.10",
+    "clean-webpack-plugin": "^1.0.1",
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1"
+  },
+  "scripts": {
+    "build": "webpack --verbose --progress --colors --optimize-minimize",
+    "watch": "webpack --verbose --progress --colors --watch"
+  },
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7"
   }
 }
