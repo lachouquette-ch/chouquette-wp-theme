@@ -27,6 +27,7 @@ if ( ! function_exists( 'chouquette_setup' ) ) :
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
 
+		// TODO remove since title will be fix
 		/*
 		 * Let WordPress manage the document title.
 		 * By adding theme support, we declare that this theme does not use a
@@ -42,8 +43,9 @@ if ( ! function_exists( 'chouquette_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
+		// TODO remove since nav will be fix
 		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
+        register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'chouquette' ),
 		) );
 
@@ -59,15 +61,18 @@ if ( ! function_exists( 'chouquette_setup' ) ) :
 			'caption',
 		) );
 
+		// TODO remove since background will be fix
 		// Set up the WordPress core custom background feature.
 		add_theme_support( 'custom-background', apply_filters( 'chouquette_custom_background_args', array(
 			'default-color' => 'ffffff',
 			'default-image' => '',
 		) ) );
 
+		// TODO what is this ?
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
+		// TODO remove since logo should be fix
 		/**
 		 * Add support for core custom logo.
 		 *
