@@ -109,6 +109,7 @@ add_action( 'after_setup_theme', 'chouquette_content_width', 0 );
 function chouquette_scripts() {
 	wp_enqueue_style( 'chouquette-style', get_stylesheet_uri() );
 
+	// TODO usefull ?
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
