@@ -24,11 +24,13 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   },
   "scripts": {
     "build": "webpack --verbose --progress --colors --optimize-minimize",
-    "watch": "webpack --verbose --progress --colors --watch"
+    "watch": "webpack --verbose --progress --colors --watch",
+    "start:dev": "webpack-dev-server"
   },
   "dependencies": {
     "bootstrap": "^4.2.1",

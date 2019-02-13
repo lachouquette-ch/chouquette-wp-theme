@@ -59,9 +59,18 @@ module.exports = {
             }
         }
     },
+    devtool: 'inline-source-map',
+    devServer: {
+        hot: true,
+        //open: true
+        watchOptions: {
+            poll: true
+        }
+    },
     plugins: [
         cleanWebpack,
         webpackProvide,
-        miniCssExtract
+        miniCssExtract,
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
