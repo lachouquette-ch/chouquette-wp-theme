@@ -1,0 +1,11 @@
+.card-category-icon {
+  @extend .rounded-circle;
+  background-color: yellow;
+  color: black;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.card-title {
+  display: inline-block;
+}

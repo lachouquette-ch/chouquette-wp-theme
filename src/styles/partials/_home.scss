@@ -1,4 +1,4 @@
-.homepage-header {
+.home-header {
   height: 100vh;
   min-height: 500px;
   background-image: url('http://findme.elated-themes.com/wp-content/uploads/2017/06/h1-title-area-backround.jpg?id=1843');
@@ -7,8 +7,12 @@
   background-repeat: no-repeat;
 
   h1 {
-    font-family: $font-titles;
     font-size: 6rem;
     color: $chouquette-yellow;
   }
+}
+
+.home-newsletter {
+  background-color: $chouquette-yellow;
+  color: black;
 }
