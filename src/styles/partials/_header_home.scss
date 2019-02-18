@@ -5,13 +5,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
 
-//.homepage-header-menu-item {
-//  > img {
-//    margin-bottom: 1rem;
-//  }
-//  > span {
-//    display: block;
-//  }
-//}
+  h1 {
+    font-family: $font-titles;
+    font-size: 6rem;
+    color: $chouquette-yellow;
+  }
+}

@@ -5,10 +5,12 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~bootstrap-select/sass/variables.scss";
 @import "~bootstrap-select/sass/bootstrap-select.scss";
-@import url('https://fonts.googleapis.com/css?family=Play');
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
+@import url('https://fonts.googleapis.com/css?family=Fira%20Sans');
 
 // Components
 @import "partials/base";
+@import "partials/bootstrap-select";
 @import "partials/header_home";
 
 // Modules
