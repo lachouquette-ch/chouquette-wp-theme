@@ -1,0 +1,34 @@
+// colors
+$chouquette-yellow: rgb(248, 239, 40);
+
+// theme colors
+$primary: $chouquette-yellow;
+$secondary: white;
+
+// Navbar
+$navbar-light-color: white;
+$navbar-light-hover-color: $chouquette-yellow;
+$navbar-light-active-color: white;
+$navbar-light-disabled-color: $chouquette-yellow;
+
+// Dropdowns
+$dropdown-link-hover-color: $chouquette-yellow;
+
+// Fonts
+$font-family-base: "Fira Sans", sans-serif;
+
+// Card
+$card-spacer-x: 1rem;
+
+// Headings
+$headings-color: $chouquette-yellow;
+
+// Links
+$link-color: $chouquette-yellow;
+$link-hover-color: $chouquette-yellow;
+$link-hover-decoration: none;
+
+// custom breakpoints
+$custom-breakpoints: (
+        xxl: 1600px
+) !default;

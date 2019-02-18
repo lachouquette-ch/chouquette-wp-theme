@@ -7,9 +7,6 @@ const webpackProvide = new webpack.ProvidePlugin({
     Popper: "popper.js",
     'window.jQuery': "jquery",
 });
-const banner = new webpack.BannerPlugin({
-    banner: 'hello world'
-});
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const cleanWebpack = new CleanWebpackPlugin(['dist']);
@@ -18,7 +15,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const miniCssExtract = new MiniCssExtractPlugin({
     filename: "style.css",
     chunkFilename: "[id].css",
-    //publicPath: '../'
 });
 
 module.exports = {
@@ -41,7 +37,6 @@ module.exports = {
                     'sass-loader'
                 ],
             },
-            // the file-loader emits files.
             {
                 test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                 loader: 'file-loader?name=fonts/[name].[ext]'
@@ -62,7 +57,7 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         hot: true,
-        //open: true
+        open: true,
         watchOptions: {
             poll: true
         }

@@ -3,11 +3,12 @@
 @import "modules/helpers";
 
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-select/sass/variables.scss";
+@import "~bootstrap-select/sass/bootstrap-select.scss";
 @import url('https://fonts.googleapis.com/css?family=Play');
-$fa-font-path: "~font-awesome/fonts";
-@import "~font-awesome/scss/font-awesome.scss";
 
 // Components
 @import "partials/base";
+@import "partials/header_home";
 
 // Modules
