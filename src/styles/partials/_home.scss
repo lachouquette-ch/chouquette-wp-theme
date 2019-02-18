@@ -13,6 +13,17 @@
 }
 
 .home-newsletter {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
   background-color: $chouquette-yellow;
   color: black;
+}
+
+.home-footer {
+  &-sn {
+    > i {
+      margin: 1rem;
+      font-size: 2rem;
+    }
+  }
 }
