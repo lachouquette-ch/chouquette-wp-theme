@@ -9,11 +9,52 @@
   h1 {
     font-size: 6rem;
     color: $chouquette-yellow;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 4rem;
+    }
+  }
+}
+
+.home-header-sn {
+  font-size: 2rem;
+  color: $chouquette-yellow;
+}
+
+.home-header-category {
+  h2 {
+    font-family: $font-family-base;
+    font-size: 1rem;
+    color: $chouquette-yellow;
+  }
+}
+
+.home-header-filters {
+  .bootstrap-select {
+    padding: 0;
+  }
+
+  > input {
+    margin: 0 1rem;
+  }
+}
+
+.home-header-filters-item {
+  @extend .p-0;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 0.5rem;
+
+  }
+
+  @include media-breakpoint-up(lg) {
+    &:not(:last-child) {
+      padding-right: 0.5rem !important;
+    }
   }
 }
 
 .home-newsletter {
-  padding: 5rem 2rem;
   background-color: $chouquette-yellow;
   color: black;
 }
@@ -21,7 +62,6 @@
 .home-footer {
   &-sn {
     > i {
-      margin: 1rem;
       font-size: 2rem;
     }
   }
