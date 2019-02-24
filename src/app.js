@@ -3,8 +3,12 @@ require("jquery");
 require("popper.js");
 require("lettering.js");
 require("textillate");
+require("swiper");
+require("swiper/dist/css/swiper.css");
 require("bootstrap-select");
 require("bootstrap");
+
+import Swiper from 'swiper';
 
 /* CSS imports */
 require("./styles/main.scss");
@@ -22,7 +26,7 @@ jQuery(function ($) {
 
     // activate swiper
     var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 40,
         grabCursor: true,
         centeredSlides: true,
@@ -32,21 +36,11 @@ jQuery(function ($) {
             prevEl: '.swiper-button-prev',
         },
         breakpoints: {
-            1024: {
-                slidesPerView: 4,
-                spaceBetween: 40,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-            },
-            640: {
+            992: {
                 slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            320: {
-                slidesPerView: 1,
-                spaceBetween: 10,
+                spaceBetween: 30,
+                grabCursor: true,
+                centeredSlides: true,
             }
         }
     });

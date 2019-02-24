@@ -58,7 +58,7 @@
   background-color: $chouquette-yellow;
   color: black;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     padding: 3rem;
   }
 }
