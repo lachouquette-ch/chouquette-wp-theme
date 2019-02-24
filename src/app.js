@@ -6,6 +6,7 @@ require("textillate");
 require("swiper");
 require("swiper/dist/css/swiper.css");
 require("bootstrap-select");
+require("bootstrap-select/dist/js/i18n/defaults-fr_FR");
 require("bootstrap");
 
 import Swiper from 'swiper';
@@ -21,7 +22,7 @@ jQuery(function ($) {
     $.fn.selectpicker.Constructor.BootstrapVersion = '4';
     $('.selectpicker').selectpicker({
         iconBase: 'fa',
-        tickIcon: 'fa-check'
+        tickIcon: 'fa-check',
     });
 
     // activate swiper
