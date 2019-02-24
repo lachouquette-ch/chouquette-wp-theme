@@ -44,7 +44,6 @@
 
   @include media-breakpoint-down(md) {
     margin-bottom: 0.5rem;
-
   }
 
   @include media-breakpoint-up(lg) {
@@ -55,14 +54,27 @@
 }
 
 .home-newsletter {
+  padding: 6rem 3rem;
   background-color: $chouquette-yellow;
   color: black;
+
+  @include media-breakpoint-down(md) {
+    padding: 3rem;
+  }
 }
 
 .home-footer {
-  &-sn {
-    > i {
-      font-size: 2rem;
-    }
-  }
+  color: white;
+}
+
+.home-footer-sn {
+  font-size: 2rem;
+}
+
+.home-footer-top {
+  background-color: #353535;
+}
+
+.home-footer-bottom {
+  background-color: #292929;
 }
