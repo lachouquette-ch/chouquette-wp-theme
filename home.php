@@ -105,55 +105,36 @@
             <h3>Les derniers articles</h3>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 py-1 p-xl-3">
-            <article class="card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <i class="card-category-icon fas fa-theater-masks"></i>
-                    <h4 class="card-title">Titre article</h4>
-                </div>
-            </article>
-        </div>
-        <div class="col-lg-8 py-1 p-xl-3">
-            <article class="card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/07/h2-listing-img-2.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <i class="card-category-icon fas fa-theater-masks"></i>
-                    <h4 class="card-title">Titre article</h4>
-                </div>
-            </article>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 py-1 p-xl-3">
-            <div class="card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-3.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <i class="card-category-icon fas fa-theater-masks"></i>
-                    <h4 class="card-title">Titre article</h4>
-                </div>
+    <?php
+    $latest_posts = new WP_Query('posts_per_page=5');
+    if ( $latest_posts->have_posts()) :
+        if ( $latest_posts->post_count == 5) :
+            ?>
+            <div class="row">
+            <?php
+            while ( $latest_posts->have_posts() ) :
+                $latest_posts ->the_post();
+                // special 2nd article
+                if ($latest_posts->current_post == 1) :
+                    set_query_var( 'col_size', '8' );
+                    get_template_part( 'template-parts/home/latest_col' );
+                    ?>
+                    </div>
+                    <div class="row">
+                    <?php
+                else :
+                    set_query_var( 'col_size', '4' );
+                    get_template_part( 'template-parts/home/latest_col' );
+                endif;
+            endwhile;
+            ?>
             </div>
-        </div>
-        <div class="col-lg-4 py-1 p-xl-3">
-            <div class="card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-4.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <i class="card-category-icon fas fa-theater-masks"></i>
-                    <h4 class="card-title">Titre article</h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 py-1 p-xl-3">
-            <div class="card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-5.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <i class="card-category-icon fas fa-theater-masks"></i>
-                    <h4 class="card-title">Titre article</h4>
-                </div>
-            </div>
-        </div>
-    </div>
+            <?php
+        else :
+            error_log( "Erreur. Il faut avoir au min 5 articles sur la blog" );
+        endif;
+    endif;
+    ?>
 </div>
 
 <div class="container-fluid home-newsletter">
