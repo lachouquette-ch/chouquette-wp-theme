@@ -107,106 +107,108 @@
     </div>
 </header>
 
-<div class="container my-3 my-xl-5">
-    <div class="row mb-xl-1">
-        <div class="col text-center">
-            <h3>Les derniers articles</h3>
-        </div>
-    </div>
-    <?php
-    $latest_posts = new WP_Query('posts_per_page=5');
-    if ($latest_posts->have_posts()) :
-        if ($latest_posts->post_count == 5) :
-            ?>
-            <div class="row">
-            <?php
-            while ($latest_posts->have_posts()) :
-                $latest_posts->the_post();
-                // special 2nd article
-                if ($latest_posts->current_post == 1) :
-                    set_query_var('col_size', '8');
-                    get_template_part('template-parts/home/latest_col');
-                    ?>
-                    </div>
-                    <div class="row">
-                <?php
-                else :
-                    set_query_var('col_size', '4');
-                    get_template_part('template-parts/home/latest_col');
-                endif;
-            endwhile;
-            ?>
+<div class="index-content">
+    <div class="index-content-latest container my-3">
+        <div class="row mb-xl-1">
+            <div class="col text-center">
+                <h3>Quoi de neuf ?</h3>
             </div>
+        </div>
         <?php
-        else :
-            error_log("Erreur. Il faut avoir au min 5 articles sur la blog");
+        $latest_posts = new WP_Query('posts_per_page=5');
+        if ($latest_posts->have_posts()) :
+            if ($latest_posts->post_count == 5) :
+                ?>
+                <div class="row">
+                <?php
+                while ($latest_posts->have_posts()) :
+                    $latest_posts->the_post();
+                    // special 2nd article
+                    if ($latest_posts->current_post == 1) :
+                        set_query_var('col_size', '8');
+                        get_template_part('template-parts/index/latest_col');
+                        ?>
+                        </div>
+                        <div class="row">
+                    <?php
+                    else :
+                        set_query_var('col_size', '4');
+                        get_template_part('template-parts/index/latest_col');
+                    endif;
+                endwhile;
+                ?>
+                </div>
+            <?php
+            else :
+                error_log("Erreur. Il faut avoir au min 5 articles sur la blog");
+            endif;
         endif;
-    endif;
-    ?>
-</div>
+        ?>
+    </div>
 
-<div class="container-fluid index-newsletter">
-    <div class="row">
-        <div class="col-lg-6">
-            Inscrit toi à la newsletter pour te tenir au courant des dernières nouveautés
-        </div>
-        <div class="col-lg-6">
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Ton adresse mail</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">Nous ne partageons pas ton adresse email avec quiconque.</small>
-                </div>
-                <button type="submit" class="btn btn-secondary">Je m'inscris</button>
-            </form>
+    <div class="container-fluid index-newsletter">
+        <div class="row">
+            <div class="col-lg-6">
+                Inscrit toi à la newsletter pour te tenir au courant des dernières nouveautés
+            </div>
+            <div class="col-lg-6">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Ton adresse mail</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">Nous ne partageons pas ton adresse email avec quiconque.</small>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Je m'inscris</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container-fluid p-3 my-3 my-xl-5">
-    <div class="row mb-3">
-        <div class="col text-center">
-            <h3>Les tops !</h3>
-        </div>
-    </div>
-    <div class="row swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text">Last updated 3 mins ago</p>
-                </div>
-            </div>
-            <div class="swiper-slide card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text">Last updated 3 mins ago</p>
-                </div>
-            </div>
-            <div class="swiper-slide card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text">Last updated 3 mins ago</p>
-                </div>
-            </div>
-            <div class="swiper-slide card bg-dark text-white">
-                <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text">Last updated 3 mins ago</p>
-                </div>
+    <div class="container-fluid p-3 my-3">
+        <div class="row mb-3">
+            <div class="col text-center">
+                <h3>Les tops !</h3>
             </div>
         </div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next swiper-button-black"></div>
-        <div class="swiper-button-prev swiper-button-black"></div>
+        <div class="row swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide card bg-dark text-white">
+                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">Last updated 3 mins ago</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card bg-dark text-white">
+                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">Last updated 3 mins ago</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card bg-dark text-white">
+                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">Last updated 3 mins ago</p>
+                    </div>
+                </div>
+                <div class="swiper-slide card bg-dark text-white">
+                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">Last updated 3 mins ago</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next swiper-button-black"></div>
+            <div class="swiper-button-prev swiper-button-black"></div>
+        </div>
     </div>
 </div>
 
