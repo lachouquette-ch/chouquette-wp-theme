@@ -16,10 +16,6 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
     font-size: 3rem;
     color: $navbar-chouquette-brand-color;
 
-    @include media-breakpoint-down(md) {
-      fond-size: 2rem;
-    }
-
     @include hover-focus {
       color: $navbar-chouquette-brand-hover-color;
     }
