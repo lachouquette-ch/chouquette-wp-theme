@@ -14,11 +14,12 @@
 
 <header class="index-header p-0 container-fluid h-100">
     <nav class="navbar navbar-chouquette">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="color: red;"></span>
         </button>
-        <div class="index-header-sn">
-            <i class="fab fa-pinterest-square mr-2"></i><i class="fab fa-facebook mx-2"></i><i class="fab fa-instagram mx-2"></i><i class="fas fa-rss-square ml-2"></i>
+        <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">La Chouquette</a>
+        <div class="index-header-sn mr-md-5 my-2">
+            <i class="fab fa-facebook-f"></i><i class="fab fa-instagram mx-4"></i><i class="fas fa-rss"></i>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -45,7 +46,7 @@
     <div class="d-flex flex-column h-100 p-3">
         <div class="flex-grow-1">
             <div class="d-flex flex-column h-100 justify-content-center align-items-center">
-                <div class="text-center mb-3">
+                <div class="text-center d-block d-md-none mb-3">
                     <h1>La Chouquette</h1>
                 </div>
                 <div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">
@@ -206,7 +207,7 @@
     <div class="index-footer-top row py-3">
         <div class="col">
             <img style="height: 15rem" class="mx-auto" src="//projet-chouquette.site/wp-content/uploads/2017/06/Logo-Lausanne-More.jpg">
-            <div class="index-footer-sn my-3"><i class="fab fa-pinterest-square mr-2"></i><i class="fab fa-facebook mx-2"></i><i class="fab fa-instagram mx-2"></i><i class="fas fa-rss-square ml-2"></i></div>
+            <div class="index-footer-sn my-3"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram mx-4"></i><i class="fas fa-rss"></i></div>
             <p class="mypacka-2"><span class="px-2">L'équipe</span><span class="px-2">Charte éditorial</span><span class="px-2">Contact</span></div>
     </div>
     </div>
