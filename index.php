@@ -14,7 +14,8 @@
 
 <header class="index-header p-0 container-fluid h-100">
     <nav class="navbar navbar-chouquette">
-        <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="color: red;"></span>
         </button>
         <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">La Chouquette</a>
@@ -50,51 +51,57 @@
                     <h1>La Chouquette</h1>
                 </div>
                 <div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">
-                    <div class="index-header-category m-3">
+                    <div class="index-header-category m-4">
                         <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
                         <h2 class="my-2">Food & Drink</h2>
                     </div>
-                    <div class="index-header-category m-3">
+                    <div class="index-header-category m-4">
                         <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
                         <h2 class="my-2">Food & Drink</h2>
                     </div>
-                    <div class="index-header-category m-3">
+                    <div class="index-header-category m-4">
                         <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
                         <h2 class="my-2">Food & Drink</h2>
                     </div>
-                    <div class="index-header-category m-3">
+                    <div class="index-header-category m-4">
                         <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
                         <h2 class="my-2">Food & Drink</h2>
                     </div>
-                    <div class="index-header-category m-3">
+                    <div class="index-header-category m-4">
                         <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
                         <h2 class="my-2">Food & Drink</h2>
                     </div>
                 </div>
-                <form class="index-header-filters row w-75">
-                    <div class="col-lg-3 index-header-filters-item">
-                        <select class="w-100 form-control selectpicker show-tick" title="Choisi ton lieu" data-selected-text-format="count > 2" multiple data-actions-box="true">
-                            <option title="Vaud" value="0">Vaud</option>
-                            <option title="Lausanne" value="1"> • Lausanne</option>
-                            <option title="Morges" value="2"> • Morges</option>
-                            <option title="Genève" value="2">Genève</option>
-                            <option title="Valais" value="3">Valais</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3 index-header-filters-item">
-                        <select class="w-100 form-control selectpicker show-tick" title="et la catégorie">
-                            <option data-icon="fas fa-cocktail" value="1">Boire et manger</option>
-                            <option data-icon="fas fa-theater-masks" value="2">Culture</option>
-                            <option data-icon="fa fa-user-circle" value="3">Interviews</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3 index-header-filters-item">
-                        <input class="w-100 form-control" type="text" placeholder="mots clefs" aria-label="" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="col-lg-3 index-header-filters-item">
-                        <button class="w-100 btn btn-outline-primary" type="button">Cherche moi des lieux</button>
-                    </div>
-                </form>
+                <div class="index-header-filters text-center">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-4 index-header-filters-item">
+                                <select class="form-control selectpicker show-tick" title="Où veux-tu aller ?" data-selected-text-format="count > 2" multiple data-actions-box="true">
+                                    <option title="Vaud" value="0">Vaud</option>
+                                    <option title="Lausanne" value="1"> • Lausanne</option>
+                                    <option title="Morges" value="2"> • Morges</option>
+                                    <option title="Genève" value="2">Genève</option>
+                                    <option title="Valais" value="3">Valais</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 index-header-filters-item">
+                                <select class="form-control selectpicker show-tick" title="Qu'aimerais-tu faire ?">
+                                    <option data-icon="fas fa-cocktail" value="1">Boire et manger</option>
+                                    <option data-icon="fas fa-theater-masks" value="2">Culture</option>
+                                    <option data-icon="fa fa-user-circle" value="3">Interviews</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 index-header-filters-item">
+                                <input class="form-control" type="text" placeholder="Un mot clef ?" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col index-header-filters-item">
+                                <button class="btn btn-primary py-2 px-5" type="button">Rechercher</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -108,31 +115,31 @@
     </div>
     <?php
     $latest_posts = new WP_Query('posts_per_page=5');
-    if ( $latest_posts->have_posts()) :
-        if ( $latest_posts->post_count == 5) :
+    if ($latest_posts->have_posts()) :
+        if ($latest_posts->post_count == 5) :
             ?>
             <div class="row">
             <?php
-            while ( $latest_posts->have_posts() ) :
-                $latest_posts ->the_post();
+            while ($latest_posts->have_posts()) :
+                $latest_posts->the_post();
                 // special 2nd article
                 if ($latest_posts->current_post == 1) :
-                    set_query_var( 'col_size', '8' );
-                    get_template_part( 'template-parts/home/latest_col' );
+                    set_query_var('col_size', '8');
+                    get_template_part('template-parts/home/latest_col');
                     ?>
                     </div>
                     <div class="row">
-                    <?php
+                <?php
                 else :
-                    set_query_var( 'col_size', '4' );
-                    get_template_part( 'template-parts/home/latest_col' );
+                    set_query_var('col_size', '4');
+                    get_template_part('template-parts/home/latest_col');
                 endif;
             endwhile;
             ?>
             </div>
-            <?php
+        <?php
         else :
-            error_log( "Erreur. Il faut avoir au min 5 articles sur la blog" );
+            error_log("Erreur. Il faut avoir au min 5 articles sur la blog");
         endif;
     endif;
     ?>

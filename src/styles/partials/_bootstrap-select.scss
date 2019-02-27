@@ -3,3 +3,10 @@
 .bootstrap-select > button {
   background-color: $input-bg;
 }
+
+.dropdown-item {
+  @include hover-focus {
+    color: $black !important;
+    background-color: $chouquette-yellow !important;
+  }
+}

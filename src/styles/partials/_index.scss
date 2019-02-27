@@ -26,6 +26,12 @@
 }
 
 .index-header-filters {
+  width: 75%;
+
+  @include media-breakpoint-up(lg) {
+    width: 50%;
+  }
+
   .bootstrap-select {
     padding: 0;
   }
@@ -37,14 +43,21 @@
 
 .index-header-filters-item {
   @extend .p-0;
+  margin-bottom: 1rem;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(sm) {
     margin-bottom: 0.5rem;
   }
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
     &:not(:last-child) {
       padding-right: 0.5rem !important;
+    }
+  }
+
+  > button {
+    @include media-breakpoint-down(sm) {
+      width: 100%;
     }
   }
 }
