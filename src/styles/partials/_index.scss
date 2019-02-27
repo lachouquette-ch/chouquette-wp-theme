@@ -1,9 +1,9 @@
-.home-header {
+.index-header {
   height: 100vh;
   min-height: 500px;
   background-image: url('http://findme.elated-themes.com/wp-content/uploads/2017/06/h1-title-area-backround.jpg?id=1843');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 
   h1 {
@@ -16,12 +16,12 @@
   }
 }
 
-.home-header-sn {
+.index-header-sn {
   font-size: 2rem;
   color: $chouquette-yellow;
 }
 
-.home-header-category {
+.index-header-category {
   h2 {
     font-family: $font-family-base;
     font-size: 1rem;
@@ -29,7 +29,7 @@
   }
 }
 
-.home-header-filters {
+.index-header-filters {
   .bootstrap-select {
     padding: 0;
   }
@@ -39,7 +39,7 @@
   }
 }
 
-.home-header-filters-item {
+.index-header-filters-item {
   @extend .p-0;
 
   @include media-breakpoint-down(md) {
@@ -53,7 +53,7 @@
   }
 }
 
-.home-newsletter {
+.index-newsletter {
   padding: 6rem 3rem;
   background-color: $chouquette-yellow;
   color: black;
@@ -63,18 +63,18 @@
   }
 }
 
-.home-footer {
+.index-footer {
   color: $white;
 }
 
-.home-footer-sn {
+.index-footer-sn {
   font-size: 2rem;
 }
 
-.home-footer-top {
+.index-footer-top {
   background-color: #353535;
 }
 
-.home-footer-bottom {
+.index-footer-bottom {
   background-color: #292929;
 }
