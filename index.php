@@ -128,7 +128,7 @@
         ?>
     </div>
 
-    <div class="container-fluid index-newsletter">
+    <div id="newsletter" class="container-fluid index-newsletter">
         <div class="row">
             <div class="col-lg-6 mb-3">
                 <h2 class="w-75 m-auto text-center">Pour être dans la confidence du meilleur de chez toi</h2>
@@ -178,11 +178,13 @@
 </div>
 
 <footer class="index-footer container-fluid text-center">
-    <div class="index-footer-top row py-3">
+    <div class="index-footer-top row pt-3">
         <div class="col">
             <img style="height: 15rem" class="mx-auto" src="//projet-chouquette.site/wp-content/uploads/2017/06/Logo-Lausanne-More.jpg">
-            <div class="index-footer-sn my-3"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram mx-4"></i><i class="fas fa-rss"></i></div>
-            <p class="mypacka-2"><span class="px-2">L'équipe</span><span class="px-2">Charte éditorial</span><span class="px-2">Contact</span></div>
+            <p class="my-3">
+                <a href="#" class="px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="px-2  d-inline-block">Charte éditoriale</a><a href="#" class="px-2 d-inline-block">Contact</a><a href="#newsletter" class="px-2 d-inline-block">Newsletter</a>
+            </p>
+        </div>
     </div>
     </div>
     <div class="index-footer-bottom row py-3">
