@@ -72,3 +72,17 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
     background-color: rgba($black, .5);
   }
 }
+
+// Wordpress default menu classes
+.menu {
+  @extend .navbar-nav;
+  @extend .mr-auto;
+
+  .menu-item {
+    @extend .nav-item;
+
+    > a {
+      @extend .nav-link;
+    }
+  }
+}

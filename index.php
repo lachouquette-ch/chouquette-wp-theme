@@ -19,30 +19,14 @@
             <span class="navbar-toggler-icon" style="color: red;"></span>
         </button>
         <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">
-            <h1>La Chouquette</h1>
+            <h1><?php bloginfo( 'name' ); ?></h1>
         </a>
         <div class="index-header-sn mr-md-5 my-2">
             <i class="fab fa-facebook-f"></i><i class="fab fa-instagram mx-4"></i><i class="fas fa-rss"></i>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu 3</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu 4</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu 5</a>
-                </li>
-            </ul>
+            <?php wp_nav_menu( "primary-menu" ); ?>
         </div>
     </nav>
 
@@ -50,7 +34,7 @@
         <div class="flex-grow-1">
             <div class="d-flex flex-column h-100 justify-content-center align-items-center">
                 <div class="text-center d-block d-md-none mb-3">
-                    <h1>La Chouquette</h1>
+                    <h1><?php bloginfo( 'name' ); ?></h1>
                 </div>
                 <div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">
                     <div class="index-header-category m-4">
