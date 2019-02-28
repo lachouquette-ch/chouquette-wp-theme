@@ -158,38 +158,17 @@
         </div>
         <div class="row swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide card bg-dark text-white">
-                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text">Last updated 3 mins ago</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card bg-dark text-white">
-                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text">Last updated 3 mins ago</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card bg-dark text-white">
-                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text">Last updated 3 mins ago</p>
-                    </div>
-                </div>
-                <div class="swiper-slide card bg-dark text-white">
-                    <img class="card-img" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-listing-img-1.jpg" alt="Card image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text">Last updated 3 mins ago</p>
-                    </div>
-                </div>
+                <?php
+                $tops_posts = new WP_Query('posts_per_page=10');
+                if ($tops_posts->have_posts()) :
+                    while ($tops_posts->have_posts()) :
+                        $tops_posts->the_post();
+                        ?> <div class="swiper-slide bg-dark text-white"> <?php
+                        get_template_part('template-parts/article-card');
+                        ?> </div> <?php
+                    endwhile;
+                endif;
+                ?>
             </div>
             <!-- Add Arrows -->
             <div class="swiper-button-next swiper-button-black"></div>
