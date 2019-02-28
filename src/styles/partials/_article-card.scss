@@ -4,6 +4,10 @@
   background-position: center;
   background-repeat: no-repeat;
   border: 1px solid black;
+
+  h3 {
+    font-size: $font-size-base;
+  }
 }
 
 .article-card-header {

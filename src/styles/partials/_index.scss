@@ -7,6 +7,7 @@
   background-repeat: no-repeat;
 
   h1 {
+    font-family: $font-family-brand;
     font-size: 3rem;
     color: $chouquette-yellow;
   }
@@ -19,7 +20,6 @@
 
 .index-header-category {
   h2 {
-    font-family: $font-family-base;
     font-size: 1rem;
     color: $chouquette-yellow;
   }
@@ -63,7 +63,8 @@
 }
 
 .index-content {
-  h3 {
+  h2 {
+    font-family: $font-family-brand;
     font-size: 2rem;
 
     @include media-breakpoint-up(lg) {

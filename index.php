@@ -18,7 +18,9 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="color: red;"></span>
         </button>
-        <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">La Chouquette</a>
+        <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">
+            <h1>La Chouquette</h1>
+        </a>
         <div class="index-header-sn mr-md-5 my-2">
             <i class="fab fa-facebook-f"></i><i class="fab fa-instagram mx-4"></i><i class="fas fa-rss"></i>
         </div>
@@ -111,7 +113,7 @@
     <div class="index-content-latest container my-3">
         <div class="row mb-xl-1">
             <div class="col text-center">
-                <h3>Quoi de neuf ?</h3>
+                <h2>Quoi de neuf ?</h2>
             </div>
         </div>
         <?php
@@ -167,7 +169,7 @@
     <div class="container-fluid p-3 my-3">
         <div class="row mb-3">
             <div class="col text-center">
-                <h3>Les tops !</h3>
+                <h2>Les tops !</h2>
             </div>
         </div>
         <div class="row swiper-container">
