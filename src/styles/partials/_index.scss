@@ -89,6 +89,11 @@
   @include media-breakpoint-down(lg) {
     padding: 3rem;
   }
+
+  h2 {
+    font-size: 1.75rem;
+    line-height: 1.75rem;
+  }
 }
 
 .index-footer {

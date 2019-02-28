@@ -150,17 +150,21 @@
 
     <div class="container-fluid index-newsletter">
         <div class="row">
-            <div class="col-lg-6">
-                Inscrit toi à la newsletter pour te tenir au courant des dernières nouveautés
+            <div class="col-lg-6 mb-3">
+                <h2 class="w-75 m-auto text-center">Pour être dans la confidence du meilleur de chez toi</h2>
             </div>
             <div class="col-lg-6">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Ton adresse mail</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">Nous ne partageons pas ton adresse email avec quiconque.</small>
+                <p class="mb-1 h4">Rejoins notre newsletter</p>
+                <p class="text-muted">Pour recevoir tous nos bons plans</p>
+                <form class="form-inline mt-3">
+                    <div class="form-row w-100">
+                        <div class="col-lg-8 mb-2">
+                            <input type="email" class="form-control form-control-lg w-100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="submit" class="btn btn-secondary w-100 btn-lg">Je m'inscris</button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Je m'inscris</button>
                 </form>
             </div>
         </div>
