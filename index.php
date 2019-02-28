@@ -126,17 +126,13 @@
                 while ($latest_posts->have_posts()) :
                     $latest_posts->the_post();
                     // special 2nd article
-                    if ($latest_posts->current_post == 1) :
-                        set_query_var('col_size', '8');
-                        get_template_part('template-parts/index/latest_col');
-                        ?>
-                        </div>
-                        <div class="row">
-                    <?php
-                    else :
-                        set_query_var('col_size', '4');
-                        get_template_part('template-parts/index/latest_col');
-                    endif;
+                    $is_second_article = $latest_posts->current_post == 1;
+                    $class_col = $is_second_article ? 'col-lg-8' : 'col-lg-4';
+                    echo sprintf('<div class="index-content-latest-container %s">', $class_col);
+                    get_template_part('template-parts/article-card');
+                    echo '</div>';
+                    if ($is_second_article)
+                        echo '</div><div class="row">';
                 endwhile;
                 ?>
                 </div>
