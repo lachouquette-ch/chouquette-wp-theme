@@ -180,7 +180,13 @@
 <footer class="index-footer container-fluid text-center">
     <div class="index-footer-top row pt-3">
         <div class="col">
-            <img style="height: 15rem" class="mx-auto" src="//projet-chouquette.site/wp-content/uploads/2017/06/Logo-Lausanne-More.jpg">
+            <?php
+            $custom_logo_id = get_theme_mod( 'custom_logo' );
+            $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+            if ( has_custom_logo() ) {
+                echo sprintf('<img style="height: 15rem" class="mx-auto" src="%s">', esc_url( $logo[0] ));
+            }
+            ?>
             <p class="my-3">
                 <a href="#" class="px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="px-2  d-inline-block">Charte éditoriale</a><a href="#" class="px-2 d-inline-block">Contact</a><a href="#newsletter" class="px-2 d-inline-block">Newsletter</a>
             </p>

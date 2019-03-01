@@ -73,7 +73,6 @@ if ( ! function_exists( 'chouquette_setup' ) ) :
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
-		// TODO remove since logo should be fix
 		/**
 		 * Add support for core custom logo.
 		 *
