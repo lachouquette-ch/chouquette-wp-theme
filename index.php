@@ -33,7 +33,7 @@
                 echo '<ul class="navbar-nav mr-auto">';
                 foreach ( $menu_items as $menu_item ) :
                     echo '<li class="nav-item">';
-                    echo sprintf ( "<a class='nav-link' href='%s'><i class='mr-2 %s'></i> %s</a>", $menu_item->url, $menu_item->logo_class, $menu_item->title );
+                    echo sprintf ( "<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>", $menu_item->url, $menu_item->description, $menu_item->logo_class, $menu_item->title );
                     echo '</li>';
                 endforeach;
                 echo '</ul>';
@@ -50,28 +50,24 @@
                 <div class="text-center d-block d-md-none mb-3">
                     <h1><?php bloginfo( 'name' ); ?></h1>
                 </div>
-                <div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">
-                    <div class="index-header-category m-4">
-                        <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
-                        <h2 class="my-2">Food & Drink</h2>
-                    </div>
-                    <div class="index-header-category m-4">
-                        <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
-                        <h2 class="my-2">Food & Drink</h2>
-                    </div>
-                    <div class="index-header-category m-4">
-                        <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
-                        <h2 class="my-2">Food & Drink</h2>
-                    </div>
-                    <div class="index-header-category m-4">
-                        <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
-                        <h2 class="my-2">Food & Drink</h2>
-                    </div>
-                    <div class="index-header-category m-4">
-                        <img src="http://findme.elated-themes.com/wp-content/uploads/2017/06/type-img-1.png" alt="Type Icon">
-                        <h2 class="my-2">Food & Drink</h2>
-                    </div>
-                </div>
+                <?php
+                // get menu items
+                $menu_items = chouquette_menu_items();
+                if ( ! empty ( $menu_items ) ) {
+                    echo '<div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">';
+                    foreach ( $menu_items as $menu_item ) :
+                        echo '<div class="index-header-category m-4">';
+                        echo sprintf ( "<a href='%s' title='%s'>", $menu_item->url, $menu_item->description );
+                        echo sprintf ( "<i class='index-header-category-icon %s'></i>", $menu_item->logo_class );
+                        echo sprintf ( "<h2 class='my-2'>%s</h2>", $menu_item->title );
+                        echo '</a>';
+                        echo '</div>';
+                    endforeach;
+                    echo '</div>';
+                } else {
+                    trigger_error( sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING );
+                }
+                ?>
                 <div class="index-header-filters text-center">
                     <form>
                         <div class="row">

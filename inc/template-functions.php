@@ -11,6 +11,7 @@ if ( ! function_exists( 'chouquette_menu_items' ) ) :
         public $id;
         public $type;
         public $title;
+        public $description;
         public $url;
         public $logo_class;
 
@@ -36,6 +37,7 @@ if ( ! function_exists( 'chouquette_menu_items' ) ) :
                 $result_item->id = $menu_item->object_id;
                 $result_item->type = $menu_item->object;
                 $result_item->title = $menu_item->title;
+                $result_item->description = $menu_item->description;
                 $result_item->url = $menu_item->url;
 
                 // get logo
