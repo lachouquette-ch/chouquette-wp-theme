@@ -82,9 +82,17 @@
                             </div>
                             <div class="col-md-4 index-header-filters-item">
                                 <select class="form-control selectpicker show-tick" title="Qu'aimerais-tu faire ?">
-                                    <option data-icon="fas fa-cocktail" value="1">Boire et manger</option>
-                                    <option data-icon="fas fa-theater-masks" value="2">Culture</option>
-                                    <option data-icon="fa fa-user-circle" value="3">Interviews</option>
+                                    <?php
+                                    // get menu items
+                                    $menu_items = chouquette_menu_items();
+                                    if ( ! empty ( $menu_items ) ) {
+                                        foreach ( $menu_items as $menu_item ) :
+                                            echo sprintf ( "<option data-icon='%s' value='%d'>%s</option>", $menu_item->logo_class, $menu_item->id, $menu_item->title );
+                                        endforeach;
+                                    } else {
+                                    trigger_error( sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING );
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-md-4 index-header-filters-item">

@@ -9,4 +9,8 @@
     color: $black !important;
     background-color: $chouquette-yellow !important;
   }
+
+  &.active {
+    color: inherit !important;
+  }
 }
