@@ -21,8 +21,7 @@ jQuery(function ($) {
     // bootstrap-select specify bootstrap version
     $.fn.selectpicker.Constructor.BootstrapVersion = '4';
     $('.selectpicker').selectpicker({
-        iconBase: 'fa',
-        tickIcon: 'fa-check',
+        tickIcon: 'fa fa-check',
     });
 
     // activate swiper
