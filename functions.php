@@ -7,6 +7,7 @@
  * @package Chouquette_thème
  */
 
+/* Chouquette constants */
 $chouquette_theme = wp_get_theme();
 define ( 'CHOUQUETTE_THEME_VERSION', $chouquette_theme->get( 'Version' ) );
 define ( 'CHOUQUETTE_PRIMARY_MENU', 'primary-menu' );
@@ -64,17 +65,6 @@ if ( ! function_exists( 'chouquette_setup' ) ) :
 			'caption',
 		) );
 
-		// TODO remove since background will be fix
-		// Set up the WordPress core custom background feature.
-		add_theme_support( 'custom-background', apply_filters( 'chouquette_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
-		) ) );
-
-		// TODO what is this ?
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
-
 		/**
 		 * Add support for core custom logo.
 		 *
@@ -91,26 +81,9 @@ endif;
 add_action( 'after_setup_theme', 'chouquette_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function chouquette_content_width() {
-	// This variable is intended to be overruled from themes.
-	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
-	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'chouquette_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'chouquette_content_width', 0 );
-
-/**
  * Enqueue scripts and styles.
  */
 function chouquette_scripts() {
-    global $chouquette_theme_version;
-
     wp_enqueue_style( 'slider', get_template_directory_uri() . '/dist/style.css', null, CHOUQUETTE_THEME_VERSION, 'all');
 
     wp_enqueue_script( 'vendor', get_template_directory_uri() . '/dist/vendor.js', null, CHOUQUETTE_THEME_VERSION, true);
