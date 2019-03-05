@@ -12,8 +12,8 @@
     <?php wp_head(); ?>
 <body>
 
-<header class="index-header container-fluid h-100">
-    <nav class="navbar fixed-top navbar-chouquette">
+<header class="index-header p-0 container-fluid h-100">
+    <nav class="navbar navbar-chouquette">
         <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="color: red;"></span>
@@ -44,7 +44,7 @@
         </div>
     </nav>
 
-    <div class="d-flex flex-column h-100 p-3">
+    <div class="index-header-menu d-flex flex-column h-100 p-3">
         <div class="flex-grow-1">
             <div class="d-flex flex-column h-100 justify-content-center align-items-center">
                 <div class="text-center d-block d-md-none mb-3">
