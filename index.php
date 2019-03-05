@@ -26,7 +26,33 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
-            <?php wp_nav_menu( "primary-menu" ); ?>
+            <?php
+            // get menu items
+            if ( isset ( get_nav_menu_locations()[CHOUQUETTE_PRIMARY_MENU] ) ) {
+                $primary_menu_id = get_nav_menu_locations()[CHOUQUETTE_PRIMARY_MENU];
+                $menu = wp_get_nav_menu_object( $primary_menu_id );
+                $menu_items = wp_get_nav_menu_items( $menu->term_id );
+
+                echo '<ul class="navbar-nav mr-auto">';
+                foreach ( $menu_items as $menu_item ) :
+                    // get title
+                    $menu_item_title = $menu_item->title;
+                    // get url
+                    $menu_item_url = $menu_item->url;
+
+                    // get logo
+                    $menu_item_post_id = $menu_item->object . '_' . $menu_item->object_id;
+                    $menu_item_logo_class = get_field( CHOUQUETTE_MENU_LOGO_SELECTOR, $menu_item_post_id );
+
+                    echo '<li class="nav-item">';
+                    echo sprintf ( "<a class='nav-link' href='%s'><i class='mr-2 %s'></i> %s</a>", $menu_item_url, $menu_item_logo_class, $menu_item_title );
+                    echo '</li>';
+                endforeach;
+                echo '</ul>';
+            } else {
+                trigger_error( sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING );
+            }
+            ?>
         </div>
     </nav>
 
