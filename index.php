@@ -12,8 +12,8 @@
     <?php wp_head(); ?>
 <body>
 
-<header class="index-header p-0 container-fluid h-100">
-    <nav class="navbar navbar-chouquette">
+<header class="index-header container-fluid h-100">
+    <nav class="navbar fixed-top navbar-chouquette">
         <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="color: red;"></span>
