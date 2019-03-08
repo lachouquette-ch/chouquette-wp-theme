@@ -17,6 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
     <link rel="stylesheet" id="theme-style-css" href="<?php echo esc_url( home_url( '/dist/style.css' ) ); ?>" type="text/css" media="all">
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
 
 	<?php wp_head(); ?>
 </head>

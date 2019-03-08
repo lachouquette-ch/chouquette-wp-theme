@@ -105,6 +105,23 @@
   }
 }
 
+.index-newsletter-response {
+  &-error {
+    color: red;
+  }
+
+  &-success {
+    color: darkgreen;
+  }
+
+  a {
+    @include hover-focus-active {
+      color: black;
+      text-decoration: underline;
+    }
+  }
+}
+
 .index-footer {
   color: $white;
 }
