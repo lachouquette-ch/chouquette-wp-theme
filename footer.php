@@ -11,10 +11,10 @@
 
 ?>
 
-	</div><!-- #content -->
+</div><!-- #content -->
 
-    <script type="text/javascript" src="<?php echo esc_url( home_url( '/dist/vendor.js' ) ); ?>"></script>
-    <script type="text/javascript" src="<?php echo esc_url( home_url( '/dist/app.js' ) ); ?>"></script>
+<script type="text/javascript" src="<?php echo esc_url(home_url('/dist/vendor.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo esc_url(home_url('/dist/app.js')); ?>"></script>
 <?php wp_footer(); ?>
 
 </body>

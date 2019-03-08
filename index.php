@@ -24,7 +24,7 @@
         <div class="index-header-sn mr-md-5 my-2">
             <a href="<?php echo esc_url(CHOUQUETTE_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-4"></i></a>
-            <a href="" title="Newsletter"><i class="far fa-envelope ml-4"></i></a>
+            <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-4"></i></a>
             <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-4"></i></a>
         </div>
 
