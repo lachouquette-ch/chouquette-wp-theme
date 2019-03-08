@@ -13,6 +13,9 @@ define ( 'CHOUQUETTE_THEME_VERSION', $chouquette_theme->get( 'Version' ) );
 define ( 'CHOUQUETTE_PRIMARY_MENU', 'primary-menu' );
 define ( 'CHOUQUETTE_MENU_LOGO_SELECTOR', 'logo' );
 
+define ( 'CHOUQUETTE_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne' );
+define ( 'CHOUQUETTE_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne' );
+
 if ( ! function_exists( 'chouquette_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

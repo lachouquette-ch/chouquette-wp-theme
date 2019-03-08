@@ -22,7 +22,10 @@
             <h1><?php bloginfo('name'); ?></h1>
         </a>
         <div class="index-header-sn mr-md-5 my-2">
-            <i class="fab fa-facebook-f"></i><i class="fab fa-instagram mx-4"></i><i class="fas fa-rss"></i>
+            <a href="<?php echo esc_url(CHOUQUETTE_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-4"></i></a>
+            <a href="" title="Newsletter"><i class="far fa-envelope ml-4"></i></a>
+            <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-4"></i></a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
@@ -33,7 +36,7 @@
                 echo '<ul class="navbar-nav mr-auto">';
                 foreach ($menu_items as $menu_item) :
                     echo '<li class="nav-item">';
-                    echo sprintf("<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>", $menu_item->url, $menu_item->description, $menu_item->logo_class, $menu_item->title);
+                    echo sprintf("<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>",  esc_url($menu_item->url), $menu_item->description, $menu_item->logo_class, $menu_item->title);
                     echo '</li>';
                 endforeach;
                 echo '</ul>';
@@ -57,7 +60,7 @@
                     echo '<div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">';
                     foreach ($menu_items as $menu_item) :
                         echo '<div class="index-header-category m-4">';
-                        echo sprintf("<a href='%s' title='%s'>", $menu_item->url, $menu_item->description);
+                        echo sprintf("<a href='%s' title='%s'>",  esc_url($menu_item->url), $menu_item->description);
                         echo sprintf("<i class='index-header-category-icon %s'></i>", $menu_item->logo_class);
                         echo sprintf("<h2 class='my-2'>%s</h2>", $menu_item->title);
                         echo '</a>';
@@ -226,7 +229,7 @@
             $custom_logo_id = get_theme_mod('custom_logo');
             $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
             if (has_custom_logo()) {
-                echo sprintf('<img style="height: 13rem" class="mx-auto" src="%s">', esc_url($logo[0]));
+                echo sprintf('<img style="height: 13rem" class="mx-auto" src="%s">',  esc_url($logo[0]));
             }
             ?>
             <p class="my-3">
