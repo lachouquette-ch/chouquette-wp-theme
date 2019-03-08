@@ -19,7 +19,7 @@
             <span class="navbar-toggler-icon" style="color: red;"></span>
         </button>
         <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">
-            <h1><?php bloginfo( 'name' ); ?></h1>
+            <h1><?php bloginfo('name'); ?></h1>
         </a>
         <div class="index-header-sn mr-md-5 my-2">
             <i class="fab fa-facebook-f"></i><i class="fab fa-instagram mx-4"></i><i class="fas fa-rss"></i>
@@ -29,16 +29,16 @@
             <?php
             // get menu items
             $menu_items = chouquette_menu_items();
-            if ( ! empty ( $menu_items ) ) {
+            if (!empty ($menu_items)) {
                 echo '<ul class="navbar-nav mr-auto">';
-                foreach ( $menu_items as $menu_item ) :
+                foreach ($menu_items as $menu_item) :
                     echo '<li class="nav-item">';
-                    echo sprintf ( "<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>", $menu_item->url, $menu_item->description, $menu_item->logo_class, $menu_item->title );
+                    echo sprintf("<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>", $menu_item->url, $menu_item->description, $menu_item->logo_class, $menu_item->title);
                     echo '</li>';
                 endforeach;
                 echo '</ul>';
             } else {
-                trigger_error( sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING );
+                trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING);
             }
             ?>
         </div>
@@ -48,24 +48,24 @@
         <div class="flex-grow-1">
             <div class="d-flex flex-column h-100 justify-content-center align-items-center">
                 <div class="text-center d-block d-md-none mb-3">
-                    <h1><?php bloginfo( 'name' ); ?></h1>
+                    <h1><?php bloginfo('name'); ?></h1>
                 </div>
                 <?php
                 // get menu items
                 $menu_items = chouquette_menu_items();
-                if ( ! empty ( $menu_items ) ) {
+                if (!empty ($menu_items)) {
                     echo '<div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">';
-                    foreach ( $menu_items as $menu_item ) :
+                    foreach ($menu_items as $menu_item) :
                         echo '<div class="index-header-category m-4">';
-                        echo sprintf ( "<a href='%s' title='%s'>", $menu_item->url, $menu_item->description );
-                        echo sprintf ( "<i class='index-header-category-icon %s'></i>", $menu_item->logo_class );
-                        echo sprintf ( "<h2 class='my-2'>%s</h2>", $menu_item->title );
+                        echo sprintf("<a href='%s' title='%s'>", $menu_item->url, $menu_item->description);
+                        echo sprintf("<i class='index-header-category-icon %s'></i>", $menu_item->logo_class);
+                        echo sprintf("<h2 class='my-2'>%s</h2>", $menu_item->title);
                         echo '</a>';
                         echo '</div>';
                     endforeach;
                     echo '</div>';
                 } else {
-                    trigger_error( sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING );
+                    trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING);
                 }
                 ?>
                 <div class="index-header-filters text-center">
@@ -85,12 +85,12 @@
                                     <?php
                                     // get menu items
                                     $menu_items = chouquette_menu_items();
-                                    if ( ! empty ( $menu_items ) ) {
-                                        foreach ( $menu_items as $menu_item ) :
-                                            echo sprintf ( "<option data-icon='%s' value='%d'>%s</option>", $menu_item->logo_class, $menu_item->id, $menu_item->title );
+                                    if (!empty ($menu_items)) {
+                                        foreach ($menu_items as $menu_item) :
+                                            echo sprintf("<option data-icon='%s' value='%d'>%s</option>", $menu_item->logo_class, $menu_item->id, $menu_item->title);
                                         endforeach;
                                     } else {
-                                    trigger_error( sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING );
+                                        trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING);
                                     }
                                     ?>
                                 </select>
@@ -124,19 +124,19 @@
             if ($latest_posts->post_count == 5) :
                 ?>
                 <div class="row">
-                <?php
-                while ($latest_posts->have_posts()) :
-                    $latest_posts->the_post();
-                    // special 2nd article
-                    $is_second_article = $latest_posts->current_post == 1;
-                    $class_col = $is_second_article ? 'col-lg-8' : 'col-lg-4';
-                    echo sprintf('<div class="index-content-latest-container %s">', $class_col);
-                    get_template_part('template-parts/article-card');
-                    echo '</div>';
-                    if ($is_second_article)
-                        echo '</div><div class="row">';
-                endwhile;
-                ?>
+                    <?php
+                    while ($latest_posts->have_posts()) :
+                        $latest_posts->the_post();
+                        // special 2nd article
+                        $is_second_article = $latest_posts->current_post == 1;
+                        $class_col = $is_second_article ? 'col-lg-8' : 'col-lg-4';
+                        echo sprintf('<div class="index-content-latest-container %s">', $class_col);
+                        get_template_part('template-parts/article-card');
+                        echo '</div>';
+                        if ($is_second_article)
+                            echo '</div><div class="row">';
+                    endwhile;
+                    ?>
                 </div>
             <?php
             else :
@@ -181,9 +181,10 @@
                 if ($tops_posts->have_posts()) :
                     while ($tops_posts->have_posts()) :
                         $tops_posts->the_post();
-                        ?> <div class="swiper-slide bg-dark text-white"> <?php
-                        get_template_part('template-parts/article-card');
-                        ?> </div> <?php
+                        ?>
+                        <div class="swiper-slide bg-dark text-white"> <?php
+                            get_template_part('template-parts/article-card');
+                            ?> </div> <?php
                     endwhile;
                 endif;
                 ?>
@@ -213,14 +214,15 @@
     <div class="index-footer-top row pt-4">
         <div class="col">
             <?php
-            $custom_logo_id = get_theme_mod( 'custom_logo' );
-            $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-            if ( has_custom_logo() ) {
-                echo sprintf('<img style="height: 13rem" class="mx-auto" src="%s">', esc_url( $logo[0] ));
+            $custom_logo_id = get_theme_mod('custom_logo');
+            $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+            if (has_custom_logo()) {
+                echo sprintf('<img style="height: 13rem" class="mx-auto" src="%s">', esc_url($logo[0]));
             }
             ?>
             <p class="my-3">
-                <a href="#" class="px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="px-2  d-inline-block">Charte éditoriale</a><a href="#" class="px-2 d-inline-block">Contact</a><a href="#newsletter" class="px-2 d-inline-block">Newsletter</a>
+                <a href="#" class="px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="px-2  d-inline-block">Charte éditoriale</a><a href="#" class="px-2 d-inline-block">Contact</a><a
+                        href="#newsletter" class="px-2 d-inline-block">Newsletter</a>
             </p>
         </div>
     </div>
