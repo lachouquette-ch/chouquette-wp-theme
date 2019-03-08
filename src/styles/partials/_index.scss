@@ -106,7 +106,7 @@
 }
 
 .index-newsletter-response {
-  &-error {
+  &-error, a {
     color: red;
   }
 
@@ -115,10 +115,7 @@
   }
 
   a {
-    @include hover-focus-active {
-      color: black;
-      text-decoration: underline;
-    }
+    text-decoration: underline;
   }
 }
 
