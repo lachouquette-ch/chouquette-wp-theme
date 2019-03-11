@@ -78,7 +78,7 @@
                                 <select class="form-control selectpicker show-tick" title="Où veux-tu aller ?" data-selected-text-format="count > 2" multiple data-actions-box="true">
                                     <?php
                                     $terms = get_terms(array(
-                                        'taxonomy' => 'cq_localisation',
+                                        'taxonomy' => CHOUQUETTE_TAXONOMY_LOCALISATION,
                                         'hide_empty' => false,
                                         'orderby' => 'term_group'
                                     ));
