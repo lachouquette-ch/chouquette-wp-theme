@@ -36,7 +36,7 @@
                 echo '<ul class="navbar-nav mr-auto">';
                 foreach ($menu_items as $menu_item) :
                     echo '<li class="nav-item">';
-                    echo sprintf("<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>",  esc_url($menu_item->url), $menu_item->description, $menu_item->logo_class, $menu_item->title);
+                    echo sprintf("<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>", esc_url($menu_item->url), $menu_item->description, $menu_item->logo_class, $menu_item->title);
                     echo '</li>';
                 endforeach;
                 echo '</ul>';
@@ -60,7 +60,7 @@
                     echo '<div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">';
                     foreach ($menu_items as $menu_item) :
                         echo '<div class="index-header-category m-4">';
-                        echo sprintf("<a href='%s' title='%s'>",  esc_url($menu_item->url), $menu_item->description);
+                        echo sprintf("<a href='%s' title='%s'>", esc_url($menu_item->url), $menu_item->description);
                         echo sprintf("<i class='index-header-category-icon %s'></i>", $menu_item->logo_class);
                         echo sprintf("<h2 class='my-2'>%s</h2>", $menu_item->title);
                         echo '</a>';
@@ -76,11 +76,18 @@
                         <div class="row">
                             <div class="col-md-4 index-header-filters-item">
                                 <select class="form-control selectpicker show-tick" title="Où veux-tu aller ?" data-selected-text-format="count > 2" multiple data-actions-box="true">
-                                    <option title="Vaud" value="0">Vaud</option>
-                                    <option title="Lausanne" value="1"> • Lausanne</option>
-                                    <option title="Morges" value="2"> • Morges</option>
-                                    <option title="Genève" value="2">Genève</option>
-                                    <option title="Valais" value="3">Valais</option>
+                                    <?php
+                                    $terms = get_terms(array(
+                                        'taxonomy' => 'cq_localisation',
+                                        'hide_empty' => false,
+                                        'orderby' => 'term_group'
+                                    ));
+                                    foreach ($terms as $term) {
+                                        $term_display = $term->parent != 0 ? ' • ' : '';
+                                        $term_display .= $term->name;
+                                        echo sprintf("<option title='%s' value='%s'>%s</option>", $term->name, $term->slug, $term_display);
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-md-4 index-header-filters-item">
@@ -229,7 +236,7 @@
             $custom_logo_id = get_theme_mod('custom_logo');
             $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
             if (has_custom_logo()) {
-                echo sprintf('<img style="height: 13rem" class="mx-auto" src="%s">',  esc_url($logo[0]));
+                echo sprintf('<img style="height: 13rem" class="mx-auto" src="%s">', esc_url($logo[0]));
             }
             ?>
             <p class="my-3">
