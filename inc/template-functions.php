@@ -49,39 +49,3 @@ if (!function_exists('chouquette_menu_items')) :
         return $result;
     }
 endif;
-
-if (!function_exists('chouquette_top_category')) :
-
-    /**
-     * Retrieve top level category for given post.
-     *
-     * Fails if multiple top categories.
-     */
-    function chouquette_top_category($post_id)
-    {
-        $top_categories = array();
-
-        $categories = get_the_category($post_id);
-        foreach ($categories as $category) {
-            // if already top category
-            if ($category->parent == 1232) { // FIXME should be 0
-                $top_categories[$category->term_id] = $category;
-                continue;
-            }
-            // if not ...
-            $parents = get_ancestors($category->term_id, 'category');
-            foreach (array_reverse($parents) as $term_id) {
-                $parent = get_term($term_id, 'category');
-                if ($parent->parent == 1232) { // FIXME should be 0
-                    $top_categories[$parent->term_id] = $parent;
-                }
-            }
-        }
-
-        // return value
-        if (empty ($top_categories))
-            return null;
-        else
-            return array_pop($top_categories);
-    }
-endif;
