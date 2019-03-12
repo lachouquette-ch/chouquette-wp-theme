@@ -1,0 +1,26 @@
+.cq-header {
+
+  .navbar-chouquette {
+    background-color: $chouquette-darker-grey;
+
+    .navbar-brand {
+      font-size: 1.75rem;
+
+      @include media-breakpoint-down(lg) {
+        font-size: 2rem;
+      }
+    }
+
+    .nav-item.active {
+      > a {
+        text-decoration: underline;
+      }
+    }
+
+    .navbar-sn {
+      font-size: 1.25rem;
+      margin: 0.5rem 0;
+    }
+  }
+
+}
