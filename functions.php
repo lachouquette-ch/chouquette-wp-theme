@@ -89,7 +89,9 @@ add_action( 'after_setup_theme', 'chouquette_setup' );
  * Enqueue scripts and styles.
  */
 function chouquette_scripts() {
-    wp_enqueue_style( 'slider', get_template_directory_uri() . '/dist/style.css', null, CHOUQUETTE_THEME_VERSION, 'all');
+    wp_enqueue_style( 'style', get_template_directory_uri() . '/dist/style.css', null, CHOUQUETTE_THEME_VERSION, 'all');
+
+    wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.7.2/css/all.css', null, null, 'all');
 
     wp_enqueue_script( 'vendor', get_template_directory_uri() . '/dist/vendor.js', null, CHOUQUETTE_THEME_VERSION, true);
 
