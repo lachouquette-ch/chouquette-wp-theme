@@ -5,6 +5,7 @@
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+  background-color: $chouquette-grey;
 
   h1 {
     font-family: $font-family-brand;
@@ -124,9 +125,9 @@
 }
 
 .index-footer-top {
-  background-color: #353535;
+  background-color: $chouquette-dark-grey;
 }
 
 .index-footer-bottom {
-  background-color: #292929;
+  background-color: $chouquette-darker-grey;
 }
