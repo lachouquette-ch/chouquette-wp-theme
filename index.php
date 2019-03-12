@@ -158,7 +158,7 @@
 
     <div id="newsletter" class="container-fluid index-newsletter">
         <div class="row">
-            <div class="col-lg-6 mb-3">
+            <div class="col-lg-6 m-md-auto mb-3">
                 <h2 class="w-75 m-auto text-center">Pour être dans la confidence du meilleur de chez toi</h2>
             </div>
             <div class="col-lg-6">
