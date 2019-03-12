@@ -13,7 +13,6 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
 .navbar-chouquette {
   .navbar-brand {
     font-family: $font-family-brand;
-    font-size: 3rem;
     color: $navbar-chouquette-brand-color;
 
     @include hover-focus {
@@ -45,10 +44,6 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
   .navbar-toggler {
     color: $navbar-chouquette-color;
     border-color: $navbar-chouquette-toggler-border-color;
-    // custom for chouquette
-    @include media-breakpoint-up(md) {
-      visibility: hidden;
-    }
   }
 
   .navbar-toggler-icon {
@@ -64,11 +59,5 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
         color: $navbar-chouquette-active-color;
       }
     }
-  }
-
-  // custom navbar
-  .navbar-collapse {
-    padding: 1rem;
-    background-color: rgba($black, .5);
   }
 }

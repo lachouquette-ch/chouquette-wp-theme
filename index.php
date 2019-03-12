@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#f8ef28"/>
 
     <?php wp_head(); ?>
+</head>
 <body>
 
 <header class="index-header p-0 container-fluid h-100">

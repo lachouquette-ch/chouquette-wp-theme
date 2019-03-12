@@ -12,6 +12,18 @@
     font-size: 3rem;
     color: $chouquette-yellow;
   }
+
+  // custom navbar
+  .navbar-collapse {
+    padding: 1rem;
+    background-color: rgba($black, .5);
+  }
+
+  .navbar-toggler {
+    @include media-breakpoint-up(md) {
+      visibility: hidden;
+    }
+  }
 }
 
 .index-header-menu {
