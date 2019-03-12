@@ -14,7 +14,7 @@
     <nav class="navbar navbar-chouquette">
         <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false"
                 aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="color: red;"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">
             <h1><?php bloginfo('name'); ?></h1>
