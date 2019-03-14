@@ -1,5 +1,5 @@
-<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-    <article class="article-card d-flex align-items-end" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>')">
+<a class="article-card" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+    <article class="d-flex align-items-end" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>')">
         <div class="article-card-header p-2 flex-fill">
             <?php
             $categories = get_categories(array(

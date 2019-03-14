@@ -32,7 +32,7 @@ jQuery(function ($) {
         slidesPerView: 1,
         spaceBetween: 10,
         autoplay: {
-            delay: 2000,
+            delay: 3000,
             disableOnInteraction: false,
         },
         navigation: {

@@ -1,13 +1,13 @@
 .article-card {
-  min-height: 300px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 1px solid black;
-
-  h3 {
-    font-size: $font-size-base;
+  > article {
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid black;
   }
+
+    text-decoration: none !important;
 }
 
 .article-card-header {
@@ -26,4 +26,5 @@
 
 .article-card-title {
   margin: 0;
+  font-size: $font-size-base;
 }

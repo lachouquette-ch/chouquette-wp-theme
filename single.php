@@ -192,6 +192,25 @@
     <div class="row cq-single-similar mt-3 mt-lg-5">
         <div class="col">
             <h3 class="mb-3">Article similaire</h3>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <?php
+                    $tops_posts = new WP_Query('posts_per_page=10');
+                    if ($tops_posts->have_posts()) :
+                        while ($tops_posts->have_posts()) :
+                            $tops_posts->the_post();
+                            ?>
+                            <div class="swiper-slide bg-dark text-white"> <?php
+                                get_template_part('template-parts/article-card');
+                                ?> </div> <?php
+                        endwhile;
+                    endif;
+                    ?>
+                </div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next swiper-button-black"></div>
+                <div class="swiper-button-prev swiper-button-black"></div>
+            </div>
         </div>
     </div>
 
