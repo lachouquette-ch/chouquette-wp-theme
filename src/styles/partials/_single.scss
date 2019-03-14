@@ -21,13 +21,14 @@
 
 .single-header-meta {
   position: absolute;
-  bottom: -5px; // to hide bottom border
+  bottom: 0;
   left: 30+100+15px; // computed based on author img
   margin-right: 15px; // responsive right spacing
 
   background-color: $white;
   padding: 3px 10px 0 10px;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 
   a {
     color: $chouquette-dark-grey;
