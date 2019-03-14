@@ -191,7 +191,7 @@
 
     <div class="row cq-single-similar mt-3 mt-lg-5">
         <div class="col">
-            <h3 class="mb-3">Article similaire</h3>
+            <h3 class="mb-3">Articles similaires</h3>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <?php
@@ -221,11 +221,4 @@
     </div>
 </article>
 
-
-<footer>
-    Footer
-</footer>
-
-<?php wp_footer(); ?>
-</body>
-</html>
+<?php get_footer(); ?>
