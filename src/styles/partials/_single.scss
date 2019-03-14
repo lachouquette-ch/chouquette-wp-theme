@@ -1,15 +1,26 @@
-.single-header {
+.cq-single {
+  a {
+    color: $chouquette-grey;
+    text-decoration: underline;
+
+    @include hover-focus {
+      color: $chouquette-darker-grey;
+    }
+  }
+}
+
+.cq-single-header {
   position: relative;
 
   margin-bottom: 50px; // for author img
 }
 
-.single-header-img {
+.cq-single-header-img {
   width: 100%;
   height: auto;
 }
 
-.single-header-author-img {
+.cq-single-header-author-img {
   height: 100px;
   width: 100px;
 
@@ -19,7 +30,7 @@
   border: 5px solid $white;
 }
 
-.single-header-meta {
+.cq-single-header-meta {
   position: absolute;
   bottom: 0;
   left: 30+100+15px; // computed based on author img
@@ -29,9 +40,41 @@
   padding: 3px 10px 0 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
 
-  a {
-    color: $chouquette-dark-grey;
-    text-decoration: underline;
+.cq-single-content-title {
+  h1 {
+    display: inline-block;
   }
+
+  a.badge {
+    vertical-align: top;
+    color: $chouquette-dark-grey;
+    text-decoration: none;
+
+    @include hover-focus {
+      color: $chouquette-grey;
+    }
+  }
+}
+
+.cq-fiche-tabs {
+  a {
+    text-decoration: inherit;
+  }
+}
+
+.cq-fiche {
+  .card-footer {
+    background-color: $chouquette-yellow;
+    color: $chouquette-darker-grey;
+  }
+}
+
+.cq-fiche-contact, .cq-fiche {
+  border-top: none !important;
+}
+
+.cq-fiche-price:not(.cq-fiche-price-selected) {
+  color: $chouquette-light-grey;
 }

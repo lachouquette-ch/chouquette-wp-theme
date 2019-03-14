@@ -55,22 +55,26 @@
     </nav>
 </header>
 
-<article class="container">
-    <div class="row">
-        <header class="col single-header p-0 mt-1 mt-md-4">
-            <img class="single-header-img" src="http://lachouquette.ch/wp-content/uploads/2019/03/Salle-vide-1140x759.jpg" alt="blalbabla">
-            <img class="single-header-author-img rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="140"
+<article class="container cq-single">
+    <div class="row cq-single-header p-0 mt-1 mt-md-4">
+        <div class="col">
+            <img class="cq-single-header-img" src="http://lachouquette.ch/wp-content/uploads/2019/03/Salle-vide-1140x759.jpg" alt="blalbabla">
+            <img class="cq-single-header-author-img rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="140"
                  height="140">
-            <div class="single-header-meta">
+            <div class="cq-single-header-meta">
                 <span>par Justine</span>
                 <span>le 6 mars 2019</span>
-                <span>dans <a name="desc" href="#">Sorties</a> / <a name="desc" href="#">Culture</a></span>
+                <span>dans <a name="desc" href="#" class="sing-header-link">Sorties</a> / <a name="desc" href="#">Culture</a></span>
             </div>
-        </header>
+        </div>
     </div>
-    <div class="row">
+
+    <div class="row cq-single-content">
         <div class="col-lg-8">
-            <h1>Le titre</h1>
+            <div class="cq-single-content-title">
+                <h1 class="mb-0 mr-2">Le titre</h1>
+                <a href="#fiche" class="badge badge-pill badge-primary py-2 px-3 d-lg-none"><i class="fas fa-info mr-1"></i> Fiche</a>
+            </div>
             <main>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pellentesque sit amet purus vitae sodales. Nulla vitae libero eget nibh venenatis convallis accumsan non nisl.
                 Suspendisse est magna, commodo et bibendum id, egestas non dui. Nam mauris leo, commodo ut facilisis quis, congue non justo. Vestibulum tempus dapibus massa sed pulvinar. Sed finibus
@@ -95,40 +99,96 @@
                 non volutpat justo, in dapibus lectus. Pellentesque mi lectus, gravida ut leo nec, tempor tincidunt libero.
             </main>
         </div>
-        <div class="col-lg-4 mt-2 mt-lg-0 p-1 p-lg-0">
-            <aside>
-                <div class="card">
-                    <img class="card-img-top" src="http://lachouquette.ch/wp-content/uploads/2019/03/JacquesGamblin_NicolasGerardin_4.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">Théâtre de Beausobre</h4>
-                        <p class="card-text">Le théatre de Morges qui balbalbalbla</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Avenue de Vertou 2, 1110 Morges</li>
-                        <li class="list-group-item">021 804 15 65</li>
-                        <li class="list-group-item">Site internet</li>
-                        <li class="list-group-item">Email</li>
-                    </ul>
-                    <div class="card-body">
-                        <h5 class="card-subtitle">Infos x</h5>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+
+        <aside id="fiche" class="col-lg-4 pt-2 pt-lg-0">
+            <ul class="nav nav-tabs cq-fiche-tabs" id="ficheTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="info-tab" data-toggle="tab" href="#ficheInfo" role="tab" aria-controls="Infos" aria-selected="true"><i class="fas fa-info mr-2"></i> Fiche</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ficheContact" role="tab" aria-controls="Contact" aria-selected="false"><i class="fas fa-user-edit mr-2"></i>
+                        Contact</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="ficheTabContent">
+                <div class="tab-pane fade show active" id="ficheInfo" role="tabpanel" aria-labelledby="info-tab">
+                    <div class="card cq-fiche">
+                        <img class="card-img-top" src="http://lachouquette.ch/wp-content/uploads/2019/03/JacquesGamblin_NicolasGerardin_4.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h1 class="card-title h3">Théâtre de Beausobre</h1>
+                            <p class="card-text">Le théatre de Morges qui balbalbalbla</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="https://maps.google.com/?q=Avenue de Vertou 2, 1110 Morges" title="Ouvrir avec Google maps" target="_blank"><i
+                                            class="fas fa-map-marker-alt pr-1"></i> Avenue de Vertou 2, 1110 Morges</a></li>
+                            <li class="list-group-item"><a href="tel:021 804 15 65" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> 021 804 15 65</a></li>
+                            <li class="list-group-item"><a href="http://beausobre.ch/" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a></li>
+                            <li class="list-group-item"><a href="mailto:info@beausobre.ch" title="EMail"><i class="fas fa-at pr-1"></i> Email</a></li>
+                            <li class="list-group-item">
+                                <span class="mr-2">Réseaux :</span>
+                                <a href="https://facebook.com/beausobre.ch/" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/theatre_de_beausobre/" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li class="list-group-item">
+                                <h2 class="h5 mb-2">Informations</h2>
+                                <p class="mb-1">Prix : <span class="cq-fiche-price cq-fiche-price-selected">$$$</span><span class="cq-fiche-price">$$</span></p>
+                                <p class="mb-1">Horaires :</p>
+                                <ul class="mb-1">
+                                    <li>Lundi-Vendredi : 19-23h</li>
+                                    <li>Samedi : 9-23h</li>
+                                    <li>Dimanche : 11-20h</li>
+                                </ul>
+                                <p class="mb-1">Catégories :</p>
+                                <p class="mb-0">
+                                    <i class="fas fa-child mr-2"></i><i class="fas fa-wheelchair mr-2"></i><i class="fas fa-wifi mr-2"></i>
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="card-footer">
+                            Chouquettisé le 12/03/2018
+                        </div>
                     </div>
                 </div>
-            </aside>
-        </div>
+                <div class="tab-pane fade" id="ficheContact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="card cq-fiche-contact">
+                        <div class="card-body">
+                            <h2 class="card-title h3">Contact le lieu </h2>
+                            <form>
+                                <div class="form-group">
+                                    <label for="contactSenderName">Ton prénom / nom</label>
+                                    <input class="form-control" id="contactSenderName" placeholder="Prénom Nom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactSenderMail">Ton mail</label>
+                                    <input type="email" class="form-control" id="contactSenderMail" placeholder="name@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactSenderContent">Ton message</label>
+                                    <textarea class="form-control" id="contactSenderContent" rows="5"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <div class="row cq-single-author">
+        <h3>Auteur</h3>
+    </div>
+
+    <div class="row cq-single-similar">
+        <h3>Article similaire</h3>
+    </div>
+
+    <div class="row cq-single-comments">
+        <h3>Commentaire</h3>
     </div>
 </article>
 
-<footer>
-    <div>Auteur</div>
-    <div>Article similaire</div>
-    <div>Article similaire</div>
-    <div>Commentaire</div>
-</footer>
 
 <footer>
     Footer
