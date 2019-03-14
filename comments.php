@@ -70,7 +70,7 @@ if (post_password_required()) {
     endif; // Check for have_comments().
 
 
-    // as document in https://codex.wordpress.org/Function_Reference/comment_form
+    // as documented in https://codex.wordpress.org/Function_Reference/comment_form
 
     $commenter = wp_get_current_commenter();
     $req = get_option( 'require_name_email' );

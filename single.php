@@ -157,11 +157,11 @@
                             <form>
                                 <div class="form-group">
                                     <label for="contactSenderName">Ton prénom / nom</label>
-                                    <input class="form-control" id="contactSenderName" placeholder="Prénom Nom">
+                                    <input class="form-control" id="contactSenderName">
                                 </div>
                                 <div class="form-group">
                                     <label for="contactSenderMail">Ton mail</label>
-                                    <input type="email" class="form-control" id="contactSenderMail" placeholder="name@example.com">
+                                    <input type="email" class="form-control" id="contactSenderMail">
                                 </div>
                                 <div class="form-group">
                                     <label for="contactSenderContent">Ton message</label>
