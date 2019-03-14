@@ -56,8 +56,8 @@
 </header>
 
 <article class="container cq-single">
-    <div class="row cq-single-header p-0 mt-1 mt-md-4">
-        <div class="col">
+    <div class="row cq-single-header mt-0 mt-lg-4">
+        <div class="col p-0">
             <img class="cq-single-header-img" src="http://lachouquette.ch/wp-content/uploads/2019/03/Salle-vide-1140x759.jpg" alt="blalbabla">
             <img class="cq-single-header-author-img rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="140"
                  height="140">
@@ -71,7 +71,7 @@
 
     <div class="row cq-single-content">
         <div class="col-lg-8">
-            <div class="cq-single-content-title">
+            <div class="cq-single-content-title mt-3 mb-2">
                 <h1 class="mb-0 mr-2">Le titre</h1>
                 <a href="#fiche" class="badge badge-pill badge-primary py-2 px-3 d-lg-none"><i class="fas fa-info mr-1"></i> Fiche</a>
             </div>
@@ -100,7 +100,7 @@
             </main>
         </div>
 
-        <aside id="fiche" class="col-lg-4 pt-2 pt-lg-0">
+        <aside id="fiche" class="col-lg-4 pt-4 pt-lg-0">
             <ul class="nav nav-tabs cq-fiche-tabs" id="ficheTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="info-tab" data-toggle="tab" href="#ficheInfo" role="tab" aria-controls="Infos" aria-selected="true"><i class="fas fa-info mr-2"></i> Fiche</a>
@@ -176,16 +176,29 @@
         </aside>
     </div>
 
-    <div class="row cq-single-author">
-        <h3>Auteur</h3>
+    <div class="row cq-single-author mt-3 mt-lg-5">
+        <div class="col">
+            <h3 class="mb-3">Auteur</h3>
+            <div class="media">
+                <img class="rounded-circle mr-3" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="80" height="80">
+                <div class="media-body">
+                    <h5 class="mt-0">Justine</h5>
+                    Bourguignonne de naissance mais vaudoise de cœur. Passionnée de cinéma et de littérature, je t'embarque dans mes aventures à Lausanne ou Morges.
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="row cq-single-similar">
-        <h3>Article similaire</h3>
+    <div class="row cq-single-similar mt-3 mt-lg-5">
+        <div class="col">
+            <h3 class="mb-3">Article similaire</h3>
+        </div>
     </div>
 
-    <div class="row cq-single-comments">
-        <h3>Commentaire</h3>
+    <div class="row cq-single-comments mt-3 mt-lg-5">
+        <div class="col">
+            <h3 class="mb-3">Commentaire</h3>
+        </div>
     </div>
 </article>
 
