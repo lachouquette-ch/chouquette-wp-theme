@@ -1,11 +1,11 @@
 // create new navbar classes based on bootstrap navbar theme colors
 
 $navbar-chouquette-color:                $chouquette-yellow;
-$navbar-chouquette-hover-color:          rgba($chouquette-yellow, .7);
-$navbar-chouquette-active-color:         rgba($chouquette-yellow, .9);
-$navbar-chouquette-disabled-color:       rgba($chouquette-yellow, .3);
+$navbar-chouquette-hover-color:          rgba($navbar-chouquette-color, .7);
+$navbar-chouquette-active-color:         rgba($navbar-chouquette-color, .9);
+$navbar-chouquette-disabled-color:       rgba($navbar-chouquette-color, .3);
 $navbar-chouquette-toggler-icon-bg:      str-replace(url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='#{$navbar-chouquette-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"), "#", "%23");
-$navbar-chouquette-toggler-border-color: rgba($chouquette-yellow, .8);
+$navbar-chouquette-toggler-border-color: rgba($navbar-chouquette-color, .8);
 
 $navbar-chouquette-brand-color:          $navbar-chouquette-color;
 $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
