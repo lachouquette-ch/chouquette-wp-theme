@@ -75,7 +75,7 @@
                 <h1 class="mb-0 mr-2">Le titre</h1>
                 <a href="#fiche" class="badge badge-pill badge-primary py-2 px-3 d-lg-none"><i class="fas fa-info mr-1"></i> Fiche</a>
             </div>
-            <main>
+            <main class="cq-single-content-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pellentesque sit amet purus vitae sodales. Nulla vitae libero eget nibh venenatis convallis accumsan non nisl.
                 Suspendisse est magna, commodo et bibendum id, egestas non dui. Nam mauris leo, commodo ut facilisis quis, congue non justo. Vestibulum tempus dapibus massa sed pulvinar. Sed finibus
                 consectetur ante quis blandit. Aenean a vehicula eros, mollis faucibus augue. Fusce venenatis pellentesque nisi.
