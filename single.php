@@ -214,11 +214,14 @@
         </div>
     </div>
 
-    <div class="row cq-single-comments mt-3 mt-lg-5">
-        <div class="col">
-            <h3 class="mb-3">Commentaire</h3>
+    <?php if (comments_open() || get_comments_number()) : ?>
+        <div class="row cq-single-comments mt-3 mt-lg-5">
+            <div class="col">
+                <h3 class="mb-3">Commentaires</h3>
+                <?php comments_template(); ?>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 </article>
 
 <?php get_footer(); ?>
