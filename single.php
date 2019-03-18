@@ -118,28 +118,28 @@
                         <div class="card-body">
                             <h1 class="card-title h4">Théâtre de Beausobre</h1>
                             <p class="card-text">Le théatre de Morges qui balbalbalbla</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a href="https://maps.google.com/?q=Avenue de Vertou 2, 1110 Morges" title="Ouvrir avec Google maps" target="_blank"><i
-                                            class="fas fa-map-marker-alt pr-1"></i> Avenue de Vertou 2, 1110 Morges</a></li>
-                            <li class="list-group-item"><a href="tel:021 804 15 65" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> 021 804 15 65</a></li>
-                            <li class="list-group-item"><a href="http://beausobre.ch/" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a></li>
-                            <li class="list-group-item"><a href="mailto:info@beausobre.ch" title="EMail"><i class="fas fa-at pr-1"></i> Email</a></li>
-                            <li class="list-group-item">
+                            <p class="mb-1"><a href="https://maps.google.com/?q=Avenue de Vertou 2, 1110 Morges" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> Avenue de Vertou 2, 1110 Morges</a></p>
+                            <p class="mb-1"><a href="tel:021 804 15 65" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> 021 804 15 65</a></p>
+                            <p class="mb-1"><a href="http://beausobre.ch/" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a></p>
+                            <p class="mb-1"><a href="mailto:info@beausobre.ch" title="EMail"><i class="fas fa-at pr-1"></i> Email</a></p>
+                            <p class="mt-3 mb-0">
                                 <span class="mr-2">Réseaux :</span>
                                 <a href="https://facebook.com/beausobre.ch/" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>
                                 <a href="https://www.instagram.com/theatre_de_beausobre/" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>
-                            </li>
+                            </p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Prix : <span class="cq-fiche-price cq-fiche-price-selected">$$$</span><span class="cq-fiche-price">$$</span></li>
                             <li class="list-group-item">
-                                <h2 class="h5 mb-2">Informations</h2>
-                                <p class="mb-1">Prix : <span class="cq-fiche-price cq-fiche-price-selected">$$$</span><span class="cq-fiche-price">$$</span></p>
-                                <p class="mb-1">Horaires :</p>
-                                <ul class="mb-1">
+                                <p class="mb-2">Horaires :</p>
+                                <ul>
                                     <li>Lundi-Vendredi : 19-23h</li>
                                     <li>Samedi : 9-23h</li>
                                     <li>Dimanche : 11-20h</li>
                                 </ul>
-                                <p class="mb-1">Catégories :</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="mb-2">Catégories :</p>
                                 <p class="mb-0">
                                     <i class="fas fa-child mr-2"></i><i class="fas fa-wheelchair mr-2"></i><i class="fas fa-wifi mr-2"></i>
                                 </p>
