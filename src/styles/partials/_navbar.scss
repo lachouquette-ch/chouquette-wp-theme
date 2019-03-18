@@ -63,6 +63,73 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
 
   // add custom
   .navbar-divider {
-    @include nav-divider($chouquette-yellow);
+    @include nav-divider($navbar-chouquette-color);
+  }
+}
+
+$navbar-chouquette-light-color:                $white;
+$navbar-chouquette-light-hover-color:          $chouquette-yellow;
+$navbar-chouquette-light-active-color:         $navbar-chouquette-light-hover-color;
+$navbar-chouquette-light-disabled-color:       $chouquette-light-grey;
+$navbar-chouquette-light-toggler-icon-bg:      $navbar-chouquette-light-color;
+$navbar-chouquette-light-toggler-border-color: $navbar-chouquette-light-color;
+
+$navbar-chouquette-light-brand-color:          $navbar-chouquette-light-color;
+$navbar-chouquette-light-brand-hover-color:    $navbar-chouquette-light-hover-color;
+
+.navbar-chouquette-light {
+  @extend .navbar-chouquette;
+
+  .navbar-brand {
+    color: $navbar-chouquette-light-brand-color;
+
+    @include hover-focus {
+      color: $navbar-chouquette-light-brand-hover-color;
+    }
+  }
+
+  .navbar-nav {
+    .nav-link {
+      color: $navbar-chouquette-light-color;
+
+      @include hover-focus {
+        color: $navbar-chouquette-light-hover-color;
+      }
+
+      &.disabled {
+        color: $navbar-chouquette-light-disabled-color;
+      }
+    }
+
+    .show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+      color: $navbar-chouquette-light-active-color;
+    }
+  }
+
+  .navbar-text {
+    color: $navbar-chouquette-light-color;
+    a {
+      color: $navbar-chouquette-light-color;
+
+      @include hover-focus {
+        color: $navbar-chouquette-light-active-color;
+      }
+    }
+  }
+
+  // add custom
+  .navbar-divider {
+    @include nav-divider($navbar-chouquette-light-color);
+  }
+
+  .navbar-sn a {
+    color: $navbar-chouquette-light-color;
+
+    @include hover-focus {
+      color: $navbar-chouquette-light-active-color;
+    }
   }
 }
