@@ -213,19 +213,6 @@
         </div>
     </div>
 
-    <div class="container-fluid mt-3">
-        <div class="row">
-            <div class="col-md-4 p-0" style="background-image: url('http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-single-img-banner-1.jpg')">
-                <img class="w-100" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-single-img-banner-1a.png">
-            </div>
-            <div class="col-md-4 p-0" style="background-image: url('http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-single-img-banner-2.jpg')">
-                <img class="w-100" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-single-img-banner-2a.png">
-            </div>
-            <div class="col-md-4 p-0" style="background-image: url('http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-single-img-banner-3.jpg')">
-                <img class="w-100" src="http://findme.elated-themes.com/wp-content/uploads/2017/06/h2-single-img-banner-3a.png">
-            </div>
-        </div>
-    </div>
 </div>
 
 <?php get_footer(); ?>
