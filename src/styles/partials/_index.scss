@@ -18,10 +18,15 @@
     color: #f8ef28;
   }
 
-  // custom navbar
-  .navbar-collapse {
+  // custom navbarnavbarChouquette
+  #navbarChouquette {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+
     padding: 1rem;
-    background-color: rgba($black, .5);
+    @include gradient-y(rgba($black, 0.4), rgba($black, 1), 0%, 100%);
   }
 
   .navbar-toggler {
