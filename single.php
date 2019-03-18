@@ -16,7 +16,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/"><?php bloginfo('name'); ?></a>
+        <a class="navbar-brand mr-5" href="/"><?php bloginfo('name'); ?></a>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
             <ul class="navbar-nav mr-auto">
