@@ -49,8 +49,9 @@
     <div class="index-header-menu d-flex flex-column h-100 p-3">
         <div class="flex-grow-1">
             <div class="d-flex flex-column h-100 justify-content-center align-items-center">
-                <div class="text-center d-block d-md-none mb-3">
-                    <h1><?php bloginfo('name'); ?></h1>
+                <div class="text-center">
+                    <h1 class="d-block d-md-none mb-5"><?php bloginfo('name'); ?></h1>
+                    <h3 class="mb-3"><?php bloginfo('description'); ?></h3>
                 </div>
                 <?php
                 // get menu items
