@@ -1,7 +1,7 @@
 .cq-header {
   margin-top: 80px; // corresp. navbar height
 
-  .navbar-chouquette {
+  .navbar-chouquette-light {
     background-color: $chouquette-darker-grey;
 
     .navbar-brand {
@@ -12,9 +12,21 @@
       }
     }
 
-    .nav-item.active {
-      > a {
+    .nav-item {
+      &.active a {
         text-decoration: underline;
+      }
+
+      i {
+        @include media-breakpoint-only(lg) {
+          font-size: 20px;
+        }
+      }
+
+      .nav-link-text {
+        @include media-breakpoint-only(lg) {
+          display: none;
+        }
       }
     }
 

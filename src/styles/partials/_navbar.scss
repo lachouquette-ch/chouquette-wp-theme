@@ -1,14 +1,14 @@
 // create new navbar classes based on bootstrap navbar theme colors
 
-$navbar-chouquette-color:                $chouquette-yellow;
-$navbar-chouquette-hover-color:          rgba($navbar-chouquette-color, .7);
-$navbar-chouquette-active-color:         rgba($navbar-chouquette-color, .9);
-$navbar-chouquette-disabled-color:       rgba($navbar-chouquette-color, .3);
-$navbar-chouquette-toggler-icon-bg:      str-replace(url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='#{$navbar-chouquette-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"), "#", "%23");
+$navbar-chouquette-color: $chouquette-yellow;
+$navbar-chouquette-hover-color: rgba($navbar-chouquette-color, .7);
+$navbar-chouquette-active-color: rgba($navbar-chouquette-color, .9);
+$navbar-chouquette-disabled-color: rgba($navbar-chouquette-color, .3);
+$navbar-chouquette-toggler-icon-bg: str-replace(url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='#{$navbar-chouquette-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"), "#", "%23");
 $navbar-chouquette-toggler-border-color: rgba($navbar-chouquette-color, .8);
 
-$navbar-chouquette-brand-color:          $navbar-chouquette-color;
-$navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
+$navbar-chouquette-brand-color: $navbar-chouquette-color;
+$navbar-chouquette-brand-hover-color: rgba($navbar-chouquette-color, .8);
 
 .navbar-chouquette {
   height: 80px;
@@ -54,6 +54,7 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
 
   .navbar-text {
     color: $navbar-chouquette-color;
+
     a {
       color: $navbar-chouquette-active-color;
 
@@ -67,17 +68,30 @@ $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
   .navbar-divider {
     @include nav-divider($navbar-chouquette-color);
   }
+
+  .navbar-collapse {
+    @include media-breakpoint-down(md) {
+      // custom navbarnavbarChouquette
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+
+      padding: 1rem;
+      @include gradient-radial(rgba($black, 0.6), rgba($black, 0.9));
+    }
+  }
 }
 
-$navbar-chouquette-light-color:                $white;
-$navbar-chouquette-light-hover-color:          $chouquette-yellow;
-$navbar-chouquette-light-active-color:         $navbar-chouquette-light-hover-color;
-$navbar-chouquette-light-disabled-color:       $chouquette-light-grey;
-$navbar-chouquette-light-toggler-icon-bg:      $navbar-chouquette-light-color;
+$navbar-chouquette-light-color: $white;
+$navbar-chouquette-light-hover-color: $chouquette-yellow;
+$navbar-chouquette-light-active-color: $navbar-chouquette-light-hover-color;
+$navbar-chouquette-light-disabled-color: $chouquette-light-grey;
+$navbar-chouquette-light-toggler-icon-bg: $navbar-chouquette-light-color;
 $navbar-chouquette-light-toggler-border-color: $navbar-chouquette-light-color;
 
-$navbar-chouquette-light-brand-color:          $navbar-chouquette-light-color;
-$navbar-chouquette-light-brand-hover-color:    $navbar-chouquette-light-hover-color;
+$navbar-chouquette-light-brand-color: $navbar-chouquette-light-color;
+$navbar-chouquette-light-brand-hover-color: $navbar-chouquette-light-hover-color;
 
 .navbar-chouquette-light {
   @extend .navbar-chouquette;
@@ -134,15 +148,4 @@ $navbar-chouquette-light-brand-hover-color:    $navbar-chouquette-light-hover-co
       color: $navbar-chouquette-light-active-color;
     }
   }
-}
-
-// custom navbarnavbarChouquette
-#navbarChouquette {
-  position: absolute;
-  top: 80px;
-  left: 0;
-  width: 100%;
-
-  padding: 1rem;
-  @include gradient-radial(rgba($black, 0.6), rgba($black, 1));
 }

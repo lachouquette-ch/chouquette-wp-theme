@@ -12,7 +12,7 @@
 <body>
 
 <header class="cq-header">
-    <nav class="navbar fixed-top navbar-chouquette-light navbar-expand-xl">
+    <nav class="navbar fixed-top navbar-chouquette-light navbar-expand-lg">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,19 +21,19 @@
         <div class="collapse navbar-collapse" id="navbarChouquette">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="fas fa-cocktail mr-2"></i>Bars et Restos <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#" title="Bars et Restos"><i class="fas fa-cocktail mr-2"></i><span class="nav-link-text">Bars et Restos</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-theater-masks mr-2"></i>Culture</a>
+                    <a class="nav-link" href="#" title="Culture"><i class="fas fa-theater-masks mr-2"></i><span class="nav-link-text">Culture</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fab fa-angellist mr-2"></i>Loisirs</a>
+                    <a class="nav-link" href="#" title="Loisirs"><i class="fab fa-angellist mr-2"></i><span class="nav-link-text">Loisirs</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-bag mr-2"></i>Shopping</a>
+                    <a class="nav-link" href="#" title="Shopping"><i class="fas fa-shopping-bag mr-2"></i><span class="nav-link-text">Shopping</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-grin-hearts mr-2"></i>Les Chouchous</a>
+                    <a class="nav-link" href="#" title="Les Chouchous"><i class="fas fa-grin-hearts mr-2"></i><span class="nav-link-text">Les Chouchous</span></a>
                 </li>
             </ul>
             <div class="navbar-divider"></div>
