@@ -186,7 +186,7 @@
         </div>
     </div>
 
-    <div class="container-fluid p-3 my-3">
+    <div class="container p-3 my-3">
         <div class="row mb-3">
             <div class="col text-center">
                 <h2>Les tops !</h2>
