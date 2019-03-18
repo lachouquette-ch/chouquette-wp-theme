@@ -11,6 +11,8 @@ $navbar-chouquette-brand-color:          $navbar-chouquette-color;
 $navbar-chouquette-brand-hover-color:    rgba($navbar-chouquette-color, .8);
 
 .navbar-chouquette {
+  height: 80px;
+
   .navbar-brand {
     font-family: $font-family-brand;
     color: $navbar-chouquette-brand-color;
@@ -132,4 +134,15 @@ $navbar-chouquette-light-brand-hover-color:    $navbar-chouquette-light-hover-co
       color: $navbar-chouquette-light-active-color;
     }
   }
+}
+
+// custom navbarnavbarChouquette
+#navbarChouquette {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+
+  padding: 1rem;
+  @include gradient-radial(rgba($black, 0.6), rgba($black, 1));
 }
