@@ -116,7 +116,7 @@
                     <div class="card cq-fiche">
                         <img class="card-img-top" src="http://lachouquette.ch/wp-content/uploads/2019/03/JacquesGamblin_NicolasGerardin_4.jpg" alt="Card image cap">
                         <div class="card-body">
-                            <h1 class="card-title h3">Théâtre de Beausobre</h1>
+                            <h1 class="card-title h4">Théâtre de Beausobre</h1>
                             <p class="card-text">Le théatre de Morges qui balbalbalbla</p>
                         </div>
                         <ul class="list-group list-group-flush">
@@ -153,7 +153,7 @@
                 <div class="tab-pane fade" id="ficheContact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="card cq-fiche-contact">
                         <div class="card-body">
-                            <h2 class="card-title h3">Contact le lieu </h2>
+                            <h2 class="card-title h4">Contact le propriétaire</h2>
                             <form>
                                 <div class="form-group">
                                     <label for="contactSenderName">Ton prénom / nom</label>
