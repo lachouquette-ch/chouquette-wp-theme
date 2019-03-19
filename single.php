@@ -40,7 +40,7 @@
             <div class="navbar-sn mr-3">
                 <a href="<?php echo esc_url(CHOUQUETTE_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-3"></i></a>
-                <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-3"></i></a>
+                <a href="#" title="Newsletter" data-toggle="modal" data-target="#newsletterModal"><i class="far fa-envelope ml-3"></i></a>
                 <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-3"></i></a>
                 <a href="#" title="Recherche" class="d-none d-md-inline-block" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search ml-3"></i></a>
             </div>
@@ -56,18 +56,49 @@
     </nav>
 </header>
 
-<!-- Modal -->
+<!-- Search Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <form>
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Mots clefs ?" aria-label="Mots clefs ?">
                         <div class="input-group-append">
-                            <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter Modal -->
+<div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newsletterModalTitle">Rejoins notre newsletter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="validate" action="https://unechouquettealausanne.us8.list-manage.com/subscribe/post?u=570ea90f4cbc136c450fe880a&amp;id=26f7afd6a2" method="post"
+                      id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+                    <div class="input-group">
+                        <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" aria-describedby="emailHelp"
+                               placeholder="Enter email">
+                        <div class="input-group-append">
+                            <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary">Je m'inscris</button>
+                        </div>
+                    </div>
+                    <div id="mce-responses" class="index-newsletter-response">
+                        <div class="index-newsletter-response-error mt-2" id="mce-error-response" style="display:none"></div>
+                        <div class="index-newsletter-response-success mt-2" id="mce-success-response" style="display:none"></div>
+                    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_570ea90f4cbc136c450fe880a_26f7afd6a2" tabindex="-1" value=""></div>
                 </form>
             </div>
         </div>
@@ -137,7 +168,8 @@
                         <div class="card-body">
                             <h1 class="card-title h4">Théâtre de Beausobre</h1>
                             <p class="card-text">Le théatre de Morges qui balbalbalbla</p>
-                            <p class="mb-1"><a href="https://maps.google.com/?q=Avenue de Vertou 2, 1110 Morges" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> Avenue de Vertou 2, 1110 Morges</a></p>
+                            <p class="mb-1"><a href="https://maps.google.com/?q=Avenue de Vertou 2, 1110 Morges" title="Ouvrir avec Google maps" target="_blank"><i
+                                            class="fas fa-map-marker-alt pr-1"></i> Avenue de Vertou 2, 1110 Morges</a></p>
                             <p class="mb-1"><a href="tel:021 804 15 65" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> 021 804 15 65</a></p>
                             <p class="mb-1"><a href="http://beausobre.ch/" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a></p>
                             <p class="mb-1"><a href="mailto:info@beausobre.ch" title="EMail"><i class="fas fa-at pr-1"></i> Email</a></p>
