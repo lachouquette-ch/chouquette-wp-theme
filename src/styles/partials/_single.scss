@@ -28,18 +28,28 @@
   bottom: -55px;
   left: 20px;
   border: 5px solid $white;
+  z-index: 100;
 }
 
 .cq-single-header-meta {
   position: absolute;
+  width: 100%;
   bottom: 0;
-  left: 30+110+15px; // computed based on author img
-  margin-right: 15px; // responsive right spacing
+  padding-left: 30+110+15px; // computed based on author img
+  padding-right: 15px; // responsive right spacing
 
-  background-color: $white;
-  padding: 3px 10px 0 10px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  padding-top: 2rem;
+  padding-bottom: 5px;
+  @include gradient-y(rgba($black, 0), rgba($black, .8));
+
+  color: $white;
+  a {
+    color: $chouquette-yellow;
+
+    @include hover-focus {
+      color: rgba($chouquette-yellow, 0.8);
+    }
+  }
 }
 
 #gotoFiche {
