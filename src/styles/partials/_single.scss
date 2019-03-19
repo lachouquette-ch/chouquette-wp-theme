@@ -42,6 +42,26 @@
   border-top-right-radius: 5px;
 }
 
+#gotoFiche {
+  position: fixed;
+  top: 80px;
+  z-index: 1;
+
+
+  > a {
+    background-color: $chouquette-yellow;
+    color: $black;
+    border-radius: 0 0 5px 5px;
+  }
+}
+
+#ficheTarget:target {
+  display: block;
+  position: relative;
+  top: -90px;
+  visibility: hidden;
+}
+
 .cq-single-content-title {
   h1 {
     display: inline-block;

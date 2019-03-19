@@ -54,6 +54,9 @@
             </form>
         </div>
     </nav>
+    <div id="gotoFiche" class="w-100 text-center d-lg-none">
+        <a href="#ficheTarget" class="py-1 px-3"><small><i class="fas fa-info mr-1"></i> Fiche</small></a>
+    </div>
 </header>
 
 <!-- Search Modal -->
@@ -123,7 +126,6 @@
         <div class="col-lg-8 px-lg-0">
             <div class="cq-single-content-title mt-3 mb-2">
                 <h1 class="mb-0 mr-2">Le titre</h1>
-                <a href="#fiche" class="badge badge-pill badge-primary py-2 px-3 d-lg-none"><i class="fas fa-info mr-1"></i> Fiche</a>
             </div>
             <main class="cq-single-content-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pellentesque sit amet purus vitae sodales. Nulla vitae libero eget nibh venenatis convallis accumsan non nisl.
@@ -217,6 +219,7 @@
         </div>
 
         <aside class="col-lg-4 pr-lg-0 pl-lg-3">
+            <a id="ficheTarget"></a>
             <div id="fiche" class="pt-4">
                 <ul class="nav nav-tabs cq-fiche-tabs" id="ficheTab" role="tablist">
                     <li class="nav-item">
