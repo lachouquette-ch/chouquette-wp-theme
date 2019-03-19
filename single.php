@@ -112,8 +112,7 @@
     <div class="row cq-single-header mt-0 mt-lg-4">
         <div class="col p-0">
             <img class="cq-single-header-img" src="http://lachouquette.ch/wp-content/uploads/2019/03/Salle-vide-1140x759.jpg" alt="blalbabla">
-            <img class="cq-single-header-author-img rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="140"
-                 height="140">
+            <img class="cq-single-header-author-img rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine">
             <div class="cq-single-header-meta">
                 <span>par Justine</span>
                 <span>le 6 mars 2019</span>

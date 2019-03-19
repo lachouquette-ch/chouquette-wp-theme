@@ -21,19 +21,19 @@
 }
 
 .cq-single-header-author-img {
-  height: 100px;
-  width: 100px;
+  height: 110px;
+  width: 110px;
 
   position: absolute;
-  bottom: -50px;
-  left: 30px;
+  bottom: -55px;
+  left: 20px;
   border: 5px solid $white;
 }
 
 .cq-single-header-meta {
   position: absolute;
   bottom: 0;
-  left: 30+100+15px; // computed based on author img
+  left: 30+110+15px; // computed based on author img
   margin-right: 15px; // responsive right spacing
 
   background-color: $white;
