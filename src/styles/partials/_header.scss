@@ -18,13 +18,12 @@
       }
 
       i {
-        @include media-breakpoint-only(lg) {
-          font-size: 20px;
-        }
+        font-size: 1.25rem;
       }
 
       .nav-link-text {
-        @include media-breakpoint-only(lg) {
+        // hide text since it breaks header display
+        @include media-breakpoint-between(md, lg) {
           display: none;
         }
       }

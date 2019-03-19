@@ -12,11 +12,11 @@
 <body>
 
 <header class="cq-header">
-    <nav class="navbar fixed-top navbar-chouquette-light navbar-expand-lg">
+    <nav class="navbar fixed-top navbar-chouquette-light navbar-expand-md">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand mr-lg-5" href="/"><?php bloginfo('name'); ?></a>
+        <a class="navbar-brand ml-3 mr-md-5" href="/"><?php bloginfo('name'); ?></a>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
             <ul class="navbar-nav mr-auto">
@@ -39,11 +39,12 @@
             <div class="navbar-divider"></div>
             <div class="navbar-sn mr-3">
                 <a href="<?php echo esc_url(CHOUQUETTE_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-2"></i></a>
-                <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-2"></i></a>
-                <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-2"></i></a>
+                <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-3"></i></a>
+                <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-3"></i></a>
+                <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-3"></i></a>
+                <a href="" title="Recherche" class="d-none d-md-inline-block"><i class="fas fa-search ml-3"></i></a>
             </div>
-            <form class="form-inline">
+            <form class="form-inline d-inline d-md-none">
                 <div class="input-group input-group-sm">
                     <input class="form-control" type="search" placeholder="Recherche" aria-label="Search">
                     <div class="input-group-append">

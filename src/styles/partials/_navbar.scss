@@ -70,7 +70,7 @@ $navbar-chouquette-brand-hover-color: rgba($navbar-chouquette-color, .8);
   }
 
   .navbar-collapse {
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       // custom navbarnavbarChouquette
       position: absolute;
       top: 80px;
