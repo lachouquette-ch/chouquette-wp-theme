@@ -42,7 +42,7 @@
                 <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-3"></i></a>
                 <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-3"></i></a>
                 <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-3"></i></a>
-                <a href="" title="Recherche" class="d-none d-md-inline-block"><i class="fas fa-search ml-3"></i></a>
+                <a href="#" title="Recherche" class="d-none d-md-inline-block" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search ml-3"></i></a>
             </div>
             <form class="d-md-none">
                 <div class="input-group input-group-sm">
@@ -55,6 +55,24 @@
         </div>
     </nav>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Mots clefs ?" aria-label="Mots clefs ?">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <article class="container cq-single">
     <div class="row cq-single-header mt-0 mt-lg-4">
