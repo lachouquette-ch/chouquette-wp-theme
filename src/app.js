@@ -1,5 +1,6 @@
 /* JS imports */
 require("jquery");
+require("sticky-kit/dist/sticky-kit");
 require("popper.js");
 require("lettering.js");
 require("textillate");
@@ -59,5 +60,9 @@ jQuery(function ($) {
                 spaceBetween: 30,
             }
         }
+    });
+
+    $("#fiche").stick_in_parent({
+        'offset_top': 80
     });
 });
