@@ -313,7 +313,7 @@
 
     <div class="row cq-single-similar mt-3 mt-lg-5">
         <div class="col">
-            <h3 class="mb-3">Articles similaires</h3>
+            <h3 class="mb-3 text-center">Articles similaires</h3>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <?php
@@ -339,7 +339,7 @@
     <?php if (comments_open() || get_comments_number()) : ?>
         <div class="row cq-single-comments mt-3 mt-lg-5">
             <div class="col">
-                <h3 class="mb-3">Commentaires</h3>
+                <h3 class="mb-3 text-center">Commentaires</h3>
                 <?php comments_template(); ?>
             </div>
         </div>
