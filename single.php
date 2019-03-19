@@ -139,14 +139,14 @@
                                 </ul>
                             </li>
                             <li class="list-group-item">
-                                <p class="mb-2">Catégories :</p>
+                                <p class="mb-2">Infos :</p>
                                 <p class="mb-0">
                                     <i class="fas fa-child mr-2"></i><i class="fas fa-wheelchair mr-2"></i><i class="fas fa-wifi mr-2"></i>
                                 </p>
                             </li>
                         </ul>
-                        <div class="card-footer">
-                            Chouquettisé le 12/03/2018
+                        <div class="card-footer text-center">
+                            CHOUQUETTISÉ
                         </div>
                     </div>
                 </div>
