@@ -114,3 +114,22 @@
 .cq-fiche-price:not(.cq-fiche-price-selected) {
   color: $chouquette-light-grey;
 }
+
+.cq-single-author {
+  margin-top: 4rem;
+
+  div.col {
+    padding-top: 35px; // corresp. to author image
+  }
+
+  img {
+    width: 70px;
+    height: 70px;
+
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    margin-left: -35px;
+  }
+
+}

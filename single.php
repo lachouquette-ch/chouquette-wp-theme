@@ -55,7 +55,9 @@
         </div>
     </nav>
     <div id="gotoFiche" class="w-100 text-center d-lg-none">
-        <a href="#ficheTarget" class="py-1 px-3"><small><i class="fas fa-info mr-1"></i> Fiche</small></a>
+        <a href="#ficheTarget" class="py-1 px-3">
+            <small><i class="fas fa-info mr-1"></i> Fiche</small>
+        </a>
     </div>
 </header>
 
@@ -127,7 +129,8 @@
                 <h1 class="mb-0 mr-2">Le titre</h1>
             </div>
             <main class="cq-single-content-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pellentesque sit amet purus vitae sodales. Nulla vitae libero eget nibh venenatis convallis accumsan non nisl.
+                Lorem ipsum dolor sit amet, consec
+                tetur adipiscing elit. Aliquam pellentesque sit amet purus vitae sodales. Nulla vitae libero eget nibh venenatis convallis accumsan non nisl.
                 Suspendisse est magna, commodo et bibendum id, egestas non dui. Nam mauris leo, commodo ut facilisis quis, congue non justo. Vestibulum tempus dapibus massa sed pulvinar. Sed finibus
                 consectetur ante quis blandit. Aenean a vehicula eros, mollis faucibus augue. Fusce venenatis pellentesque nisi.
 
@@ -297,17 +300,13 @@
         </aside>
     </div>
 
-    <div class="row cq-single-author mt-3 mt-lg-5">
-        <div class="col">
-            <h3 class="mb-3">Auteur</h3>
-            <div class="media">
-                <img class="rounded-circle mr-3" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="80" height="80">
-                <div class="media-body">
-                    <h5 class="mt-0">Justine</h5>
-                    Bourguignonne de naissance mais vaudoise de cœur. Passionnée de cinéma et de littérature, je t'embarque dans mes aventures à Lausanne ou Morges.
-                </div>
-            </div>
+    <div class="row cq-single-author">
+        <div class="col border text-center m-3 m-lg-0">
+            <img class="rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="80" height="80">
+            <h5 class="mt-3 mb-4">Justine</h5>
+            <p>Bourguignonne de naissance mais vaudoise de cœur. Passionnée de cinéma et de littérature, je t'embarque dans mes aventures à Lausanne ou Morges.</p>
         </div>
+    </div>
     </div>
 
     <div class="row cq-single-similar mt-3 mt-lg-5">
