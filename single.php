@@ -44,7 +44,7 @@
                 <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-3"></i></a>
                 <a href="" title="Recherche" class="d-none d-md-inline-block"><i class="fas fa-search ml-3"></i></a>
             </div>
-            <form class="form-inline d-inline d-md-none">
+            <form class="d-md-none">
                 <div class="input-group input-group-sm">
                     <input class="form-control" type="search" placeholder="Recherche" aria-label="Search">
                     <div class="input-group-append">
