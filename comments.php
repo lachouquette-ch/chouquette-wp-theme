@@ -74,6 +74,7 @@ if (post_password_required()) {
 
     $commenter = wp_get_current_commenter();
     $req = get_option('require_name_email');
+    $required_text = 'Les champs obligatoires sont indiqués avec *';
     $aria_req = ($req ? " aria-required='true'" : '');
     $fields = array(
         'author' =>
@@ -102,11 +103,14 @@ if (post_password_required()) {
     }
     $args = array(
         'class_submit' => 'btn btn-primary',
+        'comment_notes_before' => '<p class="comment-notes">Ton email ne sera pas publiée. ' . ( $req ? $required_text : '' ) . '</p>',
         'comment_field' =>
             '<div class="form-group"><label for="comment">' . _x('Comment', 'noun') .
             '</label><textarea class="form-control" id="comment" name="comment" rows="5" aria-required="true"></textarea>' .
             '</div>',
         'fields' => apply_filters('comment_form_default_fields', $fields),
+        'label_submit' => 'Poster mon commentaire',
+        'title_reply' => '',
         'title_reply_before' => '<h5 id="reply-title" class="comment-reply-title">',
         'title_reply_after' => '</h5>',
     );
