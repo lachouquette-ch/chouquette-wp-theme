@@ -178,7 +178,7 @@
                                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_570ea90f4cbc136c450fe880a_26f7afd6a2" tabindex="-1" value=""></div>
                             </div>
                             <div class="col-lg-4">
-                                <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-secondary w-100 btn-lg">Je m'inscris</button>
+                                <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-white w-100 btn-lg">Je m'inscris</button>
                             </div>
                         </div>
                     </form>

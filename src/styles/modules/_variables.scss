@@ -8,6 +8,10 @@ $chouquette-darker-grey: rgb(41, 41, 41);
 // Theme colors
 $primary: $chouquette-yellow;
 $secondary: $chouquette-grey;
+// add new theme colors
+$theme-colors: (
+  "white": white
+);
 
 // Navbar
 $navbar-light-color: white;
