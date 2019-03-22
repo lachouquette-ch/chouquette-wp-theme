@@ -125,3 +125,9 @@
   }
 
 }
+
+.cq-single-post-comments {
+  a {
+    @extend .link-secondary;
+  }
+}
