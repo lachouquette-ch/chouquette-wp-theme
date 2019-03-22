@@ -1,21 +1,21 @@
-.cq-single-content {
+.cq-single-post-content {
   a {
     @extend .link-secondary;
   }
 }
 
-.cq-single-header {
+.cq-single-post-header {
   position: relative;
 
   margin-bottom: 50px; // for author img
 }
 
-.cq-single-header-img {
+.cq-single-post-header-img {
   width: 100%;
   height: auto;
 }
 
-.cq-single-header-author-img {
+.cq-single-post-header-author-img {
   height: 110px;
   width: 110px;
 
@@ -26,7 +26,7 @@
   z-index: 100;
 }
 
-.cq-single-header-meta {
+.cq-single-post-header-meta {
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -60,14 +60,14 @@
   visibility: hidden;
 }
 
-.cq-single-content-title {
+.cq-single-post-content-title {
   h1 {
     //display: inline-block;
     font-family: $font-family-brand;
   }
 }
 
-.cq-single-content-text {
+.cq-single-post-content-text {
   text-align: justify;
   text-justify: inter-word;
 }
@@ -97,7 +97,7 @@
   color: $chouquette-light-grey;
 }
 
-.cq-single-author {
+.cq-single-post-author {
   margin-top: 4rem;
 
   div.col {

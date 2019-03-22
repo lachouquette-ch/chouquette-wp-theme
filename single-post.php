@@ -110,12 +110,12 @@
     </div>
 </div>
 
-<article class="container cq-single">
-    <div class="row cq-single-header mt-0 mt-lg-4">
+<article class="container cq-single-post">
+    <div class="row cq-single-post-header mt-0 mt-lg-4">
         <div class="col p-0">
-            <img class="cq-single-header-img" src="http://lachouquette.ch/wp-content/uploads/2019/03/Salle-vide-1140x759.jpg" alt="blalbabla">
-            <img class="cq-single-header-author-img rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine">
-            <div class="cq-single-header-meta">
+            <img class="cq-single-post-header-img" src="http://lachouquette.ch/wp-content/uploads/2019/03/Salle-vide-1140x759.jpg" alt="blalbabla">
+            <img class="cq-single-post-header-author-img rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine">
+            <div class="cq-single-post-header-meta">
                 <span>par Justine</span>
                 <span>le 6 mars 2019</span>
                 <span>dans <a name="desc" href="#" class="link-primary">Sorties</a> / <a name="desc" href="#" class="link-primary">Culture</a></span>
@@ -123,12 +123,12 @@
         </div>
     </div>
 
-    <div class="row cq-single-content">
+    <div class="row cq-single-post-content">
         <div class="col-lg-8 px-lg-0">
-            <div class="cq-single-content-title mt-3 mb-2">
+            <div class="cq-single-post-content-title mt-3 mb-2">
                 <h1 class="mb-0 mr-2">Le titre</h1>
             </div>
-            <main class="cq-single-content-text">
+            <main class="cq-single-post-content-text">
                 Lorem ipsum dolor sit amet, consec
                 tetur adipiscing elit. Aliquam pellentesque sit amet purus vitae sodales. Nulla vitae libero eget nibh venenatis convallis accumsan non nisl.
                 Suspendisse est magna, commodo et bibendum id, egestas non dui. Nam mauris leo, commodo ut facilisis quis, congue non justo. Vestibulum tempus dapibus massa sed pulvinar. Sed finibus
@@ -300,7 +300,7 @@
         </aside>
     </div>
 
-    <div class="row cq-single-author">
+    <div class="row cq-single-post-author">
         <div class="col border text-center m-3 m-lg-0">
             <img class="rounded-circle" src="http://0.gravatar.com/avatar/ff03948ae1055f3da0cf6b223729cf54?s=140&amp;d=blank&amp;r=g" alt="Justine" width="80" height="80">
             <h5 class="mt-3 mb-4">Justine</h5>
@@ -309,7 +309,7 @@
     </div>
     </div>
 
-    <div class="row cq-single-similar mt-3 mt-lg-5">
+    <div class="row cq-single-post-similar mt-3 mt-lg-5">
         <div class="col">
             <h3 class="mb-3 text-center">Articles similaires</h3>
             <div class="swiper-container">
@@ -335,7 +335,7 @@
     </div>
 
     <?php if (comments_open() || get_comments_number()) : ?>
-        <div class="row cq-single-comments mt-3 mt-lg-5">
+        <div class="row cq-single-post-comments mt-3 mt-lg-5">
             <div class="col">
                 <h3 class="mb-3 text-center">Commentaires</h3>
                 <?php comments_template(); ?>
