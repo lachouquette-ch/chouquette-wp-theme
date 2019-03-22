@@ -118,7 +118,7 @@
             <div class="cq-single-header-meta">
                 <span>par Justine</span>
                 <span>le 6 mars 2019</span>
-                <span>dans <a name="desc" href="#" class="sing-header-link">Sorties</a> / <a name="desc" href="#">Culture</a></span>
+                <span>dans <a name="desc" href="#" class="link-primary">Sorties</a> / <a name="desc" href="#" class="link-primary">Culture</a></span>
             </div>
         </div>
     </div>

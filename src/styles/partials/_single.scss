@@ -1,11 +1,6 @@
-.cq-single {
+.cq-single-content {
   a {
-    color: $chouquette-grey;
-    text-decoration: underline;
-
-    @include hover-focus {
-      color: $chouquette-darker-grey;
-    }
+    @extend .link-secondary;
   }
 }
 
@@ -43,13 +38,6 @@
   @include gradient-y(rgba($black, 0), rgba($black, .8));
 
   color: $white;
-  a {
-    color: $chouquette-yellow;
-
-    @include hover-focus {
-      color: rgba($chouquette-yellow, 0.8);
-    }
-  }
 }
 
 #gotoFiche {
@@ -74,18 +62,8 @@
 
 .cq-single-content-title {
   h1 {
-    display: inline-block;
+    //display: inline-block;
     font-family: $font-family-brand;
-  }
-
-  a.badge {
-    vertical-align: top;
-    color: $chouquette-dark-grey;
-    text-decoration: none;
-
-    @include hover-focus {
-      color: $chouquette-grey;
-    }
   }
 }
 
@@ -96,7 +74,11 @@
 
 .cq-fiche-tabs {
   a {
-    text-decoration: inherit;
+    text-decoration: none;
+
+    @include hover-focus-active {
+      text-decoration: none;
+    }
   }
 }
 

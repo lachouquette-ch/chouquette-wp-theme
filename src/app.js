@@ -63,6 +63,6 @@ jQuery(function ($) {
     });
 
     $("#fiche").stick_in_parent({
-        'offset_top': 80
+        'offset_top': 80,
     });
 });

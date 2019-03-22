@@ -13,3 +13,35 @@ header, footer {
 main {
   flex: 1 0 auto;
 }
+
+/* Links */
+
+.link-primary {
+  color: $primary;
+  text-decoration: underline;
+
+  @include hover-focus-active {
+    color: darken($primary, 20%);
+    text-decoration: underline;
+  }
+}
+
+.link-secondary {
+  color: $secondary;
+  text-decoration: underline;
+
+  @include hover-focus-active {
+    color: darken($secondary, 20%);
+    text-decoration: underline;
+  }
+}
+
+.link-white {
+  color: $white;
+  text-decoration: none;
+
+  @include hover-focus-active {
+    color: $chouquette-yellow;
+    text-decoration: none;
+  }
+}
