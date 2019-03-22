@@ -34,8 +34,7 @@ if (!function_exists('chouquette_fiche_post_type')) :
             'exclude_from_search' => false,
             'publicly_queryable' => true,
             'query_var' => true,
-            'capability_type' => 'post',
-            'rewrite' => array('slug' => 'lieu'), // TODO remove ?
+            'capability_type' => 'post'
         );
         register_post_type('fiche', $args);
 
@@ -75,5 +74,15 @@ if (!function_exists('chouquette_filter_by_fiche')):
             }
         }
     }
+endif;
+
+if (!function_exists('chouquette_google_map_api')):
+    function chouquette_google_map_api($api)
+    {
+        $api['key'] = 'AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI';
+        return $api;
+    }
+
+    add_filter('acf/fields/google_map/api', 'chouquette_google_map_api');
 endif;
 ?>
