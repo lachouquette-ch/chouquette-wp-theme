@@ -307,7 +307,6 @@
             <p>Bourguignonne de naissance mais vaudoise de cœur. Passionnée de cinéma et de littérature, je t'embarque dans mes aventures à Lausanne ou Morges.</p>
         </div>
     </div>
-    </div>
 
     <div class="row cq-single-post-similar mt-3 mt-lg-5">
         <div class="col">
