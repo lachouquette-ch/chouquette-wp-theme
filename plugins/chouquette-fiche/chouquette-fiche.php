@@ -19,7 +19,7 @@ if (!function_exists('chouquette_fiche_post_type')) :
             'label' => __('Fiche', 'chouquette'),
             'description' => __('Fiche Chouquette', 'chouquette'),
             'labels' => $labels,
-            'supports' => array('title', 'thumbnail', 'comments', 'revisions', 'custom-fields'),
+            'supports' => array('title', 'thumbnail', 'editor', 'revisions', 'custom-fields'),
             'taxonomies' => array('category', 'post_tag'),
             'hierarchical' => false,
             'public' => true,
