@@ -6,7 +6,6 @@
  */
 
 if (!function_exists('chouquette_acf_generate_post_id')) :
-
     /**
      * Generate the post_id as described in https://www.advancedcustomfields.com/resources/get_field/
      */
@@ -20,11 +19,9 @@ if (!function_exists('chouquette_acf_generate_post_id')) :
             trigger_error(sprintf("%s neither have attribute 'object' or 'object_id'", print_r($item, true)), E_USER_ERROR);
         }
     }
-
 endif;
 
 if (!function_exists('chouquette_menu_items')) :
-
     /**
      * Retrieve chouquette menu items
      */
@@ -45,7 +42,16 @@ if (!function_exists('chouquette_menu_items')) :
         } else {
             trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
         }
-
         return $result;
+    }
+endif;
+
+if (!function_exists('chouquette_is_chouquettise')) :
+    /**
+     * Return if fiche is chouquettise
+     */
+    function chouquette_is_chouquettise(array $fiche_fields) {
+        $chouquettise_to = DateTime::createFromFormat('d/m/Y', $fiche_fields['chouquettise_to']);
+        return $chouquettise_to >= new DateTime();
     }
 endif;

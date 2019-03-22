@@ -95,9 +95,7 @@ while (have_posts()) :
                                         </p>
                                     </li>
                                 </ul>
-                                <?php
-                                $chouquettise_to = DateTime::createFromFormat('d/m/Y', $fiche_fields['chouquettise_to']);
-                                if ($chouquettise_to >= new DateTime()): ?>
+                                <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
                                     <div class="card-footer text-center">
                                         CHOUQUETTISÉ
                                     </div>
