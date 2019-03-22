@@ -1,5 +1,5 @@
-<footer class="index-footer container-fluid text-center">
-    <div class="index-footer-top row pt-4">
+<footer class="footer container-fluid text-center">
+    <div class="footer-top row pt-4">
         <div class="col">
             <?php
             $custom_logo_id = get_theme_mod('custom_logo');
@@ -9,13 +9,13 @@
             }
             ?>
             <p class="my-3">
-                <a href="#" class="px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="px-2  d-inline-block">Charte éditoriale</a><a href="#" class="px-2 d-inline-block">Contact</a><a
+                <a href="#" class="px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="px-2 d-inline-block">Charte éditoriale</a><a href="#" class="px-2 d-inline-block">Contact</a><a
                         href="#newsletter" class="px-2 d-inline-block">Newsletter</a>
             </p>
         </div>
     </div>
     </div>
-    <div class="index-footer-bottom row py-3">
+    <div class="footer-bottom row py-3">
         <div class="col">
             <span>Copyright 2014-2019 - Tous droits réservés à La Chouquette. Toutes les images et le contenu sont la propriété du site.</span>
         </div>
