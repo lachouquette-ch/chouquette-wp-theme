@@ -9,8 +9,8 @@
             }
             ?>
             <p class="my-3">
-                <a href="#" class="px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="px-2 d-inline-block">Charte éditoriale</a><a href="#" class="px-2 d-inline-block">Contact</a><a
-                        href="#newsletter" class="px-2 d-inline-block">Newsletter</a>
+                <a href="#" class="link-white px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="link-white px-2 d-inline-block">Charte éditoriale</a><a href="#" class="link-white px-2 d-inline-block">Contact</a><a
+                        href="#newsletter" class="link-white px-2 d-inline-block">Newsletter</a>
             </p>
         </div>
     </div>
