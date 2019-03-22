@@ -13,7 +13,27 @@ define ( 'CQ_THEME_VERSION', $chouquette_theme->get( 'Version' ) );
 define ( 'CQ_PRIMARY_MENU', 'primary-menu' );
 define ( 'CQ_MENU_LOGO_SELECTOR', 'logo' );
 
+define ( 'CQ_CATEGORY_BAR_RETOS', 'bar-et-restaurant' );
+define ( 'CQ_CATEGORY_LOISIRS', 'loisirs' );
+define ( 'CQ_CATEGORY_CULTURE', 'culture-future' );
+define ( 'CQ_CATEGORY_SHOPPING', 'shopping' );
+define ( 'CQ_CATEGORY_CHOUCHOUS', 'les-chouchous' );
+
+define ( 'CQ_TAXONOMY_BAR_REST_WHEN', 'cq_bar_rest_when' );
+define ( 'CQ_TAXONOMY_BAR_REST_WHO', 'cq_bar_rest_who' );
+define ( 'CQ_TAXONOMY_BAR_REST_CRITERIA', 'cq_bar_rest_criteria' );
+define ( 'CQ_TAXONOMY_REST_TYPE', 'cq_rest_type' );
+define ( 'CQ_TAXONOMY_REST_RESTRICTION', 'cq_rest_restriction' );
+define ( 'CQ_TAXONOMY_BAR_TYPE', 'cq_bar_type' );
+define ( 'CQ_TAXONOMY_HOBBY', 'cq_hobby' );
+define ( 'CQ_TAXONOMY_CULTURE', 'cq_culture' );
+define ( 'CQ_TAXONOMY_SHOPPING_MODE', 'cq_shop_mode' );
+define ( 'CQ_TAXONOMY_SHOPPING_DECO', 'cq_shop_deco' );
+define ( 'CQ_TAXONOMY_SHOPPING_FOOD', 'cq_shop_food' );
+define ( 'CQ_TAXONOMY_SHOPPING_OTHERS', 'cq_shop_other' );
+define ( 'CQ_TAXONOMY_CHOUCHOU', 'cq_chouchou' );
 define ( 'CQ_TAXONOMY_LOCALISATION', 'cq_location' );
+define ( 'CQ_TAXONOMY_CRITERIA', 'cq_criteria' );
 
 define ( 'CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne' );
 define ( 'CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne' );

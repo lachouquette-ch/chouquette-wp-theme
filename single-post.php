@@ -7,6 +7,57 @@ while (have_posts()) :
     // get fiche
     $fiche = get_field('link_fiche')[0];
     $fiche_fields = get_fields($fiche->ID);
+
+    $categories = get_categories(array(
+        'object_ids' => get_the_ID(),
+        'parent' => 1232 // TODO should be 0
+    ));
+
+    /**
+     * Get taxonomy terms using https://developer.wordpress.org/reference/functions/get_the_terms/.
+     * Return empty array if nothing
+     */
+    function get_taxonomy_terms(WP_Post $post, string $taxonomy)
+    {
+        $terms = get_the_terms($post, $taxonomy);
+        if (!$terms) $terms = [];
+        // add logo field to term object
+        foreach ($terms as $term) {
+            $term->logo = get_field(CQ_MENU_LOGO_SELECTOR, $term);
+        }
+        return $terms;
+    }
+
+    $fiche_info_terms = [];
+    // defaults
+    $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_CRITERIA));
+    foreach ($categories as $category) {
+        switch ($category->slug) {
+            case CQ_CATEGORY_BAR_RETOS:
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHEN));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHO));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_CRITERIA));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_TYPE));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_RESTRICTION));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_TYPE));
+                break;
+            case CQ_CATEGORY_LOISIRS:
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_HOBBY));
+                break;
+            case CQ_CATEGORY_CULTURE:
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_CULTURE));
+                break;
+            case CQ_CATEGORY_SHOPPING:
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_MODE));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_DECO));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_FOOD));
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_OTHERS));
+                break;
+            case CQ_CATEGORY_CHOUCHOUS:
+                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_CHOUCHOU));
+                break;
+        }
+    }
     ?>
 
     <article class="container cq-single-post">
@@ -91,7 +142,11 @@ while (have_posts()) :
                                     <li class="list-group-item">
                                         <p class="mb-2">Infos :</p>
                                         <p class="mb-0">
-                                            <i class="fas fa-child mr-2"></i><i class="fas fa-wheelchair mr-2"></i><i class="fas fa-wifi mr-2"></i>
+                                            <?php
+                                            foreach ($fiche_info_terms as $fiche_info_term) {
+                                                echo sprintf('<i class="%s mr-2"></i>', $fiche_info_term->logo);
+                                            }
+                                            ?>
                                         </p>
                                     </li>
                                 </ul>
