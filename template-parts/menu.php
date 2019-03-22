@@ -6,23 +6,7 @@
         <a class="navbar-brand ml-3 mr-md-5" href="/"><?php bloginfo('name'); ?></a>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" title="Bars et Restos"><i class="fas fa-cocktail mr-2"></i><span class="nav-link-text">Bars et Restos</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="Culture"><i class="fas fa-theater-masks mr-2"></i><span class="nav-link-text">Culture</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="Loisirs"><i class="fab fa-angellist mr-2"></i><span class="nav-link-text">Loisirs</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="Shopping"><i class="fas fa-shopping-bag mr-2"></i><span class="nav-link-text">Shopping</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="Les Chouchous"><i class="fas fa-grin-hearts mr-2"></i><span class="nav-link-text">Les Chouchous</span></a>
-                </li>
-            </ul>
+            <?php chouquette_navbar_nav(); ?>
             <div class="navbar-divider"></div>
             <div class="navbar-sn mr-3">
                 <a href="<?php echo esc_url(CQ_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
