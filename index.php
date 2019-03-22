@@ -10,8 +10,8 @@
             <h1><?php bloginfo('name'); ?></h1>
         </a>
         <div class="index-header-sn mr-md-5 my-2">
-            <a href="<?php echo esc_url(CHOUQUETTE_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-4"></i></a>
+            <a href="<?php echo esc_url(CQ_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="<?php echo esc_url(CQ_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-4"></i></a>
             <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-4"></i></a>
             <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-4"></i></a>
         </div>
@@ -29,7 +29,7 @@
                 endforeach;
                 echo '</ul>';
             } else {
-                trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING);
+                trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
             }
             ?>
         </div>
@@ -57,7 +57,7 @@
                     endforeach;
                     echo '</div>';
                 } else {
-                    trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING);
+                    trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
                 }
                 ?>
                 <div class="index-header-filters text-center">
@@ -67,7 +67,7 @@
                                 <select class="form-control selectpicker show-tick" title="Où veux-tu aller ?" data-selected-text-format="count > 2" multiple data-actions-box="true">
                                     <?php
                                     $terms = get_terms(array(
-                                        'taxonomy' => CHOUQUETTE_TAXONOMY_LOCALISATION,
+                                        'taxonomy' => CQ_TAXONOMY_LOCALISATION,
                                         'hide_empty' => false,
                                         'orderby' => 'term_group'
                                     ));
@@ -89,7 +89,7 @@
                                             echo sprintf("<option data-icon='%s' value='%d'>%s</option>", $menu_item->logo_class, $menu_item->id, $menu_item->title);
                                         endforeach;
                                     } else {
-                                        trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING);
+                                        trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
                                     }
                                     ?>
                                 </select>

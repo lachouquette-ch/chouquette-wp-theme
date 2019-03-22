@@ -25,8 +25,8 @@
             </ul>
             <div class="navbar-divider"></div>
             <div class="navbar-sn mr-3">
-                <a href="<?php echo esc_url(CHOUQUETTE_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="<?php echo esc_url(CHOUQUETTE_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-3"></i></a>
+                <a href="<?php echo esc_url(CQ_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="<?php echo esc_url(CQ_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-3"></i></a>
                 <a href="#" title="Newsletter" data-toggle="modal" data-target="#newsletterModal"><i class="far fa-envelope ml-3"></i></a>
                 <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-3"></i></a>
                 <a href="#" title="Recherche" class="d-none d-md-inline-block" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search ml-3"></i></a>

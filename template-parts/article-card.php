@@ -7,7 +7,7 @@
                 'parent' => 1232 // TODO should be 0
             ));
             if (!empty ($categories)) {
-                $logo_class = get_field(CHOUQUETTE_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($categories[0])); // first one only
+                $logo_class = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($categories[0])); // first one only
                 echo sprintf("<i class='article-card-category %s'></i>", $logo_class);
             }
             ?>

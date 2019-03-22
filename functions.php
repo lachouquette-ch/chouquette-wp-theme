@@ -9,14 +9,14 @@
 
 /* Chouquette constants */
 $chouquette_theme = wp_get_theme();
-define ( 'CHOUQUETTE_THEME_VERSION', $chouquette_theme->get( 'Version' ) );
-define ( 'CHOUQUETTE_PRIMARY_MENU', 'primary-menu' );
-define ( 'CHOUQUETTE_MENU_LOGO_SELECTOR', 'logo' );
+define ( 'CQ_THEME_VERSION', $chouquette_theme->get( 'Version' ) );
+define ( 'CQ_PRIMARY_MENU', 'primary-menu' );
+define ( 'CQ_MENU_LOGO_SELECTOR', 'logo' );
 
-define ( 'CHOUQUETTE_TAXONOMY_LOCALISATION', 'cq_location' );
+define ( 'CQ_TAXONOMY_LOCALISATION', 'cq_location' );
 
-define ( 'CHOUQUETTE_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne' );
-define ( 'CHOUQUETTE_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne' );
+define ( 'CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne' );
+define ( 'CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne' );
 
 if ( ! function_exists( 'chouquette_setup' ) ) :
 	/**
@@ -89,13 +89,13 @@ add_action( 'after_setup_theme', 'chouquette_setup' );
  * Enqueue scripts and styles.
  */
 function chouquette_scripts() {
-    wp_enqueue_style( 'style', get_template_directory_uri() . '/dist/style.css', null, CHOUQUETTE_THEME_VERSION, 'all');
+    wp_enqueue_style( 'style', get_template_directory_uri() . '/dist/style.css', null, CQ_THEME_VERSION, 'all');
 
     wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.7.2/css/all.css', null, null, 'all');
 
-    wp_enqueue_script( 'vendor', get_template_directory_uri() . '/dist/vendor.js', null, CHOUQUETTE_THEME_VERSION, true);
+    wp_enqueue_script( 'vendor', get_template_directory_uri() . '/dist/vendor.js', null, CQ_THEME_VERSION, true);
 
-    wp_enqueue_script( 'script', get_template_directory_uri() . '/dist/app.js', null, CHOUQUETTE_THEME_VERSION, true);
+    wp_enqueue_script( 'script', get_template_directory_uri() . '/dist/app.js', null, CQ_THEME_VERSION, true);
 
 	// https://codex.wordpress.org/Function_Reference/comment_reply_link
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -122,7 +122,7 @@ require get_template_directory() . '/inc/template-functions.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
+//require get_template_directory() . '/inc/customizer.php';
 
 /**
  * Load Jetpack compatibility file.

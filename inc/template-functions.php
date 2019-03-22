@@ -33,17 +33,17 @@ if (!function_exists('chouquette_menu_items')) :
         $result = array();
 
         // get menu items
-        if (isset (get_nav_menu_locations()[CHOUQUETTE_PRIMARY_MENU])) {
-            $primary_menu_id = get_nav_menu_locations()[CHOUQUETTE_PRIMARY_MENU];
+        if (isset (get_nav_menu_locations()[CQ_PRIMARY_MENU])) {
+            $primary_menu_id = get_nav_menu_locations()[CQ_PRIMARY_MENU];
             $menu = wp_get_nav_menu_object($primary_menu_id);
             $menu_items = wp_get_nav_menu_items($menu->term_id);
             foreach ($menu_items as $menu_item) :
-                $logo_class = get_field(CHOUQUETTE_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($menu_item));
+                $logo_class = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($menu_item));
                 $menu_item->logo_class = $logo_class;
                 $result[] = $menu_item;
             endforeach;
         } else {
-            trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CHOUQUETTE_PRIMARY_MENU), E_USER_WARNING);
+            trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
         }
 
         return $result;
