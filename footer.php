@@ -53,7 +53,21 @@
             min: $.validator.format("Veuillez entrer une valeur supérieure ou égale à {0}.")
         });
     }(jQuery));
-    var $mcj = jQuery.noConflict(true);</script>
+    var $mcj = jQuery.noConflict(true);
+</script>
+
 <?php wp_footer(); ?>
+
+<!-- needs jquery -->
+<script type='text/javascript' src='https://www.google.com/recaptcha/api.js?render=<?php echo CQ_RECAPTCHA_SITE ?>'></script>
+<script type='text/javascript'>
+    grecaptcha.ready(function () {
+        // not all paged needs it so tries to find the recaptchaEnabler in current page
+        if (recaptchaEnabler && typeof (recaptchaEnabler) === "function") {
+            recaptchaEnabler();
+        }
+    });
+</script>
+
 </body>
 </html>

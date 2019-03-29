@@ -170,6 +170,8 @@ while (have_posts()) :
                                             <textarea class="form-control" id="contactSenderContent" rows="5" name="contact-content" required></textarea>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Envoyer</button>
+                                        <!-- recaptcha v3 -->
+                                        <input type="hidden" name="recaptcha-response">
                                     </form>
                                 </div>
                             </div>
@@ -222,6 +224,16 @@ while (have_posts()) :
         <?php endif; ?>
     </article>
 
+    <script>
+        var recaptchaEnabler = function () {
+            grecaptcha.execute('<?php echo CQ_RECAPTCHA_SITE ?>', {action: 'article'}).then(function (token) {
+                var elements = document.getElementsByName("recaptcha-response");
+                for (i = 0; i < elements.length; i++) {
+                    elements[i].value = token;
+                }
+            });
+        };
+    </script>
 <?php
 endwhile;
 get_footer();
