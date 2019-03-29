@@ -38,6 +38,10 @@ define ( 'CQ_TAXONOMY_CRITERIA', 'cq_criteria' );
 define ( 'CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne' );
 define ( 'CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne' );
 
+// TODO should be in wp-config.php
+define ( 'CQ_RECAPTCHA_SITE', '6LeGzZoUAAAAAMfFh3ybAsEBM_ocOUWbPnDRbg0U');
+define ( 'CQ_RECAPTCHA_SECRET', '6LeGzZoUAAAAAF35rYtWWthF9Wb_WDB1QPJ3hYG4');
+
 if ( ! function_exists( 'chouquette_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

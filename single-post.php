@@ -1,4 +1,28 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['recaptcha-response'])) {
+
+        // Build POST request:
+        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+        $recaptcha_response = $_POST['recaptcha-response'];
+
+        // Make and decode POST request:
+        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . CQ_RECAPTCHA_SECRET . '&response=' . $recaptcha_response);
+        $recaptcha = json_decode($recaptcha);
+
+        // Take action based on the score returned:
+        print_r($recaptcha);
+        if ($recaptcha->score >= 0.5) {
+            // Verified - send email
+        } else {
+            // Not verified - show form error
+        }
+    } else {
+        error_log("Couldn't find recaptcha in POST");
+    }
+}
+
+
 get_header();
 
 while (have_posts()) :
@@ -8,56 +32,13 @@ while (have_posts()) :
     $fiche = get_field('link_fiche')[0];
     $fiche_fields = get_fields($fiche->ID);
 
+    // TODO should be included in chouquette_get_fiche_terms
     $categories = get_categories(array(
         'object_ids' => get_the_ID(),
         'parent' => 1232 // TODO should be 0
     ));
 
-    /**
-     * Get taxonomy terms using https://developer.wordpress.org/reference/functions/get_the_terms/.
-     * Return empty array if nothing
-     */
-    function get_taxonomy_terms(WP_Post $post, string $taxonomy)
-    {
-        $terms = get_the_terms($post, $taxonomy);
-        if (!$terms) $terms = [];
-        // add logo field to term object
-        foreach ($terms as $term) {
-            $term->logo = get_field(CQ_MENU_LOGO_SELECTOR, $term);
-        }
-        return $terms;
-    }
-
-    $fiche_info_terms = [];
-    // defaults
-    $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_CRITERIA));
-    foreach ($categories as $category) {
-        switch ($category->slug) {
-            case CQ_CATEGORY_BAR_RETOS:
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHEN));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHO));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_CRITERIA));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_TYPE));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_RESTRICTION));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_TYPE));
-                break;
-            case CQ_CATEGORY_LOISIRS:
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_HOBBY));
-                break;
-            case CQ_CATEGORY_CULTURE:
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_CULTURE));
-                break;
-            case CQ_CATEGORY_SHOPPING:
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_MODE));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_DECO));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_FOOD));
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_OTHERS));
-                break;
-            case CQ_CATEGORY_CHOUCHOUS:
-                $fiche_info_terms = array_merge($fiche_info_terms, get_taxonomy_terms($fiche, CQ_TAXONOMY_CHOUCHOU));
-                break;
-        }
-    }
+    $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
     ?>
 
     <article class="container cq-single-post">
@@ -109,15 +90,29 @@ while (have_posts()) :
                                 <div class="card-body">
                                     <h1 class="card-title h4"><?php echo $fiche->post_title; ?></h1>
                                     <p class="card-text"><?php echo $fiche->post_content; ?></p>
-                                    <p class="mb-1">
-                                        <?php print_r($fiche_fields); ?>
-                                        <?php echo '<a href="' . esc_url(sprintf("https://maps.google.com/?q=%s", $fiche_fields['location']['address'])) . '" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> ' . $fiche_fields['location']['address'] . '</a>'; ?>
-                                    </p>
-                                    <p class="mb-1"><a href="<?php echo esc_url(sprintf("tel:%s", $fiche_fields['telephone'])); ?>" title="Téléphone"><i
-                                                    class="fas fa-phone-square pr-1"></i> <?php echo $fiche_fields['telephone']; ?></a></p>
-                                    <p class="mb-1"><a href="<?php echo esc_url($fiche_fields['website']) ?>" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site
-                                            internet</a></p>
-                                    <p class="mb-1"><a href="<?php echo esc_url(sprintf("mailto::%s", $fiche_fields['mail'])); ?>" title="Email"><i class="fas fa-at pr-1"></i> Email</a></p>
+                                    <?php print_r($fiche_fields); ?>
+                                    <?php
+                                    if (isset($fiche_fields['location']['address'])) {
+                                        echo '<p class="mb-1">';
+                                        echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields['location']['address']), $fiche_fields['location']['address']);
+                                        echo '</p>';
+                                    }
+                                    if (isset($fiche_fields['telephone'])) {
+                                        echo '<p class="mb-1">';
+                                        echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields['telephone'], $fiche_fields['telephone']);
+                                        echo '</p>';
+                                    }
+                                    if (isset($fiche_fields['website'])) {
+                                        echo '<p class="mb-1">';
+                                        echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields['website']));
+                                        echo '</p>';
+                                    }
+                                    if (isset($fiche_fields['mail'])) {
+                                        echo '<p class="mb-1">';
+                                        echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields['mail'] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20lachouquette.ch');
+                                        echo '</p>';
+                                    }
+                                    ?>
                                     <p class="mt-3 mb-0">
                                         <span class="mr-2">Réseaux :</span>
                                         <?php
@@ -161,18 +156,18 @@ while (have_posts()) :
                             <div class="card cq-fiche-contact">
                                 <div class="card-body">
                                     <h2 class="card-title h4">Contact le propriétaire</h2>
-                                    <form>
+                                    <form method="POST">
                                         <div class="form-group">
                                             <label for="contactSenderName">Ton prénom / nom</label>
-                                            <input class="form-control" id="contactSenderName">
+                                            <input class="form-control" id="contactSenderName" name="contact-name" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="contactSenderMail">Ton mail</label>
-                                            <input type="email" class="form-control" id="contactSenderMail">
+                                            <input type="email" class="form-control" id="contactSenderMail" name="contact-email" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="contactSenderContent">Ton message</label>
-                                            <textarea class="form-control" id="contactSenderContent" rows="5"></textarea>
+                                            <textarea class="form-control" id="contactSenderContent" rows="5" name="contact-content" required></textarea>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Envoyer</button>
                                     </form>
