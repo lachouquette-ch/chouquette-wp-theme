@@ -29,3 +29,18 @@ if (!function_exists('chouquette_navbar_nav')) :
     }
 endif;
 
+if (!function_exists('chouquette_header_alert')) :
+    /**
+     * Prints an alert. Should be on top of page (after menu)
+     *
+     * @param string $alert_type the alert type. Should be either  'success', 'danger', 'warning' or 'info'
+     * @param string $alert_message the alert message content
+     */
+    function chouquette_header_alert(string $alert_type, string $alert_message)
+    {
+        echo sprintf('<div class="alert alert-%s alert-dismissible fade show mb-0 pt-4" role="alert">%s', $alert_type, $alert_message);
+        echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        echo '</div>';
+    }
+endif;
+

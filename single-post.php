@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['recaptcha-response'])) {
-
         // Build POST request:
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
         $recaptcha_response = $_POST['recaptcha-response'];
@@ -39,6 +38,8 @@ while (have_posts()) :
     ));
 
     $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
+
+    chouquette_header_alert('success', 'Message bien envoyé');
     ?>
 
     <article class="container cq-single-post">
