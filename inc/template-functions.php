@@ -51,6 +51,10 @@ if (!function_exists('chouquette_is_chouquettise')) :
      * Return if fiche is chouquettise
      */
     function chouquette_is_chouquettise(array $fiche_fields) {
+        if (!isset($fiche_fields['chouquettise_to'])) {
+            return false;
+        }
+
         $chouquettise_to = DateTime::createFromFormat('d/m/Y', $fiche_fields['chouquettise_to']);
         return $chouquettise_to >= new DateTime();
     }
