@@ -129,11 +129,7 @@ while (have_posts()) :
                                                 class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields['cost']); ?></span></li>
                                     <li class="list-group-item">
                                         <p class="mb-2">Horaires :</p>
-                                        <ul>
-                                            <li>Lundi-Vendredi : 19-23h</li>
-                                            <li>Samedi : 9-23h</li>
-                                            <li>Dimanche : 11-20h</li>
-                                        </ul>
+                                        <?php chouquette_fiche_openings($fiche_fields) ?>
                                     </li>
                                     <li class="list-group-item">
                                         <p class="mb-2">Infos :</p>
