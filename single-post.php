@@ -91,7 +91,6 @@ while (have_posts()) :
                                 <div class="card-body">
                                     <h1 class="card-title h4"><?php echo $fiche->post_title; ?></h1>
                                     <p class="card-text"><?php echo $fiche->post_content; ?></p>
-                                    <?php print_r($fiche_fields); ?>
                                     <?php
                                     if (isset($fiche_fields['location']['address'])) {
                                         echo '<p class="mb-1">';
