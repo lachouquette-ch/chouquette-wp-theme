@@ -100,7 +100,7 @@
     <div class="index-content-latest container my-3">
         <div class="row mb-xl-1">
             <div class="col text-center">
-                <h2>Quoi de neuf ?</h2>
+                <h2>Nos derniers articles</h2>
             </div>
         </div>
         <?php
