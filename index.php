@@ -104,31 +104,20 @@
             </div>
         </div>
         <?php
-        $latest_posts = new WP_Query('posts_per_page=5');
+        $latest_posts = new WP_Query('posts_per_page=6');
         if ($latest_posts->have_posts()) :
-            if ($latest_posts->post_count == 5) :
-                ?>
-                <div class="row">
-                    <?php
-                    while ($latest_posts->have_posts()) :
-                        $latest_posts->the_post();
-                        // special 2nd article
-                        $is_second_article = $latest_posts->current_post == 1;
-                        $class_col = $is_second_article ? 'col-lg-8' : 'col-lg-4';
-                        echo sprintf('<div class="index-content-latest-container %s">', $class_col);
-                        get_template_part('template-parts/article-card');
-                        echo '</div>';
-                        if ($is_second_article)
-                            echo '</div><div class="row">';
-                    endwhile;
-                    ?>
-                </div>
-            <?php
-            else :
-                error_log("Erreur. Il faut avoir au min 5 articles sur la blog");
-            endif;
-        endif;
         ?>
+            <div class="row">
+                <?php
+                while ($latest_posts->have_posts()) :
+                    $latest_posts->the_post();
+                    echo '<div class="index-content-latest-container col-lg-4">';
+                    get_template_part('template-parts/article-card');
+                    echo '</div>';
+                endwhile;
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div id="newsletter" class="container-fluid index-newsletter">
