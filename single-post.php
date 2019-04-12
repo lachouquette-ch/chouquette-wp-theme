@@ -211,6 +211,8 @@ while (have_posts()) :
                                     get_template_part('template-parts/article-card');
                                     ?> </div> <?php
                             endwhile;
+                            // Restore original Post Data
+                            wp_reset_postdata();
                         endif;
                         ?>
                     </div>
