@@ -154,13 +154,13 @@
     <div class="container p-3 my-3">
         <div class="row mb-3">
             <div class="col text-center">
-                <h2>Les tops !</h2>
+                <h2>Nos tops !</h2>
             </div>
         </div>
         <div class="row swiper-container">
             <div class="swiper-wrapper">
                 <?php
-                $tops_posts = new WP_Query('posts_per_page=10');
+                $tops_posts = new WP_Query('posts_per_page=10&tag=tops&orderby=rand');
                 if ($tops_posts->have_posts()) :
                     while ($tops_posts->have_posts()) :
                         $tops_posts->the_post();
