@@ -28,16 +28,25 @@ while (have_posts()) :
     the_post();
 
     // get fiche
-    $fiche = get_field('link_fiche')[0];
-    $fiche_fields = get_fields($fiche->ID);
+    $linkFiche = get_field('link_fiche');
+    if ($linkFiche) {
+        if (count($linkFiche) > 1 ) {
+            error_log("Should only be one fiche linked to a post");
+        } else {
+            $fiche = get_field('link_fiche')[0];
+            $fiche_fields = get_fields($fiche->ID);
 
-    // TODO should be included in chouquette_get_fiche_terms
-    $categories = get_categories(array(
-        'object_ids' => get_the_ID(),
-        'parent' => 1232 // TODO should be 0
-    ));
+            // TODO should be included in chouquette_get_fiche_terms
+            $categories = get_categories(array(
+                'object_ids' => get_the_ID(),
+                'parent' => 1232 // TODO should be 0
+            ));
 
-    $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
+            $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
+        }
+    } else {
+        $fiche = false;
+    }
 
     chouquette_header_alert('success', 'Message bien envoyé');
     ?>
@@ -61,7 +70,7 @@ while (have_posts()) :
         </div>
 
         <div class="row cq-single-post-content">
-            <div class="col-lg-8 px-lg-0">
+            <div class="col px-lg-0">
                 <div class="cq-single-post-content-title mt-3 mb-2">
                     <h1 class="mr-2"><?php the_title(); ?></h1>
                 </div>
@@ -70,6 +79,7 @@ while (have_posts()) :
                 </main>
             </div>
 
+            <?php if ($fiche) : ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3">
                 <a id="ficheTarget"></a>
                 <div id="fiche" class="pt-4">
@@ -175,6 +185,7 @@ while (have_posts()) :
                     </div>
                 </div>
             </aside>
+            <?php endif; ?>
         </div>
 
         <div class="row cq-single-post-author">

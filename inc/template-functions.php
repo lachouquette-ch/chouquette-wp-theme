@@ -72,6 +72,10 @@ if (!function_exists('chouquette_get_taxonomy_terms')) :
     function chouquette_get_taxonomy_terms(WP_Post $post, string $taxonomy)
     {
         $terms = get_the_terms($post, $taxonomy);
+        if ($terms instanceof WP_Error) {
+            error_log($terms->get_error_message() . ' for ' . $taxonomy);
+            return;
+        }
         if (!$terms) $terms = [];
         // add logo field to term object
         foreach ($terms as $term) {
