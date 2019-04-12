@@ -127,14 +127,14 @@
             </div>
             <div class="col-lg-6">
                 <p class="mb-1 h4">Rejoins notre newsletter</p>
-                <p class="text-muted">Pour recevoir tous nos bons plans</p>
+                <p class="text-muted">Pour recevoir tous nos bons plans et ne plus rien rater</p>
                 <div id="mc_embed_signup">
                     <form class="validate form-inline mt-3" action="https://unechouquettealausanne.us8.list-manage.com/subscribe/post?u=570ea90f4cbc136c450fe880a&amp;id=26f7afd6a2" method="post"
                           id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
                         <div class="form-row w-100">
                             <div class="col-lg-8 mb-2">
                                 <input type="email" value="" name="EMAIL" class="required email form-control form-control-lg w-100" id="mce-EMAIL" aria-describedby="emailHelp"
-                                       placeholder="Enter email">
+                                       placeholder="Ton email">
                                 <div id="mce-responses" class="index-newsletter-response">
                                     <div class="index-newsletter-response-error mt-2" id="mce-error-response" style="display:none"></div>
                                     <div class="index-newsletter-response-success mt-2" id="mce-success-response" style="display:none"></div>
