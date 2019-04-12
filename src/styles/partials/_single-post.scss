@@ -81,9 +81,16 @@
     height: auto;
   }
 
+  /* Wordpress editor classes */
+
   .aligncenter {
     text-align: center;
     margin: auto;
+  }
+
+  pre {
+    @extend .alert;
+    @extend .alert-secondary;
   }
 }
 

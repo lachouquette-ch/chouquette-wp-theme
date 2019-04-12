@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Take action based on the score returned:
         print_r($recaptcha);
         if ($recaptcha->score >= 0.5) {
-            // Verified - send email
+            // TODO Verified - send email
         } else {
-            // Not verified - show form error
+            // TODO Not verified - show form error
         }
     } else {
         error_log("Couldn't find recaptcha in POST");
