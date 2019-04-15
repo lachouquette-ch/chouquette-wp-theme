@@ -51,6 +51,14 @@ while (have_posts()) :
     chouquette_header_alert('success', 'Message bien envoyé');
     ?>
 
+    <?php if ($fiche) : ?>
+    <div id="gotoFiche" class="w-100 text-center d-lg-none">
+        <a href="#ficheTarget" class="py-1 px-3">
+            <small><i class="fas fa-info mr-1"></i> Fiche</small>
+        </a>
+    </div>
+    <?php endif; ?>
+
     <article class="container cq-single-post">
         <div class="row cq-single-post-header mt-0 mt-lg-4">
             <div class="col p-0">

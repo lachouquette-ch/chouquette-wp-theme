@@ -25,11 +25,6 @@
             </form>
         </div>
     </nav>
-    <div id="gotoFiche" class="w-100 text-center d-lg-none">
-        <a href="#ficheTarget" class="py-1 px-3">
-            <small><i class="fas fa-info mr-1"></i> Fiche</small>
-        </a>
-    </div>
 </header>
 
 <!-- Search Modal -->
