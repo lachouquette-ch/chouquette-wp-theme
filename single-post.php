@@ -27,6 +27,17 @@ get_header();
 while (have_posts()) :
     the_post();
 
+    // get categories
+    $categories = get_categories(array(
+        'object_ids' => get_the_ID(),
+        'parent' => 1232 // TODO should be 0
+    ));
+    $category_ids = array_map(function($cat) { return $cat->term_id; }, $categories);
+
+    // get tags
+    $tags = get_the_tags();
+    $tag_ids = array_map(function($tag) { return $tag->term_id; }, $tags);
+
     // get fiche
     $linkFiche = get_field('link_fiche');
     if ($linkFiche) {
@@ -35,13 +46,6 @@ while (have_posts()) :
         } else {
             $fiche = get_field('link_fiche')[0];
             $fiche_fields = get_fields($fiche->ID);
-
-            // TODO should be included in chouquette_get_fiche_terms
-            $categories = get_categories(array(
-                'object_ids' => get_the_ID(),
-                'parent' => 1232 // TODO should be 0
-            ));
-
             $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
         }
     } else {
@@ -210,7 +214,18 @@ while (have_posts()) :
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         <?php
-                        $tops_posts = new WP_Query('posts_per_page=10');
+                        $args = array(
+                            'posts_per_page' => 6,
+                            'post__not_in' => array(get_the_ID()),
+                            'no_found_rows' => true
+                        );
+                        if (!empty($category_ids)) {
+                            $args['category__in'] = $category_ids;
+                        }
+                        if (!empty($tag_ids)) {
+                            $args['tag__in'] = $tag_ids;
+                        }
+                        $tops_posts = new WP_Query($args);
                         if ($tops_posts->have_posts()) :
                             while ($tops_posts->have_posts()) :
                                 $tops_posts->the_post();
