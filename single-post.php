@@ -226,7 +226,6 @@ while (have_posts()) :
         <?php if (comments_open() || get_comments_number()) : ?>
             <div class="row cq-single-post-comments mt-3 mt-lg-5">
                 <div class="col">
-                    <h3 class="mb-3 text-center">Commentaires</h3>
                     <?php comments_template(); ?>
                 </div>
             </div>

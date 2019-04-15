@@ -142,4 +142,40 @@
   a {
     @extend .link-secondary;
   }
+
+  // no list bullets
+  ol, ul {
+    list-style-type: none;
+  }
+
+  .comment {
+    margin-bottom: 0.5rem;
+  }
+
+  .comment-body {
+    margin-bottom: 1rem;
+  }
+
+  .comment-meta {
+    .comment-author {
+      img {
+        @extend .rounded-circle;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .comment-metadata {
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .comment-content {
+      margin-top: 0.5rem;
+
+      > p {
+        margin: 0;
+      }
+    }
+  }
 }
