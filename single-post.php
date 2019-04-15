@@ -82,7 +82,7 @@ while (have_posts()) :
         </div>
 
         <div class="row cq-single-post-content">
-            <div class="col px-lg-0">
+            <?php echo sprintf('<div class="%s px-lg-0">', $fiche ? 'col-lg-8': 'col'); ?>
                 <div class="cq-single-post-content-title mt-3 mb-2">
                     <h1 class="mr-2"><?php the_title(); ?></h1>
                 </div>
