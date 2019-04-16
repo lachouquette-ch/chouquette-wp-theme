@@ -3,9 +3,9 @@
         <div class="col">
             <?php
             $custom_logo_id = get_theme_mod('custom_logo');
-            $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+            $logo = wp_get_attachment_image_src($custom_logo_id, 'medium');
             if (has_custom_logo()) {
-                echo sprintf('<img style="height: 13rem" class="mx-auto" src="%s">', esc_url($logo[0]));
+                echo sprintf('<img class="mx-auto" src="%s">', esc_url($logo[0]));
             }
             ?>
             <p class="my-3">
