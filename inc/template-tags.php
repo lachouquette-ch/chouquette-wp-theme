@@ -48,20 +48,20 @@ if (!function_exists('chouquette_fiche_openings')) :
     function chouquette_fiche_openings(array $fiche_fields) {
         echo '<ul>';
         $raw_planning = array(
-            $fiche_fields['opening_monday'],
-            $fiche_fields['opening_tuesday'],
-            $fiche_fields['opening_wednesday'],
-            $fiche_fields['opening_thursday'],
-            $fiche_fields['opening_friday'],
-            $fiche_fields['opening_saturday'],
-            $fiche_fields['opening_sunday'],
+            $fiche_fields[CQ_FICHE_OPENING_MONDAY],
+            $fiche_fields[CQ_FICHE_OPENING_TUESDAY],
+            $fiche_fields[CQ_FICHE_OPENING_WEDNESDAY],
+            $fiche_fields[CQ_FICHE_OPENING_THURSDAY],
+            $fiche_fields[CQ_FICHE_OPENING_FRIDAY],
+            $fiche_fields[CQ_FICHE_OPENING_SATURDAY],
+            $fiche_fields[CQ_FICHE_OPENING_SUNDAY],
         );
         $planning_labels = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
 
         $from = null;
         foreach ($raw_planning as $index => $opening) {
             if ($index == count($raw_planning)-1 || $raw_planning[$index] != $raw_planning[$index+1]) {
-                if (str_replace('"', '', $raw_planning[$index]) == 'closed') {
+                if (str_replace('"', '', $raw_planning[$index]) == CQ_FICHE_OPENING_CLOSED) {
                     $opening = 'Fermé';
                 }
                 echo sprintf('<li>%s%s : %s</li>', (!is_null($from) ? $planning_labels[$from] . '-' : ''), $planning_labels[$index], $opening);

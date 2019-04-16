@@ -35,7 +35,7 @@ while (have_posts()) :
     $category_ids = array_map(function($cat) { return $cat->term_id; }, $categories);
 
     // get tags
-    $tags = get_the_tags();
+    $tags = get_the_tags() ? get_the_tags() : [];
     $tag_ids = array_map(function($tag) { return $tag->term_id; }, $tags);
 
     // get fiche
@@ -114,40 +114,40 @@ while (have_posts()) :
                                     <h1 class="card-title h4"><?php echo $fiche->post_title; ?></h1>
                                     <p class="card-text"><?php echo $fiche->post_content; ?></p>
                                     <?php
-                                    if (isset($fiche_fields['location']['address'])) {
+                                    if (isset($fiche_fields[CQ_FICHE_LOCATION]['address'])) {
                                         echo '<p class="mb-1">';
-                                        echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields['location']['address']), $fiche_fields['location']['address']);
+                                        echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']), $fiche_fields[CQ_FICHE_LOCATION]['address']);
                                         echo '</p>';
                                     }
-                                    if (isset($fiche_fields['telephone'])) {
+                                    if (isset($fiche_fields[CQ_FICHE_PHONE])) {
                                         echo '<p class="mb-1">';
-                                        echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields['telephone'], $fiche_fields['telephone']);
+                                        echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
                                         echo '</p>';
                                     }
-                                    if (isset($fiche_fields['website'])) {
+                                    if (isset($fiche_fields[CQ_FICHE_WEB])) {
                                         echo '<p class="mb-1">';
-                                        echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields['website']));
+                                        echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields[CQ_FICHE_WEB]));
                                         echo '</p>';
                                     }
-                                    if (isset($fiche_fields['mail'])) {
+                                    if (isset($fiche_fields[CQ_FICHE_MAIL])) {
                                         echo '<p class="mb-1">';
-                                        echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields['mail'] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20lachouquette.ch');
+                                        echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
                                         echo '</p>';
                                     }
                                     ?>
                                     <p class="mt-3 mb-0">
                                         <span class="mr-2">Réseaux :</span>
                                         <?php
-                                        if (!empty($fiche_fields['sn_facebook'])) echo '<a href="' . esc_url($fiche_fields['sn_facebook']) . '" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>';
-                                        if (!empty($fiche_fields['sn_instagram'])) echo '<a href="' . esc_url($fiche_fields['sn_instagram']) . '" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>';
-                                        if (!empty($fiche_fields['sn_twitter'])) echo '<a href="' . esc_url($fiche_fields['sn_twitter']) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-twitter"></i></a>';
-                                        if (!empty($fiche_fields['sn_pinterest'])) echo '<a href="' . esc_url($fiche_fields['sn_pinterest']) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-pinterest-p"></i></a>';
+                                        if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_FACEBOOK]) . '" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>';
+                                        if (!empty($fiche_fields[CQ_FICHE_INSTAGRAM])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]) . '" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>';
+                                        if (!empty($fiche_fields[CQ_FICHE_TWITTER])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_TWITTER]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-twitter"></i></a>';
+                                        if (!empty($fiche_fields[CQ_FICHE_PINTEREST])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_PINTEREST]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-pinterest-p"></i></a>';
                                         ?>
                                     </p>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Prix : <span class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields['cost']); ?></span><span
-                                                class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields['cost']); ?></span></li>
+                                    <li class="list-group-item">Prix : <span class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
+                                                class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span></li>
                                     <li class="list-group-item">
                                         <p class="mb-2">Horaires :</p>
                                         <?php chouquette_fiche_openings($fiche_fields) ?>
