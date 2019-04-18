@@ -1,26 +1,4 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['recaptcha-response'])) {
-        // Build POST request:
-        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-        $recaptcha_response = $_POST['recaptcha-response'];
-
-        // Make and decode POST request:
-        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . CQ_RECAPTCHA_SECRET . '&response=' . $recaptcha_response);
-        $recaptcha = json_decode($recaptcha);
-
-        // Take action based on the score returned:
-        print_r($recaptcha);
-        if ($recaptcha->score >= 0.5) {
-            // TODO Verified - send email
-        } else {
-            // TODO Not verified - show form error
-        }
-    } else {
-        error_log("Couldn't find recaptcha in POST");
-    }
-}
-
 
 get_header();
 
@@ -51,8 +29,6 @@ while (have_posts()) :
     } else {
         $fiche = false;
     }
-
-    chouquette_header_alert('success', 'Message bien envoyé');
     ?>
 
     <?php if ($fiche) : ?>
@@ -174,7 +150,7 @@ while (have_posts()) :
                             <div class="card cq-fiche-contact">
                                 <div class="card-body">
                                     <h2 class="card-title h4">Contact le propriétaire</h2>
-                                    <form method="POST">
+                                    <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post">
                                         <div class="form-group">
                                             <label for="contactSenderName">Ton prénom / nom</label>
                                             <input class="form-control" id="contactSenderName" name="contact-name" required>
@@ -187,9 +163,10 @@ while (have_posts()) :
                                             <label for="contactSenderContent">Ton message</label>
                                             <textarea class="form-control" id="contactSenderContent" rows="5" name="contact-content" required></textarea>
                                         </div>
+                                        <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
+                                        <input type="hidden" name="action" value="fiche_contact"> <!-- trigger fiche_contact -->
+                                        <input type="hidden" name="fiche-id" value="<?php echo $fiche->ID ?>"> <!-- trigger fiche_contact -->
                                         <button type="submit" class="btn btn-primary">Envoyer</button>
-                                        <!-- recaptcha v3 -->
-                                        <input type="hidden" name="recaptcha-response">
                                     </form>
                                 </div>
                             </div>

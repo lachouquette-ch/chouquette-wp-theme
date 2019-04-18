@@ -153,6 +153,35 @@ endif;
 add_action('wp_enqueue_scripts', 'chouquette_scripts');
 
 /**
+ * PHPMailer configuration
+ */
+if (!function_exists('chouquette_smtp')) :
+    if (!defined('MAIL_ACTIVATE')) {
+        define('MAIL_ACTIVATE', false);
+    }
+    if (!defined('MAIL_FALLBACK')) {
+        define('MAIL_FALLBACK', get_option('admin_email'));
+    }
+    if (!defined('MAIL_BCC_FALLBACK')) {
+        define('MAIL_BCC_FALLBACK', false);
+    }
+
+    function chouquette_smtp($phpmailer)
+    {
+        $phpmailer->isSMTP();
+        $phpmailer->Host = SMTP_HOST;
+        $phpmailer->SMTPAuth = SMTP_AUTH;
+        $phpmailer->Port = SMTP_PORT;
+        $phpmailer->SMTPSecure = SMTP_SECURE;
+        $phpmailer->Username = SMTP_USERNAME;
+        $phpmailer->Password = SMTP_PASSWORD;
+        $phpmailer->From = SMTP_FROM;
+        $phpmailer->FromName = SMTP_FROMNAME;
+    }
+endif;
+add_action('phpmailer_init', 'chouquette_smtp');
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
@@ -168,9 +197,9 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
- * Customizer additions.
+ * Posts methods to handle forms.
  */
-//require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/template-posts.php';
 
 /**
  * Load Jetpack compatibility file.
