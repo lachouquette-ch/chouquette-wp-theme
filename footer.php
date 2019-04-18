@@ -63,7 +63,7 @@
 <script type='text/javascript'>
     grecaptcha.ready(function () {
         // not all paged needs it so tries to find the recaptchaEnabler in current page
-        if (recaptchaEnabler && typeof (recaptchaEnabler) === "function") {
+        if (typeof recaptchaEnabler === "function") {
             recaptchaEnabler();
         }
     });
