@@ -61,6 +61,26 @@ if (!function_exists('chouquette_is_chouquettise')) :
     }
 endif;
 
+if (!function_exists('chouquette_fiche_has_openings')):
+    /**
+     * Does the fiche has any openings
+     *
+     * @param array of fiche fields
+     *
+     * @return boolean true or false
+     */
+    function chouquette_fiche_has_openings($fiche_fields)
+    {
+        return !empty(trim($fiche_fields[CQ_FICHE_OPENING_MONDAY])) ||
+            !empty(trim($fiche_fields[CQ_FICHE_OPENING_TUESDAY])) ||
+            !empty(trim($fiche_fields[CQ_FICHE_OPENING_WEDNESDAY])) ||
+            !empty(trim($fiche_fields[CQ_FICHE_OPENING_THURSDAY])) ||
+            !empty(trim($fiche_fields[CQ_FICHE_OPENING_FRIDAY])) ||
+            !empty(trim($fiche_fields[CQ_FICHE_OPENING_SATURDAY])) ||
+            !empty(trim($fiche_fields[CQ_FICHE_OPENING_SUNDAY]));
+    }
+endif;
+
 if (!function_exists('chouquette_get_taxonomy_terms')) :
     /**
      * Get taxonomy terms using https://developer.wordpress.org/reference/functions/get_the_terms/.
@@ -199,7 +219,8 @@ if (!function_exists('chouquette_recaptcha')) :
      *
      * @throws Exception if something's wrong with recaptcha
      */
-    function chouquette_recaptcha($on_success, $on_failure, $score_success = 0.5) {
+    function chouquette_recaptcha($on_success, $on_failure, $score_success = 0.5)
+    {
         if (!is_callable($on_success)) {
             throw new Exception('chouquette_recaptcha on_success should be callable');
         }
@@ -237,7 +258,8 @@ if (!function_exists('chouquette_ref_redirect')) :
      *
      * @param $query_args array query arguments to pass to redirection
      */
-    function chouquette_ref_redirect($query_args) {
+    function chouquette_ref_redirect($query_args)
+    {
         if (wp_get_referer()) {
             wp_safe_redirect(add_query_arg($query_args, wp_get_referer()), 303);
         } else {

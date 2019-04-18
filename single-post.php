@@ -76,10 +76,12 @@ while (have_posts()) :
                             <a class="nav-link active" id="info-tab" data-toggle="tab" href="#ficheInfo" role="tab" aria-controls="Infos" aria-selected="true"><i class="fas fa-info mr-2"></i>
                                 Fiche</a>
                         </li>
+                        <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
                         <li class="nav-item">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ficheContact" role="tab" aria-controls="Contact" aria-selected="false"><i class="fas fa-user-edit mr-2"></i>
                                 Contact</a>
                         </li>
+                        <?php endif; ?>
                     </ul>
 
                     <div class="tab-content" id="ficheTabContent">
@@ -95,17 +97,17 @@ while (have_posts()) :
                                         echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']), $fiche_fields[CQ_FICHE_LOCATION]['address']);
                                         echo '</p>';
                                     }
-                                    if (isset($fiche_fields[CQ_FICHE_PHONE])) {
+                                    if (!empty($fiche_fields[CQ_FICHE_PHONE])) {
                                         echo '<p class="mb-1">';
                                         echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
                                         echo '</p>';
                                     }
-                                    if (isset($fiche_fields[CQ_FICHE_WEB])) {
+                                    if (!empty($fiche_fields[CQ_FICHE_WEB])) {
                                         echo '<p class="mb-1">';
                                         echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields[CQ_FICHE_WEB]));
                                         echo '</p>';
                                     }
-                                    if (isset($fiche_fields[CQ_FICHE_MAIL])) {
+                                    if (!empty($fiche_fields[CQ_FICHE_MAIL])) {
                                         echo '<p class="mb-1">';
                                         echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
                                         echo '</p>';
@@ -122,12 +124,17 @@ while (have_posts()) :
                                     </p>
                                 </div>
                                 <ul class="list-group list-group-flush">
+                                    <?php if (!empty($fiche_fields[CQ_FICHE_COST])): ?>
                                     <li class="list-group-item">Prix : <span class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
                                                 class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span></li>
+                                    <?php endif; ?>
+                                    <?php if (chouquette_fiche_has_openings($fiche_fields)): ?>
                                     <li class="list-group-item">
                                         <p class="mb-2">Horaires :</p>
                                         <?php chouquette_fiche_openings($fiche_fields) ?>
                                     </li>
+                                    <?php endif; ?>
+                                    <?php if (!empty($fiche_info_terms)): ?>
                                     <li class="list-group-item">
                                         <p class="mb-2">Infos :</p>
                                         <p class="mb-0">
@@ -138,6 +145,7 @@ while (have_posts()) :
                                             ?>
                                         </p>
                                     </li>
+                                    <?php endif; ?>
                                 </ul>
                                 <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
                                     <div class="card-footer text-center">
@@ -146,6 +154,7 @@ while (have_posts()) :
                                 <?php endif; ?>
                             </div>
                         </div>
+                        <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
                         <div class="tab-pane fade" id="ficheContact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="card cq-fiche-contact">
                                 <div class="card-body">
@@ -171,6 +180,7 @@ while (have_posts()) :
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </aside>
