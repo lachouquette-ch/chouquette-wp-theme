@@ -16,12 +16,20 @@ if ( !is_home() ) :
     get_template_part( 'template-parts/menu' );
 endif;
 
-// print alerts (callback from posting)
-if (!empty($_GET)) {
-    if (isset($_GET['success'])) {
-        chouquette_header_alert('success', base64_decode($_GET['success']));
+/* Print messages (mostly from posting redirects) */
+if (isset($_COOKIE[CQ_COOKIE_PREFIX . 'message_status']) && isset($_COOKIE[CQ_COOKIE_PREFIX . 'message_content'])) {
+    switch ($_COOKIE[CQ_COOKIE_PREFIX . 'message_status']) {
+        case 'success':
+            $alert = 'success';
+            break;
+        case 'failure':
+            $alert = 'danger';
+            break;
+        default:
+            $alert = 'light';
     }
-    if (isset($_GET['failure'])) {
-        chouquette_header_alert('danger', base64_decode($_GET['failure']));
-    }
+    chouquette_header_alert($alert, base64_decode($_COOKIE[CQ_COOKIE_PREFIX . 'message_content']));
+    // unset cookies
+    unset($_COOKIE[CQ_COOKIE_PREFIX . 'message_status']);
+    unset($_COOKIE[CQ_COOKIE_PREFIX . 'message_content']);
 }

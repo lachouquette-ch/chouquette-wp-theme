@@ -13,6 +13,8 @@ define('CQ_THEME_VERSION', $chouquette_theme->get('Version'));
 define('CQ_PRIMARY_MENU', 'primary-menu');
 define('CQ_MENU_LOGO_SELECTOR', 'logo');
 
+define('CQ_COOKIE_PREFIX', 'chouquette_');
+
 define('CQ_CATEGORY_BAR_RETOS', 'bar-et-restaurant');
 define('CQ_CATEGORY_LOISIRS', 'loisirs');
 define('CQ_CATEGORY_CULTURE', 'culture-future');

@@ -258,12 +258,14 @@ if (!function_exists('chouquette_ref_redirect')) :
      *
      * @param $query_args array query arguments to pass to redirection
      */
-    function chouquette_ref_redirect($query_args)
+    function chouquette_ref_redirect($status, $message)
     {
+        setcookie(CQ_COOKIE_PREFIX . 'message_status', $status, time()+10, '/'); // 10 seconds
+        setcookie(CQ_COOKIE_PREFIX . 'message_content', base64_encode($message), time()+10, '/'); // 10 seconds
         if (wp_get_referer()) {
-            wp_safe_redirect(add_query_arg($query_args, wp_get_referer()), 303);
+            wp_safe_redirect(wp_get_referer(), 303);
         } else {
-            wp_safe_redirect(add_query_arg($query_args, get_home_url()), 303);
+            wp_safe_redirect(get_home_url(), 303);
         }
     }
 endif;

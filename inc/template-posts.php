@@ -15,13 +15,13 @@ if (!function_exists('chouquette_posts_fiche_contact')) :
                     function () use ($contact_mail) {
                         $result = chouquette_mail($_POST['contact-name'], $_POST['contact-email'], $contact_mail, sprintf('Message de %s via lachouquette.ch', $_POST['contact-name']), $_POST['contact-content']);
                         if ($result) {
-                            chouquette_ref_redirect(array('success' => base64_encode('Email envoyé à ' . $contact_mail)));
+                            chouquette_ref_redirect('success', 'Email envoyé à ' . $contact_mail);
                         } else {
-                            chouquette_ref_redirect(array('failure' => base64_encode("Echec de l'envoi de l'email à " . $contact_mail)));
+                            chouquette_ref_redirect('failure', "Echec de l'envoi de l'email à " . $contact_mail);
                         }
                     },
                     function () use ($contact_mail) {
-                        chouquette_ref_redirect(array('failure' => base64_encode("Problème lors de l'envoi de l'email à " . $contact_mail)));
+                        chouquette_ref_redirect('failure', "Problème lors de l'envoi de l'email à " . $contact_mail);
                     }
                 );
             }
