@@ -41,6 +41,19 @@
   }
 }
 
+.index-header-category-logo {
+  @extend .rounded-circle;
+  padding: 15px;
+  background-color: rgba($black, 0.5);
+  width: 100px;
+  height: 100px;
+
+  img {
+    margin: auto;
+    max-width: 60px;
+  }
+}
+
 .index-header-category-icon {
   color: $white;
   font-size: 3rem;

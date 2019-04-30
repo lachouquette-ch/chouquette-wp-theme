@@ -45,6 +45,11 @@ if (!function_exists('chouquette_header_alert')) :
 endif;
 
 if (!function_exists('chouquette_fiche_openings')) :
+    /**
+     * Prints fiche openings. Also flatten openings if consecutive days have the same.
+     *
+     * @param array $fiche_fields all fiche fields to pick from
+     */
     function chouquette_fiche_openings(array $fiche_fields) {
         echo '<ul>';
         $raw_planning = array(
@@ -74,3 +79,36 @@ if (!function_exists('chouquette_fiche_openings')) :
     }
 endif;
 
+if (!function_exists('chouquette_taxonomy_logo')) :
+    /**
+     * Prints the taxonomy logo (if any)
+     *
+     * @param object $taxonomy  the taxonomy. Should have a 'logo' attribute (array) with the id of the image
+     * @param string $color the color. Only 'white', 'black' or 'yellow'
+     * @param string $size the WP size. Default is thumbnail
+     * @param array $classes the classes to add to the img tag
+     */
+    function chouquette_taxonomy_logo(object $taxonomy, string $color = null, string $size = 'thumbnail', array $classes = array()) {
+        if (!property_exists($taxonomy, CQ_MENU_LOGO_SELECTOR) && !isset($taxonomy->logo['ID'])) {
+            throw new Exception("taxonomy has no property 'logo' or without 'ID' element");
+        }
+        switch ($color) {
+            case 'white':
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_WHITE, $taxonomy->logo['title']);
+                $image_id = chouquette_get_attachment_by_title($file_name)->ID;
+                break;
+            case 'black':
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_BLACK, $taxonomy->logo['title']);
+                $image_id = chouquette_get_attachment_by_title($file_name)->ID;
+                break;
+            case 'yellow':
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_YELLOW, $taxonomy->logo['title']);
+                $image_id = chouquette_get_attachment_by_title($file_name)->ID;
+                break;
+            default:
+                $image_id = $taxonomy->logo['ID'];
+        }
+        $image_src = wp_get_attachment_image_src($image_id, $size)[0];
+        return sprintf('<img src="%s" alt="%s" class="%s">', $image_src, $taxonomy->title, join(" ", $classes));
+    }
+endif;

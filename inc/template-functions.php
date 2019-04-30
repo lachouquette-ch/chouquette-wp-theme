@@ -35,8 +35,8 @@ if (!function_exists('chouquette_menu_items')) :
             $menu = wp_get_nav_menu_object($primary_menu_id);
             $menu_items = wp_get_nav_menu_items($menu->term_id);
             foreach ($menu_items as $menu_item) :
-                $logo_class = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($menu_item));
-                $menu_item->logo_class = $logo_class;
+                $logo = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($menu_item));
+                $menu_item->logo = $logo;
                 $result[] = $menu_item;
             endforeach;
         } else {
@@ -260,8 +260,8 @@ if (!function_exists('chouquette_ref_redirect')) :
      */
     function chouquette_ref_redirect($status, $message)
     {
-        setcookie(CQ_COOKIE_PREFIX . 'message_status', $status, time()+10, '/'); // 10 seconds
-        setcookie(CQ_COOKIE_PREFIX . 'message_content', base64_encode($message), time()+10, '/'); // 10 seconds
+        setcookie(CQ_COOKIE_PREFIX . 'message_status', $status, time() + 10, '/'); // 10 seconds
+        setcookie(CQ_COOKIE_PREFIX . 'message_content', base64_encode($message), time() + 10, '/'); // 10 seconds
         if (wp_get_referer()) {
             wp_safe_redirect(wp_get_referer(), 303);
         } else {
@@ -269,3 +269,21 @@ if (!function_exists('chouquette_ref_redirect')) :
         }
     }
 endif;
+
+if (!(function_exists('chouquette_get_attachment_by_title'))) {
+    function chouquette_get_attachment_by_title($post_name)
+    {
+        $args = array(
+            'posts_per_page' => 1,
+            'post_type' => 'attachment',
+            'name' => trim($post_name),
+        );
+
+        $get_attachment = new WP_Query($args);
+        if (!$get_attachment || !isset($get_attachment->posts, $get_attachment->posts[0])) {
+            return false;
+        }
+
+        return $get_attachment->posts[0];
+    }
+}
