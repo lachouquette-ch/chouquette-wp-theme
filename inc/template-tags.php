@@ -19,7 +19,7 @@ if (!function_exists('chouquette_navbar_nav')) :
             echo '<ul class="navbar-nav mr-auto">';
             foreach ($menu_items as $menu_item) :
                 echo '<li class="nav-item">';
-                echo sprintf("<a class='nav-link' href='%s' title='%s'><i class='mr-2 %s'></i> %s</a>", esc_url($menu_item->url), $menu_item->description, $menu_item->logo_class, $menu_item->title);
+                echo sprintf("<a class='nav-link' href='%s' title='%s'>%s %s</a>", esc_url($menu_item->url), $menu_item->description, chouquette_taxonomy_logo($menu_item, 'white', 'thumbnail', array('nav-logo ml-lg-3 mr-2')), $menu_item->title);
                 echo '</li>';
             endforeach;
             echo '</ul>';
