@@ -158,6 +158,8 @@ if (!function_exists('chouquette_mail')) :
      * @param $to string dest. email
      * @param $subject string email subject
      * @param $message string email content
+     *
+     * @return true/false if the mail was property sent
      */
     function chouquette_mail(string $from_name, string $from, string $to, string $subject, string $message)
     {
@@ -265,7 +267,7 @@ if (!function_exists('chouquette_ref_redirect')) :
     }
 endif;
 
-if (!(function_exists('chouquette_get_attachment_by_title'))) {
+if (!(function_exists('chouquette_get_attachment_by_title'))) :
     function chouquette_get_attachment_by_title($post_name)
     {
         $args = array(
@@ -281,4 +283,29 @@ if (!(function_exists('chouquette_get_attachment_by_title'))) {
 
         return $get_attachment->posts[0];
     }
-}
+endif;
+
+if (!(function_exists('chouquette_get_top_categories'))) :
+    /**
+     * Gets all top categories for given post (or fiche)
+     *
+     * @param int $id the post/fiche id
+     *
+     * @return array a unique array of categories
+     */
+    function chouquette_get_top_categories(int $id) {
+        $categories = get_categories(array(
+            'object_ids' => $id,
+            'exclude_tree' => "8,9,285,1,14,257" // TODO remove after deployment
+        ));
+
+        $result = array();
+        foreach ($categories as $category) {
+            while ($category->category_parent != 1232) { // TODO Should be 0
+                $category = get_category($category->category_parent);
+            }
+            array_push($result, $category);
+        }
+        return array_unique($result, SORT_REGULAR);
+    }
+endif;

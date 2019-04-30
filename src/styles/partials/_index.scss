@@ -61,7 +61,7 @@
 .index-header-filters {
   width: 75%;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-only(xl) {
     width: 50%;
   }
 
