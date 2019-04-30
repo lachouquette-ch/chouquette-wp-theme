@@ -10,16 +10,20 @@ while (have_posts()) :
         'object_ids' => get_the_ID(),
         'parent' => 1232 // TODO should be 0
     ));
-    $category_ids = array_map(function($cat) { return $cat->term_id; }, $categories);
+    $category_ids = array_map(function ($cat) {
+        return $cat->term_id;
+    }, $categories);
 
     // get tags
     $tags = get_the_tags() ? get_the_tags() : [];
-    $tag_ids = array_map(function($tag) { return $tag->term_id; }, $tags);
+    $tag_ids = array_map(function ($tag) {
+        return $tag->term_id;
+    }, $tags);
 
     // get fiche
     $linkFiche = get_field('link_fiche');
     if ($linkFiche) {
-        if (count($linkFiche) > 1 ) {
+        if (count($linkFiche) > 1) {
             error_log("Should only be one fiche linked to a post");
         } else {
             $fiche = get_field('link_fiche')[0];
@@ -37,7 +41,7 @@ while (have_posts()) :
             <small><i class="fas fa-info mr-1"></i> Fiche</small>
         </a>
     </div>
-    <?php endif; ?>
+<?php endif; ?>
 
     <article class="container cq-single-post">
         <div class="row cq-single-post-header mt-0 mt-lg-4">
@@ -58,16 +62,16 @@ while (have_posts()) :
         </div>
 
         <div class="row cq-single-post-content">
-            <?php echo sprintf('<div class="%s px-lg-0">', $fiche ? 'col-lg-8': 'col'); ?>
-                <div class="cq-single-post-content-title mt-3 mb-2">
-                    <h1 class="mr-2"><?php the_title(); ?></h1>
-                </div>
-                <main class="cq-single-post-content-text">
-                    <?php the_content(); ?>
-                </main>
+            <?php echo sprintf('<div class="%s px-lg-0">', $fiche ? 'col-lg-8' : 'col'); ?>
+            <div class="cq-single-post-content-title mt-3 mb-2">
+                <h1 class="mr-2"><?php the_title(); ?></h1>
             </div>
+            <main class="cq-single-post-content-text">
+                <?php the_content(); ?>
+            </main>
+        </div>
 
-            <?php if ($fiche) : ?>
+        <?php if ($fiche) : ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3">
                 <a id="ficheTarget"></a>
                 <div id="fiche" class="pt-4">
@@ -77,10 +81,11 @@ while (have_posts()) :
                                 Fiche</a>
                         </li>
                         <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ficheContact" role="tab" aria-controls="Contact" aria-selected="false"><i class="fas fa-user-edit mr-2"></i>
-                                Contact</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ficheContact" role="tab" aria-controls="Contact" aria-selected="false"><i
+                                            class="fas fa-user-edit mr-2"></i>
+                                    Contact</a>
+                            </li>
                         <?php endif; ?>
                     </ul>
 
@@ -97,54 +102,59 @@ while (have_posts()) :
                                         echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']), $fiche_fields[CQ_FICHE_LOCATION]['address']);
                                         echo '</p>';
                                     }
-                                    if (!empty($fiche_fields[CQ_FICHE_PHONE])) {
+                                    if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_PHONE])) {
                                         echo '<p class="mb-1">';
                                         echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
                                         echo '</p>';
                                     }
-                                    if (!empty($fiche_fields[CQ_FICHE_WEB])) {
+                                    if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_WEB])) {
                                         echo '<p class="mb-1">';
                                         echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields[CQ_FICHE_WEB]));
                                         echo '</p>';
                                     }
-                                    if (!empty($fiche_fields[CQ_FICHE_MAIL])) {
+                                    if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_MAIL])) {
                                         echo '<p class="mb-1">';
                                         echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
                                         echo '</p>';
                                     }
                                     ?>
-                                    <p class="mt-3 mb-0">
-                                        <span class="mr-2">Réseaux :</span>
-                                        <?php
-                                        if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_FACEBOOK]) . '" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>';
-                                        if (!empty($fiche_fields[CQ_FICHE_INSTAGRAM])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]) . '" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>';
-                                        if (!empty($fiche_fields[CQ_FICHE_TWITTER])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_TWITTER]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-twitter"></i></a>';
-                                        if (!empty($fiche_fields[CQ_FICHE_PINTEREST])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_PINTEREST]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-pinterest-p"></i></a>';
-                                        ?>
-                                    </p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <?php if (!empty($fiche_fields[CQ_FICHE_COST])): ?>
-                                    <li class="list-group-item">Prix : <span class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
-                                                class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span></li>
-                                    <?php endif; ?>
-                                    <?php if (chouquette_fiche_has_openings($fiche_fields)): ?>
-                                    <li class="list-group-item">
-                                        <p class="mb-2">Horaires :</p>
-                                        <?php chouquette_fiche_openings($fiche_fields) ?>
-                                    </li>
-                                    <?php endif; ?>
-                                    <?php if (!empty($fiche_info_terms)): ?>
-                                    <li class="list-group-item">
-                                        <p class="mb-2">Infos :</p>
-                                        <p class="mb-0">
+                                    <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                        <p class="mt-3 mb-0">
+                                            <span class="mr-2">Réseaux :</span>
                                             <?php
-                                            foreach ($fiche_info_terms as $fiche_info_term) {
-                                                echo sprintf('<i class="%s mr-2"></i>', $fiche_info_term->logo);
-                                            }
+                                            if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_FACEBOOK]) . '" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>';
+                                            if (!empty($fiche_fields[CQ_FICHE_INSTAGRAM])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]) . '" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>';
+                                            if (!empty($fiche_fields[CQ_FICHE_TWITTER])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_TWITTER]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-twitter"></i></a>';
+                                            if (!empty($fiche_fields[CQ_FICHE_PINTEREST])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_PINTEREST]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-pinterest-p"></i></a>';
                                             ?>
                                         </p>
-                                    </li>
+                                    <?php endif; ?>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                        <?php if (!empty($fiche_fields[CQ_FICHE_COST])): ?>
+                                            <li class="list-group-item">Prix : <span
+                                                        class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
+                                                        class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span></li>
+                                        <?php endif; ?>
+                                        <?php if (chouquette_fiche_has_openings($fiche_fields)): ?>
+                                            <li class="list-group-item">
+                                                <p class="mb-2">Horaires :</p>
+                                                <?php chouquette_fiche_openings($fiche_fields) ?>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if (!empty($fiche_info_terms)): ?>
+                                        <li class="list-group-item">
+                                            <p class="mb-2">Infos :</p>
+                                            <p class="mb-0">
+                                                <?php
+                                                foreach ($fiche_info_terms as $fiche_info_term) {
+                                                    echo sprintf('<i class="%s mr-2"></i>', $fiche_info_term->logo);
+                                                }
+                                                ?>
+                                            </p>
+                                        </li>
                                     <?php endif; ?>
                                 </ul>
                                 <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
@@ -155,36 +165,36 @@ while (have_posts()) :
                             </div>
                         </div>
                         <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                        <div class="tab-pane fade" id="ficheContact" role="tabpanel" aria-labelledby="contact-tab">
-                            <div class="card cq-fiche-contact">
-                                <div class="card-body">
-                                    <h2 class="card-title h4">Contact le propriétaire</h2>
-                                    <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post">
-                                        <div class="form-group">
-                                            <label for="contactSenderName">Ton prénom / nom</label>
-                                            <input class="form-control" id="contactSenderName" name="contact-name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="contactSenderMail">Ton mail</label>
-                                            <input type="email" class="form-control" id="contactSenderMail" name="contact-email" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="contactSenderContent">Ton message</label>
-                                            <textarea class="form-control" id="contactSenderContent" rows="5" name="contact-content" required></textarea>
-                                        </div>
-                                        <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
-                                        <input type="hidden" name="action" value="fiche_contact"> <!-- trigger fiche_contact -->
-                                        <input type="hidden" name="fiche-id" value="<?php echo $fiche->ID ?>"> <!-- trigger fiche_contact -->
-                                        <button type="submit" class="btn btn-primary">Envoyer</button>
-                                    </form>
+                            <div class="tab-pane fade" id="ficheContact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="card cq-fiche-contact">
+                                    <div class="card-body">
+                                        <h2 class="card-title h4">Contact le propriétaire</h2>
+                                        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                                            <div class="form-group">
+                                                <label for="contactSenderName">Ton prénom / nom</label>
+                                                <input class="form-control" id="contactSenderName" name="contact-name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contactSenderMail">Ton mail</label>
+                                                <input type="email" class="form-control" id="contactSenderMail" name="contact-email" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contactSenderContent">Ton message</label>
+                                                <textarea class="form-control" id="contactSenderContent" rows="5" name="contact-content" required></textarea>
+                                            </div>
+                                            <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
+                                            <input type="hidden" name="action" value="fiche_contact"> <!-- trigger fiche_contact -->
+                                            <input type="hidden" name="fiche-id" value="<?php echo $fiche->ID ?>"> <!-- trigger fiche_contact -->
+                                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <?php endif; ?>
                     </div>
                 </div>
             </aside>
-            <?php endif; ?>
+        <?php endif; ?>
         </div>
 
         <div class="row cq-single-post-author">
