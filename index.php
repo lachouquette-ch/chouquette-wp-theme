@@ -36,7 +36,7 @@
                     foreach ($menu_items as $menu_item) :
                         echo '<div class="index-header-category m-4">';
                         echo sprintf("<a href='%s' title='%s'>", esc_url($menu_item->url), $menu_item->description);
-                        echo '<div class="index-header-category-logo">';
+                        echo '<div class="index-header-category-logo p-3">';
                         echo chouquette_taxonomy_logo($menu_item);
                         echo '</div>';
                         echo sprintf("<h2 class='my-2'>%s</h2>", $menu_item->title);

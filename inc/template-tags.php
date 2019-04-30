@@ -89,24 +89,25 @@ if (!function_exists('chouquette_taxonomy_logo')) :
      * @param array $classes the classes to add to the img tag
      */
     function chouquette_taxonomy_logo(object $taxonomy, string $color = null, string $size = 'thumbnail', array $classes = array()) {
-        if (!property_exists($taxonomy, CQ_MENU_LOGO_SELECTOR) && !isset($taxonomy->logo['ID'])) {
-            throw new Exception("taxonomy has no property 'logo' or without 'ID' element");
+        $logo = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($taxonomy));
+        if (! $logo) {
+            throw new Exception("taxonomy has no logo");
         }
         switch ($color) {
             case 'white':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_WHITE, $taxonomy->logo['title']);
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_WHITE, $logo['title']);
                 $image_id = chouquette_get_attachment_by_title($file_name)->ID;
                 break;
             case 'black':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_BLACK, $taxonomy->logo['title']);
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_BLACK, $logo['title']);
                 $image_id = chouquette_get_attachment_by_title($file_name)->ID;
                 break;
             case 'yellow':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_YELLOW, $taxonomy->logo['title']);
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_YELLOW, $logo['title']);
                 $image_id = chouquette_get_attachment_by_title($file_name)->ID;
                 break;
             default:
-                $image_id = $taxonomy->logo['ID'];
+                $image_id = $logo['ID'];
         }
         $image_src = wp_get_attachment_image_src($image_id, $size)[0];
         return sprintf('<img src="%s" alt="%s" class="%s">', $image_src, $taxonomy->title, join(" ", $classes));

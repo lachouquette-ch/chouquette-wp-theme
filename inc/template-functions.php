@@ -34,15 +34,10 @@ if (!function_exists('chouquette_menu_items')) :
             $primary_menu_id = get_nav_menu_locations()[CQ_PRIMARY_MENU];
             $menu = wp_get_nav_menu_object($primary_menu_id);
             $menu_items = wp_get_nav_menu_items($menu->term_id);
-            foreach ($menu_items as $menu_item) :
-                $logo = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($menu_item));
-                $menu_item->logo = $logo;
-                $result[] = $menu_item;
-            endforeach;
+            return $menu_items;
         } else {
             trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
         }
-        return $result;
     }
 endif;
 

@@ -18,10 +18,12 @@
 .article-card-category {
   @extend .rounded-circle;
   @include float-left;
-  padding: 0.5rem;
   margin-right: 0.75rem;
   background-color: $chouquette-yellow;
-  color: $black;
+
+  img {
+    max-width: 30px;
+  }
 }
 
 .article-card-title {
