@@ -143,13 +143,20 @@ while (have_posts()) :
                                     <?php endif; ?>
                                     <?php if (!empty($fiche_info_terms)): ?>
                                         <li class="list-group-item">
-                                            <p class="mb-2">Infos :</p>
                                             <p class="mb-0">
+                                                <ul class="cq-fiche-info">
                                                 <?php
-                                                foreach ($fiche_info_terms as $fiche_info_term) {
-                                                    echo sprintf('<i class="%s mr-2"></i>', $fiche_info_term->logo);
+                                                foreach ($fiche_info_terms as $taxonomy => $terms) {
+                                                    echo '<li>' . get_field_object($taxonomy, $fiche->ID)['label'];
+                                                    echo '<ol>';
+                                                    foreach ($terms as $term) {
+                                                        echo '<li>' . $term->name . '</li>';
+                                                    }
+                                                    echo '</ol>';
+                                                    echo '</li>';
                                                 }
                                                 ?>
+                                                </ul>
                                             </p>
                                         </li>
                                     <?php endif; ?>

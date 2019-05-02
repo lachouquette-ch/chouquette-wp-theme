@@ -108,41 +108,41 @@ if (!function_exists('chouquette_get_fiche_terms')) :
      * @param WP_post $fiche the given fiche
      * @param array $categories array of category terms TODO retrieve categories should be included in this function (currently post have categories, not fiche)
      *
-     * @return array of WP_Term or empty array
+     * @return array of arrays (taxonomy name with WP_Terms) or empty array
      */
     function chouquette_get_fiche_terms(WP_Post $fiche, array $categories)
     {
-        $fiche_info_terms = [];
+        $fiche_info_terms = array();
         // defaults
-        $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CRITERIA));
+        $fiche_info_terms[CQ_TAXONOMY_CRITERIA] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CRITERIA);
         foreach ($categories as $category) {
             switch ($category->slug) {
                 case CQ_CATEGORY_BAR_RETOS:
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHEN));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHO));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_CRITERIA));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_TYPE));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_RESTRICTION));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_TYPE));
+                    $fiche_info_terms[CQ_TAXONOMY_BAR_REST_WHEN] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHEN);
+                    $fiche_info_terms[CQ_TAXONOMY_BAR_REST_WHO] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHO);
+                    $fiche_info_terms[CQ_TAXONOMY_BAR_REST_CRITERIA] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_CRITERIA);
+                    $fiche_info_terms[CQ_TAXONOMY_REST_TYPE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_TYPE);
+                    $fiche_info_terms[CQ_TAXONOMY_REST_RESTRICTION] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_RESTRICTION);
+                    $fiche_info_terms[CQ_TAXONOMY_BAR_TYPE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_TYPE);
                     break;
                 case CQ_CATEGORY_LOISIRS:
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_HOBBY));
+                    $fiche_info_terms[CQ_TAXONOMY_HOBBY] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_HOBBY);
                     break;
                 case CQ_CATEGORY_CULTURE:
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CULTURE));
+                    $fiche_info_terms[CQ_TAXONOMY_CULTURE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CULTURE);
                     break;
                 case CQ_CATEGORY_SHOPPING:
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_MODE));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_DECO));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_FOOD));
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_OTHERS));
+                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_MODE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_MODE);
+                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_DECO] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_DECO);
+                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_FOOD] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_FOOD);
+                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_OTHERS] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_OTHERS);
                     break;
                 case CQ_CATEGORY_CHOUCHOUS:
-                    $fiche_info_terms = array_merge($fiche_info_terms, chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CHOUCHOU));
+                    $fiche_info_terms[CQ_TAXONOMY_CHOUCHOU] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CHOUCHOU);
                     break;
             }
         }
-        return $fiche_info_terms;
+        return array_filter($fiche_info_terms);
     }
 endif;
 

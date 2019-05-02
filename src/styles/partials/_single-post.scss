@@ -119,6 +119,28 @@
   color: $chouquette-light-grey;
 }
 
+ul.cq-fiche-info {
+  list-style-type: none;
+  padding: 0;
+
+  ol {
+    list-style-type: none;
+    padding: 0;
+    display: inline;
+    margin-left: 0.5rem;
+
+    li {
+      @extend .badge, .badge-yellow;
+      padding: 4px 6px;
+      opacity: 0.85;
+    }
+
+    li + li {
+      margin-left: 0.2rem;
+    }
+  }
+}
+
 .cq-single-post-author {
   margin-top: 4rem;
 

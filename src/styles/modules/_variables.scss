@@ -10,7 +10,8 @@ $primary: $chouquette-yellow;
 $secondary: $chouquette-grey;
 // add new theme colors
 $theme-colors: (
-  "white": white
+  "white": white,
+  "yellow": $chouquette-yellow
 );
 
 // Navbar
