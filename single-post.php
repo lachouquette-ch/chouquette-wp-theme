@@ -6,10 +6,7 @@ while (have_posts()) :
     the_post();
 
     // get categories
-    $categories = get_categories(array(
-        'object_ids' => get_the_ID(),
-        'parent' => 1232 // TODO should be 0
-    ));
+    $categories = chouquette_get_top_categories(get_the_ID());
     $category_ids = array_map(function ($cat) {
         return $cat->term_id;
     }, $categories);
