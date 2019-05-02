@@ -11,6 +11,7 @@
 $chouquette_theme = wp_get_theme();
 define('CQ_THEME_VERSION', $chouquette_theme->get('Version'));
 define('CQ_PRIMARY_MENU', 'primary-menu');
+define('CQ_FOOTER_MENU', 'footer-menu');
 define('CQ_MENU_LOGO_SELECTOR', 'logo');
 
 define('CQ_COOKIE_PREFIX', 'chouquette_');
@@ -106,7 +107,8 @@ if (!function_exists('chouquette_setup')) :
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
-            'primary-menu' => esc_html__('Menu principal', 'chouquette'),
+            CQ_PRIMARY_MENU => esc_html__('Menu principal', 'chouquette'),
+            CQ_FOOTER_MENU => esc_html__('Menu footer', 'chouquette'),
         ));
 
         /*

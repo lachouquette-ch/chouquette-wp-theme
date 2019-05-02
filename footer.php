@@ -9,8 +9,13 @@
             }
             ?>
             <p class="my-3">
-                <a href="#" class="link-white px-2 d-inline-block">Qui sommes-nous ?</a><a href="#" class="link-white px-2 d-inline-block">Charte éditoriale</a><a href="#" class="link-white px-2 d-inline-block">Contact</a><a
-                        href="#newsletter" class="link-white px-2 d-inline-block">Newsletter</a>
+                <?php
+                $menu_args = array(
+                    'theme_location' => CQ_FOOTER_MENU,
+                    'menu_class' => 'footer-top-menu px-2'
+                );
+                wp_nav_menu($menu_args);
+                ?>
             </p>
         </div>
     </div>

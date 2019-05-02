@@ -6,6 +6,15 @@
   background-color: $chouquette-dark-grey;
 }
 
+ul.footer-top-menu {
+  list-style-type: none;
+  padding: 0;
+
+  a {
+    @extend .link-white;
+  }
+}
+
 .footer-bottom {
   background-color: $chouquette-darker-grey;
 }
