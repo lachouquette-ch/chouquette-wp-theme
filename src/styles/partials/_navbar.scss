@@ -35,6 +35,12 @@ $navbar-chouquette-brand-hover-color: rgba($navbar-chouquette-color, .8);
       }
     }
 
+    .nav-link {
+      img.nav-logo {
+        max-width: 30px;
+      }
+    }
+
     .show > .nav-link,
     .active > .nav-link,
     .nav-link.show,
@@ -127,6 +133,7 @@ $navbar-chouquette-light-brand-hover-color: $navbar-chouquette-light-hover-color
 
   .navbar-text {
     color: $navbar-chouquette-light-color;
+
     a {
       color: $navbar-chouquette-light-color;
 

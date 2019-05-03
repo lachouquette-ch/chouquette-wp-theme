@@ -17,7 +17,7 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
-            <?php chouquette_navbar_nav(); ?>
+            <?php chouquette_navbar_nav('yellow'); ?>
         </div>
     </nav>
 
