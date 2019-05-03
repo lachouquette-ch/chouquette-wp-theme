@@ -22,6 +22,12 @@ main {
   }
 }
 
+#wpadminbar {
+  @media screen and (max-width: 600px) {
+    position: fixed;
+  }
+}
+
 /* reCaptcha */
 
 .grecaptcha-badge {
