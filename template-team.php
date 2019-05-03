@@ -6,7 +6,7 @@
 get_header();
 ?>
 
-<div class="container cq-team mb-5">
+<div class="container cq-team my-5">
     <div class="row cq-team-title">
         <div class="col text-center">
             <h1 class="mb-3 cq-font"><?php the_title() ?></h1>
