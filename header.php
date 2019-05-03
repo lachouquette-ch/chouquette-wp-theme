@@ -9,7 +9,7 @@
 
     <?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
 
 <?php
 if ( !is_home() ) :
