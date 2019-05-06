@@ -69,6 +69,8 @@ define('CQ_FICHE_OPENING_CLOSED', 'closed');
 define('CQ_FICHE_CHOUQUETTISE_FROM', 'chouquettise_from');
 define('CQ_FICHE_CHOUQUETTISE_TO', 'chouquettise_to');
 
+define('CQ_USER_ROLE', 'role');
+
 if (!function_exists('chouquette_setup')) :
     /**
      * Sets up theme defaults and registers support for various WordPress features.

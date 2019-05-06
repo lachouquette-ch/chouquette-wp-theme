@@ -15,6 +15,8 @@ if (!function_exists('chouquette_acf_generate_post_id')) :
             return $item->taxonomy . '_' . $item->term_id;
         } elseif ($item instanceof WP_Post) {
             return $item->object . '_' . $item->object_id;
+        } elseif ($item instanceof WP_User) {
+            return 'user_' . $item->ID;
         } else {
             trigger_error(sprintf("%s neither have attribute 'object' or 'object_id'", print_r($item, true)), E_USER_ERROR);
         }
