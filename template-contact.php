@@ -16,23 +16,23 @@ while (have_posts()) :
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputName">Nom</label>
+                        <label for="inputName">Nom *</label>
                         <input type="text" class="form-control" id="inputName" placeholder="Nom" name="contact-name" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputMail">Email</label>
+                        <label for="inputMail">Email *</label>
                         <input type="email" class="form-control" id="inputMail" placeholder="Email" name="contact-email" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputSubject">Sujet</label>
+                        <label for="inputSubject">Sujet *</label>
                         <input type="text" class="form-control" id="inputSubject" placeholder="Sujet" name="contact-subject" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputCanton">Canton</label>
+                        <label for="inputCanton">Canton *</label>
                         <select id="inputCanton" class="form-control" name="contact-localisation" required>
-                            <option value="">Canton...</option>
+                            <option value="" selected>Tous</option>
                                 <?php
                                 $terms = get_terms(array(
                                     'taxonomy' => CQ_TAXONOMY_LOCALISATION,
@@ -48,11 +48,12 @@ while (have_posts()) :
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputMessage">Message</label>
+                    <label for="inputMessage">Message *</label>
                     <textarea class="form-control" id="inputMessage" rows="10" name="contact-content" required></textarea>
                 </div>
                 <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
                 <input type="hidden" name="action" value="contact"> <!-- trigger fiche_contact -->
+                <span class="float-right"><em>* champs obligatoires</em></span>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
         </div>
