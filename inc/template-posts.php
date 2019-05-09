@@ -41,7 +41,15 @@ if (!function_exists('chouquette_posts_contact')) :
                 return;
             }
 
-            $contact_mail = MAIL_FALLBACK; // should be the mail of the Chouquette in charge
+            $localisation = get_term_by('slug', $_POST['contact-localisation'], CQ_TAXONOMY_LOCALISATION);
+            if ($localisation) {
+                $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($localisation));
+                if ($ambassador) {
+                    $contact_mail = $ambassador->user_email;
+                } else {
+                    $contact_mail = MAIL_FALLBACK;
+                }
+            }
             chouquette_recaptcha(
                 function () use ($contact_mail) {
                     $result = chouquette_mail($_POST['contact-name'], $_POST['contact-email'], $contact_mail, $_POST['contact-subject'], $_POST['contact-content']);
