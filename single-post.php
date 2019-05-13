@@ -62,7 +62,7 @@ while (have_posts()) :
         </div>
 
         <?php if (!empty($linkFiches)) : ?>
-            <aside class="col-lg-4 pr-lg-0 pl-lg-3">
+            <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
                 <a id="ficheTarget"></a>
                 <div id="ficheAccordion">
                 <?php
@@ -71,17 +71,16 @@ while (have_posts()) :
                         $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
                 ?>
                     <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="<?php echo '#fiche_' . $fiche->ID; ?>" aria-expanded="false" aria-controls="collapseTwo">
-                                    <?php echo $fiche->post_title ?>
-                                </button>
-                            </h5>
+                        <div class="card-header cq-fiches-header text-center">
+                            <a class="collapsed link-no-decoration w-100" data-toggle="collapse" data-target="<?php echo '#fiche_' . $fiche->ID; ?>" aria-expanded="false" aria-controls="collapseTwo" href="#">
+                                <i class="far fa-plus-square float-left"></i>
+                                <?php echo $fiche->post_title ?>
+                            </a>
                         </div>
                         <div id="<?php echo 'fiche_' . $fiche->ID; ?>" class="collapse <?php echo $ficheIndex == 0 ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#ficheAccordion">
-                            <div class="card-body">
+                            <div class="card-body p-2">
                                 <nav>
-                                    <div class="nav nav-tabs cq-fiche-tabs" id="nav-tab" role="tablist">
+                                    <div class="nav nav-tabs link-no-decoration" id="nav-tab" role="tablist">
                                         <a class="nav-item nav-link active" id="info-tab" data-toggle="tab" href="#ficheInfo" role="tab" aria-controls="Infos" aria-selected="true"><i class="fas fa-info mr-2"></i>Fiche</a>
                                         <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
                                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ficheContact" role="tab" aria-controls="Contact" aria-selected="false"><i class="fas fa-user-edit mr-2"></i>Contact</a>

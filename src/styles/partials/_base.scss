@@ -36,6 +36,14 @@ main {
 
 /* Links */
 
+.link-no-decoration {
+  text-decoration: none !important;
+
+  @include hover-focus-active {
+    text-decoration: none !important;
+  }
+}
+
 .link-primary {
   color: $primary;
   text-decoration: underline;
@@ -65,6 +73,7 @@ main {
     text-decoration: none;
   }
 }
+
 
 /* Fonts */
 

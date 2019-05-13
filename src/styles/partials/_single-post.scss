@@ -94,17 +94,18 @@
   }
 }
 
-.cq-fiche-tabs {
-  a {
-    text-decoration: none;
-
-    @include hover-focus-active {
-      text-decoration: none;
-    }
+.cq-fiches-header {
+  > a {
+    color: $black;
   }
+
 }
 
 .cq-fiche {
+  > img {
+    height: auto;
+  }
+
   .card-footer {
     background-color: $chouquette-yellow;
     color: $chouquette-darker-grey;
