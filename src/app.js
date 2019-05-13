@@ -62,7 +62,7 @@ jQuery(function ($) {
         }
     });
 
-    $("#fiche").stick_in_parent({
-        'offset_top': 80,
+    $("#ficheAccordion").stick_in_parent({
+        'offset_top': 100,
     });
 });
