@@ -20,9 +20,6 @@ while (have_posts()) :
     } elseif (!is_array($linkFiches)) {
         $linkFiches = array($linkFiches);
     }
-//            $fiche = get_field('link_fiche')[0];
-//            $fiche_fields = get_fields($fiche->ID);
-//            $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
     ?>
 
     <?php if (!empty($linkFiches)) : ?>
@@ -81,14 +78,14 @@ while (have_posts()) :
                             <div class="card-body p-2">
                                 <nav>
                                     <div class="nav nav-tabs link-no-decoration" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active" id="info-tab" data-toggle="tab" href="#ficheInfo" role="tab" aria-controls="Infos" aria-selected="true"><i class="fas fa-info mr-2"></i>Fiche</a>
+                                        <a class="nav-item nav-link active" id="info-tab" data-toggle="tab" href="<?php echo '#ficheInfo_' . $fiche->ID; ?>" role="tab" aria-controls="Infos" aria-selected="true"><i class="fas fa-info mr-2"></i>Fiche</a>
                                         <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ficheContact" role="tab" aria-controls="Contact" aria-selected="false"><i class="fas fa-user-edit mr-2"></i>Contact</a>
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="<?php echo '#ficheContact_' . $fiche->ID; ?>" role="tab" aria-controls="Contact" aria-selected="false"><i class="fas fa-user-edit mr-2"></i>Contact</a>
                                         <?php endif; ?>
                                     </div>
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="ficheInfo" role="tabpanel">
+                                    <div class="tab-pane fade show active" id="<?php echo 'ficheInfo_' . $fiche->ID; ?>" role="tabpanel">
                                         <div class="card cq-fiche">
                                             <?php echo get_the_post_thumbnail($fiche->ID, 'medium', ['class' => 'card-img-top']); ?>
                                             <div class="card-body">
@@ -166,7 +163,7 @@ while (have_posts()) :
                                         </div>
                                     </div>
                                     <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                                        <div class="tab-pane fade" id="ficheContact" role="tabpanel">
+                                        <div class="tab-pane fade" id="<?php echo 'ficheContact_' . $fiche->ID; ?>" role="tabpanel">
                                             <div class="card cq-fiche-contact">
                                                 <div class="card-body">
                                                     <h2 class="card-title h4">Contact le propriétaire</h2>
