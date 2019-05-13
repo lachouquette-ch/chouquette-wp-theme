@@ -297,15 +297,15 @@ if (!(function_exists('chouquette_get_top_categories'))) :
      */
     function chouquette_get_top_categories(int $id) {
         // get fiche
-        $linkFiche = get_field('link_fiche', $id);
-        if ($linkFiche) {
-            $taxonomy_id = $linkFiche[0]->ID;
+        $linkFiches = get_field('link_fiche', $id);
+        if ($linkFiches) {
+            $taxonomy_ids = array_column($linkFiches, 'ID');
         } else {
-            $taxonomy_id = $id; // fallback to article if no fiche (ex : tops)
+            $taxonomy_ids = array($id); // fallback to article if no fiche (ex : tops)
         }
 
         $categories = get_categories(array(
-            'object_ids' => $taxonomy_id,
+            'object_ids' => $taxonomy_ids,
             'exclude_tree' => "8,9,285,1,14,257" // TODO remove after deployment
         ));
 
