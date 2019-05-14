@@ -73,6 +73,7 @@ while (have_posts()) :
 
                         if ($fiche_fields[CQ_FICHE_LOCATION]) { // add to markers
                             $fiche_marker = [
+                                'ficheId' => $fiche->ID,
                                 'lat' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lat']),
                                 'lng' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lng'])
                             ];
@@ -81,7 +82,7 @@ while (have_posts()) :
                         ?>
                         <div class="card">
                             <div class="card-header cq-fiches-header text-center">
-                                <a class="link-no-decoration w-100 <?php echo $ficheIndex != 0 ? 'collapsed' : '' ?>" data-toggle="collapse" data-target="<?php echo '#fiche_' . $fiche->ID; ?>"
+                                <a id="<?php echo $fiche->ID ?>" class="link-no-decoration w-100 <?php echo $ficheIndex != 0 ? 'collapsed' : '' ?>" data-toggle="collapse" data-target="<?php echo '#fiche_' . $fiche->ID; ?>"
                                    aria-expanded="false" aria-controls="collapseTwo" href="#">
                                     <i class="shown far fa-minus-square float-left"></i>
                                     <i class="hidden far fa-plus-square float-left"></i>
@@ -231,7 +232,7 @@ while (have_posts()) :
                             {"visibility": "off"}
                         ]
                     },
-                ]
+                ];
 
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
@@ -247,6 +248,9 @@ while (have_posts()) :
                     var bounds = new google.maps.LatLngBounds();
                     <?php foreach ($fiche_markers as $index => $fiche_marker): ?>
                     var marker = new google.maps.Marker({position: <?php echo json_encode($fiche_marker) ?>, map: map});
+                    marker.addListener('click', function () {
+                        document.getElementById("<?php echo $fiche_marker['ficheId']; ?>").click();
+                    });
                     bounds.extend(marker.getPosition());
                     <?php endforeach; ?>
                     map.fitBounds(bounds);
