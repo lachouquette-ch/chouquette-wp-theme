@@ -224,6 +224,14 @@ while (have_posts()) :
                     west: 5.706689,
                     east: 10.857024,
                 };
+                var MAP_STYLES = [
+                    {
+                        "featureType": "poi.business",
+                        "stylers": [
+                            {"visibility": "off"}
+                        ]
+                    },
+                ]
 
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
@@ -233,6 +241,7 @@ while (have_posts()) :
                             latLngBounds: SWITZERLAND_BOUNDS,
                             strictBounds: false,
                         },
+                        styles: MAP_STYLES
                     });
 
                     var bounds = new google.maps.LatLngBounds();
