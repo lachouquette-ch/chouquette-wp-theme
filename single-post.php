@@ -82,14 +82,14 @@ while (have_posts()) :
                         ?>
                         <div class="card">
                             <div class="card-header cq-fiches-header text-center">
-                                <a id="<?php echo $fiche->ID ?>" class="link-no-decoration w-100 <?php echo $ficheIndex != 0 ? 'collapsed' : '' ?>" data-toggle="collapse" data-target="<?php echo '#fiche_' . $fiche->ID; ?>"
+                                <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration w-100" data-toggle="collapse" data-target="<?php echo '#ficheContent' . $fiche->ID; ?>"
                                    aria-expanded="false" aria-controls="collapseTwo" href="#">
                                     <i class="shown far fa-minus-square float-left"></i>
                                     <i class="hidden far fa-plus-square float-left"></i>
                                     <?php echo $fiche->post_title ?>
                                 </a>
                             </div>
-                            <div id="<?php echo 'fiche_' . $fiche->ID; ?>" class="collapse <?php echo $ficheIndex == 0 ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#ficheAccordion">
+                            <div id="<?php echo 'ficheContent' . $fiche->ID; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#ficheAccordion">
                                 <div class="card-body p-2">
                                     <nav>
                                         <div class="nav nav-tabs link-no-decoration" id="nav-tab" role="tablist">
@@ -249,7 +249,7 @@ while (have_posts()) :
                     <?php foreach ($fiche_markers as $index => $fiche_marker): ?>
                     var marker = new google.maps.Marker({position: <?php echo json_encode($fiche_marker) ?>, map: map});
                     marker.addListener('click', function () {
-                        document.getElementById("<?php echo $fiche_marker['ficheId']; ?>").click();
+                        document.getElementById("<?php echo 'ficheLink' . $fiche_marker['ficheId']; ?>").click();
                     });
                     bounds.extend(marker.getPosition());
                     <?php endforeach; ?>
