@@ -94,11 +94,38 @@
   }
 }
 
+.cq-fiches {
+  .card {
+    border-radius: unset;
+
+    &:not(:first-child) {
+      border-top: none;
+    }
+  }
+}
+
 .cq-fiches-header {
+  border-bottom: none;
+
   > a {
     color: $black;
-  }
 
+    // manage hidden/shown sign
+    > i.hidden {
+      display: none;
+    }
+    > i.shown {
+      display: inline;
+    }
+    &.collapsed {
+      > i.hidden {
+        display: inline;
+      }
+      > i.shown {
+        display: none;
+      }
+    }
+  }
 }
 
 .cq-fiche {

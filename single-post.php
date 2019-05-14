@@ -61,7 +61,7 @@ while (have_posts()) :
         <?php if (!empty($linkFiches)) : ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
                 <a id="ficheTarget"></a>
-                <div id="ficheAccordion">
+                <div id="ficheAccordion" class="cq-fiches">
                 <?php
                     foreach ($linkFiches as $ficheIndex=>$fiche):
                         $fiche_fields = get_fields($fiche->ID);
@@ -69,8 +69,9 @@ while (have_posts()) :
                 ?>
                     <div class="card">
                         <div class="card-header cq-fiches-header text-center">
-                            <a class="collapsed link-no-decoration w-100" data-toggle="collapse" data-target="<?php echo '#fiche_' . $fiche->ID; ?>" aria-expanded="false" aria-controls="collapseTwo" href="#">
-                                <i class="far fa-plus-square float-left"></i>
+                            <a class="link-no-decoration w-100 <?php echo $ficheIndex != 0 ? 'collapsed' : '' ?>" data-toggle="collapse" data-target="<?php echo '#fiche_' . $fiche->ID; ?>" aria-expanded="false" aria-controls="collapseTwo" href="#">
+                                <i class="shown far fa-minus-square float-left"></i>
+                                <i class="hidden far fa-plus-square float-left"></i>
                                 <?php echo $fiche->post_title ?>
                             </a>
                         </div>
