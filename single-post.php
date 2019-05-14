@@ -58,14 +58,26 @@ while (have_posts()) :
             </main>
         </div>
 
-        <?php if (!empty($linkFiches)) : ?>
+        <?php
+        if (!empty($linkFiches)) :
+            $fiche_markers = [];
+            ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
                 <a id="ficheTarget"></a>
+                <div id="map" class="cq-fiches-map border"></div>
                 <div id="ficheAccordion" class="cq-fiches">
                     <?php
                     foreach ($linkFiches as $ficheIndex => $fiche):
                         $fiche_fields = get_fields($fiche->ID);
                         $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
+
+                        if ($fiche_fields[CQ_FICHE_LOCATION]) { // add to markers
+                            $fiche_marker = [
+                                'lat' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lat']),
+                                'lng' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lng'])
+                            ];
+                            $fiche_markers[] = $fiche_marker;
+                        }
                         ?>
                         <div class="card">
                             <div class="card-header cq-fiches-header text-center">
@@ -202,6 +214,36 @@ while (have_posts()) :
                     <?php endforeach; ?>
                 </div>
             </aside>
+
+            <!-- Only load map if has fiches -->
+            <script>
+                var map;
+                var SWITZERLAND_BOUNDS = {
+                    north: 47.882391,
+                    south: 45.640088,
+                    west: 5.706689,
+                    east: 10.857024,
+                };
+
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        disableDefaultUI: true,
+                        gestureHandling: 'cooperative',
+                        restriction: {
+                            latLngBounds: SWITZERLAND_BOUNDS,
+                            strictBounds: false,
+                        },
+                    });
+
+                    var bounds = new google.maps.LatLngBounds();
+                    <?php foreach ($fiche_markers as $index => $fiche_marker): ?>
+                    var marker = new google.maps.Marker({position: <?php echo json_encode($fiche_marker) ?>, map: map});
+                    bounds.extend(marker.getPosition());
+                    <?php endforeach; ?>
+                    map.fitBounds(bounds);
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=initMap" async defer></script>
         <?php endif; ?>
         </div>
 
