@@ -24,7 +24,7 @@ while (have_posts()) :
 
     <?php if (!empty($linkFiches)) : ?>
     <div id="gotoFiche" class="w-100 text-center d-lg-none">
-        <a href="#ficheTarget" class="py-1 px-3">
+        <a href="#fichesTarget" class="py-1 px-3">
             <small><i class="fas fa-info mr-1"></i> Fiche</small>
         </a>
     </div>
@@ -63,156 +63,160 @@ while (have_posts()) :
             $fiche_markers = [];
             ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
-                <a id="ficheTarget"></a>
-                <div id="map" class="cq-fiches-map border"></div>
-                <div id="ficheAccordion" class="cq-fiches">
-                    <?php
-                    foreach ($linkFiches as $ficheIndex => $fiche):
-                        $fiche_fields = get_fields($fiche->ID);
-                        $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
+                <div id="fiches">
+                    <a id="fichesTarget"></a>
+                    <div id="fichesMap" class="cq-fiches-map border"></div>
+                    <div id="fichesAccordion" class="cq-fiches">
+                        <?php
+                        foreach ($linkFiches as $ficheIndex => $fiche):
+                            $fiche_fields = get_fields($fiche->ID);
+                            $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
+                            $fiche_categories = chouquette_get_top_categories($fiche->ID);
 
-                        if ($fiche_fields[CQ_FICHE_LOCATION]) { // add to markers
-                            $fiche_marker = [
-                                'ficheId' => $fiche->ID,
-                                'lat' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lat']),
-                                'lng' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lng'])
-                            ];
-                            $fiche_markers[] = $fiche_marker;
-                        }
-                        ?>
-                        <div class="card">
-                            <div class="card-header cq-fiches-header text-center">
-                                <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration w-100" data-toggle="collapse" data-target="<?php echo '#ficheContent' . $fiche->ID; ?>"
-                                   aria-expanded="false" aria-controls="collapseTwo" href="#">
-                                    <i class="shown far fa-minus-square float-left"></i>
-                                    <i class="hidden far fa-plus-square float-left"></i>
-                                    <?php echo $fiche->post_title ?>
-                                </a>
-                            </div>
-                            <div id="<?php echo 'ficheContent' . $fiche->ID; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#ficheAccordion">
-                                <div class="card-body p-2">
-                                    <nav>
-                                        <div class="nav nav-tabs link-no-decoration" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="info-tab" data-toggle="tab" href="<?php echo '#ficheInfo_' . $fiche->ID; ?>" role="tab" aria-controls="Infos"
-                                               aria-selected="true"><i class="fas fa-info mr-2"></i>Fiche</a>
-                                            <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="<?php echo '#ficheContact_' . $fiche->ID; ?>" role="tab" aria-controls="Contact"
-                                                   aria-selected="false"><i class="fas fa-user-edit mr-2"></i>Contact</a>
-                                            <?php endif; ?>
-                                        </div>
-                                    </nav>
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="<?php echo 'ficheInfo_' . $fiche->ID; ?>" role="tabpanel">
-                                            <div class="card cq-fiche">
-                                                <?php echo get_the_post_thumbnail($fiche->ID, 'medium', ['class' => 'card-img-top']); ?>
-                                                <div class="card-body">
-                                                    <h1 class="card-title h4"><?php echo $fiche->post_title; ?></h1>
-                                                    <p class="card-text"><?php echo $fiche->post_content; ?></p>
-                                                    <?php
-                                                    if (isset($fiche_fields[CQ_FICHE_LOCATION]['address'])) {
-                                                        echo '<p class="mb-1">';
-                                                        echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']), $fiche_fields[CQ_FICHE_LOCATION]['address']);
-                                                        echo '</p>';
-                                                    }
-                                                    if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_PHONE])) {
-                                                        echo '<p class="mb-1">';
-                                                        echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
-                                                        echo '</p>';
-                                                    }
-                                                    if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_WEB])) {
-                                                        echo '<p class="mb-1">';
-                                                        echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields[CQ_FICHE_WEB]));
-                                                        echo '</p>';
-                                                    }
-                                                    if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_MAIL])) {
-                                                        echo '<p class="mb-1">';
-                                                        echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
-                                                        echo '</p>';
-                                                    }
-                                                    ?>
-                                                    <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
-                                                        <p class="mt-3 mb-0">
-                                                            <span class="mr-2">Réseaux :</span>
-                                                            <?php
-                                                            if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_FACEBOOK]) . '" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>';
-                                                            if (!empty($fiche_fields[CQ_FICHE_INSTAGRAM])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]) . '" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>';
-                                                            if (!empty($fiche_fields[CQ_FICHE_TWITTER])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_TWITTER]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-twitter"></i></a>';
-                                                            if (!empty($fiche_fields[CQ_FICHE_PINTEREST])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_PINTEREST]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-pinterest-p"></i></a>';
-                                                            ?>
-                                                        </p>
-                                                    <?php endif; ?>
-                                                </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
-                                                        <?php if (!empty($fiche_fields[CQ_FICHE_COST])): ?>
-                                                            <li class="list-group-item">Prix : <span
-                                                                        class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
-                                                                        class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span></li>
-                                                        <?php endif; ?>
-                                                        <?php if (chouquette_fiche_has_openings($fiche_fields)): ?>
-                                                            <li class="list-group-item">
-                                                                <p class="mb-2">Horaires :</p>
-                                                                <?php chouquette_fiche_openings($fiche_fields) ?>
-                                                            </li>
-                                                        <?php endif; ?>
-                                                    <?php endif; ?>
-                                                    <?php if (!empty($fiche_info_terms)): ?>
-                                                        <li class="list-group-item">
-                                                            <p class="mb-0">
-                                                            <ul class="cq-fiche-info">
-                                                                <?php
-                                                                foreach ($fiche_info_terms as $taxonomy => $terms) {
-                                                                    echo '<li><span class="mr-2">' . get_field_object($taxonomy, $fiche->ID)['label'] . '</span>';
-                                                                    echo '<ol>';
-                                                                    foreach ($terms as $term) {
-                                                                        echo '<li>' . $term->name . '</li>';
-                                                                    }
-                                                                    echo '</ol>';
-                                                                    echo '</li>';
-                                                                }
-                                                                ?>
-                                                            </ul>
-                                                            </p>
-                                                        </li>
-                                                    <?php endif; ?>
-                                                </ul>
-                                                <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
-                                                    <div class="card-footer text-center">CHOUQUETTISÉ</div>
+                            if ($fiche_fields[CQ_FICHE_LOCATION]) { // add to markers
+                                $fiche_marker = [
+                                    'ficheId' => $fiche->ID,
+                                    'lat' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lat']),
+                                    'lng' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lng'])
+                                ];
+                                $fiche_markers[] = $fiche_marker;
+                            }
+                            ?>
+                            <div class="card">
+                                <div class="card-header cq-fiches-header text-center">
+                                    <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration w-100" data-toggle="collapse"
+                                       data-target="<?php echo '#ficheContent' . $fiche->ID; ?>"
+                                       aria-expanded="false" aria-controls="collapseTwo" href="#">
+                                        <i class="shown far fa-minus-square float-left"></i>
+                                        <i class="hidden far fa-plus-square float-left"></i>
+                                        <?php echo $fiche->post_title ?>
+                                    </a>
+                                </div>
+                                <div id="<?php echo 'ficheContent' . $fiche->ID; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#fichesAccordion">
+                                    <div class="card-body p-2">
+                                        <nav>
+                                            <div class="nav nav-tabs link-no-decoration" id="nav-tab" role="tablist">
+                                                <a class="nav-item nav-link active" id="info-tab" data-toggle="tab" href="<?php echo '#ficheInfo_' . $fiche->ID; ?>" role="tab" aria-controls="Infos"
+                                                   aria-selected="true"><i class="fas fa-info mr-2"></i>Fiche</a>
+                                                <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
+                                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="<?php echo '#ficheContact_' . $fiche->ID; ?>" role="tab" aria-controls="Contact"
+                                                       aria-selected="false"><i class="fas fa-user-edit mr-2"></i>Contact</a>
                                                 <?php endif; ?>
                                             </div>
-                                        </div>
-                                        <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                                            <div class="tab-pane fade" id="<?php echo 'ficheContact_' . $fiche->ID; ?>" role="tabpanel">
-                                                <div class="card cq-fiche-contact">
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="<?php echo 'ficheInfo_' . $fiche->ID; ?>" role="tabpanel">
+                                                <div class="card cq-fiche">
+                                                    <?php echo get_the_post_thumbnail($fiche->ID, 'medium', ['class' => 'card-img-top']); ?>
                                                     <div class="card-body">
-                                                        <h2 class="card-title h4">Contact le propriétaire</h2>
-                                                        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-                                                            <div class="form-group">
-                                                                <label for="contactSenderName">Ton prénom / nom</label>
-                                                                <input class="form-control" id="contactSenderName" name="contact-name" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="contactSenderMail">Ton mail</label>
-                                                                <input type="email" class="form-control" id="contactSenderMail" name="contact-email" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="contactSenderContent">Ton message</label>
-                                                                <textarea class="form-control" id="contactSenderContent" rows="5" name="contact-content" required></textarea>
-                                                            </div>
-                                                            <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
-                                                            <input type="hidden" name="action" value="fiche_contact"> <!-- trigger fiche_contact -->
-                                                            <input type="hidden" name="fiche-id" value="<?php echo $fiche->ID ?>"> <!-- trigger fiche_contact -->
-                                                            <button type="submit" class="btn btn-primary">Envoyer</button>
-                                                        </form>
+                                                        <h1 class="card-title h4"><?php echo $fiche->post_title; ?></h1>
+                                                        <p class="card-text"><?php echo $fiche->post_content; ?></p>
+                                                        <?php
+                                                        if (isset($fiche_fields[CQ_FICHE_LOCATION]['address'])) {
+                                                            echo '<p class="mb-1">';
+                                                            echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']), $fiche_fields[CQ_FICHE_LOCATION]['address']);
+                                                            echo '</p>';
+                                                        }
+                                                        if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_PHONE])) {
+                                                            echo '<p class="mb-1">';
+                                                            echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
+                                                            echo '</p>';
+                                                        }
+                                                        if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_WEB])) {
+                                                            echo '<p class="mb-1">';
+                                                            echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields[CQ_FICHE_WEB]));
+                                                            echo '</p>';
+                                                        }
+                                                        if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_MAIL])) {
+                                                            echo '<p class="mb-1">';
+                                                            echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
+                                                            echo '</p>';
+                                                        }
+                                                        ?>
+                                                        <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                                            <p class="mt-3 mb-0">
+                                                                <span class="mr-2">Réseaux :</span>
+                                                                <?php
+                                                                if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_FACEBOOK]) . '" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>';
+                                                                if (!empty($fiche_fields[CQ_FICHE_INSTAGRAM])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]) . '" title="Instagram" target="_blank" class="mr-2"><i class="fab fa-instagram"></i></a>';
+                                                                if (!empty($fiche_fields[CQ_FICHE_TWITTER])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_TWITTER]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-twitter"></i></a>';
+                                                                if (!empty($fiche_fields[CQ_FICHE_PINTEREST])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_PINTEREST]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-pinterest-p"></i></a>';
+                                                                ?>
+                                                            </p>
+                                                        <?php endif; ?>
                                                     </div>
+                                                    <ul class="list-group list-group-flush">
+                                                        <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                                            <?php if (!empty($fiche_fields[CQ_FICHE_COST])): ?>
+                                                                <li class="list-group-item">Prix : <span
+                                                                            class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
+                                                                            class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span></li>
+                                                            <?php endif; ?>
+                                                            <?php if (chouquette_fiche_has_openings($fiche_fields)): ?>
+                                                                <li class="list-group-item">
+                                                                    <p class="mb-2">Horaires :</p>
+                                                                    <?php chouquette_fiche_openings($fiche_fields) ?>
+                                                                </li>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                        <?php if (!empty($fiche_info_terms)): ?>
+                                                            <li class="list-group-item">
+                                                                <p class="mb-0">
+                                                                <ul class="cq-fiche-info">
+                                                                    <?php
+                                                                    foreach ($fiche_info_terms as $taxonomy => $terms) {
+                                                                        echo '<li><span class="mr-2">' . get_field_object($taxonomy, $fiche->ID)['label'] . '</span>';
+                                                                        echo '<ol>';
+                                                                        foreach ($terms as $term) {
+                                                                            echo '<li>' . $term->name . '</li>';
+                                                                        }
+                                                                        echo '</ol>';
+                                                                        echo '</li>';
+                                                                    }
+                                                                    ?>
+                                                                </ul>
+                                                                </p>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    </ul>
+                                                    <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                                        <div class="card-footer text-center">CHOUQUETTISÉ</div>
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
-                                        <?php endif; ?>
+                                            <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
+                                                <div class="tab-pane fade" id="<?php echo 'ficheContact_' . $fiche->ID; ?>" role="tabpanel">
+                                                    <div class="card cq-fiche-contact">
+                                                        <div class="card-body">
+                                                            <h2 class="card-title h4">Contact le propriétaire</h2>
+                                                            <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                                                                <div class="form-group">
+                                                                    <label for="contactSenderName">Ton prénom / nom</label>
+                                                                    <input class="form-control" id="contactSenderName" name="contact-name" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="contactSenderMail">Ton mail</label>
+                                                                    <input type="email" class="form-control" id="contactSenderMail" name="contact-email" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="contactSenderContent">Ton message</label>
+                                                                    <textarea class="form-control" id="contactSenderContent" rows="5" name="contact-content" required></textarea>
+                                                                </div>
+                                                                <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
+                                                                <input type="hidden" name="action" value="fiche_contact"> <!-- trigger fiche_contact -->
+                                                                <input type="hidden" name="fiche-id" value="<?php echo $fiche->ID ?>"> <!-- trigger fiche_contact -->
+                                                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </aside>
 
@@ -235,7 +239,7 @@ while (have_posts()) :
                 ];
 
                 function initMap() {
-                    map = new google.maps.Map(document.getElementById('map'), {
+                    map = new google.maps.Map(document.getElementById('fichesMap'), {
                         disableDefaultUI: true,
                         gestureHandling: 'cooperative',
                         restriction: {
