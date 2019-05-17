@@ -86,7 +86,7 @@ while (have_posts()) :
                                 <div class="card-header cq-fiches-header text-center">
                                     <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration w-100" data-toggle="collapse"
                                        data-target="<?php echo '#ficheContent' . $fiche->ID; ?>"
-                                       aria-expanded="false" aria-controls="collapseTwo" href="#">
+                                       aria-expanded="false" aria-controls="collapseTwo" href="#" onclick="bounce(<?php echo $fiche->ID; ?>);">
                                         <i class="shown far fa-minus-square float-left"></i>
                                         <i class="hidden far fa-plus-square float-left"></i>
                                         <?php echo $fiche->post_title ?>
@@ -238,26 +238,44 @@ while (have_posts()) :
                     },
                 ];
 
+                var markers = new Map();
+                function bounce(ficheId) {
+                    marker = markers.get(ficheId);
+                    if (marker) {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                        window.setTimeout(function() {
+                            marker.setAnimation(null);
+                        }, 2000);
+                    }
+                };
+
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('fichesMap'), {
+                        zoom: 15,
                         disableDefaultUI: true,
                         gestureHandling: 'cooperative',
                         restriction: {
                             latLngBounds: SWITZERLAND_BOUNDS,
                             strictBounds: false,
                         },
-                        styles: MAP_STYLES
+                        styles: MAP_STYLES,
                     });
 
                     var bounds = new google.maps.LatLngBounds();
                     <?php foreach ($fiche_markers as $index => $fiche_marker): ?>
                     var marker = new google.maps.Marker({position: <?php echo json_encode($fiche_marker) ?>, map: map});
                     marker.addListener('click', function () {
+                        bounce(<?php echo $fiche_marker['ficheId']; ?>);
                         document.getElementById("<?php echo 'ficheLink' . $fiche_marker['ficheId']; ?>").click();
                     });
+                    markers.set(<?php echo $fiche_marker['ficheId']; ?>, marker);
                     bounds.extend(marker.getPosition());
                     <?php endforeach; ?>
-                    map.fitBounds(bounds);
+                    if (markers.size > 1) {
+                        map.fitBounds(bounds);
+                    } else {
+                        map.setCenter(markers.values().next().value.getPosition());
+                    }
                 }
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=initMap" async defer></script>
