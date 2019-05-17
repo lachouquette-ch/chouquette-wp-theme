@@ -14,6 +14,8 @@ define('CQ_PRIMARY_MENU', 'primary-menu');
 define('CQ_FOOTER_MENU', 'footer-menu');
 define('CQ_MENU_LOGO_SELECTOR', 'logo');
 
+define('CQ_FICHE_SELECTOR', 'link_fiche');
+
 define('CQ_COOKIE_PREFIX', 'chouquette_');
 
 define('CQ_CATEGORY_BAR_RETOS', 'bar-et-restaurant');
@@ -211,6 +213,11 @@ require get_template_directory() . '/inc/template-functions.php';
  * Posts methods to handle forms.
  */
 require get_template_directory() . '/inc/template-posts.php';
+
+/**
+ * API template endpoints
+ */
+require get_template_directory() . '/inc/template-api.php';
 
 /**
  * Load Jetpack compatibility file.

@@ -14,7 +14,7 @@ while (have_posts()) :
     $tag_ids = array_column($tags, 'term_id');
 
     // get fiche
-    $linkFiches = get_field('link_fiche');
+    $linkFiches = get_field(CQ_FICHE_SELECTOR);
     if (!$linkFiches) {
         $linkFiches = [];
     } elseif (!is_array($linkFiches)) {
@@ -72,15 +72,6 @@ while (have_posts()) :
                             $fiche_fields = get_fields($fiche->ID);
                             $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
                             $fiche_categories = chouquette_get_top_categories($fiche->ID);
-
-                            if ($fiche_fields[CQ_FICHE_LOCATION]) { // add to markers
-                                $fiche_marker = [
-                                    'ficheId' => $fiche->ID,
-                                    'lat' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lat']),
-                                    'lng' => floatval($fiche_fields[CQ_FICHE_LOCATION]['lng'])
-                                ];
-                                $fiche_markers[] = $fiche_marker;
-                            }
                             ?>
                             <div class="card">
                                 <div class="card-header cq-fiches-header text-center">
@@ -239,11 +230,12 @@ while (have_posts()) :
                 ];
 
                 var markers = new Map();
+
                 function bounce(ficheId) {
                     marker = markers.get(ficheId);
                     if (marker) {
                         marker.setAnimation(google.maps.Animation.BOUNCE);
-                        window.setTimeout(function() {
+                        window.setTimeout(function () {
                             marker.setAnimation(null);
                         }, 2000);
                     }
@@ -262,23 +254,33 @@ while (have_posts()) :
                     });
 
                     var bounds = new google.maps.LatLngBounds();
-                    <?php foreach ($fiche_markers as $index => $fiche_marker): ?>
-                    var marker = new google.maps.Marker({position: <?php echo json_encode($fiche_marker) ?>, map: map});
-                    marker.addListener('click', function () {
-                        bounce(<?php echo $fiche_marker['ficheId']; ?>);
-                        document.getElementById("<?php echo 'ficheLink' . $fiche_marker['ficheId']; ?>").click();
-                    });
-                    markers.set(<?php echo $fiche_marker['ficheId']; ?>, marker);
-                    bounds.extend(marker.getPosition());
-                    <?php endforeach; ?>
-                    if (markers.size > 1) {
-                        map.fitBounds(bounds);
-                    } else {
-                        map.setCenter(markers.values().next().value.getPosition());
-                    }
+
+                    // Change this depending on the name of your PHP or XML file
+                    fetch('http://chouquette.test/wp-json/myplugin/v1/author/<?php echo get_the_ID() ?>')
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (fiches) {
+                            console.log(fiches);
+                            fiches.forEach(function (fiche) {
+                                var marker = new google.maps.Marker({position: fiche, map: map});
+                                marker.addListener('click', function () {
+                                    bounce(fiche.id);
+                                    document.getElementById('ficheLink' + fiche.id).click();
+                                });
+                                markers.set(fiche.id, marker);
+                                bounds.extend(marker.getPosition());
+                            });
+                            if (markers.size > 1) {
+                                map.fitBounds(bounds);
+                            } else {
+                                map.setCenter(markers.values().next().value.getPosition());
+                            }
+                        });
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=initMap" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=initMap"
+                    async defer></script>
         <?php endif; ?>
         </div>
 

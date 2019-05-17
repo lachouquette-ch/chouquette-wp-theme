@@ -297,7 +297,7 @@ if (!(function_exists('chouquette_get_top_categories'))) :
      */
     function chouquette_get_top_categories(int $id) {
         // get fiche
-        $linkFiches = get_field('link_fiche', $id);
+        $linkFiches = get_field(CQ_FICHE_SELECTOR, $id);
         if ($linkFiches) {
             $taxonomy_ids = array_column($linkFiches, 'ID');
         } else {
