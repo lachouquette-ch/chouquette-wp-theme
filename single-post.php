@@ -214,6 +214,7 @@ while (have_posts()) :
             <!-- Only load map if has fiches -->
             <script>
                 var markers = new Map();
+
                 function initMap() {
                     let map = new google.maps.Map(document.getElementById('fichesMap'), {
                         zoom: 15,
