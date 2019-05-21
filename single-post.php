@@ -213,6 +213,8 @@ while (have_posts()) :
 
             <!-- Only load map if has fiches -->
             <script>
+                /** TODO should find a way to factorize consts and function, externalize to own JS and load it properly **/
+
                 var map;
                 var SWITZERLAND_BOUNDS = {
                     north: 47.882391,
