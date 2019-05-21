@@ -213,40 +213,6 @@ while (have_posts()) :
 
             <!-- Only load map if has fiches -->
             <script>
-                /** TODO should find a way to factorize consts and function, externalize to own JS and load it properly **/
-
-                var map;
-                var SWITZERLAND_BOUNDS = {
-                    north: 47.882391,
-                    south: 45.640088,
-                    west: 5.706689,
-                    east: 10.857024,
-                };
-                var MAP_STYLES = [
-                    {
-                        "featureType": "poi.business",
-                        "stylers": [
-                            {"visibility": "off"}
-                        ]
-                    },
-                ];
-
-                var markers = new Map();
-
-                function bounce(ficheId) {
-                    marker = markers.get(ficheId);
-                    if (marker) {
-                        if (marker.getAnimation()) {
-                            marker.setAnimation(null);
-                        } else {
-                            marker.setAnimation(google.maps.Animation.BOUNCE);
-                            window.setTimeout(function () {
-                                marker.setAnimation(null);
-                            }, 2000);
-                        }
-                    }
-                };
-
                 function initMap() {
                     let map = new google.maps.Map(document.getElementById('fichesMap'), {
                         zoom: 15,
@@ -282,7 +248,6 @@ while (have_posts()) :
                         });
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=initMap" async defer></script>
         <?php endif; ?>
         </div>
 

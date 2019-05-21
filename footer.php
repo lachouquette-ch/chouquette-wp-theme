@@ -74,5 +74,45 @@
     });
 </script>
 
+<!-- needs jquery -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=bootstrapMap" async defer></script>
+<script type='text/javascript'>
+    var SWITZERLAND_BOUNDS = {
+        north: 47.882391,
+        south: 45.640088,
+        west: 5.706689,
+        east: 10.857024,
+    };
+    var MAP_STYLES = [
+        {
+            "featureType": "poi.business",
+            "stylers": [
+                {"visibility": "off"}
+            ]
+        },
+    ];
+
+    function bounce(ficheId) {
+        marker = markers.get(ficheId);
+        if (marker) {
+            if (marker.getAnimation()) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                window.setTimeout(function () {
+                    marker.setAnimation(null);
+                }, 2000);
+            }
+        }
+    };
+
+    function bootstrapMap() {
+        // not all paged needs it so tries to find the recaptchaEnabler in current page
+        if (typeof initMap === "function") {
+            initMap();
+        }
+    }
+</script>
+
 </body>
 </html>
