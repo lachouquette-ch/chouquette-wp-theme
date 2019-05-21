@@ -242,7 +242,7 @@ while (have_posts()) :
                 };
 
                 function initMap() {
-                    map = new google.maps.Map(document.getElementById('fichesMap'), {
+                    let map = new google.maps.Map(document.getElementById('fichesMap'), {
                         zoom: 15,
                         disableDefaultUI: true,
                         gestureHandling: 'cooperative',
@@ -254,14 +254,11 @@ while (have_posts()) :
                     });
 
                     var bounds = new google.maps.LatLngBounds();
-
-                    // Change this depending on the name of your PHP or XML file
-                    fetch('http://chouquette.test/wp-json/myplugin/v1/author/<?php echo get_the_ID() ?>')
+                    fetch('http://chouquette.test/wp-json/cq/v1/post/<?php echo get_the_ID() ?>/localisation')
                         .then(function (response) {
                             return response.json();
                         })
                         .then(function (fiches) {
-                            console.log(fiches);
                             fiches.forEach(function (fiche) {
                                 var marker = new google.maps.Marker({position: fiche, map: map});
                                 marker.addListener('click', function () {
@@ -279,8 +276,7 @@ while (have_posts()) :
                         });
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=initMap"
-                    async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=initMap" async defer></script>
         <?php endif; ?>
         </div>
 

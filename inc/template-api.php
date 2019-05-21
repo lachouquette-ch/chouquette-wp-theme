@@ -1,6 +1,6 @@
 <?php
 
-function my_awesome_func($data)
+function cq_get_localisations_for_post($data)
 {
     $fiches = get_field(CQ_FICHE_SELECTOR, $data['id']);
 
@@ -28,8 +28,8 @@ function my_awesome_func($data)
 }
 
 add_action('rest_api_init', function () {
-    register_rest_route('myplugin/v1', '/author/(?P<id>\d+)', array(
+    register_rest_route('cq/v1', '/post/(?P<id>\d+)/localisation', array(
         'methods' => 'GET',
-        'callback' => 'my_awesome_func',
+        'callback' => 'cq_get_localisations_for_post',
     ));
 });
