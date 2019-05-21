@@ -236,10 +236,14 @@ while (have_posts()) :
                 function bounce(ficheId) {
                     marker = markers.get(ficheId);
                     if (marker) {
-                        marker.setAnimation(google.maps.Animation.BOUNCE);
-                        window.setTimeout(function () {
+                        if (marker.getAnimation()) {
                             marker.setAnimation(null);
-                        }, 2000);
+                        } else {
+                            marker.setAnimation(google.maps.Animation.BOUNCE);
+                            window.setTimeout(function () {
+                                marker.setAnimation(null);
+                            }, 2000);
+                        }
                     }
                 };
 
