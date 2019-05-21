@@ -226,27 +226,23 @@ while (have_posts()) :
                     });
 
                     var bounds = new google.maps.LatLngBounds();
-                    fetch('http://chouquette.test/wp-json/cq/v1/post/<?php echo get_the_ID() ?>/localisation')
-                        .then(function (response) {
-                            return response.json();
-                        })
-                        .then(function (fiches) {
-                            fiches.forEach(function (fiche) {
-                                var marker = new google.maps.Marker({position: fiche, map: map});
-                                marker.addListener('click', function () {
-                                    bounce(fiche.id);
-                                    document.getElementById('ficheLink' + fiche.id).click();
-                                });
-                                markers.set(fiche.id, marker);
-                                bounds.extend(marker.getPosition());
+                    $.getJSON('http://chouquette.test/wp-json/cq/v1/post/<?php echo get_the_ID() ?>/localisation', function (fiches) {
+                        fiches.forEach(function (fiche) {
+                            var marker = new google.maps.Marker({position: fiche, map: map});
+                            marker.addListener('click', function () {
+                                bounce(fiche.id);
+                                document.getElementById('ficheLink' + fiche.id).click();
                             });
-                            if (markers.size > 1) {
-                                map.fitBounds(bounds);
-                            } else {
-                                map.setCenter(markers.values().next().value.getPosition());
-                            }
+                            markers.set(fiche.id, marker);
+                            bounds.extend(marker.getPosition());
                         });
-                }
+                        if (markers.size > 1) {
+                            map.fitBounds(bounds);
+                        } else {
+                            map.setCenter(markers.values().next().value.getPosition());
+                        }
+                    });
+                };
             </script>
         <?php endif; ?>
         </div>
