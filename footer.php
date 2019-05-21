@@ -92,17 +92,14 @@
         },
     ];
 
-    function bounce(ficheId) {
-        marker = markers.get(ficheId);
-        if (marker) {
-            if (marker.getAnimation()) {
+    function bounce(marker) {
+        if (marker.getAnimation()) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            window.setTimeout(function () {
                 marker.setAnimation(null);
-            } else {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-                window.setTimeout(function () {
-                    marker.setAnimation(null);
-                }, 2000);
-            }
+            }, 2000);
         }
     };
 

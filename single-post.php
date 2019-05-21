@@ -77,7 +77,7 @@ while (have_posts()) :
                                 <div class="card-header cq-fiches-header text-center">
                                     <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration w-100" data-toggle="collapse"
                                        data-target="<?php echo '#ficheContent' . $fiche->ID; ?>"
-                                       aria-expanded="false" aria-controls="collapseTwo" href="#" onclick="bounce(<?php echo $fiche->ID; ?>);">
+                                       aria-expanded="false" aria-controls="collapseTwo" href="#" onclick="bounce(markers.get(<?php echo $fiche->ID; ?>));">
                                         <i class="shown far fa-minus-square float-left"></i>
                                         <i class="hidden far fa-plus-square float-left"></i>
                                         <?php echo $fiche->post_title ?>
@@ -213,6 +213,7 @@ while (have_posts()) :
 
             <!-- Only load map if has fiches -->
             <script>
+                var markers = new Map();
                 function initMap() {
                     let map = new google.maps.Map(document.getElementById('fichesMap'), {
                         zoom: 15,
@@ -230,7 +231,7 @@ while (have_posts()) :
                         fiches.forEach(function (fiche) {
                             var marker = new google.maps.Marker({position: fiche, map: map});
                             marker.addListener('click', function () {
-                                bounce(fiche.id);
+                                bounce(markers.get(fiche.id));
                                 document.getElementById('ficheLink' + fiche.id).click();
                             });
                             markers.set(fiche.id, marker);
