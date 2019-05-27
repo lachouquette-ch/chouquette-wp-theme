@@ -11,7 +11,7 @@ $navbar-chouquette-brand-color: $navbar-chouquette-color;
 $navbar-chouquette-brand-hover-color: rgba($navbar-chouquette-color, .8);
 
 .navbar-chouquette {
-  height: 80px;
+  height: $header-height;
 
   .navbar-brand {
     font-family: $font-family-brand;
@@ -79,7 +79,7 @@ $navbar-chouquette-brand-hover-color: rgba($navbar-chouquette-color, .8);
     @include media-breakpoint-down(sm) {
       // custom navbarnavbarChouquette
       position: absolute;
-      top: 80px;
+      top: $header-height;
       left: 0;
       width: 100%;
 
