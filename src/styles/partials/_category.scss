@@ -1,0 +1,44 @@
+// TODO refactor for all website
+.cq-selectpicker {
+  button {
+    @extend .form-control;
+    color: #59646f;
+  }
+}
+
+.category-criteria {
+  border-left: solid $chouquette-light-grey 3px;
+}
+
+.category-fiche {
+  box-shadow: 0px 0px 5px rgba($chouquette-yellow, 1);
+}
+
+.category-fiche-header {
+  min-height: 250px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.category-fiche-header-icon {
+  @extend .rounded-circle;
+  @extend .float-left;
+  background-color: $chouquette-yellow;
+  padding: 0.75rem;
+
+  > img {
+    max-width: 35px;
+  }
+}
+
+.category-map {
+  position: fixed !important;
+  top: $header-height;
+  right: 0;
+  height: calc(100vh - #{$header-height});
+  width: 50%;
+  z-index: 0;
+}
+
