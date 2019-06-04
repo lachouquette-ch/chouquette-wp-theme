@@ -17,7 +17,7 @@
 
 .article-card-category {
   @extend .rounded-circle;
-  @include float-left;
+  @extend .float-left;
   margin-right: 0.75rem;
   background-color: $chouquette-yellow;
 
