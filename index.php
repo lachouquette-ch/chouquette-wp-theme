@@ -109,7 +109,7 @@
         $latest_posts = new WP_Query('posts_per_page=6');
         if ($latest_posts->have_posts()) :
         ?>
-            <div class="row">
+            <div class="row shadow-lg">
                 <?php
                 while ($latest_posts->have_posts()) :
                     $latest_posts->the_post();
@@ -167,7 +167,7 @@
                     while ($tops_posts->have_posts()) :
                         $tops_posts->the_post();
                         ?>
-                        <div class="swiper-slide bg-dark text-white"> <?php
+                        <div class="swiper-slide bg-dark text-white shadow-sm"> <?php
                             get_template_part('template-parts/article-card');
                             ?> </div> <?php
                     endwhile;
