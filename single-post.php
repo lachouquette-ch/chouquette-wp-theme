@@ -63,7 +63,7 @@ while (have_posts()) :
             $fiche_markers = [];
             ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
-                <div id="fiches">
+                <div id="fiches" class="shadow">
                     <a id="fichesTarget"></a>
                     <div id="fichesMap" class="cq-fiches-map border"></div>
                     <div id="fichesAccordion" class="cq-fiches">
@@ -250,7 +250,7 @@ while (have_posts()) :
         </div>
 
         <div class="row cq-single-post-author">
-            <div class="col border text-center m-3 m-lg-0">
+            <div class="col border shadow-sm text-center m-3 m-lg-0">
                 <?php echo get_avatar(get_the_author_meta('ID'), 150, null, get_the_author(), ['class' => 'cq-single-post-header-author-img rounded-circle']); ?>
                 <h5 class="mt-3 mb-4"><?php the_author() ?></h5>
                 <p><?php the_author_meta('description'); ?></p>
