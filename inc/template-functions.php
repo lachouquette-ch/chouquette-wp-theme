@@ -103,6 +103,24 @@ if (!function_exists('chouquette_get_taxonomy_terms')) :
     }
 endif;
 
+if (!function_exists('chouquette_flatten_fiche_terms')) :
+    /**
+     * Flatten fiche terms into single array
+     *
+     * @param $fiche_terms fiche terms from chouquette_get_fiche_terms function
+     * @return array of term names
+     */
+    function chouquette_flatten_fiche_terms(array $fiche_terms)
+    {
+        $result = array();
+        array_walk_recursive($fiche_terms, function ($value, $key) use (&$result) {
+            $result[] = $value->name;
+        });
+        return $result;
+    }
+endif;
+
+
 if (!function_exists('chouquette_get_fiche_terms')) :
     /**
      * Get all fiche taxonomy terms depending of its categories
@@ -115,8 +133,6 @@ if (!function_exists('chouquette_get_fiche_terms')) :
     function chouquette_get_fiche_terms(WP_Post $fiche, array $categories)
     {
         $fiche_info_terms = array();
-        // defaults
-        $fiche_info_terms[CQ_TAXONOMY_CRITERIA] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CRITERIA);
         foreach ($categories as $category) {
             switch ($category->slug) {
                 case CQ_CATEGORY_BAR_RETOS:
@@ -144,6 +160,8 @@ if (!function_exists('chouquette_get_fiche_terms')) :
                     break;
             }
         }
+        // defaults
+        $fiche_info_terms[CQ_TAXONOMY_CRITERIA] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CRITERIA);
         return array_filter($fiche_info_terms);
     }
 endif;
@@ -287,15 +305,16 @@ if (!(function_exists('chouquette_get_attachment_by_title'))) :
     }
 endif;
 
-if (!(function_exists('chouquette_get_top_categories'))) :
+if (!(function_exists('chouquette_get_categories'))) :
     /**
-     * Gets all top categories for given post (or fiche)
+     * Gets all categories for given post (or fiche)
      *
      * @param int $id the post/fiche id
      *
      * @return array a unique array of categories
      */
-    function chouquette_get_top_categories(int $id) {
+    function chouquette_get_categories(int $id)
+    {
         // get fiche
         $linkFiches = get_field(CQ_FICHE_SELECTOR, $id);
         if ($linkFiches) {
@@ -308,6 +327,22 @@ if (!(function_exists('chouquette_get_top_categories'))) :
             'object_ids' => $taxonomy_ids,
             'exclude_tree' => "8,9,285,1,14,257" // TODO remove after deployment
         ));
+
+        return $categories;
+    }
+endif;
+
+if (!(function_exists('chouquette_get_top_categories'))) :
+    /**
+     * Gets all top categories for given post (or fiche)
+     *
+     * @param int $id the post/fiche id
+     *
+     * @return array a unique array of top categories
+     */
+    function chouquette_get_top_categories(int $id)
+    {
+        $categories = chouquette_get_categories($id);
 
         $result = array();
         foreach ($categories as $category) {

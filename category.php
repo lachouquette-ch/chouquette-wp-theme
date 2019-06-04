@@ -19,21 +19,23 @@ get_header();
                 <form class="mb-4 px-4">
                     <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
-                        <div class="cq-selectpicker form-group col-md-4">
-                            <select class="form-control selectpicker show-tick" title="Sous catégorie" data-selected-text-format="count > 2" multiple="" data-actions-box="true" tabindex="-98">
+                        <div class="form-group col-md-4">
+                            <select class="form-control" title="Sous catégorie">
+                                <option title="Bars / Pubs" value="">Je veux ...</option>
                                 <option title="Bars / Pubs" value="">Bars / Pubs</option>
                                 <option title="Boulangeries / Pâtisseries" value="">Boulangeries / Pâtisseries</option>
                                 <option title="Restaurants" value="fribourg">Restaurants</option>
                             </select>
                         </div>
-                        <div class="cq-selectpicker form-group col-md-4">
-                            <select class="form-control selectpicker show-tick" title="Où veux-tu aller ?" data-selected-text-format="count > 2" multiple="" data-actions-box="true" tabindex="-98">
+                        <div class="form-group col-md-4">
+                            <select class="form-control" title="Où veux-tu aller ?">
+                                <option title="Vaud" value="">Où ça ...</option>
                                 <option title="Vaud" value="vaud">Vaud</option>
                                 <option title="Fribourg" value="fribourg">Fribourg</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <input class="form-control" type="text" placeholder="Un mot clef ?" aria-label="" aria-describedby="basic-addon1">
+                            <input class="form-control" type="text" placeholder="Plus précisement ..." aria-label="" aria-describedby="basic-addon1">
                         </div>
                     </div>
                     <button class="btn btn-sm btn-secondary mr-2" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
@@ -89,24 +91,36 @@ get_header();
 
 
                 <?php
-                $latest_posts = new WP_Query('posts_per_page=6');
-                if ($latest_posts->have_posts()):
+                $args = array(
+                    'post_type' => 'fiche',
+                    //'post_status' => 'publish',
+                    //'posts_per_page' => 8,
+                );
+
+                $loop = new WP_Query($args);
+                if ($loop->have_posts()):
                     echo '<div class="d-flex justify-content-around flex-wrap category-fiche-container py-4">';
-                    while ($latest_posts->have_posts()) :
-                        $latest_posts->the_post();
+                    while ($loop->have_posts()) :
+                        $loop->the_post();
+                        $categories = chouquette_get_top_categories(get_the_ID());
+                        $fiche_info_terms = chouquette_get_fiche_terms(get_post(), $categories);
                         ?>
                         <article class="card category-fiche mb-4">
-                            <div class="card-header category-fiche-header p-2" style="background-image: url('http://chouquette.test/wp-content/uploads/2019/03/MG_9874-768x512.jpg');">
+                            <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
                                     <img src="http://chouquette.test/wp-content/uploads/2019/04/Loisirs_noir-150x150.png" alt="">
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">LaSpaSuite</h5>
-                                <p class="card-text">
-                                    Some quick example text to build on the card title and make up the bulk of the card's content
+                                <h5 class="card-title"><?php the_title(); ?></h5>
+                                <p class="card-text"><?php the_content(); ?></p>
+                                <p class="card-text small text-secondary">
+                                    <?php
+                                    $terms = chouquette_flatten_fiche_terms($fiche_info_terms);
+                                    echo implode(", ", array_slice($terms, 0, 4));
+                                    echo sizeof($terms) > 4 ? '...' : '';
+                                    ?>
                                 </p>
-                                <p class="card-text small text-secondary">Brunch, cocktail, Wifi, ...</p>
                                 <div class="w-100">
                                     <a href="" class="btn btn-sm btn-outline-secondary">Article</a>
                                     <a href="" class="btn btn-sm btn-outline-secondary">Voir</a>
@@ -116,7 +130,6 @@ get_header();
                     <?php
                     endwhile;
                     echo '</div>';
-                    wp_reset_postdata();
                 endif;
                 ?>
             </div>
