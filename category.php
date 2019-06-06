@@ -21,12 +21,12 @@ $locations = get_terms(array(
 ));
 
 ?>
-    <div class="container-fluid" style="min-height: calc(100vh - 100px)">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
                 <div id="fichesMap" class="category-map"></div>
             </div>
-            <div class="col-md-6 order-md-0 p-0">
+            <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
                 <form class="mb-4 px-4">
                     <h3 class="mb-3 h5">Je recherche :</h3>
@@ -126,8 +126,8 @@ $locations = get_terms(array(
                 }
 
                 $loop = new WP_Query($args);
+                echo '<div class="d-flex justify-content-around flex-wrap category-fiche-container py-4">';
                 if ($loop->have_posts()):
-                    echo '<div class="d-flex justify-content-around flex-wrap category-fiche-container py-4">';
                     while ($loop->have_posts()) :
                         $loop->the_post();
                         $categories = chouquette_get_top_categories(get_the_ID());
@@ -157,8 +157,10 @@ $locations = get_terms(array(
                         </article>
                     <?php
                     endwhile;
-                    echo '</div>';
+                else:
+                    echo "<span>Pas de résultat pour cette recherche</span>";
                 endif;
+                echo '</div>';
                 ?>
             </div>
         </div>

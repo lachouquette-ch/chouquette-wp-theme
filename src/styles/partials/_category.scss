@@ -6,6 +6,10 @@
   }
 }
 
+.category-result-col {
+  min-height: calc(100vh - #{$header-height}); // case no result;
+}
+
 .category-criteria {
   border-left: solid $chouquette-light-grey 3px;
 }
