@@ -8,8 +8,20 @@
  */
 
 get_header();
+
+$sub_categories = get_categories(array(
+    'child_of' => get_queried_object()->term_id,
+    'hide_empty' => 1
+));
+
+$locations = get_terms(array(
+    'taxonomy' => CQ_TAXONOMY_LOCALISATION,
+    'hide_empty' => false,
+    'orderby' => 'term_group'
+));
+
 ?>
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height: calc(100vh - 100px)">
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
                 <div id="fichesMap" class="category-map"></div>
@@ -20,22 +32,29 @@ get_header();
                     <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <select class="form-control" title="Sous catégorie">
+                            <select class="form-control" title="Sous catégorie" name="cat">
                                 <option title="Bars / Pubs" value="">Je veux ...</option>
-                                <option title="Bars / Pubs" value="">Bars / Pubs</option>
-                                <option title="Boulangeries / Pâtisseries" value="">Boulangeries / Pâtisseries</option>
-                                <option title="Restaurants" value="fribourg">Restaurants</option>
+                                <?php
+                                foreach ($sub_categories as $sub_category) {
+                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $sub_category->name, $sub_category->slug, $_GET['cat'] == $sub_category->slug ? 'selected' : '', $sub_category->name);
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <select class="form-control" title="Où veux-tu aller ?">
+                            <select class="form-control" title="Où veux-tu aller ?" name="loc">
                                 <option title="Vaud" value="">Où ça ...</option>
-                                <option title="Vaud" value="vaud">Vaud</option>
-                                <option title="Fribourg" value="fribourg">Fribourg</option>
+                                <?php
+                                foreach ($locations as $location) {
+                                    $location_display = $location->parent != 0 ? ' • ' : '';
+                                    $location_display .= $location->name;
+                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $location->name, $location->slug, $_GET['loc'] == $location->slug ? 'selected' : '', $location_display);
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <input class="form-control" type="text" placeholder="Plus précisement ..." aria-label="" aria-describedby="basic-addon1">
+                            <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo $_GET['search'] ? sprintf('value="%s"', $_GET['search']) : '' ?> ">
                         </div>
                     </div>
                     <button class="btn btn-sm btn-secondary mr-2" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
@@ -93,9 +112,18 @@ get_header();
                 <?php
                 $args = array(
                     'post_type' => 'fiche',
-                    //'post_status' => 'publish',
-                    //'posts_per_page' => 8,
+                    'category_name' => isset($_GET['cat']) ? $_GET['cat'] : get_query_var('category_name'),
+                    's' => $_GET['search']
                 );
+                if (!empty($_GET['loc'])) {
+                    $args['tax_query'] = array(
+                        array(
+                            'taxonomy' => 'cq_location',
+                            'field' => 'slug',
+                            'terms' => $_GET['loc'],
+                        ),
+                    );
+                }
 
                 $loop = new WP_Query($args);
                 if ($loop->have_posts()):
