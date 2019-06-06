@@ -33,7 +33,7 @@ $locations = get_terms(array(
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <select class="form-control" title="Sous catégorie" name="cat">
-                                <option title="Bars / Pubs" value="">Je veux ...</option>
+                                <option title="Bars / Pubs" value="<?php echo get_queried_object()->slug ?>">Je veux ...</option>
                                 <?php
                                 foreach ($sub_categories as $sub_category) {
                                     echo sprintf("<option title='%s' value='%s' %s>%s</option>", $sub_category->name, $sub_category->slug, $_GET['cat'] == $sub_category->slug ? 'selected' : '', $sub_category->name);
@@ -113,7 +113,7 @@ $locations = get_terms(array(
                 <?php
                 $args = array(
                     'post_type' => 'fiche',
-                    'category_name' => isset($_GET['cat']) ? $_GET['cat'] : get_query_var('category_name'),
+                    'category_name' => isset($_GET['cat']) ? $_GET['cat'] : get_queried_object()->slug,
                     's' => $_GET['search']
                 );
                 if (!empty($_GET['loc'])) {
