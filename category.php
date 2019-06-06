@@ -57,7 +57,8 @@ $locations = get_terms(array(
                             <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo $_GET['search'] ? sprintf('value="%s"', $_GET['search']) : '' ?> ">
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-secondary mr-2" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
+                    <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
+                    <button class="btn btn-sm btn-secondary mr-1" type="reset">Réinitialiser</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
                     <div id="collapseCriteria" class="collapse pl-3 mt-3 category-criteria">
                         <div class="form-inline">
