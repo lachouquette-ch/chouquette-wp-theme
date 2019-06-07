@@ -44,7 +44,7 @@ $locations = get_terms(array(
                         </div>
                         <div class="form-group col-md-4">
                             <select class="form-control" title="Où veux-tu aller ?" name="loc">
-                                <option title="Vaud" value="">Où ça ...</option>
+                                <option title="" value="">Où ça ...</option>
                                 <?php
                                 foreach ($locations as $location) {
                                     $location_display = $location->parent != 0 ? ' • ' : '';

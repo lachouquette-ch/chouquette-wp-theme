@@ -18,12 +18,6 @@ jQuery(function ($) {
     // activate textillate
     $('.tlt').textillate();
 
-    // bootstrap-select specify bootstrap version
-    $.fn.selectpicker.Constructor.BootstrapVersion = '4';
-    $('.selectpicker').selectpicker({
-        tickIcon: 'fa fa-check',
-    });
-
     // activate swiper
     var swiper = new Swiper('.swiper-container', {
         grabCursor: true,

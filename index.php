@@ -52,7 +52,8 @@
                     <form>
                         <div class="row">
                             <div class="col-md-4 index-header-filters-item">
-                                <select class="form-control selectpicker show-tick" title="Où veux-tu aller ?" data-selected-text-format="count > 2" multiple data-actions-box="true">
+                                <select class="form-control">
+                                    <option title="" value="">Où veux-tu aller ?</option>
                                     <?php
                                     $terms = get_terms(array(
                                         'taxonomy' => CQ_TAXONOMY_LOCALISATION,
@@ -68,13 +69,14 @@
                                 </select>
                             </div>
                             <div class="col-md-4 index-header-filters-item">
-                                <select class="form-control selectpicker show-tick" title="Qu'aimerais-tu faire ?">
+                                <select class="form-control">
+                                    <option title="" value="">Qu'aimerais-tu faire ?</option>
                                     <?php
                                     // get menu items
                                     $menu_items = chouquette_menu_items();
                                     if (!empty ($menu_items)) {
                                         foreach ($menu_items as $menu_item) :
-                                            echo sprintf("<option data-icon='%s' value='%d'>%s</option>", $menu_item->logo_class, $menu_item->id, $menu_item->title);
+                                            echo sprintf("<option value='%d'>%s</option>", $menu_item->id, $menu_item->title);
                                         endforeach;
                                     } else {
                                         trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
