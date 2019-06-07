@@ -117,6 +117,7 @@ function cq_get_taxonomies_for_category($data)
             break;
 
         case CQ_CATEGORY_SHOPPING:
+            break;
         case CQ_SUB_CATEGORY_SHOPPING_MODE:
             $results[] = build_result(CQ_TAXONOMY_SHOPPING_MODE);
             break;
