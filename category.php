@@ -28,11 +28,12 @@ $locations = get_terms(array(
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
-                <form class="mb-4 px-4">
+                <form id="app-form" class="mb-4 px-4">
                     <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <select class="form-control" title="Sous catégorie" name="cat">
+                            <select id="search-cat" class="form-control" title="Sous catégorie" name="cat"
+                                    onchange="app.refreshCriterias(this.options[this.selectedIndex].value)">
                                 <option title="Bars / Pubs" value="<?php echo get_queried_object()->slug ?>">Je veux ...</option>
                                 <?php
                                 foreach ($sub_categories as $sub_category) {
@@ -54,56 +55,18 @@ $locations = get_terms(array(
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo $_GET['search'] ? sprintf('value="%s"', $_GET['search']) : '' ?> ">
+                            <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo $_GET['search'] ? sprintf('value="%s"', $_GET['search']) : '' ?>>
                         </div>
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
                     <button class="btn btn-sm btn-secondary mr-1" type="reset">Réinitialiser</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
                     <div id="collapseCriteria" class="collapse pl-3 mt-3 category-criteria">
-                        <div class="form-inline">
-                            <span class="col-form-label">Quand ?</span>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Brunch</label>
-                            </div>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Déjeuner (petit)</label>
-                            </div>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Goûter</label>
-                            </div>
-                        </div>
-                        <div class="form-inline">
-                            <span class="col-form-label">Critères ?</span>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Accès Wi-Fi</label>
-                            </div>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Plats à emporter</label>
-                            </div>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Possibilité de privatisation</label>
-                            </div>
-                        </div>
-                        <div class="form-inline">
-                            <span class="col-form-label">Types ?</span>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Bistrot</label>
-                            </div>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Burgers</label>
-                            </div>
-                            <div class="form-check ml-3">
-                                <input class="form-check-input" type="checkbox" name="quand" value="option2">
-                                <label class="form-check-label">Fondue</label>
+                        <div class="form-inline" v-for="criteria in criterias">
+                            <span class="col-form-label">{{ criteria.label }}</span>
+                            <div class="form-check ml-3" v-for="term in criteria.terms">
+                                <input class="form-check-input" type="checkbox" :name="criteria.name" :value="term.slug">
+                                <label class="form-check-label">{{ term.name }}</label>
                             </div>
                         </div>
                     </div>
@@ -166,6 +129,32 @@ $locations = get_terms(array(
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app-form',
+            data() {
+                return {
+                    criterias: null,
+                    category: null,
+                }
+            },
+            methods: {
+                refreshCriterias: function (category) {
+                    axios
+                        .get(`http://chouquette.test/wp-json/cq/v1/category/${category}/taxonomy`)
+                        .then((response) => this.criterias = response.data)
+                }
+            },
+            mounted() {
+                var selectCategory = document.getElementById("search-cat");
+                this.category = selectCategory.options[selectCategory.selectedIndex].value;
+                this.refreshCriterias(this.category);
+            }
+        })
+    </script>
 
     <script>
         var markers = new Map();
