@@ -55,7 +55,7 @@ $locations = get_terms(array(
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo $_GET['search'] ? sprintf('value="%s"', $_GET['search']) : '' ?>>
+                            <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : sprintf('value="%s"', $_GET['search']) ?>>
                         </div>
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
@@ -65,7 +65,7 @@ $locations = get_terms(array(
                         <div class="form-inline" v-for="criteria in criterias">
                             <span class="col-form-label">{{ criteria.label }}</span>
                             <div class="form-check ml-3" v-for="term in criteria.terms">
-                                <input class="form-check-input" type="checkbox" :name="criteria.name" :value="term.slug" :checked="term.checked">
+                                <input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" :checked="term.checked">
                                 <label class="form-check-label">{{ term.name }}</label>
                             </div>
                         </div>
@@ -158,7 +158,8 @@ $locations = get_terms(array(
             },
             created() {
                 // create instance of URLSearch
-                this.$_params = new URLSearchParams(location.search);
+                var queryParams = location.search.replace(/%5B%5D/g, ''); // remove []
+                this.$_params = new URLSearchParams(queryParams);
             },
             mounted() {
                 var selectCategory = document.getElementById("search-cat");
