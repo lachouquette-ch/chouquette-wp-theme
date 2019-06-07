@@ -65,7 +65,7 @@ $locations = get_terms(array(
                         <div class="form-inline" v-for="criteria in criterias">
                             <span class="col-form-label">{{ criteria.label }}</span>
                             <div class="form-check ml-3" v-for="term in criteria.terms">
-                                <input class="form-check-input" type="checkbox" :name="criteria.name" :value="term.slug">
+                                <input class="form-check-input" type="checkbox" :name="criteria.name" :value="term.slug" :checked="term.checked">
                                 <label class="form-check-label">{{ term.name }}</label>
                             </div>
                         </div>
@@ -139,14 +139,26 @@ $locations = get_terms(array(
                 return {
                     criterias: null,
                     category: null,
+                    $_params: null
                 }
             },
             methods: {
                 refreshCriterias: function (category) {
                     axios
                         .get(`http://chouquette.test/wp-json/cq/v1/category/${category}/taxonomy`)
-                        .then((response) => this.criterias = response.data)
+                        .then(function (response) {
+                            response.data.forEach(function (taxonomy) {
+                                taxonomy.terms.forEach(function (term) {
+                                    term.checked = app.$_params.getAll(taxonomy.name).includes(term.slug);
+                                });
+                            });
+                            app.criterias = response.data;
+                        });
                 }
+            },
+            created() {
+                // create instance of URLSearch
+                this.$_params = new URLSearchParams(location.search);
             },
             mounted() {
                 var selectCategory = document.getElementById("search-cat");
