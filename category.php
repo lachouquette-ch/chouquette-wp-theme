@@ -103,9 +103,8 @@ $locations = get_terms(array(
                         'operator' => 'AND'
                     );
                 }
-                var_dump($args);
-
                 $loop = new WP_Query($args);
+
                 echo '<div class="d-flex justify-content-around flex-wrap category-fiche-container py-4">';
                 if ($loop->have_posts()):
                     while ($loop->have_posts()) :

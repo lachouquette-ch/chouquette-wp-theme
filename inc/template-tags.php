@@ -13,13 +13,17 @@ if (!function_exists('chouquette_navbar_nav')) :
      */
     function chouquette_navbar_nav(string $img_color = 'white')
     {
+        if (!empty(get_the_category())) {
+            $active_category = get_the_category()[0]->name;
+        }
+
         // get menu items
         $menu_items = chouquette_menu_items();
         if (!empty ($menu_items)) {
             echo '<ul class="navbar-nav mr-auto">';
             foreach ($menu_items as $menu_item) :
-                echo '<li class="nav-item">';
-                echo sprintf("<a class='nav-link' href='%s' title='%s'>%s %s</a>", esc_url($menu_item->url), $menu_item->description, chouquette_taxonomy_logo($menu_item, $img_color, 'thumbnail', array('nav-logo ml-lg-3 mr-2')), $menu_item->title);
+                echo sprintf('<li class="nav-item %s">', $active_category == $menu_item->title ? 'active' : '');
+                echo sprintf('<a class="nav-link" href="%s" title="%s">%s %s</a>', esc_url($menu_item->url), $menu_item->description, chouquette_taxonomy_logo($menu_item, $img_color, 'thumbnail', array('nav-logo ml-lg-3 mr-2')), $menu_item->title);
                 echo '</li>';
             endforeach;
             echo '</ul>';
