@@ -80,6 +80,10 @@
     }
   }
 
+  > input::placeholder {
+    color: $input-color;
+  }
+
   > button {
     @include media-breakpoint-down(sm) {
       width: 100%;
