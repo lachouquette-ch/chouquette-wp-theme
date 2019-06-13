@@ -95,7 +95,7 @@ if (!function_exists('chouquette_taxonomy_logo')) :
     function chouquette_taxonomy_logo(object $taxonomy, string $color = null, string $size = 'thumbnail', array $classes = array()) {
         $logo = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($taxonomy));
         if (! $logo) {
-            throw new Exception("taxonomy has no logo");
+            throw new Exception(sprintf("Taxonomy %s has no logo", mb_strimwidth(print_r($taxonomy, TRUE), 0, 200, '...')));
         }
         switch ($color) {
             case 'white':
