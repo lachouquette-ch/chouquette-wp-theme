@@ -2,7 +2,7 @@
     <article class="d-flex align-items-end" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>')">
         <div class="article-card-header p-2 flex-fill">
             <?php
-            $categories = chouquette_get_top_categories(get_the_ID());
+            $categories = chouquette_categories_get_tops(get_the_ID());
             if (!empty ($categories)) {
                 echo '<div class="article-card-category p-2">';
                 echo chouquette_taxonomy_logo($categories[0], 'black');

@@ -81,7 +81,7 @@ if (!function_exists('chouquette_fiche_get_taxonomies')) :
     function chouquette_fiche_get_taxonomies(WP_Post $fiche)
     {
         // get all field objects for fiche categories
-        $categories = chouquette_get_all_categories($fiche->ID);
+        $categories = chouquette_categories_get_all($fiche->ID);
         $fields = array();
         foreach ($categories as $category) {
             $the_field = chouquette_acf_get_field_object($category->slug)[0];

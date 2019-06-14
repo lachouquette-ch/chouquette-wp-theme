@@ -110,7 +110,7 @@ $locations = get_terms(array(
                     while ($loop->have_posts()) :
                         $loop->the_post();
                         $category = get_the_category(get_the_ID());
-                        $categories = chouquette_get_top_categories(get_the_ID());
+                        $categories = chouquette_categories_get_tops(get_the_ID());
                         $taxonomies = chouquette_fiche_get_taxonomies(get_post());
                         ?>
                         <article class="card category-fiche mb-4">

@@ -21,7 +21,7 @@ function cq_get_localisations_for_post($data)
         );
 
         $result['categories'] = [];
-        $categories = chouquette_get_top_categories($fiche->ID);
+        $categories = chouquette_categories_get_tops($fiche->ID);
         foreach ($categories as $category) {
             $category_dto = array('cat_id' => $category->term_id, 'cat_name' => $category->name);
             array_push($result['categories'], $category_dto);

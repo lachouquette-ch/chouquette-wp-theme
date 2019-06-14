@@ -6,7 +6,7 @@ while (have_posts()) :
     the_post();
 
     // get categories
-    $categories = chouquette_get_top_categories(get_the_ID());
+    $categories = chouquette_categories_get_tops(get_the_ID());
     $category_ids = array_column($categories, 'term_id');
 
     // get tags
@@ -71,7 +71,7 @@ while (have_posts()) :
                         foreach ($linkFiches as $ficheIndex => $fiche):
                             $fiche_fields = get_fields($fiche->ID);
                             $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
-                            $fiche_categories = chouquette_get_top_categories($fiche->ID);
+                            $fiche_categories = chouquette_categories_get_tops($fiche->ID);
                             ?>
                             <div class="card">
                                 <div class="card-header cq-fiches-header text-center">
