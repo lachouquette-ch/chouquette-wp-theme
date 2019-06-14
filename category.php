@@ -93,8 +93,8 @@ $locations = get_terms(array(
                 }
                 // filter criterias
                 $filtered_params = array_filter($_GET, function ($key) {
-                        return substr_compare($key, 'cq_', 0, 3) == false;
-                    }, ARRAY_FILTER_USE_KEY);
+                    return substr_compare($key, 'cq_', 0, 3) == false;
+                }, ARRAY_FILTER_USE_KEY);
                 foreach ($filtered_params as $key => $value) {
                     $args['tax_query'][] = array(
                         'taxonomy' => $key,
@@ -112,6 +112,15 @@ $locations = get_terms(array(
                         $category = get_the_category(get_the_ID());
                         $categories = chouquette_categories_get_tops(get_the_ID());
                         $taxonomies = chouquette_fiche_get_taxonomies(get_post());
+                        $posts = get_posts(array(
+                            'meta_query' => array(
+                                array(
+                                    'key' => CQ_FICHE_SELECTOR, // name of custom field
+                                    'value' => '"' . get_the_ID() . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
+                                    'compare' => 'LIKE'
+                                )
+                            )
+                        ));
                         ?>
                         <article class="card category-fiche mb-4">
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
@@ -130,7 +139,12 @@ $locations = get_terms(array(
                                     ?>
                                 </p>
                                 <div class="w-100">
-                                    <a href="" class="btn btn-sm btn-outline-secondary">Article</a>
+                                    <?php
+                                    if (!empty($posts)) {
+                                        $lastest_post = $posts[0];
+                                        echo sprintf('<a href="%s" title="%s" class="btn btn-sm btn-outline-secondary">Article</a>', get_the_permalink($lastest_post), $lastest_post->post_title);
+                                    }
+                                    ?>
                                     <a href="" class="btn btn-sm btn-outline-secondary">Voir</a>
                                 </div>
                             </div>
