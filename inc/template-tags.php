@@ -11,7 +11,7 @@ if (!function_exists('chouquette_navbar_nav')) :
     /*
      * Prints the navbar composed of ul/li items (nav-item)
      */
-    function chouquette_navbar_nav(string $img_color = 'white')
+    function chouquette_navbar_nav(string $img_color = 'white', string $img_color_active = 'yellow')
     {
         if (!empty(get_the_category())) {
             $active_category = get_the_category()[0]->name;
@@ -23,7 +23,11 @@ if (!function_exists('chouquette_navbar_nav')) :
             echo '<ul class="navbar-nav mr-auto">';
             foreach ($menu_items as $menu_item) :
                 echo sprintf('<li class="nav-item %s">', $active_category == $menu_item->title ? 'active' : '');
-                echo sprintf('<a class="nav-link" href="%s" title="%s">%s %s</a>', esc_url($menu_item->url), $menu_item->description, chouquette_taxonomy_logo($menu_item, $img_color, 'thumbnail', array('nav-logo ml-lg-3 mr-2')), $menu_item->title);
+                echo sprintf('<a class="nav-link" href="%s" title="%s">%s %s</a>',
+                    esc_url($menu_item->url),
+                    $menu_item->description,
+                    chouquette_taxonomy_logo($menu_item, $active_category == $menu_item->title ? $img_color_active : $img_color, 'thumbnail', array('nav-logo ml-lg-3 mr-2')),
+                    $menu_item->title);
                 echo '</li>';
             endforeach;
             echo '</ul>';
