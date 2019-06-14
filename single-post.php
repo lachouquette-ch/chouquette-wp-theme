@@ -70,7 +70,7 @@ while (have_posts()) :
                         <?php
                         foreach ($linkFiches as $ficheIndex => $fiche):
                             $fiche_fields = get_fields($fiche->ID);
-                            $fiche_taxonomies = chouquette_get_fiche_taxonomies($fiche);
+                            $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
                             $fiche_categories = chouquette_get_top_categories($fiche->ID);
                             ?>
                             <div class="card">
@@ -108,23 +108,23 @@ while (have_posts()) :
                                                             echo sprintf('<a href="%s" title="Ouvrir avec Google maps" target="_blank"><i class="fas fa-map-marker-alt pr-1"></i> %s</a>', esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']), $fiche_fields[CQ_FICHE_LOCATION]['address']);
                                                             echo '</p>';
                                                         }
-                                                        if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_PHONE])) {
+                                                        if (chouquette_fiche_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_PHONE])) {
                                                             echo '<p class="mb-1">';
                                                             echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
                                                             echo '</p>';
                                                         }
-                                                        if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_WEB])) {
+                                                        if (chouquette_fiche_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_WEB])) {
                                                             echo '<p class="mb-1">';
                                                             echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields[CQ_FICHE_WEB]));
                                                             echo '</p>';
                                                         }
-                                                        if (chouquette_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_MAIL])) {
+                                                        if (chouquette_fiche_is_chouquettise($fiche_fields) && !empty($fiche_fields[CQ_FICHE_MAIL])) {
                                                             echo '<p class="mb-1">';
                                                             echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
                                                             echo '</p>';
                                                         }
                                                         ?>
-                                                        <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                                        <?php if (chouquette_fiche_is_chouquettise($fiche_fields)) : ?>
                                                             <p class="mt-3 mb-0">
                                                                 <span class="mr-2">Réseaux :</span>
                                                                 <?php
@@ -137,7 +137,7 @@ while (have_posts()) :
                                                         <?php endif; ?>
                                                     </div>
                                                     <ul class="list-group list-group-flush">
-                                                        <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                                        <?php if (chouquette_fiche_is_chouquettise($fiche_fields)) : ?>
                                                             <?php if (!empty($fiche_fields[CQ_FICHE_COST])): ?>
                                                                 <li class="list-group-item">Prix : <span
                                                                             class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
@@ -172,7 +172,7 @@ while (have_posts()) :
                                                             </li>
                                                         <?php endif; ?>
                                                     </ul>
-                                                    <?php if (chouquette_is_chouquettise($fiche_fields)) : ?>
+                                                    <?php if (chouquette_fiche_is_chouquettise($fiche_fields)) : ?>
                                                         <div class="card-footer text-center">CHOUQUETTISÉ</div>
                                                     <?php endif; ?>
                                                 </div>
