@@ -84,7 +84,7 @@ function cq_get_taxonomies_for_category($data)
     // get field objects terms
     $taxonomy_fields = array();
     foreach ($categories as $category) {
-        $the_field = chouquette_get_field_object_by_name($category->slug)[0];
+        $the_field = chouquette_acf_get_field_object($category->slug)[0];
         if ($the_field['type'] == ACF_FIELD_GROUP_TYPE) {
             foreach ($the_field['sub_fields'] as $sub_field) {
                 if ($sub_field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
