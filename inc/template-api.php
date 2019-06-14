@@ -48,16 +48,14 @@ add_action('rest_api_init', function () {
  */
 function cq_get_taxonomies_for_category($data)
 {
-    function build_result(string $taxonomy)
+    function build_DTO(array $taxonomy)
     {
         // field
-        $raw_field = get_field_object($taxonomy, 17895); // 17895 is fiche Buet
-        $field = array_filter($raw_field, function ($key) {
+        $field = array_filter($taxonomy, function ($key) {
             return $key == 'label' || $key == 'instructions' || $key == 'name' || $key == 'taxonomy';
         }, ARRAY_FILTER_USE_KEY);
 
-        // taxonomy
-        $raw_terms = get_terms($field['taxonomy']);
+        // taxonomies
         $terms = array_map(function (WP_Term $term) {
             $result = [];
             $result['term_id'] = $term->term_id;
@@ -66,80 +64,49 @@ function cq_get_taxonomies_for_category($data)
             $result['description'] = $term->description;
             return $result;
 
-        }, $raw_terms);
+        }, $taxonomy['terms']);
 
         // put things together
         $field['terms'] = $terms;
         return $field;
     }
 
-    $results = array();
-    switch ($data['slug']) {
-        case CQ_CATEGORY_BAR_RETOS:
-        case CQ_SUB_CATEGORY_BAR_RETOS_VIE_NOCTURNE:
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_CRITERIA);
-            break;
-        case CQ_SUB_CATEGORY_BAR_RETOS_BAR_PUBS:
-            $results[] = build_result(CQ_TAXONOMY_BAR_TYPE);
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_CRITERIA);
-            break;
-        case CQ_SUB_CATEGORY_BAR_RETOS_BOULANGERIES_PATISSERIES:
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_WHEN);
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_WHO);
-            $results[] = build_result(CQ_TAXONOMY_REST_RESTRICTION);
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_CRITERIA);
-            break;
-        case CQ_SUB_CATEGORY_BAR_RETOS_RESTAURANTS:
-        case CQ_SUB_CATEGORY_BAR_RETOS_SUR_LE_POUCE:
-            $results[] = build_result(CQ_TAXONOMY_REST_TYPE);
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_WHEN);
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_WHO);
-            $results[] = build_result(CQ_TAXONOMY_REST_RESTRICTION);
-            $results[] = build_result(CQ_TAXONOMY_BAR_REST_CRITERIA);
-            break;
+    $category = get_category_by_slug($data['slug']);
 
-        case CQ_CATEGORY_LOISIRS:
-        case CQ_SUB_CATEGORY_LOISIRS_ACTIVITES:
-        case CQ_SUB_CATEGORY_LOISIRS_BALADES:
-        case CQ_SUB_CATEGORY_LOISIRS_ESCAPADES:
-        case CQ_SUB_CATEGORY_LOISIRS_SPA_BIEN_ETRE:
-        case CQ_SUB_CATEGORY_LOISIRS_SPORTS:
-            $results[] = build_result(CQ_TAXONOMY_HOBBY);
-            break;
-
-        case CQ_CATEGORY_CULTURE:
-        case CQ_SUB_CATEGORY_CULTURE_AUTRES:
-        case CQ_SUB_CATEGORY_CULTURE_CINEMA:
-        case CQ_SUB_CATEGORY_CULTURE_MUSEE:
-        case CQ_SUB_CATEGORY_CULTURE_MUSIQUE:
-        case CQ_SUB_CATEGORY_CULTURE_THEATRE:
-            $results[] = build_result(CQ_TAXONOMY_CULTURE);
-            break;
-
-        case CQ_CATEGORY_SHOPPING:
-            break;
-        case CQ_SUB_CATEGORY_SHOPPING_MODE:
-            $results[] = build_result(CQ_TAXONOMY_SHOPPING_MODE);
-            break;
-        case CQ_SUB_CATEGORY_SHOPPING_DECO:
-            $results[] = build_result(CQ_TAXONOMY_SHOPPING_DECO);
-            break;
-        case CQ_SUB_CATEGORY_SHOPPING_FOOD:
-            $results[] = build_result(CQ_TAXONOMY_SHOPPING_FOOD);
-            break;
-        case CQ_SUB_CATEGORY_SHOPPING_AUTRE:
-        case CQ_SUB_CATEGORY_SHOPPING_WEB:
-            $results[] = build_result(CQ_TAXONOMY_SHOPPING_OTHERS);
-            break;
-
-        case CQ_CATEGORY_CHOUCHOUS:
-            $results[] = build_result(CQ_TAXONOMY_CHOUCHOU);
-            break;
+    // get upper categories
+    $categories = array($category->term_id => $category);
+    while ($category->category_parent != 1232) { // TODO Should be 0
+        $category = get_category($category->category_parent);
+        $categories[$category->term_id] = $category;
     }
-    // add common criteria
-    $results[] = build_result(CQ_TAXONOMY_CRITERIA);
+    $categories = array_reverse($categories);
 
-    return $results;
+    // get field objects terms
+    $taxonomy_fields = array();
+    foreach ($categories as $category) {
+        $the_field = chouquette_get_field_object_by_name($category->slug)[0];
+        if ($the_field['type'] == ACF_FIELD_GROUP_TYPE) {
+            foreach ($the_field['sub_fields'] as $sub_field) {
+                if ($sub_field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
+                    $taxonomy_fields[$sub_field['taxonomy']] = $sub_field;
+                }
+            }
+        } elseif ($the_field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
+            $taxonomy_fields[$the_field['taxonomy']] = $the_field;
+        }
+    }
+
+    // add terms and built DTO
+    $result = [];
+    foreach ($taxonomy_fields as $key => $value) {
+        $value['terms'] = get_terms($value['taxonomy'], array(
+            'hide_empty' => false, // TODO remove ?
+        ));
+        $dto = build_DTO($value);
+        $result[] = $dto;
+    }
+
+    return $result;
 }
 
 add_action('rest_api_init', function () {

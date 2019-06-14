@@ -70,7 +70,7 @@ while (have_posts()) :
                         <?php
                         foreach ($linkFiches as $ficheIndex => $fiche):
                             $fiche_fields = get_fields($fiche->ID);
-                            $fiche_info_terms = chouquette_get_fiche_terms($fiche, $categories);
+                            $fiche_taxonomies = chouquette_get_fiche_taxonomies($fiche);
                             $fiche_categories = chouquette_get_top_categories($fiche->ID);
                             ?>
                             <div class="card">
@@ -150,19 +150,21 @@ while (have_posts()) :
                                                                 </li>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
-                                                        <?php if (!empty($fiche_info_terms)): ?>
+                                                        <?php if (!empty($fiche_taxonomies)): ?>
                                                             <li class="list-group-item">
                                                                 <p class="mb-0">
                                                                 <ul class="cq-fiche-info">
                                                                     <?php
-                                                                    foreach ($fiche_info_terms as $taxonomy => $terms) {
-                                                                        echo '<li><span class="mr-2">' . get_field_object($taxonomy, $fiche->ID)['label'] . '</span>';
-                                                                        echo '<ol>';
-                                                                        foreach ($terms as $term) {
-                                                                            echo '<li>' . $term->name . '</li>';
+                                                                    foreach ($fiche_taxonomies as $taxonomy) {
+                                                                        if (!empty($taxonomy['terms'])) {
+                                                                            echo '<li><span class="mr-2">' . $taxonomy['label'] . '</span>';
+                                                                            echo '<ol>';
+                                                                            foreach ($taxonomy['terms'] as $term) {
+                                                                                echo '<li>' . $term->name . '</li>';
+                                                                            }
+                                                                            echo '</ol>';
+                                                                            echo '</li>';
                                                                         }
-                                                                        echo '</ol>';
-                                                                        echo '</li>';
                                                                     }
                                                                     ?>
                                                                 </ul>

@@ -107,62 +107,60 @@ if (!function_exists('chouquette_flatten_fiche_terms')) :
     /**
      * Flatten fiche terms into single array
      *
-     * @param $fiche_terms fiche terms from chouquette_get_fiche_terms function
+     * @param $taxonomies fiche taxonomies including terms from chouquette_get_fiche_taxonomies function
      * @return array of term names
      */
-    function chouquette_flatten_fiche_terms(array $fiche_terms)
+    function chouquette_flatten_fiche_terms(array $taxonomies)
     {
-        $result = array();
-        array_walk_recursive($fiche_terms, function ($value, $key) use (&$result) {
-            $result[] = $value->name;
-        });
-        return $result;
+        $terms = array_column($taxonomies, 'terms');
+        $terms = call_user_func_array('array_merge', $terms); // flatten array of arrays
+        $names = array_column($terms, 'name');
+        return array_unique($names);
     }
 endif;
 
 
-if (!function_exists('chouquette_get_fiche_terms')) :
+if (!function_exists('chouquette_get_fiche_taxonomies')) :
+    function get_all_taxonomy_fields($field, array $acc = [])
+    {
+        if ($field['type'] == ACF_FIELD_GROUP_TYPE) {
+            foreach ($field['sub_fields'] as $sub_field) {
+                $fields = get_all_taxonomy_fields($sub_field, $acc);
+                $acc = array_merge($acc, $fields);
+            }
+        } elseif ($field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
+            $acc[$field['name']] = $field;
+        }
+        return $acc;
+    }
+
     /**
      * Get all fiche taxonomy terms depending of its categories
      *
      * @param WP_post $fiche the given fiche
-     * @param array $categories array of category terms TODO retrieve categories should be included in this function (currently post have categories, not fiche)
      *
      * @return array of arrays (taxonomy name with WP_Terms) or empty array
      */
-    function chouquette_get_fiche_terms(WP_Post $fiche, array $categories)
+    function chouquette_get_fiche_taxonomies(WP_Post $fiche)
     {
-        $fiche_info_terms = array();
+        // get all field objects for fiche categories
+        $categories = chouquette_get_all_categories($fiche->ID);
+        $fields = array();
         foreach ($categories as $category) {
-            switch ($category->slug) {
-                case CQ_CATEGORY_BAR_RETOS:
-                    $fiche_info_terms[CQ_TAXONOMY_BAR_REST_WHEN] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHEN);
-                    $fiche_info_terms[CQ_TAXONOMY_BAR_REST_WHO] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_WHO);
-                    $fiche_info_terms[CQ_TAXONOMY_BAR_REST_CRITERIA] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_REST_CRITERIA);
-                    $fiche_info_terms[CQ_TAXONOMY_REST_TYPE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_TYPE);
-                    $fiche_info_terms[CQ_TAXONOMY_REST_RESTRICTION] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_REST_RESTRICTION);
-                    $fiche_info_terms[CQ_TAXONOMY_BAR_TYPE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_BAR_TYPE);
-                    break;
-                case CQ_CATEGORY_LOISIRS:
-                    $fiche_info_terms[CQ_TAXONOMY_HOBBY] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_HOBBY);
-                    break;
-                case CQ_CATEGORY_CULTURE:
-                    $fiche_info_terms[CQ_TAXONOMY_CULTURE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CULTURE);
-                    break;
-                case CQ_CATEGORY_SHOPPING:
-                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_MODE] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_MODE);
-                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_DECO] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_DECO);
-                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_FOOD] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_FOOD);
-                    $fiche_info_terms[CQ_TAXONOMY_SHOPPING_OTHERS] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_SHOPPING_OTHERS);
-                    break;
-                case CQ_CATEGORY_CHOUCHOUS:
-                    $fiche_info_terms[CQ_TAXONOMY_CHOUCHOU] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CHOUCHOU);
-                    break;
+            $the_field = chouquette_get_field_object_by_name($category->slug)[0];
+            $taxonomy_fields = get_all_taxonomy_fields($the_field);
+            $fields = array_merge($fields, $taxonomy_fields);
+        }
+        // get field objects terms
+        foreach ($fields as $key => $field) {
+            $terms = get_the_terms($fiche, $field['taxonomy']);
+            if ($terms) {
+                $fields[$key]['terms'] = $terms;
+            } else {
+                $fields[$key]['terms'] = [];
             }
         }
-        // defaults
-        $fiche_info_terms[CQ_TAXONOMY_CRITERIA] = chouquette_get_taxonomy_terms($fiche, CQ_TAXONOMY_CRITERIA);
-        return array_filter($fiche_info_terms);
+        return $fields;
     }
 endif;
 
@@ -307,7 +305,8 @@ endif;
 
 if (!(function_exists('chouquette_get_categories'))) :
     /**
-     * Gets all categories for given post (or fiche)
+     * Gets all categories for given post or related fiches.
+     * First try with fiches then fallback to post (if given as parameter).
      *
      * @param int $id the post/fiche id
      *
@@ -334,7 +333,7 @@ endif;
 
 if (!(function_exists('chouquette_get_top_categories'))) :
     /**
-     * Gets all top categories for given post (or fiche)
+     * Gets top categories for given post (or fiche)
      *
      * @param int $id the post/fiche id
      *
@@ -352,5 +351,55 @@ if (!(function_exists('chouquette_get_top_categories'))) :
             array_push($result, $category);
         }
         return array_unique($result, SORT_REGULAR);
+    }
+endif;
+
+if (!(function_exists('chouquette_get_all_categories'))) :
+    /**
+     * Gets all categories (including top) for given post (or fiche)
+     *
+     * @param int $id the post/fiche id
+     *
+     * @return array a unique array of top categories
+     */
+    function chouquette_get_all_categories(int $id)
+    {
+        $categories = chouquette_get_categories($id);
+
+        $result = array();
+        foreach ($categories as $category) {
+            $current = array($category->slug => $category);
+            while ($category->category_parent != 1232) { // TODO Should be 0
+                $category = get_category($category->category_parent);
+                $current[$category->slug] = $category;
+            }
+            $current = array_reverse($current);
+            $result = array_merge($result, $current);
+        }
+        return $result;
+    }
+endif;
+
+if (!(function_exists('chouquette_get_field_object_by_name'))) :
+    /**
+     * Get ACF field object by field name without using post id.
+     * Works also with sub-groups
+     *
+     * @param string $name the field name (can be category name, ...)
+     * @return the field object (using get_field_object method)
+     */
+    function chouquette_get_field_object_by_name(string $name)
+    {
+        global $wpdb;
+        $field_keys = $wpdb->get_col($wpdb->prepare("
+            SELECT  p.post_name
+            FROM    $wpdb->posts p
+            WHERE   p.post_type = 'acf-field'
+            AND     p.post_excerpt = %s;
+        ", $name));
+
+        return array_map(function ($field_key) {
+            return get_field_object($field_key);
+        }, $field_keys);
     }
 endif;

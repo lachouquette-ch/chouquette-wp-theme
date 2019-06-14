@@ -109,13 +109,14 @@ $locations = get_terms(array(
                 if ($loop->have_posts()):
                     while ($loop->have_posts()) :
                         $loop->the_post();
+                        $category = get_the_category(get_the_ID());
                         $categories = chouquette_get_top_categories(get_the_ID());
-                        $fiche_info_terms = chouquette_get_fiche_terms(get_post(), $categories);
+                        $taxonomies = chouquette_get_fiche_taxonomies(get_post());
                         ?>
                         <article class="card category-fiche mb-4">
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
-                                    <img src="http://chouquette.test/wp-content/uploads/2019/04/Loisirs_noir-150x150.png" alt="">
+                                    <?php //echo chouquette_taxonomy_logo($category[0], 'black'); ?>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -123,7 +124,7 @@ $locations = get_terms(array(
                                 <p class="card-text"><?php the_content(); ?></p>
                                 <p class="card-text small text-secondary">
                                     <?php
-                                    $terms = chouquette_flatten_fiche_terms($fiche_info_terms);
+                                    $terms = chouquette_flatten_fiche_terms($taxonomies);
                                     echo implode(", ", array_slice($terms, 0, 4));
                                     echo sizeof($terms) > 4 ? '...' : '';
                                     ?>

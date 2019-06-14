@@ -19,51 +19,16 @@ define('CQ_FICHE_SELECTOR', 'link_fiche');
 define('CQ_COOKIE_PREFIX', 'chouquette_');
 
 define('CQ_CATEGORY_BAR_RETOS', 'bar-et-restaurant');
-define('CQ_SUB_CATEGORY_BAR_RETOS_BAR_PUBS', 'bars-pubs');
-define('CQ_SUB_CATEGORY_BAR_RETOS_BOULANGERIES_PATISSERIES', 'boulangeries-patisseries');
-define('CQ_SUB_CATEGORY_BAR_RETOS_RESTAURANTS', 'restaurants');
-define('CQ_SUB_CATEGORY_BAR_RETOS_SUR_LE_POUCE', 'sur-le-pouce');
-define('CQ_SUB_CATEGORY_BAR_RETOS_VIE_NOCTURNE', 'vie-nocturne');
-
 define('CQ_CATEGORY_LOISIRS', 'loisirs');
-define('CQ_SUB_CATEGORY_LOISIRS_ACTIVITES', 'activites');
-define('CQ_SUB_CATEGORY_LOISIRS_BALADES', 'balades');
-define('CQ_SUB_CATEGORY_LOISIRS_ESCAPADES', 'escapades');
-define('CQ_SUB_CATEGORY_LOISIRS_SPA_BIEN_ETRE', 'spa-bien-etre');
-define('CQ_SUB_CATEGORY_LOISIRS_SPORTS', 'sports');
-
 define('CQ_CATEGORY_CULTURE', 'culture-future');
-define('CQ_SUB_CATEGORY_CULTURE_AUTRES', 'culture-autres');
-define('CQ_SUB_CATEGORY_CULTURE_CINEMA', 'cinema-culture-future');
-define('CQ_SUB_CATEGORY_CULTURE_MUSEE', 'musee');
-define('CQ_SUB_CATEGORY_CULTURE_MUSIQUE', 'musique');
-define('CQ_SUB_CATEGORY_CULTURE_THEATRE', 'theatre');
-
 define('CQ_CATEGORY_SHOPPING', 'shopping');
-define('CQ_SUB_CATEGORY_SHOPPING_AUTRE', 'shopping-autre');
-define('CQ_SUB_CATEGORY_SHOPPING_DECO', 'shopping-deco');
-define('CQ_SUB_CATEGORY_SHOPPING_FOOD', 'food');
-define('CQ_SUB_CATEGORY_SHOPPING_MODE', 'shopping-mode');
-define('CQ_SUB_CATEGORY_SHOPPING_WEB', 'shopping-web');
+define('CQ_CATEGORY_CHOUCHOUS', 'services');
 
-define('CQ_CATEGORY_CHOUCHOUS', 'les-chouchous');
+define('ACF_FIELD_GROUP_TYPE', 'group');
+define('ACF_FIELD_TAXONOMY_TYPE', 'taxonomy');
 
-define('CQ_TAXONOMY_BAR_REST_WHEN', 'cq_bar_rest_when');
-define('CQ_TAXONOMY_BAR_REST_WHO', 'cq_bar_rest_who');
-define('CQ_TAXONOMY_BAR_REST_CRITERIA', 'cq_bar_rest_criteria');
-define('CQ_TAXONOMY_REST_TYPE', 'cq_rest_type');
-define('CQ_TAXONOMY_REST_RESTRICTION', 'cq_rest_restriction');
-define('CQ_TAXONOMY_BAR_TYPE', 'cq_bar_type');
-define('CQ_TAXONOMY_HOBBY', 'cq_hobby');
-define('CQ_TAXONOMY_CULTURE', 'cq_culture');
-define('CQ_TAXONOMY_SHOPPING_MODE', 'cq_shop_mode');
-define('CQ_TAXONOMY_SHOPPING_DECO', 'cq_shop_deco');
-define('CQ_TAXONOMY_SHOPPING_FOOD', 'cq_shop_food');
-define('CQ_TAXONOMY_SHOPPING_OTHERS', 'cq_shop_other');
-define('CQ_TAXONOMY_CHOUCHOU', 'cq_chouchou');
 define('CQ_TAXONOMY_LOCALISATION', 'cq_location');
 define('CQ_TAXONOMY_CRITERIA', 'cq_criteria');
-
 define('CQ_TAXONOMY_LOGO_SUFFIX_WHITE', '_blanc');
 define('CQ_TAXONOMY_LOGO_SUFFIX_BLACK', '_noir');
 define('CQ_TAXONOMY_LOGO_SUFFIX_YELLOW', '_jaune');
