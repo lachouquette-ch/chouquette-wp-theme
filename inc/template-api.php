@@ -79,7 +79,6 @@ function cq_get_taxonomies_for_category($data)
         $category = get_category($category->category_parent);
         $categories[$category->term_id] = $category;
     }
-    $categories = array_reverse($categories);
 
     // get field objects terms
     $taxonomy_fields = array();
