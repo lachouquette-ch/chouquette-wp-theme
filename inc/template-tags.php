@@ -103,15 +103,15 @@ if (!function_exists('chouquette_taxonomy_logo')) :
         }
         switch ($color) {
             case 'white':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_WHITE, $logo['title']);
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_WHITE, $logo['name']);
                 $image_id = chouquette_get_attachment_by_title($file_name)->ID;
                 break;
             case 'black':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_BLACK, $logo['title']);
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_BLACK, $logo['name']);
                 $image_id = chouquette_get_attachment_by_title($file_name)->ID;
                 break;
             case 'yellow':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_YELLOW, $logo['title']);
+                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_YELLOW, $logo['name']);
                 $image_id = chouquette_get_attachment_by_title($file_name)->ID;
                 break;
             default:

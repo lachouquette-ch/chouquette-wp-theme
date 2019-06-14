@@ -29,9 +29,9 @@ define('ACF_FIELD_TAXONOMY_TYPE', 'taxonomy');
 
 define('CQ_TAXONOMY_LOCALISATION', 'cq_location');
 define('CQ_TAXONOMY_CRITERIA', 'cq_criteria');
-define('CQ_TAXONOMY_LOGO_SUFFIX_WHITE', '_blanc');
-define('CQ_TAXONOMY_LOGO_SUFFIX_BLACK', '_noir');
-define('CQ_TAXONOMY_LOGO_SUFFIX_YELLOW', '_jaune');
+define('CQ_TAXONOMY_LOGO_SUFFIX_WHITE', '_white');
+define('CQ_TAXONOMY_LOGO_SUFFIX_BLACK', '_black');
+define('CQ_TAXONOMY_LOGO_SUFFIX_YELLOW', '_yellow');
 
 define('CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne');
 define('CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne');
