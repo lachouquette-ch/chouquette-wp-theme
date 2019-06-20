@@ -14,6 +14,7 @@ define('CQ_PRIMARY_MENU', 'primary-menu');
 define('CQ_FOOTER_MENU', 'footer-menu');
 define('CQ_MENU_LOGO_SELECTOR', 'logo');
 
+define('CQ_FICHE_POST_TYPE', 'fiche');
 define('CQ_FICHE_SELECTOR', 'link_fiche');
 
 define('CQ_COOKIE_PREFIX', 'chouquette_');

@@ -1,5 +1,24 @@
 <?php
 
+function cq_location_dto(int $fiche_id) {
+    $fiche_raw = get_field(CQ_FICHE_LOCATION, $fiche_id);
+    return array(
+        'lat' => floatval($fiche_raw['lat']),
+        'lng' => floatval($fiche_raw['lng'])
+    );
+}
+
+function cq_categories_dto(int $fiche_id) {
+    $categories = get_the_category($fiche_id);
+    $result = [];
+    foreach ($categories as $category) {
+        $category_dto = array('cat_id' => $category->term_id, 'cat_name' => $category->name);
+        // TODO add location pin (logo)
+        $result[] = $category_dto;
+    }
+    return $result;
+}
+
 /**
  * REST API to get all locations for a given post
  *
@@ -13,19 +32,9 @@ function cq_get_localisations_for_post($data)
     $results = [];
     foreach ($fiches as $fiche) {
         // populate result object
-        $fiche_raw = get_field(CQ_FICHE_LOCATION, $fiche->ID);
-        $result = array(
-            'id' => $fiche->ID,
-            'lat' => floatval($fiche_raw['lat']),
-            'lng' => floatval($fiche_raw['lng'])
-        );
-
-        $result['categories'] = [];
-        $categories = chouquette_categories_get_tops($fiche->ID);
-        foreach ($categories as $category) {
-            $category_dto = array('cat_id' => $category->term_id, 'cat_name' => $category->name);
-            array_push($result['categories'], $category_dto);
-        }
+        $result = cq_location_dto($fiche->ID);
+        $result['id'] = $fiche->ID;
+        $result['categories'] = cq_categories_dto($fiche->ID);
 
         // append to result array
         array_push($results, $result);
@@ -112,5 +121,49 @@ add_action('rest_api_init', function () {
     register_rest_route('cq/v1', '/category/(?P<slug>[\w-]+)/taxonomy', array(
         'methods' => 'GET',
         'callback' => 'cq_get_taxonomies_for_category',
+    ));
+});
+
+/**
+ * REST API to get all locations for a given category
+ *
+ * @param $data GET params with category 'slug'
+ * @return array of object(id, lat, lng)
+ */
+function cq_get_localisations_for_category($data)
+{
+    $result = array();
+
+    $category = get_category_by_slug($data['slug']);
+    $args = array(
+        'post_type' => CQ_FICHE_POST_TYPE,
+        'category_name' => $category->slug,
+        'meta_key' => CQ_FICHE_CHOUQUETTISE_TO,
+        'meta_type' => 'DATE',
+        'orderby' => 'meta_value',
+        'order' => 'DESC',
+        'post_status' => 'any' // TODO to remove
+    );
+    $fiches = new WP_Query($args);
+    if ($fiches->have_posts()) {
+        while ($fiches->have_posts()) {
+            $fiches->the_post();
+            $fiche = get_post();
+
+            $dto = array('id' => $fiche->ID);
+            $dto['title'] = get_the_title($fiche->ID);
+            $dto['location'] = cq_location_dto($fiche->ID);
+            $dto['categories'] = cq_categories_dto($fiche->ID);
+            // TODO add window popup content
+            $result[] = $dto;
+        }
+    }
+    return $result;
+}
+
+add_action('rest_api_init', function () {
+    register_rest_route('cq/v1', '/category/(?P<slug>[\w-]+)/fiche', array(
+        'methods' => 'GET',
+        'callback' => 'cq_get_localisations_for_category',
     ));
 });
