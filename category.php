@@ -207,7 +207,7 @@ $locations = get_terms(array(
                         <div>
                             <label>Horaires :</label>
                             <a class="link-secondary link-no-decoration" data-toggle="collapse" href="#horaires" role="button">Ouvert (12:00-15:00) <i class="fas fa-caret-down"></i></a>
-                            <ul class="collapse" id="horaires">
+                            <ul class="collapse mb-0" id="horaires">
                                 <li><label>Lundi</label> 12:00-15:00</li>
                                 <li><label>Mardi</label> 12:00-15:00</li>
                                 <li><label>Mercredi</label> 12:00-15:00</li>
