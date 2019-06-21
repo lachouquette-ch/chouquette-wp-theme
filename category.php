@@ -135,10 +135,12 @@ $locations = get_terms(array(
                             <div class="card-body">
                                 <h5 class="card-title"><?php the_title(); ?></h5>
                                 <p class="card-text"><?php the_content(); ?></p>
-                                <?php if (!empty($terms)): ?>
+                                <?php
+                                $terms = chouquette_fiche_flatten_terms($taxonomies);
+                                if (!empty($terms)):
+                                    ?>
                                     <p class="card-text small text-secondary">
                                         <?php
-                                        $terms = chouquette_fiche_flatten_terms($taxonomies);
                                         echo implode(", ", array_slice($terms, 0, 4));
                                         echo sizeof($terms) > 4 ? '...' : '';
                                         ?>
@@ -237,7 +239,7 @@ $locations = get_terms(array(
                     // close current infoWindow
                     if (app.currentInfoWindow) app.currentInfoWindow.close();
                 },
-                _colEnabled: function() {
+                _colEnabled: function () {
                     return window.getComputedStyle(document.getElementById('colTrigger')).display != "none";
                 },
                 addFichesToMap: function () {
