@@ -6,6 +6,7 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
 <div class="category-info-window container-fluid">
     <div class="row">
         <div class="col-lg-3 text-center p-0 mb-2 mb-lg-0">
+            <span id="colTrigger" class="d-none d-lg-inline"></span>
             <img width="100%" class="rounded d-none d-lg-block" src="<?php echo $fiche_fields['main-image']; ?>" alt="<?php get_the_title($fiche->ID); ?>">
         </div>
         <div class="col-lg px-0 px-lg-2">
@@ -74,5 +75,5 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
         echo implode(", ", $terms);
         ?>
     </div>
-    <img width="100%" class="d-block d-lg-none mt-2" src="<?php echo $fiche_fields['main-image']; ?>" alt="<?php get_the_title($fiche->ID); ?>">
+    <img width="100%" class="d-block d-lg-none mt-3" src="<?php echo $fiche_fields['main-image']; ?>" alt="<?php get_the_title($fiche->ID); ?>">
 </div>

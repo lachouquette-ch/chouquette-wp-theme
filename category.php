@@ -24,6 +24,7 @@ $locations = get_terms(array(
     <div id="app" class="container-fluid">
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
+                <a class="category-fiche-target" id="targetMap"></a>
                 <div id="fichesMap" class="category-map"></div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
@@ -254,9 +255,13 @@ $locations = get_terms(array(
 
                                 // action on marker
                                 marker.addListener('click', function () {
-                                    // goto fiche
-                                    var elmnt = document.getElementById('target' + fiche.id);
-                                    elmnt.scrollIntoView(true, {behavior: "smooth"});
+                                    // only for column display
+                                    var trigger = document.getElementById('colTrigger');
+                                    if (trigger && trigger.style.display != 'none') {
+                                        // goto fiche
+                                        var elmnt = document.getElementById('target' + fiche.id);
+                                        elmnt.scrollIntoView(true, {behavior: "smooth"});
+                                    }
 
                                     // work on map
                                     app.clearMap();
