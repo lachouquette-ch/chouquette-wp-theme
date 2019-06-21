@@ -13,20 +13,18 @@ if (!function_exists('chouquette_navbar_nav')) :
      */
     function chouquette_navbar_nav(string $img_color = 'white', string $img_color_active = 'yellow')
     {
-        if (!empty(get_the_category())) {
-            $active_category = get_the_category()[0]->name;
-        }
+        $active_category_id = get_queried_object()->term_id;
 
         // get menu items
         $menu_items = chouquette_menu_items();
         if (!empty ($menu_items)) {
             echo '<ul class="navbar-nav mr-auto">';
             foreach ($menu_items as $menu_item) :
-                echo sprintf('<li class="nav-item %s">', $active_category == $menu_item->title ? 'active' : '');
+                echo sprintf('<li class="nav-item %s">', $active_category_id == $menu_item->object_id ? 'active' : '');
                 echo sprintf('<a class="nav-link" href="%s" title="%s">%s %s</a>',
                     esc_url($menu_item->url),
                     $menu_item->description,
-                    chouquette_taxonomy_logo($menu_item, $active_category == $menu_item->title ? $img_color_active : $img_color, 'thumbnail', array('nav-logo ml-lg-3 mr-2')),
+                    chouquette_taxonomy_logo($menu_item, $active_category_id == $menu_item->object_id ? $img_color_active : $img_color, 'thumbnail', array('nav-logo ml-lg-3 mr-2')),
                     $menu_item->title);
                 echo '</li>';
             endforeach;
