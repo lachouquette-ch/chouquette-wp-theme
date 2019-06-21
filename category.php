@@ -25,6 +25,7 @@ $locations = get_terms(array(
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
                 <a class="category-fiche-target" id="targetMap"></a>
+                <span id="colTrigger" class="d-none d-md-inline"></span>
                 <div id="fichesMap" class="category-map"></div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
@@ -236,6 +237,9 @@ $locations = get_terms(array(
                     // close current infoWindow
                     if (app.currentInfoWindow) app.currentInfoWindow.close();
                 },
+                _colEnabled: function() {
+                    return window.getComputedStyle(document.getElementById('colTrigger')).display != "none";
+                },
                 addFichesToMap: function () {
                     axios({
                         method: 'get',
@@ -256,8 +260,7 @@ $locations = get_terms(array(
                                 // action on marker
                                 marker.addListener('click', function () {
                                     // only for column display
-                                    var trigger = document.getElementById('colTrigger');
-                                    if (trigger && trigger.style.display != 'none') {
+                                    if (app._colEnabled()) {
                                         // goto fiche
                                         var elmnt = document.getElementById('target' + fiche.id);
                                         elmnt.scrollIntoView(true, {behavior: "smooth"});
@@ -292,6 +295,11 @@ $locations = get_terms(array(
                     // close current infoWindow
                     app.currentInfoWindow = app.infoWindows.get(ficheId);
                     app.currentInfoWindow.open(map, app.currentMarker);
+
+                    // for mobile
+                    if (!this._colEnabled()) {
+                        window.scrollTo(0, 0);
+                    }
                 }
             },
             created() {
