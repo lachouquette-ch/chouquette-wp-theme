@@ -49,6 +49,9 @@ if (!function_exists('chouquette_fiche_flatten_terms')) :
      */
     function chouquette_fiche_flatten_terms(array $taxonomies)
     {
+        if (empty($taxonomies)) {
+            throw new Exception("No taxonomy given");
+        }
         $terms = array_column($taxonomies, 'terms');
         $terms = call_user_func_array('array_merge', $terms); // flatten array of arrays
         $names = array_column($terms, 'name');
