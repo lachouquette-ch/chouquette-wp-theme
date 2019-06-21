@@ -56,7 +56,7 @@
 #fichesTarget:target {
   display: block;
   position: relative;
-  top: -120px;
+  top: $header-height * -1.4;
   visibility: hidden;
 }
 
