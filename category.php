@@ -185,7 +185,7 @@ $locations = get_terms(array(
             google.maps.event.addListener(map, "click", function (event) {
                 if (app.currentInfoWindow) app.currentInfoWindow.close();
                 if (app.currentMarker) app.currentMarker.setAnimation(null);
-                if (app.bounds) map.setCenter(app.currentMarker.getPosition());
+                if (app.markers.size > 1) map.fitBounds(app.bounds);
             });
 
             app.addFichesToMap();
