@@ -137,13 +137,39 @@ function cq_get_localisations_for_category($data)
     $category = get_category_by_slug($data['slug']);
     $args = array(
         'post_type' => CQ_FICHE_POST_TYPE,
-        'category_name' => $category->slug,
+        'category_name' => isset($_GET['cat']) ? $_GET['cat'] : $category->slug,
         'meta_key' => CQ_FICHE_CHOUQUETTISE_TO,
         'meta_type' => 'DATE',
         'orderby' => 'meta_value',
         'order' => 'DESC',
         'post_status' => 'any' // TODO to remove
     );
+    // filter search
+    if (!empty($_GET['search'])) {
+        $args['s'] = $_GET['search'];
+    }
+    // filter location
+    $args['tax_query'] = array('relation' => 'AND');
+    if (!empty($_GET['loc'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'cq_location',
+            'field' => 'slug',
+            'terms' => $_GET['loc'],
+        );
+    }
+    // filter criterias
+    $filtered_params = array_filter($_GET, function ($key) {
+        return substr_compare($key, 'cq_', 0, 3) == false;
+    }, ARRAY_FILTER_USE_KEY);
+    foreach ($filtered_params as $key => $value) {
+        $args['tax_query'][] = array(
+            'taxonomy' => $key,
+            'field' => 'slug',
+            'terms' => $value,
+            'operator' => 'AND'
+        );
+    }
+
     $fiches = new WP_Query($args);
     if ($fiches->have_posts()) {
         while ($fiches->have_posts()) {

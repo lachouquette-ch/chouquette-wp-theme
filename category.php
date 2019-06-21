@@ -234,8 +234,10 @@ $locations = get_terms(array(
                     if (app.currentInfoWindow) app.currentInfoWindow.close();
                 },
                 addFichesToMap: function () {
-                    axios
-                        .get(`http://chouquette.test/wp-json/cq/v1/category/${this.category}/fiche`)
+                    axios({
+                        method: 'get',
+                        url: `http://chouquette.test/wp-json/cq/v1/category/${this.category}/fiche` + location.search,
+                    })
                         .then(function (response) {
                             app.bounds = new google.maps.LatLngBounds();
                             response.data.forEach(function (fiche) {
