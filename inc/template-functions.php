@@ -171,6 +171,24 @@ if (!function_exists('chouquette_ref_redirect')) :
     }
 endif;
 
+if (!function_exists('chouquette_load_template_part')) :
+    /**
+     * Load a template and return its as string
+     *
+     * @param string $template_name The slug name for the generic template.
+     * @param string $part_name The name of the specialised template.
+     * @return string template content
+     */
+    function chouquette_load_template_part($template_name, $part_name = null)
+    {
+        ob_start();
+        get_template_part($template_name, $part_name);
+        $var = ob_get_contents();
+        ob_end_clean();
+        return $var;
+    }
+endif;
+
 if (!(function_exists('chouquette_get_attachment_by_title'))) :
     function chouquette_get_attachment_by_title($post_name)
     {

@@ -154,7 +154,7 @@ function cq_get_localisations_for_category($data)
             $dto['title'] = get_the_title($fiche->ID);
             $dto['location'] = cq_location_dto($fiche->ID);
             $dto['categories'] = cq_categories_dto($fiche->ID);
-            // TODO add window popup content
+            $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
             $result[] = $dto;
         }
     }
