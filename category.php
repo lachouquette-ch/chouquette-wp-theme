@@ -65,8 +65,8 @@ $locations = get_terms(array(
                         <div class="form-inline" v-for="criteria in criterias">
                             <span class="col-form-label">{{ criteria.label }}</span>
                             <div class="form-check ml-3" v-for="term in criteria.terms">
-                                <input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" :checked="term.checked">
-                                <label class="form-check-label">{{ term.name }}</label>
+                                <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" :checked="term.checked">
+                                <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
                             </div>
                         </div>
                     </div>
@@ -218,6 +218,9 @@ $locations = get_terms(array(
                             });
                             app.criterias = response.data;
                         });
+                },
+                resetForm: function() {
+
                 },
                 clearMap: function() {
                     // stop current animation
