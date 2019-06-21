@@ -84,7 +84,10 @@ if (!function_exists('chouquette_fiche_get_taxonomies')) :
         $categories = chouquette_categories_get_all($fiche->ID);
         $fields = array();
         foreach ($categories as $category) {
-            $the_field = chouquette_acf_get_field_object($category->slug)[0];
+            $act_fields = chouquette_acf_get_field_object($category->slug);
+            // no acf field for category ? (can be...)
+            if (empty($act_fields)) continue;
+            $the_field = $act_fields[0];
             $taxonomy_fields = get_all_taxonomy_fields($the_field);
             $fields = array_merge($fields, $taxonomy_fields);
         }

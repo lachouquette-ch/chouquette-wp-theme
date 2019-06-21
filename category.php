@@ -144,7 +144,7 @@ $locations = get_terms(array(
                                     <?php
                                     if (!empty($posts)) {
                                         $lastest_post = $posts[0];
-                                        echo sprintf('<button href="%s" title="%s" class="btn btn-sm btn-outline-secondary">Article</button>', get_the_permalink($lastest_post), $lastest_post->post_title);
+                                        echo sprintf('<button href="%s" title="%s" class="btn btn-sm btn-outline-secondary">Article</button>', get_the_permalink($lastest_post), esc_html($lastest_post->post_title));
                                     }
                                     ?>
                                     <button href="" class="btn btn-sm btn-outline-secondary" v-on:click="locateFiche(<?php echo get_the_ID(); ?>)">Voir</button>

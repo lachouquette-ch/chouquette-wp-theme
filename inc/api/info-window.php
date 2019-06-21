@@ -25,8 +25,8 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
                 <label>Contact :</label>
                 <span>
                     <?php
-                    if (!empty($fiche_fields[CQ_FICHE_MAIL])) echo sprintf('<a href="mailto:%s" title="Email" class="link-secondary link-no-decoration mr-2"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
-                    if (!empty($fiche_fields[CQ_FICHE_PHONE])) echo sprintf('<a href="tel:%s" title="Téléphone" class="link-secondary link-no-decoration mr-2"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
+                    if (!empty($fiche_fields[CQ_FICHE_MAIL])) echo sprintf('<a href="mailto:%s" title="Email" class="link-secondary link-no-decoration mr-2"><i class="fas fa-at"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
+                    if (!empty($fiche_fields[CQ_FICHE_PHONE])) echo sprintf('<a href="tel:%s" title="Téléphone" class="link-secondary link-no-decoration mr-2"><i class="fas fa-phone-square"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
                     ?>
                 </span>
             </div>
