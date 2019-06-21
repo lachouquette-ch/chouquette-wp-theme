@@ -59,7 +59,6 @@ $locations = get_terms(array(
                         </div>
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
-                    <button class="btn btn-sm btn-secondary mr-1" type="reset">Réinitialiser</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
                     <div id="collapseCriteria" class="collapse pl-3 mt-3 category-criteria">
                         <div class="form-inline" v-for="criteria in criterias">
@@ -69,6 +68,7 @@ $locations = get_terms(array(
                                 <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
                             </div>
                         </div>
+                        <a href="#" class="d-block link-secondary small mt-3" v-on:click="resetCriterias">Tout déselectionner</a>
                     </div>
                 </form>
 
@@ -126,7 +126,8 @@ $locations = get_terms(array(
                         <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4">
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
-                                    <?php //echo chouquette_taxonomy_logo($category[0], 'black'); ?>
+                                    <?php //echo chouquette_taxonomy_logo($category[0], 'black');
+                                    ?>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -219,10 +220,14 @@ $locations = get_terms(array(
                             app.criterias = response.data;
                         });
                 },
-                resetForm: function() {
-
+                resetCriterias: function () {
+                    this.criterias.forEach(function (taxonomy) {
+                        taxonomy.terms.forEach(function (term) {
+                            term.checked = false;
+                        })
+                    })
                 },
-                clearMap: function() {
+                clearMap: function () {
                     // stop current animation
                     if (app.currentMarker) app.currentMarker.setAnimation(null);
                     // close current infoWindow
