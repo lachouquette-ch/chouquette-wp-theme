@@ -6,7 +6,7 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
 <div class="category-info-window container-fluid">
     <div class="row">
         <div class="col-lg-3 text-center p-0 mb-2 mb-lg-0">
-            <img width="100%" class="rounded" src="<?php echo $fiche_fields['main-image']; ?>" alt="<?php get_the_title($fiche->ID); ?>">
+            <img width="100%" class="rounded d-none d-lg-block" src="<?php echo $fiche_fields['main-image']; ?>" alt="<?php get_the_title($fiche->ID); ?>">
         </div>
         <div class="col-lg px-0 px-lg-2">
             <h5 class="mt-0"><?php echo get_the_title(); ?></h5>
@@ -33,7 +33,8 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
             <div>
                 <?php if (!empty($fiche_fields[CQ_FICHE_COST])): ?>
                     <label>Prix :</label>
-                    <span class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span>
+                    <span class="cq-fiche-price cq-fiche-price-selected"><?php echo str_repeat('$', $fiche_fields[CQ_FICHE_COST]); ?></span><span
+                            class="cq-fiche-price"><?php echo str_repeat('$', 5 - $fiche_fields[CQ_FICHE_COST]); ?></span>
                 <?php endif; ?>
             </div>
             <?php
@@ -64,11 +65,14 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
             <?php endif; ?>
         </div>
     </div>
-    <div class="row mt-2"><?php echo get_the_content(); ?></div>
+    <?php if (!empty(get_the_content())): ?>
+        <div class="row mt-2"><?php echo get_the_content(); ?></div>
+    <?php endif; ?>
     <div class="row mt-3 font-italic">
         <?php
         $terms = chouquette_fiche_flatten_terms($fiche_taxonomies);
         echo implode(", ", $terms);
         ?>
     </div>
+    <img width="100%" class="d-block d-lg-none mt-2" src="<?php echo $fiche_fields['main-image']; ?>" alt="<?php get_the_title($fiche->ID); ?>">
 </div>
