@@ -183,7 +183,7 @@ $locations = get_terms(array(
             google.maps.event.addListener(map, "click", function (event) {
                 if (app.currentInfoWindow) app.currentInfoWindow.close();
                 if (app.currentMarker) app.currentMarker.setAnimation(null);
-                if (app.bounds) map.fitBounds(app.bounds);
+                if (app.bounds) map.setCenter(app.currentMarker.getPosition());
             });
 
             app.addFichesToMap();
