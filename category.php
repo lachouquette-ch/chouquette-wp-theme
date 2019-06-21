@@ -21,14 +21,14 @@ $locations = get_terms(array(
 ));
 
 ?>
-    <div class="container-fluid">
+    <div id="app" class="container-fluid">
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
                 <div id="fichesMap" class="category-map"></div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
-                <form id="app-form" class="mb-4 px-4">
+                <form class="mb-4 px-4">
                     <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -122,7 +122,8 @@ $locations = get_terms(array(
                             )
                         ));
                         ?>
-                        <article class="card category-fiche mb-4">
+                        <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
+                        <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4">
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
                                     <?php //echo chouquette_taxonomy_logo($category[0], 'black'); ?>
@@ -142,10 +143,10 @@ $locations = get_terms(array(
                                     <?php
                                     if (!empty($posts)) {
                                         $lastest_post = $posts[0];
-                                        echo sprintf('<a href="%s" title="%s" class="btn btn-sm btn-outline-secondary">Article</a>', get_the_permalink($lastest_post), $lastest_post->post_title);
+                                        echo sprintf('<button href="%s" title="%s" class="btn btn-sm btn-outline-secondary">Article</button>', get_the_permalink($lastest_post), $lastest_post->post_title);
                                     }
                                     ?>
-                                    <a href="" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                    <button href="" class="btn btn-sm btn-outline-secondary" v-on:click="locateFiche(<?php echo get_the_ID(); ?>)">Voir</button>
                                 </div>
                             </div>
                         </article>
@@ -192,7 +193,7 @@ $locations = get_terms(array(
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         var app = new Vue({
-            el: '#app-form',
+            el: '#app',
             data() {
                 return {
                     criterias: null,
@@ -218,6 +219,12 @@ $locations = get_terms(array(
                             app.criterias = response.data;
                         });
                 },
+                clearMap: function() {
+                    // stop current animation
+                    if (app.currentMarker) app.currentMarker.setAnimation(null);
+                    // close current infoWindow
+                    if (app.currentInfoWindow) app.currentInfoWindow.close();
+                },
                 addFichesToMap: function () {
                     axios
                         .get(`http://chouquette.test/wp-json/cq/v1/category/${this.category}/fiche`)
@@ -235,19 +242,12 @@ $locations = get_terms(array(
 
                                 // action on marker
                                 marker.addListener('click', function () {
-                                    // stop current animation
-                                    if (app.currentMarker) app.currentMarker.setAnimation(null);
+                                    // goto fiche
+                                    var elmnt = document.getElementById('target' + fiche.id);
+                                    elmnt.scrollIntoView(true, {behavior: "smooth"});
 
-                                    app.currentMarker = this;
-                                    // start animation
-                                    app.currentMarker.setAnimation(google.maps.Animation.BOUNCE);
-                                    window.setTimeout(function () {
-                                        app.currentMarker.setAnimation(null);
-                                    }, 2000);
-
-                                    // close current infoWindow
-                                    if (app.currentInfoWindow) app.currentInfoWindow.close();
-
+                                    // work on map
+                                    app.clearMap();
                                     app.currentInfoWindow = infoWindow;
                                     app.currentInfoWindow.open(map, marker);
                                 });
@@ -259,6 +259,22 @@ $locations = get_terms(array(
                                 map.setCenter(app.markers.values().next().value.getPosition());
                             }
                         });
+                },
+                locateFiche: function (ficheId) {
+                    this.clearMap();
+
+                    app.currentMarker = app.markers.get(ficheId);
+                    // center map
+                    map.setCenter(app.currentMarker.getPosition());
+                    // start animation
+                    app.currentMarker.setAnimation(google.maps.Animation.BOUNCE);
+                    window.setTimeout(function () {
+                        app.currentMarker.setAnimation(null);
+                    }, 2000);
+
+                    // close current infoWindow
+                    app.currentInfoWindow = app.infoWindows.get(ficheId);
+                    app.currentInfoWindow.open(map, app.currentMarker);
                 }
             },
             created() {

@@ -21,6 +21,13 @@
   }
 }
 
+.category-fiche-target {
+  display: block;
+  position: relative;
+  top: $header-height * -1.2;
+  visibility: hidden;
+}
+
 .category-fiche-header {
   min-height: 250px;
 
