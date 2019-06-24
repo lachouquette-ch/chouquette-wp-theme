@@ -128,8 +128,7 @@ $locations = get_terms(array(
                         <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4">
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
-                                    <?php //echo chouquette_taxonomy_logo($category[0], 'black');
-                                    ?>
+                                    <?php echo chouquette_taxonomy_logo($category[0], 'black'); ?>
                                 </div>
                             </div>
                             <div class="card-body">
