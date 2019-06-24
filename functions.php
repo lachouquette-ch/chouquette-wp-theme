@@ -12,7 +12,6 @@ $chouquette_theme = wp_get_theme();
 define('CQ_THEME_VERSION', $chouquette_theme->get('Version'));
 define('CQ_PRIMARY_MENU', 'primary-menu');
 define('CQ_FOOTER_MENU', 'footer-menu');
-define('CQ_MENU_LOGO_SELECTOR', 'logo');
 
 define('CQ_FICHE_POST_TYPE', 'fiche');
 define('CQ_FICHE_SELECTOR', 'link_fiche');
@@ -25,14 +24,17 @@ define('CQ_CATEGORY_CULTURE', 'culture-future');
 define('CQ_CATEGORY_SHOPPING', 'shopping');
 define('CQ_CATEGORY_CHOUCHOUS', 'services');
 
+define('CQ_CATEGORY_LOGO_YELLOW', 'logo_yellow');
+define('CQ_CATEGORY_LOGO_WHITE', 'logo_white');
+define('CQ_CATEGORY_LOGO_BLACK', 'logo_black');
+define('CQ_CATEGORY_LOGO_MARKER_YELLOW', 'marker_yellow');
+define('CQ_CATEGORY_LOGO_MARKER_WHITE', 'marker_white');
+
 define('ACF_FIELD_GROUP_TYPE', 'group');
 define('ACF_FIELD_TAXONOMY_TYPE', 'taxonomy');
 
 define('CQ_TAXONOMY_LOCALISATION', 'cq_location');
 define('CQ_TAXONOMY_CRITERIA', 'cq_criteria');
-define('CQ_TAXONOMY_LOGO_SUFFIX_WHITE', '_blanc');
-define('CQ_TAXONOMY_LOGO_SUFFIX_BLACK', '_noir');
-define('CQ_TAXONOMY_LOGO_SUFFIX_YELLOW', '_jaune');
 
 define('CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne');
 define('CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne');

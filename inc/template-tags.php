@@ -94,28 +94,21 @@ if (!function_exists('chouquette_taxonomy_logo')) :
      * @param string $size the WP size. Default is thumbnail
      * @param array $classes the classes to add to the img tag
      */
-    function chouquette_taxonomy_logo(object $taxonomy, string $color = null, string $size = 'thumbnail', array $classes = array()) {
-        $logo = get_field(CQ_MENU_LOGO_SELECTOR, chouquette_acf_generate_post_id($taxonomy));
-        if (! $logo) {
-            throw new Exception(sprintf("Taxonomy %s has no logo", mb_strimwidth(print_r($taxonomy, TRUE), 0, 200, '...')));
-        }
+    function chouquette_taxonomy_logo(object $taxonomy, string $color = 'yellow', string $size = 'thumbnail', array $classes = array()) {
         switch ($color) {
             case 'white':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_WHITE, $logo['name']);
-                $image_id = chouquette_get_attachment_by_title($file_name)->ID;
+                $logo = get_field(CQ_CATEGORY_LOGO_WHITE, chouquette_acf_generate_post_id($taxonomy));
                 break;
             case 'black':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_BLACK, $logo['name']);
-                $image_id = chouquette_get_attachment_by_title($file_name)->ID;
+                $logo = get_field(CQ_CATEGORY_LOGO_BLACK, chouquette_acf_generate_post_id($taxonomy));
                 break;
             case 'yellow':
-                $file_name = preg_replace('/_\w+$/', CQ_TAXONOMY_LOGO_SUFFIX_YELLOW, $logo['name']);
-                $image_id = chouquette_get_attachment_by_title($file_name)->ID;
+                $logo = get_field(CQ_CATEGORY_LOGO_YELLOW, chouquette_acf_generate_post_id($taxonomy));
                 break;
             default:
-                $image_id = $logo['ID'];
+                throw new Exception("$color is undefined");
         }
-        $image_src = wp_get_attachment_image_src($image_id, $size)[0];
+        $image_src = wp_get_attachment_image_src($logo['id'], $size)[0];
         return sprintf('<img src="%s" alt="%s" class="%s">', $image_src, $taxonomy->title, join(" ", $classes));
     }
 endif;

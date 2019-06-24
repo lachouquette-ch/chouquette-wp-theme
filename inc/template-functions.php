@@ -188,21 +188,3 @@ if (!function_exists('chouquette_load_template_part')) :
         return $var;
     }
 endif;
-
-if (!(function_exists('chouquette_get_attachment_by_title'))) :
-    function chouquette_get_attachment_by_title($post_name)
-    {
-        $args = array(
-            'posts_per_page' => 1,
-            'post_type' => 'attachment',
-            'name' => trim($post_name),
-        );
-
-        $get_attachment = new WP_Query($args);
-        if (!$get_attachment || !isset($get_attachment->posts, $get_attachment->posts[0])) {
-            return false;
-        }
-
-        return $get_attachment->posts[0];
-    }
-endif;
