@@ -124,17 +124,7 @@ add_action('rest_api_init', function () {
     ));
 });
 
-/**
- * REST API to get all locations for a given category
- *
- * @param $data GET params with category 'slug'
- * @return array of object(id, lat, lng)
- */
-function cq_get_localisations_for_category($data)
-{
-    $result = array();
-
-    $category = get_category_by_slug($data['slug']);
+function cq_get_locations_for_category_prepare_query($category) {
     $args = array(
         'post_type' => CQ_FICHE_POST_TYPE,
         'category_name' => isset($_GET['cat']) ? $_GET['cat'] : $category->slug,
@@ -169,6 +159,22 @@ function cq_get_localisations_for_category($data)
             'operator' => 'AND'
         );
     }
+
+    return $args;
+}
+
+/**
+ * REST API to get all locations for a given category
+ *
+ * @param $data GET params with category 'slug'
+ * @return array of object(id, lat, lng)
+ */
+function cq_get_localisations_for_category($data)
+{
+    $result = array();
+
+    $category = get_category_by_slug($data['slug']);
+    $args = cq_get_locations_for_category_prepare_query($category);
 
     $fiches = new WP_Query($args);
     if ($fiches->have_posts()) {

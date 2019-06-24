@@ -77,36 +77,7 @@ $locations = get_terms(array(
                 </form>
 
                 <?php
-                // filter category
-                $args = array(
-                    'post_type' => 'fiche',
-                    'category_name' => isset($_GET['cat']) ? $_GET['cat'] : get_queried_object()->slug,
-                );
-                // filter search
-                if (!empty($_GET['search'])) {
-                    $args['s'] = $_GET['search'];
-                }
-                // filter location
-                $args['tax_query'] = array('relation' => 'AND');
-                if (!empty($_GET['loc'])) {
-                    $args['tax_query'][] = array(
-                        'taxonomy' => 'cq_location',
-                        'field' => 'slug',
-                        'terms' => $_GET['loc'],
-                    );
-                }
-                // filter criterias
-                $filtered_params = array_filter($_GET, function ($key) {
-                    return substr_compare($key, 'cq_', 0, 3) == false;
-                }, ARRAY_FILTER_USE_KEY);
-                foreach ($filtered_params as $key => $value) {
-                    $args['tax_query'][] = array(
-                        'taxonomy' => $key,
-                        'field' => 'slug',
-                        'terms' => $value,
-                        'operator' => 'AND'
-                    );
-                }
+                $args = cq_get_locations_for_category_prepare_query(get_queried_object());
                 $loop = new WP_Query($args);
 
                 echo '<div class="d-flex justify-content-around flex-wrap category-fiche-container py-4">';
