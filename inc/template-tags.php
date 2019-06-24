@@ -13,7 +13,7 @@ if (!function_exists('chouquette_navbar_nav')) :
      */
     function chouquette_navbar_nav(string $img_color = 'white', string $img_color_active = 'yellow')
     {
-        $active_category_id = get_queried_object()->term_id;
+        $active_category_id = !empty(get_queried_object()) ? get_queried_object()->term_id : null;
 
         // get menu items
         $menu_items = chouquette_menu_items();
@@ -56,7 +56,8 @@ if (!function_exists('chouquette_fiche_openings')) :
      *
      * @param array $fiche_fields all fiche fields to pick from
      */
-    function chouquette_fiche_openings(array $fiche_fields) {
+    function chouquette_fiche_openings(array $fiche_fields)
+    {
         echo '<ul>';
         $raw_planning = array(
             $fiche_fields[CQ_FICHE_OPENING_MONDAY],
@@ -71,7 +72,7 @@ if (!function_exists('chouquette_fiche_openings')) :
 
         $from = null;
         foreach ($raw_planning as $index => $opening) {
-            if ($index == count($raw_planning)-1 || $raw_planning[$index] != $raw_planning[$index+1]) {
+            if ($index == count($raw_planning) - 1 || $raw_planning[$index] != $raw_planning[$index + 1]) {
                 if (str_replace('"', '', $raw_planning[$index]) == CQ_FICHE_OPENING_CLOSED) {
                     $opening = 'Fermé';
                 }
@@ -89,12 +90,13 @@ if (!function_exists('chouquette_taxonomy_logo')) :
     /**
      * Prints the taxonomy logo (if any)
      *
-     * @param object $taxonomy  the taxonomy. Should have a 'logo' attribute (array) with the id of the image
+     * @param object $taxonomy the taxonomy. Should have a 'logo' attribute (array) with the id of the image
      * @param string $color the color. Only 'white', 'black' or 'yellow'
      * @param string $size the WP size. Default is thumbnail
      * @param array $classes the classes to add to the img tag
      */
-    function chouquette_taxonomy_logo(object $taxonomy, string $color = 'yellow', string $size = 'thumbnail', array $classes = array()) {
+    function chouquette_taxonomy_logo(object $taxonomy, string $color = 'yellow', string $size = 'thumbnail', array $classes = array())
+    {
         switch ($color) {
             case 'white':
                 $logo = get_field(CQ_CATEGORY_LOGO_WHITE, chouquette_acf_generate_post_id($taxonomy));

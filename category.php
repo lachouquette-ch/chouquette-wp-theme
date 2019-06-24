@@ -39,7 +39,8 @@ $locations = get_terms(array(
                                 <option title="Bars / Pubs" value="<?php echo get_queried_object()->slug ?>">Je veux ...</option>
                                 <?php
                                 foreach ($sub_categories as $sub_category) {
-                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $sub_category->name, $sub_category->slug, $_GET['cat'] == $sub_category->slug ? 'selected' : '', $sub_category->name);
+                                    $attr_selected = isset($_GET['cat']) && $_GET['cat'] == $sub_category->slug ? 'selected' : '';
+                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $sub_category->name, $sub_category->slug, $attr_selected, $sub_category->name);
                                 }
                                 ?>
                             </select>
@@ -51,7 +52,8 @@ $locations = get_terms(array(
                                 foreach ($locations as $location) {
                                     $location_display = $location->parent != 0 ? ' • ' : '';
                                     $location_display .= $location->name;
-                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $location->name, $location->slug, $_GET['loc'] == $location->slug ? 'selected' : '', $location_display);
+                                    $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $location->slug ? 'selected' : '';
+                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $location->name, $location->slug, $attr_selected, $location_display);
                                 }
                                 ?>
                             </select>
