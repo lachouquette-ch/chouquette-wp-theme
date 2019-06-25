@@ -184,7 +184,8 @@ $locations = get_terms(array(
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
@@ -249,9 +250,14 @@ $locations = get_terms(array(
                                 app.infoWindows.set(fiche.id, infoWindow);
 
                                 // create marker
+                                if (_.isEqual(fiche.location, {lat: 0, lng: 0})) {
+                                    console.log(`${fiche.title} has no location`);
+                                    return;
+                                }
+
                                 var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon, map: map});
-                                app.bounds.extend(marker.getPosition());
                                 app.markers.set(fiche.id, marker);
+                                app.bounds.extend(marker.getPosition());
 
                                 // action on marker
                                 marker.addListener('click', function () {
@@ -271,7 +277,7 @@ $locations = get_terms(array(
 
                             if (app.markers.size > 1) {
                                 map.fitBounds(app.bounds);
-                            } else {
+                            } else if (app.markers.size) {
                                 map.setCenter(app.markers.values().next().value.getPosition());
                             }
                         });
