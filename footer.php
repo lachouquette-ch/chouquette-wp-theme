@@ -95,6 +95,9 @@
         lat: 46.519962,
         lng: 6.633597
     };
+    const Z_INDEX_SELECTED = 1000;
+    const Z_INDEX_CHOUQUETTISE = 500;
+    const Z_INDEX_DEFAULT = 100;
 
     function bounce(marker) {
         if (marker.getAnimation()) {

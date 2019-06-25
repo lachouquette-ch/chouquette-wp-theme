@@ -174,8 +174,7 @@ $locations = get_terms(array(
             });
 
             google.maps.event.addListener(map, "click", function (event) {
-                if (app.currentInfoWindow) app.currentInfoWindow.close();
-                if (app.currentMarker) app.currentMarker.setAnimation(null);
+                app.clearMap();
                 if (app.markers.size > 1) map.fitBounds(app.bounds);
             });
 
@@ -227,10 +226,15 @@ $locations = get_terms(array(
                 },
                 // stop current animation and close current info window
                 clearMap: function () {
-                    // stop current animation
-                    if (app.currentMarker) app.currentMarker.setAnimation(null);
-                    // close current infoWindow
+                    if (app.currentMarker) {
+                        // stop animation
+                        app.currentMarker.setAnimation(null);
+                        // reset zindex
+                        app.currentMarker.setZIndex(app.currentMarker.defaultZIndex);
+                    }
+
                     if (app.currentInfoWindow) app.currentInfoWindow.close();
+                    // reset index
                 },
                 // hack to know if on mobile or not
                 _colEnabled: function () {
@@ -256,6 +260,8 @@ $locations = get_terms(array(
                                 }
 
                                 var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon, map: map});
+                                marker.defaultZIndex = fiche.chouquettise ? Z_INDEX_CHOUQUETTISE : Z_INDEX_DEFAULT;
+                                marker.setZIndex(marker.defaultZIndex); // to start
                                 app.markers.set(fiche.id, marker);
                                 app.bounds.extend(marker.getPosition());
 
@@ -270,6 +276,8 @@ $locations = get_terms(array(
 
                                     // work on map
                                     app.clearMap();
+                                    app.currentMarker = this;
+                                    app.currentMarker.setZIndex(Z_INDEX_SELECTED);
                                     app.currentInfoWindow = infoWindow;
                                     app.currentInfoWindow.open(map, marker);
                                 });
@@ -289,6 +297,8 @@ $locations = get_terms(array(
                     app.currentMarker = app.markers.get(ficheId);
                     // center map
                     map.setCenter(app.currentMarker.getPosition());
+                    // set zIndex
+                    app.currentMarker.setZIndex(Z_INDEX_SELECTED);
                     // start animation
                     app.currentMarker.setAnimation(google.maps.Animation.BOUNCE);
                     window.setTimeout(function () {
