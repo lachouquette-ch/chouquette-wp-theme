@@ -205,9 +205,10 @@ function cq_get_localisations_for_category($data)
             $dto = array('id' => $fiche->ID);
             $dto['title'] = get_the_title($fiche->ID);
             $dto['location'] = cq_location_dto($fiche->ID);
-            $dto['icon'] = chouquette_category_get_marker_icon($fiche_category, false);
+            $dto['icon'] = chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID));
             $dto['categories'] = cq_categories_dto($fiche->ID);
             $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            $dto['chouquettise'] = chouquette_fiche_is_chouquettise($fiche->ID);
             $result[] = $dto;
         }
     }

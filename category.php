@@ -112,7 +112,7 @@ $locations = get_terms(array(
                             )
                         ));
                         ?>
-                        <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4">
+                        <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'category-fiche-chouquettise'; ?>">
                             <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
@@ -120,8 +120,8 @@ $locations = get_terms(array(
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"><?php the_title(); ?></h5>
-                                <p class="card-text"><?php the_content(); ?></p>
+                                <h5 class="card-title"><?php echo get_the_title(); ?></h5>
+                                <p class="card-text"><?php echo get_the_content(); ?></p>
                                 <?php
                                 $terms = chouquette_fiche_flatten_terms($taxonomies);
                                 if (!empty($terms)):

@@ -2,6 +2,7 @@
 $fiche = get_post();
 $fiche_fields = get_fields(get_the_ID());
 $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
+$is_chouquettise = chouquette_fiche_is_chouquettise($fiche->ID);
 ?>
 <div class="category-info-window container-fluid">
     <div class="row">
@@ -10,6 +11,7 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
         </div>
         <div class="col-lg px-0 px-lg-2">
             <h5 class="mt-0"><?php echo get_the_title(); ?></h5>
+            <?php if ($is_chouquettise): ?>
             <div>
                 <label>Internet :</label>
                 <span>
@@ -63,6 +65,7 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
                     </ul>
                 </div>
             <?php endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <?php if (!empty(get_the_content())): ?>
@@ -74,5 +77,11 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
         echo implode(", ", $terms);
         ?>
     </div>
+    <?php if ($is_chouquettise): ?>
+        <div class="row mt-2 float-right">
+            <a href="<?php echo esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']); ?>" class="link-secondary" title="Ouvrir avec Google maps" target="_blank"><i
+                        class="fas fa-map-marker-alt pr-1"></i> Ouvrir dans google maps</a>
+        </div>
+    <?php endif; ?>
     <img width="100%" class="d-block d-lg-none mt-3" src="<?php esc_url(the_post_thumbnail_url('thumbnail')); ?>" alt="<?php get_the_title($fiche->ID); ?>">
 </div>

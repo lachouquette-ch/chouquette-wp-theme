@@ -9,13 +9,14 @@ if (!function_exists('chouquette_fiche_is_chouquettise')) :
     /**
      * Return if fiche is chouquettise
      */
-    function chouquette_fiche_is_chouquettise(array $fiche_fields)
+    function chouquette_fiche_is_chouquettise(int $fiche_id)
     {
-        if (!isset($fiche_fields[CQ_FICHE_CHOUQUETTISE_TO])) {
+        $field = get_field(CQ_FICHE_CHOUQUETTISE_TO, $fiche_id);
+        if (!$field) {
             return false;
         }
 
-        $chouquettise_to = DateTime::createFromFormat('d/m/Y', $fiche_fields[CQ_FICHE_CHOUQUETTISE_TO]);
+        $chouquettise_to = DateTime::createFromFormat('d/m/Y', $field);
         return $chouquettise_to >= new DateTime();
     }
 endif;
