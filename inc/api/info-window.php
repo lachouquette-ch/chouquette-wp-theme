@@ -74,5 +74,5 @@ $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
         echo implode(", ", $terms);
         ?>
     </div>
-    <img width="100%" class="d-block d-lg-none mt-3" src="<?php echo $fiche_fields['main-image']; ?>" alt="<?php get_the_title($fiche->ID); ?>">
+    <img width="100%" class="d-block d-lg-none mt-3" src="<?php esc_url(the_post_thumbnail_url('thumbnail')); ?>" alt="<?php get_the_title($fiche->ID); ?>">
 </div>
