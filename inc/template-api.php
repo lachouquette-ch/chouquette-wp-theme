@@ -139,6 +139,7 @@ function cq_get_locations_for_category_prepare_query($category)
         'meta_type' => 'DATE',
         'orderby' => 'meta_value',
         'order' => 'DESC',
+        'posts_per_page' => -1,
         'post_status' => 'any' // TODO to remove
     );
     // filter search
