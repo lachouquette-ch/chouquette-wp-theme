@@ -35,17 +35,20 @@ function cq_get_localisations_for_post($data)
 {
     $fiches = get_field(CQ_FICHE_SELECTOR, $data['id']);
 
-    $results = [];
+    $dtos = [];
     foreach ($fiches as $fiche) {
+        $category = get_the_category($fiche->ID)[0];
+
         // populate result object
-        $result = cq_location_dto($fiche->ID);
-        $result['id'] = $fiche->ID;
-        $result['categories'] = cq_categories_dto($fiche->ID);
+        $dto = cq_location_dto($fiche->ID);
+        $dto['id'] = $fiche->ID;
+        $dto['icon'] = chouquette_category_get_marker_icon($category, chouquette_fiche_is_chouquettise($fiche->ID));
+        $dto['categories'] = cq_categories_dto($fiche->ID);
 
         // append to result array
-        array_push($results, $result);
+        array_push($dtos, $dto);
     }
-    return $results;
+    return $dtos;
 }
 
 add_action('rest_api_init', function () {
@@ -189,19 +192,7 @@ function cq_get_localisations_for_category($data)
         while ($fiches->have_posts()) {
             $fiches->the_post();
             $fiche = get_post();
-            $fiche_category = get_categories(array(
-                'taxonomy' => 'category',
-                'object_ids' => $fiche->ID,
-                'parent' => $category->term_id,
-                'hide_empty' => true,
-                'number' => 1 // only one
-            ));
-            // if not subcategory
-            if (empty($fiche_category)) {
-                $fiche_category = $category;
-            } else {
-                $fiche_category = $fiche_category[0];
-            }
+            $fiche_category = chouquette_category_get_single_sub_category($fiche->ID, $category);
 
             $dto = array('id' => $fiche->ID);
             $dto['title'] = get_the_title($fiche->ID);

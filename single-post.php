@@ -232,23 +232,10 @@ while (have_posts()) :
                     var bounds = new google.maps.LatLngBounds();
                     $.getJSON('http://chouquette.test/wp-json/cq/v1/post/<?php echo get_the_ID() ?>/localisation', function (fiches) {
                         fiches.forEach(function (fiche) {
-                            var image = {
-                                url: 'http://lachouquette.ch/wp-content/uploads/2019/06/unnamed3-e1560866304937.png',
-                                size: new google.maps.Size(50, 57),
-                                // url: 'http://lachouquette.ch/wp-content/uploads/2019/06/unnamed2-e1560866240140.png',
-                                // size: new google.maps.Size(50, 57),
-                                // url: 'http://lachouquette.ch/wp-content/uploads/2019/06/unnamed1-e1560866145419.png',
-                                // size: new google.maps.Size(50, 57),
-                                // The origin for this image is (0, 0).
-                                origin: new google.maps.Point(0, 0),
-                                // The anchor for this image is the base of the flagpole at (0, 32).
-                                anchor: new google.maps.Point(0, 24)
-                            };
-
                             var marker = new google.maps.Marker({
                                 position: fiche,
                                 map: map,
-                                icon: image
+                                icon: fiche.icon
                             });
                             marker.addListener('click', function () {
                                 bounce(markers.get(fiche.id));

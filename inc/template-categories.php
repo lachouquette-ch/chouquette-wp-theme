@@ -102,3 +102,28 @@ if (!function_exists('chouquette_category_get_marker_icon')) :
         return $image_src;
     }
 endif;
+
+if (!function_exists('chouquette_category_get_single_sub_category')) :
+    /**
+     * Get first subcategory for given post and parent category. Fallback to parent category if none.
+     *
+     * @param int $post_id the post id
+     * @param object $parent_category the parent category
+     * @return object the first sub category or parent category if none
+     */
+    function chouquette_category_get_single_sub_category(int $post_id, object $parent_category)
+    {
+        $result = get_categories(array(
+            'taxonomy' => 'category',
+            'object_ids' => $post_id,
+            'parent' => $parent_category->term_id,
+            'hide_empty' => true,
+            'number' => 1 // only one
+        ));
+        // if not subcategory
+        if (empty($result)) {
+            return $parent_category;
+        }
+        return $result[0];
+    }
+endif;

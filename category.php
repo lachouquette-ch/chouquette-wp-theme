@@ -89,19 +89,7 @@ $locations = get_terms(array(
                 if ($loop->have_posts()):
                     while ($loop->have_posts()) :
                         $loop->the_post();
-                        $fiche_category = get_categories(array(
-                            'taxonomy' => 'category',
-                            'object_ids' => get_the_ID(),
-                            'parent' => $category->term_id,
-                            'hide_empty' => true,
-                            'number' => 1 // only one
-                        ));
-                        // if not subcategory
-                        if (empty($fiche_category)) {
-                            $fiche_category = $category;
-                        } else {
-                            $fiche_category = $fiche_category[0];
-                        }
+                        $fiche_category = chouquette_category_get_single_sub_category(get_the_ID(), $category);
                         $categories = chouquette_categories_get_tops(get_the_ID());
                         $taxonomies = chouquette_fiche_get_taxonomies(get_post());
                         $posts = get_posts(array(
