@@ -74,7 +74,7 @@ $locations = get_terms(array(
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="d-block link-secondary small mt-3" v-on:click="resetCriterias">Tout déselectionner</a>
+                        <a href="#" class="d-block link-secondary small mt-3" v-on:click.stop="resetCriterias">Tout déselectionner</a>
                     </div>
                 </form>
 
