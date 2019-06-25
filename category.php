@@ -64,12 +64,14 @@ $locations = get_terms(array(
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
-                    <div id="collapseCriteria" class="collapse pl-3 mt-3 category-criteria">
-                        <div class="form-inline" v-for="criteria in criterias">
-                            <span class="col-form-label">{{ criteria.label }}</span>
-                            <div class="form-check ml-3" v-for="term in criteria.terms">
-                                <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" :checked="term.checked">
-                                <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
+                    <div id="collapseCriteria" class="collapse category-criteria pl-3 mt-2">
+                        <div class="d-flex flex-wrap">
+                            <div v-for="criteria in criterias" class="pt-2 px-2">
+                                <span class="col-form-label" class="white-space: nowrap;">{{ criteria.label }}</span>
+                                <div class="form-check ml-3" v-for="term in criteria.terms">
+                                    <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" :checked="term.checked">
+                                    <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
+                                </div>
                             </div>
                         </div>
                         <a href="#" class="d-block link-secondary small mt-3" v-on:click="resetCriterias">Tout déselectionner</a>
@@ -186,6 +188,7 @@ $locations = get_terms(array(
                 }
             },
             methods: {
+                // get criterias from remote based on given category
                 refreshCriterias: function (category) {
                     axios
                         .get(`http://chouquette.test/wp-json/cq/v1/category/${category}/taxonomy`)
@@ -198,6 +201,7 @@ $locations = get_terms(array(
                             app.criterias = response.data;
                         });
                 },
+                // uncheck add criterias
                 resetCriterias: function () {
                     this.criterias.forEach(function (taxonomy) {
                         taxonomy.terms.forEach(function (term) {
@@ -205,15 +209,18 @@ $locations = get_terms(array(
                         })
                     })
                 },
+                // stop current animation and close current info window
                 clearMap: function () {
                     // stop current animation
                     if (app.currentMarker) app.currentMarker.setAnimation(null);
                     // close current infoWindow
                     if (app.currentInfoWindow) app.currentInfoWindow.close();
                 },
+                // hack to know if on mobile or not
                 _colEnabled: function () {
                     return window.getComputedStyle(document.getElementById('colTrigger')).display != "none";
                 },
+                // get fiches from URL and add it to map
                 addFichesToMap: function () {
                     axios({
                         method: 'get',
@@ -254,6 +261,7 @@ $locations = get_terms(array(
                             }
                         });
                 },
+                // locate on fiche on the map, display info window and activate animation
                 locateFiche: function (ficheId) {
                     this.clearMap();
 
