@@ -9,9 +9,10 @@
 
 get_header();
 
+$category = get_queried_object();
 $sub_categories = get_categories(array(
-    'child_of' => get_queried_object()->term_id,
-    'hide_empty' => 1
+    'child_of' => $category->term_id,
+    'hide_empty' => true
 ));
 
 $locations = get_terms(array(
@@ -36,7 +37,7 @@ $locations = get_terms(array(
                         <div class="form-group col-md-4">
                             <select id="search-cat" class="form-control" title="Sous catégorie" name="cat"
                                     onchange="app.refreshCriterias(this.options[this.selectedIndex].value)">
-                                <option title="Bars / Pubs" value="<?php echo get_queried_object()->slug ?>">Je veux ...</option>
+                                <option title="Bars / Pubs" value="<?php echo $category->slug ?>">Je veux ...</option>
                                 <?php
                                 foreach ($sub_categories as $sub_category) {
                                     $attr_selected = isset($_GET['cat']) && $_GET['cat'] == $sub_category->slug ? 'selected' : '';
@@ -79,14 +80,26 @@ $locations = get_terms(array(
                 </form>
 
                 <?php
-                $args = cq_get_locations_for_category_prepare_query(get_queried_object());
+                $args = cq_get_locations_for_category_prepare_query($category);
                 $loop = new WP_Query($args);
 
                 echo '<div class="d-flex justify-content-around flex-wrap category-fiche-container py-4">';
                 if ($loop->have_posts()):
                     while ($loop->have_posts()) :
                         $loop->the_post();
-                        $category = get_the_category(get_the_ID());
+                        $fiche_category = get_categories(array(
+                            'taxonomy' => 'category',
+                            'object_ids' => get_the_ID(),
+                            'parent' => $category->term_id,
+                            'hide_empty' => true,
+                            'number' => 1 // only one
+                        ));
+                        // if not subcategory
+                        if (empty($fiche_category)) {
+                            $fiche_category = $category;
+                        } else {
+                            $fiche_category = $fiche_category[0];
+                        }
                         $categories = chouquette_categories_get_tops(get_the_ID());
                         $taxonomies = chouquette_fiche_get_taxonomies(get_post());
                         $posts = get_posts(array(
@@ -103,7 +116,7 @@ $locations = get_terms(array(
                             <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
-                                    <?php echo chouquette_taxonomy_logo($category[0], 'black'); ?>
+                                    <?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -195,7 +208,7 @@ $locations = get_terms(array(
                         .then(function (response) {
                             response.data.forEach(function (taxonomy) {
                                 taxonomy.terms.forEach(function (term) {
-                                    if(app.$_params.getAll(taxonomy.name).includes(term.slug)) {
+                                    if (app.$_params.getAll(taxonomy.name).includes(term.slug)) {
                                         term.checked = true;
                                     }
                                 });
@@ -236,7 +249,7 @@ $locations = get_terms(array(
                                 app.infoWindows.set(fiche.id, infoWindow);
 
                                 // create marker
-                                var marker = new google.maps.Marker({position: fiche.location, map: map});
+                                var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon, map: map});
                                 app.bounds.extend(marker.getPosition());
                                 app.markers.set(fiche.id, marker);
 

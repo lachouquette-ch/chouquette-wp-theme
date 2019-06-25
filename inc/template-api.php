@@ -181,10 +181,24 @@ function cq_get_localisations_for_category($data)
         while ($fiches->have_posts()) {
             $fiches->the_post();
             $fiche = get_post();
+            $fiche_category = get_categories(array(
+                'taxonomy' => 'category',
+                'object_ids' =>$fiche->ID,
+                'parent' => $category->term_id,
+                'hide_empty' => true,
+                'number' => 1 // only one
+            ));
+            // if not subcategory
+            if (empty($fiche_category)) {
+                $fiche_category = $category;
+            } else {
+                $fiche_category = $fiche_category[0];
+            }
 
             $dto = array('id' => $fiche->ID);
             $dto['title'] = get_the_title($fiche->ID);
             $dto['location'] = cq_location_dto($fiche->ID);
+            $dto['icon'] = chouquette_category_get_marker_icon($fiche_category, false);
             $dto['categories'] = cq_categories_dto($fiche->ID);
             $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
             $result[] = $dto;
