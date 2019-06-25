@@ -295,8 +295,9 @@ $locations = get_terms(array(
                     this.clearMap();
 
                     app.currentMarker = app.markers.get(ficheId);
-                    // center map
+                    // zoom and center map
                     map.setCenter(app.currentMarker.getPosition());
+                    map.setZoom(ZOOM_LEVEL_ACTIVED);
                     // set zIndex
                     app.currentMarker.setZIndex(Z_INDEX_SELECTED);
                     // start animation

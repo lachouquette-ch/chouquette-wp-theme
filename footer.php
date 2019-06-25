@@ -77,12 +77,6 @@
 <!-- needs jquery -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI&callback=bootstrapMap" async defer></script>
 <script type='text/javascript'>
-    const SWITZERLAND_BOUNDS = {
-        north: 47.882391,
-        south: 45.640088,
-        west: 5.706689,
-        east: 10.857024,
-    };
     const MAP_STYLES = [
         {
             "featureType": "poi.business",
@@ -91,13 +85,23 @@
             ]
         },
     ];
+
+    const SWITZERLAND_BOUNDS = {
+        north: 47.882391,
+        south: 45.640088,
+        west: 5.706689,
+        east: 10.857024,
+    };
     const LAUSANNE_LOCALISATION = {
         lat: 46.519962,
         lng: 6.633597
     };
+
     const Z_INDEX_SELECTED = 1000;
     const Z_INDEX_CHOUQUETTISE = 500;
     const Z_INDEX_DEFAULT = 100;
+
+    const ZOOM_LEVEL_ACTIVED = 17;
 
     function bounce(marker) {
         if (marker.getAnimation()) {
