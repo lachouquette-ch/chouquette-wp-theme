@@ -69,7 +69,7 @@ $locations = get_terms(array(
                             <div v-for="criteria in criterias" class="pt-2 px-2">
                                 <span class="col-form-label" class="white-space: nowrap;">{{ criteria.label }}</span>
                                 <div class="form-check ml-3" v-for="term in criteria.terms">
-                                    <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" :checked="term.checked">
+                                    <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked">
                                     <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
                                 </div>
                             </div>
@@ -195,7 +195,9 @@ $locations = get_terms(array(
                         .then(function (response) {
                             response.data.forEach(function (taxonomy) {
                                 taxonomy.terms.forEach(function (term) {
-                                    term.checked = app.$_params.getAll(taxonomy.name).includes(term.slug);
+                                    if(app.$_params.getAll(taxonomy.name).includes(term.slug)) {
+                                        term.checked = true;
+                                    }
                                 });
                             });
                             app.criterias = response.data;
