@@ -65,17 +65,19 @@ $locations = get_terms(array(
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
-                    <div id="collapseCriteria" class="collapse category-criteria pl-3 mt-2">
-                        <div class="d-flex flex-wrap">
-                            <div v-for="criteria in criterias" class="pt-2 px-2">
-                                <span class="col-form-label" class="white-space: nowrap;">{{ criteria.label }}</span>
-                                <div class="form-check ml-3" v-for="term in criteria.terms">
-                                    <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked">
-                                    <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
+                    <div id="collapseCriteria" class="collapse category-criteria  mt-2">
+                        <div class="container-fluid">
+                            <div v-for="criteriaRow in criteriaRows" class="row">
+                                <div v-for="criteria in criteriaRow" class="col-md-6 pt-2 px-2">
+                                    <span class="col-form-label" class="white-space: nowrap;">{{ criteria.label }}</span>
+                                    <div class="form-check ml-3" v-for="term in criteria.terms">
+                                        <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked">
+                                        <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
+                                    </div>
                                 </div>
                             </div>
+                            <a href="#" class="d-block link-secondary small mt-3" v-on:click.prevent="resetCriterias">Tout déselectionner</a>
                         </div>
-                        <a href="#" class="d-block link-secondary small mt-3" v-on:click.stop="resetCriterias">Tout déselectionner</a>
                     </div>
                 </form>
 
@@ -199,6 +201,20 @@ $locations = get_terms(array(
                     bounds: null,
                     $_params: null
                 }
+            },
+            computed: {
+                // helper to create proper grid columns
+                criteriaRows: function () {
+                    if (!this.criterias) {
+                        return [];
+                    }
+
+                    var result = [];
+                    for (var i = 0; i < this.criterias.length; i = i + 2) {
+                        result.push(this.criterias.slice(i, i+ 2));
+                    }
+                    return result;
+                },
             },
             methods: {
                 // get criterias from remote based on given category
