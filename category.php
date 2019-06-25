@@ -99,8 +99,8 @@ $locations = get_terms(array(
                             )
                         ));
                         ?>
-                        <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
                         <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4">
+                            <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
                             <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                                 <div class="category-fiche-header-icon">
                                     <?php echo chouquette_taxonomy_logo($category[0], 'black'); ?>
