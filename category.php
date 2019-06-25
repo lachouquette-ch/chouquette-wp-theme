@@ -250,7 +250,7 @@ $locations = get_terms(array(
                                 app.infoWindows.set(fiche.id, infoWindow);
 
                                 // create marker
-                                if (_.isEqual(fiche.location, {lat: 0, lng: 0})) {
+                                if (_.isEmpty(fiche.location)) {
                                     console.log(`${fiche.title} has no location`);
                                     return;
                                 }

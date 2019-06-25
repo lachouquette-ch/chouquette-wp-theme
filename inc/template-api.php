@@ -1,14 +1,20 @@
 <?php
 
-function cq_location_dto(int $fiche_id) {
-    $fiche_raw = get_field(CQ_FICHE_LOCATION, $fiche_id);
+function cq_location_dto(int $fiche_id)
+{
+    $location = get_field(CQ_FICHE_LOCATION, $fiche_id);
+    if (empty($location)) {
+        error_log(sprintf("Fiche %s has no location", $fiche_id));
+        return [];
+    }
     return array(
-        'lat' => floatval($fiche_raw['lat']),
-        'lng' => floatval($fiche_raw['lng'])
+        'lat' => floatval($location['lat']),
+        'lng' => floatval($location['lng'])
     );
 }
 
-function cq_categories_dto(int $fiche_id) {
+function cq_categories_dto(int $fiche_id)
+{
     $categories = get_the_category($fiche_id);
     $result = [];
     foreach ($categories as $category) {
@@ -124,7 +130,8 @@ add_action('rest_api_init', function () {
     ));
 });
 
-function cq_get_locations_for_category_prepare_query($category) {
+function cq_get_locations_for_category_prepare_query($category)
+{
     $args = array(
         'post_type' => CQ_FICHE_POST_TYPE,
         'category_name' => isset($_GET['cat']) ? $_GET['cat'] : $category->slug,
@@ -183,7 +190,7 @@ function cq_get_localisations_for_category($data)
             $fiche = get_post();
             $fiche_category = get_categories(array(
                 'taxonomy' => 'category',
-                'object_ids' =>$fiche->ID,
+                'object_ids' => $fiche->ID,
                 'parent' => $category->term_id,
                 'hide_empty' => true,
                 'number' => 1 // only one
