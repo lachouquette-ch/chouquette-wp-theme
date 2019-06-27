@@ -88,7 +88,7 @@ $locations = get_terms(array(
 
                 echo '<div class="category-fiche-container py-4">';
                 if ($loop->have_posts()):
-                echo '<div class="d-flex justify-content-around flex-wrap">';
+                    echo '<div class="d-flex justify-content-around flex-wrap">';
                     while ($loop->have_posts()) :
                         $loop->the_post();
                         $fiche_category = chouquette_category_get_single_sub_category(get_the_ID(), $category);
@@ -353,8 +353,18 @@ $locations = get_terms(array(
                 var selectCategory = document.getElementById("search-cat");
                 this.category = selectCategory.options[selectCategory.selectedIndex].value;
                 this.refreshCriterias(this.category);
+
+                // scroll to current fiche
+                var num = this.$_params.get('num');
+                if (num) {
+                    var numGotoFiche = num - <?php echo CQ_CATEGORY_PAGING_NUMBER; ?>; // compute first fiche to go to
+                    var fiche = document.getElementsByClassName("category-fiche")[numGotoFiche];
+                    setTimeout(function () {
+                        fiche.childNodes[0].scrollIntoView(true, {behavior: "smooth"});
+                    }, 1500);
+                }
             }
-        })
+        });
     </script>
 <?php
 get_footer();
