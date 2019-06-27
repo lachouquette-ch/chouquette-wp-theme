@@ -135,6 +135,14 @@ add_action('rest_api_init', function () {
 
 function cq_get_locations_for_category_prepare_query($category)
 {
+    if (empty($_GET['num']) || $_GET['num'] < 1) {
+        $number_of_fiches = CQ_CATEGORY_PAGING_NUMBER;
+    } elseif ($_GET['num'] > CQ_CATEGORY_MAX_FICHES) {
+        $number_of_fiches = CQ_CATEGORY_MAX_FICHES;
+    } else {
+        $number_of_fiches = $_GET['num'];
+    }
+
     $args = array(
         'post_type' => CQ_FICHE_POST_TYPE,
         'category_name' => isset($_GET['cat']) ? $_GET['cat'] : $category->slug,
@@ -142,7 +150,7 @@ function cq_get_locations_for_category_prepare_query($category)
         'meta_type' => 'DATE',
         'orderby' => 'meta_value',
         'order' => 'DESC',
-        'posts_per_page' => -1,
+        'posts_per_page' => $number_of_fiches,
         'post_status' => 'any' // TODO to remove
     );
     // filter search

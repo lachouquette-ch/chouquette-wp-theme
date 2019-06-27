@@ -84,9 +84,11 @@ $locations = get_terms(array(
                 <?php
                 $args = cq_get_locations_for_category_prepare_query($category);
                 $loop = new WP_Query($args);
+                $number_of_fiches = $loop->post_count;
 
-                echo '<div class="d-flex justify-content-around flex-wrap category-fiche-container py-4">';
+                echo '<div class="category-fiche-container py-4">';
                 if ($loop->have_posts()):
+                echo '<div class="d-flex justify-content-around flex-wrap">';
                     while ($loop->have_posts()) :
                         $loop->the_post();
                         $fiche_category = chouquette_category_get_single_sub_category(get_the_ID(), $category);
@@ -136,13 +138,33 @@ $locations = get_terms(array(
                         </article>
                     <?php
                     endwhile;
+                    echo '</div>';
+                    echo '<div class="text-center mt-3">';
+                    global $wp;
+                    $current_url = "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                    $next_url = add_query_arg('num', $number_of_fiches + CQ_CATEGORY_PAGING_NUMBER, $current_url);
+
+                    if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches) {
+                        $pagination_disabled = true;
+                        $pagination_text = "Plus d'article pour cette recherche";
+                    } elseif ($number_of_fiches >= CQ_CATEGORY_MAX_FICHES) {
+                        $pagination_disabled = true;
+                        $pagination_text = "Peux-tu affiner ta recherche ?";
+                    } else {
+                        $pagination_disabled = false;
+                        $pagination_text = "Plus de fiches";
+                    }
+
+                    echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s" href="%s" role="button">%s</a>', $pagination_disabled ? 'disabled' : '', $next_url, $pagination_text);
+                    echo '</div>';
                 else:
-                    echo "<span>Pas de résultat pour cette recherche</span>";
+                    echo "<span class='d-block text-center'>Pas de résultat pour cette recherche</span>";
                 endif;
                 echo '</div>';
                 ?>
             </div>
         </div>
+    </div>
     </div>
 
     <script>
@@ -199,7 +221,7 @@ $locations = get_terms(array(
 
                     var result = [];
                     for (var i = 0; i < this.criterias.length; i = i + 2) {
-                        result.push(this.criterias.slice(i, i+ 2));
+                        result.push(this.criterias.slice(i, i + 2));
                     }
                     return result;
                 },
