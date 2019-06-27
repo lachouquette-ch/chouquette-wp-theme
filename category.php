@@ -65,7 +65,7 @@ $locations = get_terms(array(
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
-                    <div id="collapseCriteria" class="collapse category-criteria  mt-2">
+                    <div id="collapseCriteria" v-bind:class="{ show: hasCriterias }" class="collapse category-criteria  mt-2">
                         <div class="container-fluid">
                             <div v-for="criteriaRow in criteriaRows" class="row">
                                 <div v-for="criteria in criteriaRow" class="col-md-6 pt-2 px-2">
@@ -203,6 +203,7 @@ $locations = get_terms(array(
             data() {
                 return {
                     criterias: null,
+                    hasCriterias: false,
                     category: null,
                     currentMarker: null,
                     markers: new Map(),
@@ -236,6 +237,7 @@ $locations = get_terms(array(
                                 taxonomy.terms.forEach(function (term) {
                                     if (app.$_params.getAll(taxonomy.name).includes(term.slug)) {
                                         term.checked = true;
+                                        app.hasCriterias = true;
                                     }
                                 });
                             });
