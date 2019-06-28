@@ -63,7 +63,7 @@ while (have_posts()) :
             $fiche_markers = [];
             ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
-                <div id="fiches" class="shadow">
+                <div id="app" class="shadow">
                     <a id="fichesTarget"></a>
                     <div id="fichesMap" class="cq-fiches-map border"></div>
                     <div id="fichesAccordion" class="cq-fiches">
@@ -76,14 +76,15 @@ while (have_posts()) :
                             <div class="card">
                                 <div class="card-header cq-fiches-header text-center">
                                     <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration w-100" data-toggle="collapse"
-                                       data-target="<?php echo '#ficheContent' . $fiche->ID; ?>"
-                                       aria-expanded="false" aria-controls="collapseTwo" href="#" onclick="bounce(markers.get(<?php echo $fiche->ID; ?>));">
+                                       href="<?php echo '#ficheContent' . $fiche->ID; ?>"
+                                       aria-expanded="false" aria-controls="collapseTwo" v-on:click="locateFiche(<?php echo $fiche->ID; ?>)">
                                         <i class="shown far fa-minus-square float-left"></i>
                                         <i class="hidden far fa-plus-square float-left"></i>
                                         <?php echo $fiche->post_title ?>
                                     </a>
                                 </div>
-                                <div id="<?php echo 'ficheContent' . $fiche->ID; ?>" class="collapse" aria-labelledby="headingTwo" data-parent="#fichesAccordion">
+                                <div id="<?php echo 'ficheContent' . $fiche->ID; ?>" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#fichesAccordion">
                                     <div class="card-body p-2">
                                         <nav>
                                             <div class="nav nav-tabs link-no-decoration" id="nav-tab" role="tablist">
@@ -214,11 +215,13 @@ while (have_posts()) :
             </aside>
 
             <!-- Only load map if has fiches -->
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
             <script>
-                var markers = new Map();
+                var map = null; // google map
 
                 function initMap() {
-                    let map = new google.maps.Map(document.getElementById('fichesMap'), {
+                    map = new google.maps.Map(document.getElementById('fichesMap'), {
                         zoom: 15,
                         disableDefaultUI: true,
                         gestureHandling: 'cooperative',
@@ -229,28 +232,99 @@ while (have_posts()) :
                         styles: MAP_STYLES,
                     });
 
-                    var bounds = new google.maps.LatLngBounds();
-                    $.getJSON('http://chouquette.test/wp-json/cq/v1/post/<?php echo get_the_ID() ?>/localisation', function (fiches) {
-                        fiches.forEach(function (fiche) {
-                            var marker = new google.maps.Marker({
-                                position: fiche,
-                                map: map,
-                                icon: fiche.icon
-                            });
-                            marker.addListener('click', function () {
-                                bounce(markers.get(fiche.id));
-                                document.getElementById('ficheLink' + fiche.id).click();
-                            });
-                            markers.set(fiche.id, marker);
-                            bounds.extend(marker.getPosition());
-                        });
-                        if (markers.size > 1) {
-                            map.fitBounds(bounds);
-                        } else {
-                            map.setCenter(markers.values().next().value.getPosition());
-                        }
+                    google.maps.event.addListener(map, "click", function (event) {
+                        app.clearFiches(true);
+                        if (app.markers.size > 1) map.fitBounds(app.bounds);
                     });
+
+                    app.addLocationsToMap();
                 };
+
+                var app = new Vue({
+                    el: '#app',
+                    data() {
+                        return {
+                            locations: new Map(),
+                            markers: new Map(),
+                            bounds: null,
+                            currentMarker: null,
+                            currentLocation: null
+                        }
+                    },
+                    computed: {
+                        // helper to show/hide fiche
+                        showLocation: function (id) {
+                            return true;
+                            //locations.get(<?php echo $fiche->ID; ?>).visibility
+                        }
+                    },
+                    methods: {
+                        addLocationsToMap: function () {
+                            axios({
+                                method: 'get',
+                                url: 'http://chouquette.test/wp-json/cq/v1/post/<?php echo get_the_ID() ?>/location',
+                            })
+                                .then(function (response) {
+                                    app.bounds = new google.maps.LatLngBounds();
+                                    response.data.forEach(function (loc) {
+                                        var marker = new google.maps.Marker({position: loc, icon: loc.icon, map: map});
+                                        app.markers.set(loc.id, marker);
+                                        app.locations.set(loc.id, loc);
+                                        app.bounds.extend(marker.getPosition());
+
+                                        // action on marker
+                                        marker.addListener('click', function () {
+                                            app.clearFiches(true);
+
+                                            // set currentLocation and toggle
+                                            app.currentLocation = loc;
+                                            $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
+                                            if (app.currentMarker != this) {
+                                                app.currentMarker = this;
+                                                map.setZoom(ZOOM_LEVEL_ACTIVED);
+                                                map.setCenter(app.currentMarker.getPosition());
+                                                bounce(app.currentMarker);
+                                            } else {
+                                                app.currentMarker = null;
+                                                app.currentLocation = null;
+                                            }
+                                        });
+                                    });
+
+                                    app.clearFiches();
+                                });
+                        },
+                        // stop current animation and close fiches
+                        clearFiches: function () {
+                            if (this.currentMarker) {
+                                this.currentMarker.setAnimation(null);
+                            }
+
+                            if (app.markers.size > 1) {
+                                map.fitBounds(app.bounds);
+                            } else if (app.markers.size) {
+                                map.setCenter(app.markers.values().next().value.getPosition());
+                            }
+                        },
+                        // locate on fiche on the map and activate animation
+                        locateFiche: function (ficheId) {
+                            this.clearFiches();
+
+                            // no need to toggle fiche display. Bootstrap does that
+                            targetLocation = this.locations.get(ficheId);
+                            if (targetLocation != app.currentLocation) {
+                                app.currentLocation = targetLocation;
+                                app.currentMarker = app.markers.get(ficheId);
+                                map.setZoom(ZOOM_LEVEL_ACTIVED);
+                                map.setCenter(app.currentMarker.getPosition());
+                                bounce(app.currentMarker);
+                            } else {
+                                app.currentMarker = null;
+                                app.currentLocation = null;
+                            }
+                        },
+                    }
+                })
             </script>
         <?php endif; ?>
         </div>

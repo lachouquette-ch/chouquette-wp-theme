@@ -167,8 +167,10 @@ $locations = get_terms(array(
     </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     <script>
-        var markers = new Map();
         var map = null; // google map
 
         function initMap() {
@@ -192,12 +194,7 @@ $locations = get_terms(array(
 
             app.addFichesToMap();
         };
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
-    <script>
         var app = new Vue({
             el: '#app',
             data() {
@@ -307,7 +304,7 @@ $locations = get_terms(array(
                                     app.currentMarker = this;
                                     app.currentMarker.setZIndex(Z_INDEX_SELECTED);
                                     app.currentInfoWindow = infoWindow;
-                                    app.currentInfoWindow.open(map, marker);
+                                    app.currentInfoWindow.open(map, app.currentMarker);
                                 });
                             });
 
@@ -324,15 +321,12 @@ $locations = get_terms(array(
 
                     app.currentMarker = app.markers.get(ficheId);
                     // zoom and center map
-                    map.setCenter(app.currentMarker.getPosition());
                     map.setZoom(ZOOM_LEVEL_ACTIVED);
+                    map.setCenter(app.currentMarker.getPosition());
                     // set zIndex
                     app.currentMarker.setZIndex(Z_INDEX_SELECTED);
                     // start animation
-                    app.currentMarker.setAnimation(google.maps.Animation.BOUNCE);
-                    window.setTimeout(function () {
-                        app.currentMarker.setAnimation(null);
-                    }, 2000);
+                    bounce(app.currentMarker);
 
                     // close current infoWindow
                     app.currentInfoWindow = app.infoWindows.get(ficheId);

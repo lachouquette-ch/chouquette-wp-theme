@@ -87,10 +87,10 @@
     ];
 
     const SWITZERLAND_BOUNDS = {
-        north: 47.882391,
-        south: 45.640088,
-        west: 5.706689,
-        east: 10.857024,
+        north: 48.5744540832,
+        south: 45.3980935767,
+        west: 4.3880763722,
+        east: 11.93019063
     };
     const LAUSANNE_LOCALISATION = {
         lat: 46.519962,

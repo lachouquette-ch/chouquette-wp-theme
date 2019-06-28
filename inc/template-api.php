@@ -31,7 +31,7 @@ function cq_categories_dto(int $fiche_id)
  * @param $data GET params with post 'id'
  * @return array of object(id, lat, lng)
  */
-function cq_get_localisations_for_post($data)
+function cq_get_locations_for_post($data)
 {
     $fiches = get_field(CQ_FICHE_SELECTOR, $data['id']);
 
@@ -52,9 +52,9 @@ function cq_get_localisations_for_post($data)
 }
 
 add_action('rest_api_init', function () {
-    register_rest_route('cq/v1', '/post/(?P<id>\d+)/localisation', array(
+    register_rest_route('cq/v1', '/post/(?P<id>\d+)/location', array(
         'methods' => 'GET',
-        'callback' => 'cq_get_localisations_for_post',
+        'callback' => 'cq_get_locations_for_post',
     ));
 });
 
@@ -188,7 +188,7 @@ function cq_get_locations_for_category_prepare_query($category)
  * @param $data GET params with category 'slug'
  * @return array of object(id, lat, lng)
  */
-function cq_get_localisations_for_category($data)
+function cq_get_locations_for_category($data)
 {
     $result = array();
 
@@ -218,6 +218,6 @@ function cq_get_localisations_for_category($data)
 add_action('rest_api_init', function () {
     register_rest_route('cq/v1', '/category/(?P<slug>[\w-]+)/fiche', array(
         'methods' => 'GET',
-        'callback' => 'cq_get_localisations_for_category',
+        'callback' => 'cq_get_locations_for_category',
     ));
 });
