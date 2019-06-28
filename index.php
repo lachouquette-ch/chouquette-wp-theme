@@ -39,7 +39,7 @@
                         echo '<div class="index-header-category-logo p-3">';
                         echo chouquette_taxonomy_logo($menu_item);
                         echo '</div>';
-                        echo sprintf("<h2 class='my-2'>%s</h2>", $menu_item->title);
+                        echo "<h2 class='my-2'>{$menu_item->title}</h2>";
                         echo '</a>';
                         echo '</div>';
                     endforeach;
@@ -63,7 +63,7 @@
                                     foreach ($terms as $term) {
                                         $term_display = $term->parent != 0 ? ' • ' : '';
                                         $term_display .= $term->name;
-                                        echo sprintf("<option title='%s' value='%s'>%s</option>", $term->name, $term->slug, $term_display);
+                                        echo "<option title='{$term->name}' value='{$term->slug}'>{$term_display}</option>";
                                     }
                                     ?>
                                 </select>
@@ -76,7 +76,7 @@
                                     $menu_items = chouquette_menu_items();
                                     if (!empty ($menu_items)) {
                                         foreach ($menu_items as $menu_item) :
-                                            echo sprintf("<option value='%d'>%s</option>", $menu_item->id, $menu_item->title);
+                                            echo "<option title='{$menu_item->title}' value='{$menu_item->object_id}'>{$menu_item->title}</option>";
                                         endforeach;
                                     } else {
                                         trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);

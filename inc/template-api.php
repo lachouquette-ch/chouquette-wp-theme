@@ -4,7 +4,7 @@ function cq_location_dto(int $fiche_id)
 {
     $location = get_field(CQ_FICHE_LOCATION, $fiche_id);
     if (empty($location)) {
-        error_log(sprintf("Fiche %s has no location", $fiche_id));
+        error_log("Fiche {$fiche_id} has no location");
         return [];
     }
     return array(

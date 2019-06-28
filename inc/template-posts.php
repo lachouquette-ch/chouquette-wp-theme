@@ -13,7 +13,7 @@ if (!function_exists('chouquette_posts_fiche_contact')) :
                 $contact_mail = get_field(CQ_FICHE_MAIL, $_POST['fiche-id']);
                 chouquette_recaptcha(
                     function () use ($contact_mail) {
-                        $result = chouquette_mail($_POST['contact-name'], $_POST['contact-email'], $contact_mail, sprintf('Message de %s via lachouquette.ch', $_POST['contact-name']), $_POST['contact-content']);
+                        $result = chouquette_mail($_POST['contact-name'], $_POST['contact-email'], $contact_mail, "Message de {$_POST['contact-name']} via lachouquette.ch", $_POST['contact-content']);
                         if ($result) {
                             chouquette_ref_redirect('success', 'Email envoyé à ' . $contact_mail);
                         } else {

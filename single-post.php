@@ -111,7 +111,7 @@ while (have_posts()) :
                                                         }
                                                         if (chouquette_fiche_is_chouquettise($fiche->ID) && !empty($fiche_fields[CQ_FICHE_PHONE])) {
                                                             echo '<p class="mb-1">';
-                                                            echo sprintf('<a href="tel:%s" title="Téléphone"><i class="fas fa-phone-square pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
+                                                            echo "<a href='tel:{$fiche_fields[CQ_FICHE_PHONE]}' title='Téléphone'><i class='fas fa-phone-square pr-1'></i> {$fiche_fields[CQ_FICHE_PHONE]}</a>";
                                                             echo '</p>';
                                                         }
                                                         if (chouquette_fiche_is_chouquettise($fiche->ID) && !empty($fiche_fields[CQ_FICHE_WEB])) {

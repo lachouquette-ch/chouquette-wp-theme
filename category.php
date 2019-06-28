@@ -41,7 +41,7 @@ $locations = get_terms(array(
                                 <?php
                                 foreach ($sub_categories as $sub_category) {
                                     $attr_selected = isset($_GET['cat']) && $_GET['cat'] == $sub_category->slug ? 'selected' : '';
-                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $sub_category->name, $sub_category->slug, $attr_selected, $sub_category->name);
+                                    echo "<option title='{$sub_category->name}' value='{$sub_category->slug}' {$attr_selected}>{$sub_category->name}</option>";
                                 }
                                 ?>
                             </select>
@@ -54,13 +54,13 @@ $locations = get_terms(array(
                                     $location_display = $location->parent != 0 ? ' • ' : '';
                                     $location_display .= $location->name;
                                     $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $location->slug ? 'selected' : '';
-                                    echo sprintf("<option title='%s' value='%s' %s>%s</option>", $location->name, $location->slug, $attr_selected, $location_display);
+                                    echo "<option title='{$location->name}' value='{$location->slug}' {$attr_selected}>{$location_display}</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : sprintf('value="%s"', $_GET['search']) ?>>
+                            <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'"?>>
                         </div>
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>

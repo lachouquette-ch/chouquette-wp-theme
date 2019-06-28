@@ -96,8 +96,8 @@ EOT;
 
         /* Headers */
         $headers = array(
-            'Content-Type: text/html; charset=UTF-8',
-            sprintf('Reply-To: %s <%s>', $from_name, $from)
+            "Content-Type: text/html; charset=UTF-8",
+            "Reply-To: {$from_name} <{$from}>"
         );
         if (MAIL_BCC_FALLBACK) {
             $headers[] = 'Bcc: ' . MAIL_FALLBACK;

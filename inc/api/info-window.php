@@ -28,7 +28,7 @@ $is_chouquettise = chouquette_fiche_is_chouquettise($fiche->ID);
                 <span>
                     <?php
                     if (!empty($fiche_fields[CQ_FICHE_MAIL])) echo sprintf('<a href="mailto:%s" title="Email" class="link-secondary link-no-decoration mr-2"><i class="fas fa-at"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
-                    if (!empty($fiche_fields[CQ_FICHE_PHONE])) echo sprintf('<a href="tel:%s" title="Téléphone" class="link-secondary link-no-decoration mr-2"><i class="fas fa-phone-square"></i> %s</a>', $fiche_fields[CQ_FICHE_PHONE], $fiche_fields[CQ_FICHE_PHONE]);
+                    if (!empty($fiche_fields[CQ_FICHE_PHONE])) echo "<a href='tel:{$fiche_fields[CQ_FICHE_PHONE]}' title='Téléphone' class='link-secondary link-no-decoration mr-2'><i class='fas fa-phone-square'></i> {$fiche_fields[CQ_FICHE_PHONE]}</a>";
                     ?>
                 </span>
             </div>

@@ -44,7 +44,7 @@ if (!function_exists('chouquette_header_alert')) :
      */
     function chouquette_header_alert(string $alert_type, string $alert_message)
     {
-        echo sprintf('<div class="alert alert-%s alert-dismissible fade show mb-0 pt-4" role="alert">%s', $alert_type, $alert_message);
+        echo "<div class='alert alert-{$alert_type} alert-dismissible fade show mb-0 pt-4' role='alert'>{$alert_message}";
         echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
         echo '</div>';
     }

@@ -42,7 +42,7 @@ while (have_posts()) :
                                 ));
                                 foreach ($terms as $term) {
                                     $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($term));
-                                    echo sprintf("<option title='%s' value='%s'>%s (%s)</option>", $term->name, $term->slug, $term->name, $ambassador->display_name);
+                                    echo "<option title='{$term->name}' value='{$term->slug}'>{$term->name} ({$ambassador->display_name})</option>";
                                 }
                                 ?>
                         </select>

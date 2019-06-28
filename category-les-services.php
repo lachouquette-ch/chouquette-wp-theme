@@ -35,13 +35,13 @@ $locations = get_terms(array(
                             $location_display = $location->parent != 0 ? ' • ' : '';
                             $location_display .= $location->name;
                             $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $location->slug ? 'selected' : '';
-                            echo sprintf("<option title='%s' value='%s' %s>%s</option>", $location->name, $location->slug, $attr_selected, $location_display);
+                            echo "<option title='{$location->name}' value='{$location->slug}' {$attr_selected}>{$location_display}/option>";
                         }
                         ?>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : sprintf('value="%s"', $_GET['search']) ?>>
+                    <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'"; ?>
                 </div>
                 <div class="form-group col-md-4">
                     <button class="btn btn-primary" type="submit">Rechercher</button>
