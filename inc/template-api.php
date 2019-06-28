@@ -148,8 +148,8 @@ function cq_get_locations_for_category_prepare_query($category)
         'category_name' => isset($_GET['cat']) ? $_GET['cat'] : $category->slug,
         'meta_key' => CQ_FICHE_CHOUQUETTISE_TO,
         'meta_type' => 'DATE',
-        'orderby' => 'meta_value',
-        'order' => 'DESC',
+        'orderby' => 'meta_value date',
+        'order' => 'DESC DESC',
         'posts_per_page' => $number_of_fiches,
         'post_status' => 'any' // TODO to remove
     );
