@@ -10,6 +10,11 @@
 get_header();
 
 $category = get_queried_object();
+if (isset($_GET['cat'])) {
+    $selected_category = get_category_by_slug($_GET['cat']);
+} else {
+    $selected_category = $category;
+}
 $sub_categories = get_categories(array(
     'child_of' => $category->term_id,
     'hide_empty' => true
@@ -82,7 +87,7 @@ $locations = get_terms(array(
                 </form>
 
                 <?php
-                $args = cq_get_locations_for_category_prepare_query($category);
+                $args = cq_get_locations_for_category_prepare_query($selected_category);
                 $loop = new WP_Query($args);
                 $number_of_fiches = $loop->post_count;
 
@@ -91,7 +96,7 @@ $locations = get_terms(array(
                     echo '<div class="d-flex justify-content-around flex-wrap">';
                     while ($loop->have_posts()) :
                         $loop->the_post();
-                        $fiche_category = chouquette_category_get_single_sub_category(get_the_ID(), $category);
+                        $fiche_category = chouquette_category_get_single_sub_category(get_the_ID(), $selected_category);
                         $categories = chouquette_categories_get_tops(get_the_ID());
                         $taxonomies = chouquette_fiche_get_taxonomies(get_post());
                         $posts = get_posts(array(

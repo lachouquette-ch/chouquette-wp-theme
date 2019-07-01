@@ -37,7 +37,7 @@ function cq_get_locations_for_post($data)
 
     $dtos = [];
     foreach ($fiches as $fiche) {
-        $category = get_the_category($fiche->ID)[0];
+        $category = chouquette_categories($fiche->ID)[0];
 
         // populate result object
         $dto = cq_location_dto($fiche->ID);
@@ -145,7 +145,7 @@ function cq_get_locations_for_category_prepare_query($category)
 
     $args = array(
         'post_type' => CQ_FICHE_POST_TYPE,
-        'category_name' => isset($_GET['cat']) ? $_GET['cat'] : $category->slug,
+        'category_name' => $category->slug,
         'meta_key' => CQ_FICHE_CHOUQUETTISE_TO,
         'meta_type' => 'DATE',
         'orderby' => 'meta_value date',

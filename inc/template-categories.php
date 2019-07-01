@@ -7,14 +7,16 @@
 
 if (!(function_exists('chouquette_categories'))) :
     /**
-     * Gets all categories for given post or related fiches.
+     * Gets all categories for given post or related fiches. First is primary (if exists).
+     *
      * First try with fiches then fallback to post (if given as parameter).
      *
      * @param int $id the post/fiche id
+     * @param int $parent_id the parent id to limit the search. Default false : does not filter by parent
      *
      * @return array a unique array of categories
      */
-    function chouquette_categories(int $id)
+    function chouquette_categories(int $id, int $parent_id = null)
     {
         // get fiche
         $linkFiches = get_field(CQ_FICHE_SELECTOR, $id);
@@ -26,8 +28,26 @@ if (!(function_exists('chouquette_categories'))) :
 
         $categories = get_categories(array(
             'object_ids' => $taxonomy_ids,
-            'exclude_tree' => "8,9,285,1,14,257" // TODO remove after deployment
+            'exclude_tree' => "8,9,285,1,14,257", // TODO remove after deployment
+            'parent' => $parent_id ?: ''
         ));
+
+        // get principal category if any
+        foreach ($taxonomy_ids as $taxonomy_id) {
+            $principal_category_id = get_post_meta($taxonomy_id, YOAST_PRIMARY_CATEGORY_META, true);
+            if (!$principal_category_id) continue;
+
+            // reorder list (array)
+            $new_categories = array();
+            foreach($categories as $category) {
+                if ($category->term_id == $principal_category_id) {
+                    array_unshift($new_categories, $category);
+                } else {
+                    array_push($new_categories, $category);
+                }
+            }
+            $categories = $new_categories;
+        }
 
         return $categories;
     }
@@ -35,7 +55,7 @@ endif;
 
 if (!(function_exists('chouquette_categories_get_tops'))) :
     /**
-     * Gets top categories for given post (or fiche)
+     * Gets top categories for given post (or fiche). First is primary (if exists)
      *
      * @param int $id the post/fiche id
      *
@@ -113,17 +133,12 @@ if (!function_exists('chouquette_category_get_single_sub_category')) :
      */
     function chouquette_category_get_single_sub_category(int $post_id, object $parent_category)
     {
-        $result = get_categories(array(
-            'taxonomy' => 'category',
-            'object_ids' => $post_id,
-            'parent' => $parent_category->term_id,
-            'hide_empty' => true,
-            'number' => 1 // only one
-        ));
+        $categories = chouquette_categories($post_id, $parent_category->term_id);
         // if not subcategory
-        if (empty($result)) {
+        if (empty($categories)) {
             return $parent_category;
         }
-        return $result[0];
+
+        return $categories[0];
     }
 endif;

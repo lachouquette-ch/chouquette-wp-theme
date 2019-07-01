@@ -36,6 +36,8 @@ define('CQ_CATEGORY_MAX_FICHES', 30);
 define('ACF_FIELD_GROUP_TYPE', 'group');
 define('ACF_FIELD_TAXONOMY_TYPE', 'taxonomy');
 
+define('YOAST_PRIMARY_CATEGORY_META', '_yoast_wpseo_primary_category');
+
 define('CQ_TAXONOMY_LOCALISATION', 'cq_location');
 define('CQ_TAXONOMY_CRITERIA', 'cq_criteria');
 
