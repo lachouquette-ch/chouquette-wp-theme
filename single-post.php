@@ -255,7 +255,6 @@ while (have_posts()) :
                         // helper to show/hide fiche
                         showLocation: function (id) {
                             return true;
-                            //locations.get(<?php echo $fiche->ID; ?>).visibility
                         }
                     },
                     methods: {
@@ -274,17 +273,22 @@ while (have_posts()) :
 
                                         // action on marker
                                         marker.addListener('click', function () {
-                                            app.clearFiches(true);
+                                            app.clearFiches();
 
                                             // set currentLocation and toggle
-                                            app.currentLocation = loc;
-                                            $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
                                             if (app.currentMarker != this) {
+                                                app.currentLocation = loc;
+                                                $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
+
                                                 app.currentMarker = this;
                                                 map.setZoom(ZOOM_LEVEL_ACTIVED);
                                                 map.setCenter(app.currentMarker.getPosition());
                                                 bounce(app.currentMarker);
                                             } else {
+                                                if (app.currentLocation) {
+                                                    $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
+                                                }
+
                                                 app.currentMarker = null;
                                                 app.currentLocation = null;
                                             }
@@ -300,27 +304,28 @@ while (have_posts()) :
                                 this.currentMarker.setAnimation(null);
                             }
 
-                            if (app.markers.size > 1) {
-                                map.fitBounds(app.bounds);
-                            } else if (app.markers.size) {
-                                map.setCenter(app.markers.values().next().value.getPosition());
+                            if (this.markers.size > 1) {
+                                map.fitBounds(this.bounds);
+                            } else if (this.markers.size) {
+                                map.setCenter(this.markers.values().next().value.getPosition());
                             }
                         },
                         // locate on fiche on the map and activate animation
                         locateFiche: function (ficheId) {
-                            this.clearFiches();
+                            this.clearFiches(false);
 
-                            // no need to toggle fiche display. Bootstrap does that
                             targetLocation = this.locations.get(ficheId);
-                            if (targetLocation != app.currentLocation) {
-                                app.currentLocation = targetLocation;
-                                app.currentMarker = app.markers.get(ficheId);
+                            if (targetLocation != this.currentLocation) {
+                                this.currentLocation = targetLocation;
+                                // no need to toggle fiche, bootstrap does that already
+
+                                this.currentMarker = this.markers.get(ficheId);
                                 map.setZoom(ZOOM_LEVEL_ACTIVED);
-                                map.setCenter(app.currentMarker.getPosition());
-                                bounce(app.currentMarker);
+                                map.setCenter(this.currentMarker.getPosition());
+                                bounce(this.currentMarker);
                             } else {
-                                app.currentMarker = null;
-                                app.currentLocation = null;
+                                this.currentMarker = null;
+                                this.currentLocation = null;
                             }
                         },
                     }
