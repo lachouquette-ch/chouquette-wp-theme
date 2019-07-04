@@ -38,7 +38,7 @@ define('ACF_FIELD_TAXONOMY_TYPE', 'taxonomy');
 
 define('YOAST_PRIMARY_CATEGORY_META', '_yoast_wpseo_primary_category');
 
-define('CQ_TAXONOMY_LOCALISATION', 'cq_location');
+define('CQ_TAXONOMY_LOCATION', 'cq_location');
 define('CQ_TAXONOMY_CRITERIA', 'cq_criteria');
 
 define('CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne');

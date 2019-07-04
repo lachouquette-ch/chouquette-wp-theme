@@ -56,7 +56,7 @@
                                         <option title="" value="">Où veux-tu aller ?</option>
                                         <?php
                                         $terms = get_terms(array(
-                                            'taxonomy' => CQ_TAXONOMY_LOCALISATION,
+                                            'taxonomy' => CQ_TAXONOMY_LOCATION,
                                             'hide_empty' => false,
                                             'orderby' => 'term_group'
                                         ));

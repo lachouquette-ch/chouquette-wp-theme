@@ -21,7 +21,7 @@ $sub_categories = get_categories(array(
 ));
 
 $locations = get_terms(array(
-    'taxonomy' => CQ_TAXONOMY_LOCALISATION,
+    'taxonomy' => CQ_TAXONOMY_LOCATION,
     'hide_empty' => false,
     'orderby' => 'term_group'
 ));

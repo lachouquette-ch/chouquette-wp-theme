@@ -35,7 +35,7 @@ while (have_posts()) :
                             <option value="" selected>Tous</option>
                                 <?php
                                 $terms = get_terms(array(
-                                    'taxonomy' => CQ_TAXONOMY_LOCALISATION,
+                                    'taxonomy' => CQ_TAXONOMY_LOCATION,
                                     'hide_empty' => false,
                                     'parent' => 0,
                                     'orderby' => 'name'

@@ -41,7 +41,7 @@ if (!function_exists('chouquette_posts_contact')) :
                 return;
             }
 
-            $localisation = get_term_by('slug', $_POST['contact-localisation'], CQ_TAXONOMY_LOCALISATION);
+            $localisation = get_term_by('slug', $_POST['contact-localisation'], CQ_TAXONOMY_LOCATION);
             if ($localisation) {
                 $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($localisation));
                 if ($ambassador) {
