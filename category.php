@@ -56,10 +56,11 @@ $locations = get_terms(array(
                                 <option title="" value="">Où ça ...</option>
                                 <?php
                                 foreach ($locations as $location) {
-                                    $location_display = $location->parent != 0 ? ' • ' : '';
+                                    $term_style = $location->parent == 0 ? 'font-weight: bold' : '';
+                                    $location_display = $location->parent != 0 ? '&nbsp;&nbsp;' : '';
                                     $location_display .= $location->name;
                                     $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $location->slug ? 'selected' : '';
-                                    echo "<option title='{$location->name}' value='{$location->slug}' {$attr_selected}>{$location_display}</option>";
+                                    echo "<option title='{$location->name}' value='{$location->slug}' style='${term_style}' {$attr_selected}>{$location_display}</option>";
                                 }
                                 ?>
                             </select>

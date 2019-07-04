@@ -61,9 +61,10 @@
                                             'orderby' => 'term_group'
                                         ));
                                         foreach ($terms as $term) {
-                                            $term_display = $term->parent != 0 ? ' • ' : '';
+                                            $term_style = $term->parent == 0 ? 'font-weight: bold' : '';
+                                            $term_display = $term->parent != 0 ? '&nbsp;&nbsp;' : '';
                                             $term_display .= $term->name;
-                                            echo "<option title='{$term->name}' value='{$term->slug}'>{$term_display}</option>";
+                                            echo "<option title='{$term->name}' value='{$term->slug}' style='${term_style}'>{$term_display}</option>";
                                         }
                                         ?>
                                     </select>
