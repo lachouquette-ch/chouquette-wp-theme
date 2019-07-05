@@ -49,9 +49,9 @@ while (have_posts()) :
         </div>
 
         <div class="row cq-single-post-content">
-            <?php echo sprintf('<div class="%s px-lg-0">', empty($linkFiches) ? 'col' : 'col-lg-8'); ?>
+            <?php echo sprintf('<div class="%s pl-lg-0">', empty($linkFiches) ? 'col' : 'col-lg-8'); ?>
             <div class="cq-single-post-content-title mt-3 mb-2">
-                <h1 class="mr-2"><?php the_title(); ?></h1>
+                <h1 class="mr-2 mb-4"><?php the_title(); ?></h1>
             </div>
             <main class="cq-single-post-content-text">
                 <?php the_content(); ?>
@@ -74,12 +74,12 @@ while (have_posts()) :
                             $fiche_categories = chouquette_categories_get_tops($fiche->ID);
                             ?>
                             <div class="card">
-                                <div class="card-header cq-fiches-header text-center">
-                                    <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration w-100" data-toggle="collapse"
+                                <div class="card-header cq-fiches-header">
+                                    <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration" data-toggle="collapse"
                                        href="<?php echo '#ficheContent' . $fiche->ID; ?>"
                                        aria-expanded="false" aria-controls="collapseTwo" v-on:click="locateFiche(<?php echo $fiche->ID; ?>)">
-                                        <i class="shown far fa-minus-square float-left"></i>
-                                        <i class="hidden far fa-plus-square float-left"></i>
+                                        <i class="shown far fa-minus-square mr-2"></i>
+                                        <i class="hidden far fa-plus-square mr-2"></i>
                                         <?php echo $fiche->post_title ?>
                                     </a>
                                 </div>
@@ -89,7 +89,7 @@ while (have_posts()) :
                                         <nav>
                                             <div class="nav nav-tabs link-no-decoration" id="nav-tab" role="tablist">
                                                 <a class="nav-item nav-link active" id="info-tab" data-toggle="tab" href="<?php echo '#ficheInfo_' . $fiche->ID; ?>" role="tab" aria-controls="Infos"
-                                                   aria-selected="true"><i class="fas fa-info mr-2"></i>Fiche</a>
+                                                   aria-selected="true"><i class="fas fa-info mr-2"></i>Infos</a>
                                                 <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
                                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="<?php echo '#ficheContact_' . $fiche->ID; ?>" role="tab" aria-controls="Contact"
                                                        aria-selected="false"><i class="fas fa-user-edit mr-2"></i>Contact</a>
@@ -116,12 +116,12 @@ while (have_posts()) :
                                                         }
                                                         if (chouquette_fiche_is_chouquettise($fiche->ID) && !empty($fiche_fields[CQ_FICHE_WEB])) {
                                                             echo '<p class="mb-1">';
-                                                            echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> Site internet</a>', esc_url($fiche_fields[CQ_FICHE_WEB]));
+                                                            echo sprintf('<a href="%s" title="Site internet" target="_blank"><i class="fas fa-desktop pr-1"></i> %s</a>', esc_url($fiche_fields[CQ_FICHE_WEB]), $fiche_fields[CQ_FICHE_WEB]);
                                                             echo '</p>';
                                                         }
                                                         if (chouquette_fiche_is_chouquettise($fiche->ID) && !empty($fiche_fields[CQ_FICHE_MAIL])) {
                                                             echo '<p class="mb-1">';
-                                                            echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> Email</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url());
+                                                            echo sprintf('<a href="mailto:%s" title="Email"><i class="fas fa-at pr-1"></i> %s</a>', $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url(), $fiche_fields[CQ_FICHE_MAIL]);
                                                             echo '</p>';
                                                         }
                                                         ?>
@@ -182,7 +182,8 @@ while (have_posts()) :
                                                 <div class="tab-pane fade" id="<?php echo 'ficheContact_' . $fiche->ID; ?>" role="tabpanel">
                                                     <div class="card cq-fiche-contact">
                                                         <div class="card-body">
-                                                            <h2 class="card-title h4">Contact le propriétaire</h2>
+                                                            <h2 class="card-title h4">Contact <?php echo $fiche->post_title; ?></h2>
+                                                            <p>Une question, une demande, une réservation... écris-lui un petit mot directement ici <i class="far fa-smile"></i></p>
                                                             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                                                                 <div class="form-group">
                                                                     <label for="contactSenderName">Ton prénom / nom</label>

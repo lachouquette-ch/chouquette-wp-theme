@@ -71,6 +71,10 @@
   text-align: justify;
   text-justify: inter-word;
 
+  h3, h4 {
+    margin-top: 2rem;
+  }
+
   figure {
     text-align: center;
     max-width: 100%;
@@ -140,6 +144,10 @@
   .card-footer {
     background-color: $chouquette-yellow;
     color: $chouquette-darker-grey;
+  }
+
+  a {
+    @extend .link-no-decoration;
   }
 }
 
