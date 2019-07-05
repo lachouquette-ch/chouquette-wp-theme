@@ -10,13 +10,13 @@ while (have_posts()) :
     ?>
 
     <div class="container cq-contact my-5">
-        <h1 class="mb-5 cq-font text-center"><?php the_title() ?></h1>
+        <h1 class="mb-3 cq-font text-center"><?php the_title() ?></h1>
         <div class="mb-5 text-center"><?php the_content(); ?></div>
         <div class="container">
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputName">Nom *</label>
+                        <label for="inputName">Nom (et société) *</label>
                         <input type="text" class="form-control" id="inputName" placeholder="Nom" name="contact-name" required>
                     </div>
                     <div class="form-group col-md-6">
@@ -42,7 +42,7 @@ while (have_posts()) :
                                 ));
                                 foreach ($terms as $term) {
                                     $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($term));
-                                    echo "<option title='{$term->name}' value='{$term->slug}'>{$term->name} ({$ambassador->display_name})</option>";
+                                    echo sprintf("<option title='%s' value='%s'>%s %s</option>", $term->name, $term->slug, $term->name, $ambassador ? "({$ambassador->display_name})" : '');
                                 }
                                 ?>
                         </select>

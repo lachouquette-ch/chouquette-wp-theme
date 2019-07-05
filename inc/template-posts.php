@@ -42,19 +42,17 @@ if (!function_exists('chouquette_posts_contact')) :
             }
 
             $localisation = get_term_by('slug', $_POST['contact-localisation'], CQ_TAXONOMY_LOCATION);
-            if ($localisation) {
-                $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($localisation));
-                if ($ambassador) {
-                    $contact_mail = $ambassador->user_email;
-                } else {
-                    $contact_mail = MAIL_FALLBACK;
-                }
+            $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($localisation));
+            if ($ambassador) {
+                $contact_mail = $ambassador->user_email;
+            } else {
+                $contact_mail = MAIL_FALLBACK;
             }
             chouquette_recaptcha(
                 function () use ($contact_mail) {
                     $result = chouquette_mail($_POST['contact-name'], $_POST['contact-email'], $contact_mail, $_POST['contact-subject'], $_POST['contact-content']);
                     if ($result) {
-                        chouquette_ref_redirect('success', 'Email envoyé à ' . $contact_mail);
+                        chouquette_ref_redirect('success', 'Merci beaucoup pour ton message. Nous ferons au mieux pour te répondre dans les plus brefs délais.');
                     } else {
                         chouquette_ref_redirect('failure', "Echec de l'envoi de l'email à " . $contact_mail);
                     }
