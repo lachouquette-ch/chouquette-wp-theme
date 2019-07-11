@@ -133,14 +133,14 @@ add_action('rest_api_init', function () {
     ));
 });
 
-function cq_get_locations_for_category_prepare_query($category)
+function cq_get_locations_for_category_prepare_query($category, int $number = null, string $location = '', string $search = '', array $criterias = array())
 {
-    if (empty($_GET['num']) || $_GET['num'] < 1) {
+    if (is_null($number) || $number < 1) {
         $number_of_fiches = CQ_CATEGORY_PAGING_NUMBER;
-    } elseif ($_GET['num'] > CQ_CATEGORY_MAX_FICHES) {
+    } elseif ($number > CQ_CATEGORY_MAX_FICHES) {
         $number_of_fiches = CQ_CATEGORY_MAX_FICHES;
     } else {
-        $number_of_fiches = $_GET['num'];
+        $number_of_fiches = $number;
     }
 
     $args = array(
@@ -153,24 +153,21 @@ function cq_get_locations_for_category_prepare_query($category)
         'posts_per_page' => $number_of_fiches,
         'post_status' => 'any' // TODO to remove
     );
-    // filter search
-    if (!empty($_GET['search'])) {
-        $args['s'] = $_GET['search'];
-    }
     // filter location
     $args['tax_query'] = array('relation' => 'AND');
-    if (!empty($_GET['loc'])) {
+    if (!empty($location)) {
         $args['tax_query'][] = array(
             'taxonomy' => CQ_TAXONOMY_LOCATION,
             'field' => 'slug',
-            'terms' => $_GET['loc'],
+            'terms' => $location,
         );
     }
+    // filter search
+    if (!empty($search)) {
+        $args['s'] = $search;
+    }
     // filter criterias
-    $filtered_params = array_filter($_GET, function ($key) {
-        return substr_compare($key, 'cq_', 0, 3) == false;
-    }, ARRAY_FILTER_USE_KEY);
-    foreach ($filtered_params as $key => $value) {
+    foreach ($criterias as $key => $value) {
         $args['tax_query'][] = array(
             'taxonomy' => $key,
             'field' => 'slug',
@@ -193,7 +190,10 @@ function cq_get_locations_for_category($data)
     $result = array();
 
     $category = get_category_by_slug($data['slug']);
-    $args = cq_get_locations_for_category_prepare_query($category);
+    $criterias = array_filter($_GET, function ($key) {
+        return substr_compare($key, 'cq_', 0, 3) == false;
+    }, ARRAY_FILTER_USE_KEY);
+    $args = cq_get_locations_for_category_prepare_query($category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
 
     $fiches = new WP_Query($args);
     if ($fiches->have_posts()) {
