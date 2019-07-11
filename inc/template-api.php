@@ -161,7 +161,7 @@ function cq_get_locations_for_category_prepare_query($category)
     $args['tax_query'] = array('relation' => 'AND');
     if (!empty($_GET['loc'])) {
         $args['tax_query'][] = array(
-            'taxonomy' => 'cq_location',
+            'taxonomy' => CQ_TAXONOMY_LOCATION,
             'field' => 'slug',
             'terms' => $_GET['loc'],
         );
