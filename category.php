@@ -88,9 +88,7 @@ $locations = get_terms(array(
                 </form>
 
                 <?php
-                $criterias = array_filter($_GET, function ($key) {
-                    return substr_compare($key, 'cq_', 0, 3) == false;
-                }, ARRAY_FILTER_USE_KEY);
+                $criterias = cq_filter_criterias_params($_GET);
                 $args = cq_get_locations_for_category_prepare_query($selected_category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
                 $loop = new WP_Query($args);
                 $number_of_fiches = $loop->post_count;

@@ -133,6 +133,12 @@ add_action('rest_api_init', function () {
     ));
 });
 
+function cq_filter_criterias_params(array $queryParams) {
+    return array_filter($queryParams, function ($key) {
+        return substr_compare($key, 'cq_', 0, 3) == false;
+    }, ARRAY_FILTER_USE_KEY);
+}
+
 function cq_get_locations_for_category_prepare_query($category, int $number = null, string $location = '', string $search = '', array $criterias = array())
 {
     if (is_null($number) || $number < 1) {
@@ -190,9 +196,7 @@ function cq_get_locations_for_category($data)
     $result = array();
 
     $category = get_category_by_slug($data['slug']);
-    $criterias = array_filter($_GET, function ($key) {
-        return substr_compare($key, 'cq_', 0, 3) == false;
-    }, ARRAY_FILTER_USE_KEY);
+    $criterias = cq_filter_criterias_params($_GET);
     $args = cq_get_locations_for_category_prepare_query($category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
 
     $fiches = new WP_Query($args);
