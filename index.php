@@ -52,7 +52,7 @@
                         <form :action="action" id="app">
                             <div class="row">
                                 <div class="col-md-4 index-header-filters-item">
-                                    <select class="form-control" title="Où veux-tu aller ?" name="loc">
+                                    <select class="form-control" title="Où veux-tu aller ?" name="loc" v-model="loc">
                                         <option title="" value="">Où veux-tu aller ?</option>
                                         <?php
                                         $terms = get_terms(array(
@@ -87,7 +87,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 index-header-filters-item">
-                                    <input class="form-control" type="text" placeholder="Un mot clef ?" name="search">
+                                    <input class="form-control" type="text" placeholder="Un mot clef ?" name="search" v-model="search">
                                 </div>
                             </div>
                             <div class="row">
@@ -192,7 +192,9 @@
             el: '#app',
             data() {
                 return {
-                    cat: ''
+                    loc: '',
+                    cat: '',
+                    search: ''
                 }
             },
             computed: {
@@ -200,6 +202,8 @@
                 action: function () {
                     if (this.cat) {
                         return `category/${this.cat}`;
+                    } else if (this.loc) {
+                        return `location/${this.loc}`;
                     }
                 }
             },

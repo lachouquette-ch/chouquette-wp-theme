@@ -89,29 +89,35 @@ function cq_get_taxonomies_for_category($data)
         return $field;
     }
 
-    $category = get_category_by_slug($data['slug']);
-
-    // get upper categories
-    $categories = array($category->term_id => $category);
-    while ($category->category_parent != 1232) { // TODO Should be 0
-        $category = get_category($category->category_parent);
-        $categories[$category->term_id] = $category;
-    }
-
-    // get field objects terms
     $taxonomy_fields = array();
-    foreach ($categories as $category) {
-        $the_field = chouquette_acf_get_field_object($category->slug)[0];
-        if ($the_field['type'] == ACF_FIELD_GROUP_TYPE) {
-            foreach ($the_field['sub_fields'] as $sub_field) {
-                if ($sub_field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
-                    $taxonomy_fields[$sub_field['taxonomy']] = $sub_field;
+    if (!empty($data['slug'])) {
+        $category = get_category_by_slug($data['slug']);
+
+        // get upper categories
+        $categories = array($category->term_id => $category);
+        while ($category->category_parent != 1232) { // TODO Should be 0
+            $category = get_category($category->category_parent);
+            $categories[$category->term_id] = $category;
+        }
+
+        // get field objects terms
+        foreach ($categories as $category) {
+            $the_field = chouquette_acf_get_field_object($category->slug)[0];
+            if ($the_field['type'] == ACF_FIELD_GROUP_TYPE) {
+                foreach ($the_field['sub_fields'] as $sub_field) {
+                    if ($sub_field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
+                        $taxonomy_fields[$sub_field['taxonomy']] = $sub_field;
+                    }
                 }
+            } elseif ($the_field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
+                $taxonomy_fields[$the_field['taxonomy']] = $the_field;
             }
-        } elseif ($the_field['type'] == ACF_FIELD_TAXONOMY_TYPE) {
-            $taxonomy_fields[$the_field['taxonomy']] = $the_field;
         }
     }
+
+    // add overall criterias
+    $other_field = chouquette_acf_get_field_object(CQ_TAXONOMY_CRITERIA)[0];
+    $taxonomy_fields[CQ_TAXONOMY_CRITERIA] = $other_field;
 
     // add terms and built DTO
     $result = [];
@@ -127,13 +133,14 @@ function cq_get_taxonomies_for_category($data)
 }
 
 add_action('rest_api_init', function () {
-    register_rest_route('cq/v1', '/category/(?P<slug>[\w-]+)/taxonomy', array(
+    register_rest_route('cq/v1', '/category(?:/(?P<slug>[\w-]+))?/taxonomy', array(
         'methods' => 'GET',
         'callback' => 'cq_get_taxonomies_for_category',
     ));
 });
 
-function cq_filter_criterias_params(array $queryParams) {
+function cq_filter_criterias_params(array $queryParams)
+{
     return array_filter($queryParams, function ($key) {
         return substr_compare($key, 'cq_', 0, 3) == false;
     }, ARRAY_FILTER_USE_KEY);
@@ -223,5 +230,94 @@ add_action('rest_api_init', function () {
     register_rest_route('cq/v1', '/category/(?P<slug>[\w-]+)/fiche', array(
         'methods' => 'GET',
         'callback' => 'cq_get_locations_for_category',
+    ));
+});
+
+function cq_get_locations_for_location_prepare_query($location, int $number = null, string $category = '', string $search = '', array $criterias = array())
+{
+    if (is_null($number) || $number < 1) {
+        $number_of_fiches = CQ_CATEGORY_PAGING_NUMBER;
+    } elseif ($number > CQ_CATEGORY_MAX_FICHES) {
+        $number_of_fiches = CQ_CATEGORY_MAX_FICHES;
+    } else {
+        $number_of_fiches = $number;
+    }
+
+    $args = array(
+        'post_type' => CQ_FICHE_POST_TYPE,
+        'meta_key' => CQ_FICHE_CHOUQUETTISE_TO,
+        'meta_type' => 'DATE',
+        'orderby' => 'meta_value date',
+        'order' => 'DESC DESC',
+        'posts_per_page' => $number_of_fiches,
+        'post_status' => 'any', // TODO to remove
+        'tax_query' => [
+            'relation' => 'AND',
+            [
+                'taxonomy' => CQ_TAXONOMY_LOCATION,
+                'field' => 'slug',
+                'terms' => $location->slug,
+            ]
+        ]
+    );
+    // filter category
+    if (!empty($category)) {
+        $args['category_name'] = $category;
+    }
+    // filter search
+    if (!empty($search)) {
+        $args['s'] = $search;
+    }
+    // filter criterias
+    foreach ($criterias as $key => $value) {
+        $args['tax_query'][] = array(
+            'taxonomy' => $key,
+            'field' => 'slug',
+            'terms' => $value,
+            'operator' => 'AND'
+        );
+    }
+
+    return $args;
+}
+
+/**
+ * REST API to get all locations for a given location
+ *
+ * @param $data GET params with location 'slug'
+ * @return array of object(id, lat, lng)
+ */
+function cq_get_locations_for_location($data)
+{
+    $result = array();
+
+    $location = get_term_by('slug', $data['slug'], CQ_TAXONOMY_LOCATION);
+    $criterias = cq_filter_criterias_params($_GET);
+    $args = cq_get_locations_for_location_prepare_query($location, $_GET['num'] ?? null, $_GET['cat'] ?? '', $_GET['search'] ?? '', $criterias);
+
+    $fiches = new WP_Query($args);
+    if ($fiches->have_posts()) {
+        while ($fiches->have_posts()) {
+            $fiches->the_post();
+            $fiche = get_post();
+            $fiche_category = chouquette_categories_get_tops($fiche->ID)[0];
+
+            $dto = array('id' => $fiche->ID);
+            $dto['title'] = get_the_title($fiche->ID);
+            $dto['location'] = cq_location_dto($fiche->ID);
+            $dto['icon'] = chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID));
+            $dto['categories'] = cq_categories_dto($fiche->ID);
+            $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            $dto['chouquettise'] = chouquette_fiche_is_chouquettise($fiche->ID);
+            $result[] = $dto;
+        }
+    }
+    return $result;
+}
+
+add_action('rest_api_init', function () {
+    register_rest_route('cq/v1', '/location/(?P<slug>[\w-]+)/fiche', array(
+        'methods' => 'GET',
+        'callback' => 'cq_get_locations_for_location',
     ));
 });
