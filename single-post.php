@@ -245,10 +245,9 @@ while (have_posts()) :
                         if ($tops_posts->have_posts()) :
                             while ($tops_posts->have_posts()) :
                                 $tops_posts->the_post();
-                                ?>
-                                <div class="swiper-slide bg-dark text-white"> <?php
-                                    get_template_part('template-parts/article-card');
-                                    ?> </div> <?php
+                                echo '<div class="swiper-slide bg-dark text-white">';
+                                get_template_part('template-parts/article-card');
+                                echo '</div>';
                             endwhile;
                             // Restore original Post Data
                             wp_reset_postdata();
