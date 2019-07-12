@@ -35,7 +35,7 @@ $locations = get_terms(array(
                             $location_display = $location->parent != 0 ? ' • ' : '';
                             $location_display .= $location->name;
                             $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $location->slug ? 'selected' : '';
-                            echo "<option title='{$location->name}' value='{$location->slug}' {$attr_selected}>{$location_display}></option>";
+                            echo "<option title='{$location->name}' value='{$location->slug}' {$attr_selected}>{$location_display}</option>";
                         }
                         ?>
                     </select>
@@ -212,4 +212,7 @@ $locations = get_terms(array(
         });
     </script>
 <?php
+
+wp_enqueue_script('category-les-services', get_template_directory_uri() . '/category-les-services.js', ['vue', 'underscore'], CQ_THEME_VERSION, true);
+
 get_footer();
