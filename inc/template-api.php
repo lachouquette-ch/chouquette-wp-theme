@@ -90,8 +90,8 @@ function cq_get_taxonomies_for_category($data)
     }
 
     $taxonomy_fields = array();
-    if (!empty($data['slug'])) {
-        $category = get_category_by_slug($data['slug']);
+    if (!empty($data['cat'])) {
+        $category = get_category_by_slug($data['cat']);
 
         // get upper categories
         $categories = array($category->term_id => $category);
@@ -133,7 +133,7 @@ function cq_get_taxonomies_for_category($data)
 }
 
 add_action('rest_api_init', function () {
-    register_rest_route('cq/v1', '/category(?:/(?P<slug>[\w-]+))?/taxonomy', array(
+    register_rest_route('cq/v1', '/category/taxonomy', array(
         'methods' => 'GET',
         'callback' => 'cq_get_taxonomies_for_category',
     ));

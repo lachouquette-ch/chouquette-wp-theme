@@ -9,7 +9,17 @@
 
 get_header();
 
-$location = get_queried_object();
+$search_categories = array_map(function ($item) {
+    return get_category($item->object_id);
+}, chouquette_menu_items());
+$default_category = '';
+
+$search_locations = get_categories(array(
+    'taxonomy' => CQ_TAXONOMY_LOCATION,
+    'child_of' => get_queried_object()->term_id,
+    'hide_empty' => false
+));
+$default_location = isset($_GET['loc']) ? get_term_by('slug', $_GET['loc'], CQ_TAXONOMY_LOCATION) : get_queried_object();
 
 ?>
     <div id="app" class="container-fluid">
@@ -20,41 +30,32 @@ $location = get_queried_object();
                 <div id="fichesMap" class="category-map"></div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
-                <h1 class="text-center my-4 cq-font">Résultats pour <?php echo single_cat_title(); ?></h1>
+                <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
                 <form class="mb-4 px-4">
-                    <h3 class="mb-3 h5">J'affine ma recherche :</h3>
+                    <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <select class="form-control" title="Sous catégorie" name="cat"
+                            <select id="search-cat" class="form-control" title="Sous catégorie" name="cat"
                                     onchange="app.refreshCriterias(this.options[this.selectedIndex].value)">
-                                <option title="" value="">Je veux ...</option>
+                                <option title="" value="<?php echo $default_category->slug ?? '' ?>">Je veux ...</option>
                                 <?php
-                                // get menu items
-                                $menu_items = chouquette_menu_items();
-                                if (!empty ($menu_items)) {
-                                    foreach ($menu_items as $menu_item) :
-                                        $category = get_category($menu_item->object_id);
-                                        $attr_selected = isset($_GET['cat']) && $_GET['cat'] == $category->slug ? 'selected' : '';
-                                        echo "<option title='{$menu_item->title}' value='{$category->slug}' {$attr_selected}>{$category->name}</option>";
-                                    endforeach;
-                                } else {
-                                    trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
+                                foreach ($search_categories as $search_category) {
+                                    $attr_selected = isset($_GET['cat']) && $_GET['cat'] == $search_category->slug ? 'selected' : '';
+                                    echo "<option title='{$search_category->name}' value='{$search_category->slug}' {$attr_selected}>{$search_category->name}</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <select id="search-loc" class="form-control" title="Où veux-tu aller ?" name="loc">
-                                <option title="" value="<?php echo $location->slug ?>">Où ça ...</option>
+                                <option title="" value="<?php echo $default_location->slug ?? '' ?>">Où ça ...</option>
                                 <?php
-                                $sub_locations = get_categories(array(
-                                    'taxonomy' => CQ_TAXONOMY_LOCATION,
-                                    'child_of' => $location->term_id,
-                                    'hide_empty' => true
-                                ));
-                                foreach ($sub_locations as $sub_location) {
-                                    $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $sub_location->slug ? 'selected' : '';
-                                    echo "<option title='{$sub_location->name}' value='{$sub_location->slug}' {$attr_selected}>{$sub_location->name}</option>";
+                                foreach ($search_locations as $search_location) {
+                                    $term_style = $search_location->parent == 0 ? 'font-weight: bold' : '';
+                                    $search_location_display = $search_location->parent != 0 ? '&nbsp;&nbsp;' : '';
+                                    $search_location_display .= $search_location->name;
+                                    $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $search_location->slug ? 'selected' : '';
+                                    echo "<option title='{$search_location->name}' value='{$search_location->slug}' style='${term_style}' {$attr_selected}>{$search_location_display}</option>";
                                 }
                                 ?>
                             </select>
@@ -83,7 +84,11 @@ $location = get_queried_object();
 
                 <?php
                 $criterias = cq_filter_criterias_params($_GET);
-                $args = cq_get_locations_for_location_prepare_query($location, $_GET['num'] ?? null, $_GET['cat'] ?? '', $_GET['search'] ?? '', $criterias);
+                if ($default_category) {
+                    $args = cq_get_locations_for_category_prepare_query($default_category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
+                } else {
+                    $args = cq_get_locations_for_location_prepare_query($default_location, $_GET['num'] ?? null, $_GET['cat'] ?? '', $_GET['search'] ?? '', $criterias);
+                }
                 $loop = new WP_Query($args);
                 $number_of_fiches = $loop->post_count;
 
@@ -165,7 +170,6 @@ $location = get_queried_object();
             </div>
         </div>
     </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
@@ -201,7 +205,9 @@ $location = get_queried_object();
                 return {
                     criterias: null,
                     hasCriterias: false,
+                    category: null,
                     location: null,
+                    ficheApiURL : '',
                     currentMarker: null,
                     markers: new Map(),
                     currentInfoWindow: null,
@@ -228,7 +234,7 @@ $location = get_queried_object();
                 // get criterias from remote based on given category
                 refreshCriterias: function (category) {
                     axios
-                        .get(`http://chouquette.test/wp-json/cq/v1/category/${category}/taxonomy`)
+                        .get(`http://chouquette.test/wp-json/cq/v1/category/taxonomy?cat=${category}`)
                         .then(function (response) {
                             response.data.forEach(function (taxonomy) {
                                 taxonomy.terms.forEach(function (term) {
@@ -269,7 +275,7 @@ $location = get_queried_object();
                 addFichesToMap: function () {
                     axios({
                         method: 'get',
-                        url: `http://chouquette.test/wp-json/cq/v1/location/${this.location}/fiche` + location.search,
+                        url: this.ficheApiURL + location.search,
                     })
                         .then(function (response) {
                             app.bounds = new google.maps.LatLngBounds();
@@ -344,9 +350,18 @@ $location = get_queried_object();
                 this.$_params = new URLSearchParams(queryParams);
             },
             mounted() {
+                // get selections
                 var selectedLocation = document.getElementById("search-loc");
                 this.location = selectedLocation.options[selectedLocation.selectedIndex].value;
-                this.refreshCriterias();
+                var selectCategory = document.getElementById("search-cat");
+                this.category = selectCategory.options[selectCategory.selectedIndex].value;
+                this.refreshCriterias(this.category);
+
+                if (this.category) {
+                    this.ficheApiURL = `http://chouquette.test/wp-json/cq/v1/category/${this.category}/fiche`;
+                } else {
+                    this.ficheApiURL = `http://chouquette.test/wp-json/cq/v1/location/${this.location}/fiche`;
+                }
 
                 // scroll to current fiche
                 var num = this.$_params.get('num');
