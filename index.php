@@ -185,29 +185,7 @@
         </div>
 
     </div>
+<?php
+wp_enqueue_script('index', get_template_directory_uri() . '/index.js', null, null, true);
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data() {
-                return {
-                    loc: '',
-                    cat: '',
-                    search: ''
-                }
-            },
-            computed: {
-                // helper to create proper grid columns
-                action: function () {
-                    if (this.cat) {
-                        return `category/${this.cat}`;
-                    } else if (this.loc) {
-                        return `location/${this.loc}`;
-                    }
-                }
-            },
-        });
-    </script>
-
-<?php get_footer(); ?>
+get_footer();
