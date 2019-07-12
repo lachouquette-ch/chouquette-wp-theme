@@ -59,18 +59,9 @@ while (have_posts()) :
             </form>
         </div>
     </div>
-
-    <script>
-        var recaptchaEnabler = function () {
-            grecaptcha.execute('<?php echo CQ_RECAPTCHA_SITE ?>', {action: 'contact'}).then(function (token) {
-                var elements = document.getElementsByName("recaptcha-response");
-                for (i = 0; i < elements.length; i++) {
-                    elements[i].value = token;
-                }
-            });
-        };
-    </script>
 <?php
 endwhile;
+
+wp_enqueue_script('template_contact', get_template_directory_uri() . '/template-contact.js', null, null, true);
 
 get_footer();

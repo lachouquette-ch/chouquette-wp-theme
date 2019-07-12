@@ -27,6 +27,11 @@
     </div>
 </footer>
 
+<script>
+    // Global variables
+    CQ_RECAPTCHA_SITE = "<?php echo CQ_RECAPTCHA_SITE ?>";
+</script>
+
 <?php wp_footer(); ?>
 
 <!-- needs jquery -->
