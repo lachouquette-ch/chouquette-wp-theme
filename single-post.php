@@ -215,6 +215,7 @@ while (have_posts()) :
                 </div>
             </aside>
         <?php endif; ?>
+        </div>
 
         <div class="row cq-single-post-author">
             <div class="col border shadow-sm text-center m-3 m-lg-0">
