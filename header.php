@@ -10,6 +10,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<span id="colTrigger" class="d-none d-md-inline"></span>
 
 <?php
 if ( !is_home() ) :

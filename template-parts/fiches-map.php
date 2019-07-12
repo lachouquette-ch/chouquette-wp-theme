@@ -17,7 +17,6 @@ $default_location = get_query_var('default_location');
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
                 <a class="category-fiche-target" id="targetMap"></a>
-                <span id="colTrigger" class="d-none d-md-inline"></span>
                 <div id="fichesMap" class="category-map"></div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
@@ -168,4 +167,4 @@ $default_location = get_query_var('default_location');
 
 <?php
 
-wp_enqueue_script('fiches-map', get_template_directory_uri() . '/template-parts/fiches-map.js', ['vue', 'google-maps'], CQ_THEME_VERSION, true);
+wp_enqueue_script('fiches-map', get_template_directory_uri() . '/template-parts/fiches-map.js', ['vue', 'google-maps', 'underscore'], CQ_THEME_VERSION, true);
