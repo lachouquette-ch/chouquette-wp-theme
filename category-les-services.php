@@ -48,7 +48,7 @@ $locations = get_terms(array(
                 </div>
             </div>
             <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
-            <div id="collapseCriteria" v-bind:class="{ show: hasCriterias }" class="collapse category-criteria  mt-2">
+            <div id="collapseCriteria" v-bind:class="{ show: hasCriterias }" class="collapse fiches-map-criteria  mt-2">
                 <div class="container-fluid">
                     <div v-for="criteriaRow in criteriaRows" class="row">
                         <div v-for="criteria in criteriaRow" class="col-md-6 pt-2 px-2">
@@ -70,7 +70,7 @@ $locations = get_terms(array(
         $loop = new WP_Query($args);
         $number_of_fiches = $loop->post_count;
 
-        echo '<div class="category-fiche-container py-4">';
+        echo '<div class="fiches-map-fiche-container py-4">';
         if ($loop->have_posts()):
             echo '<div class="d-flex justify-content-around flex-wrap">';
             while ($loop->have_posts()) :
@@ -88,10 +88,10 @@ $locations = get_terms(array(
                     )
                 ));
                 ?>
-                <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'category-fiche-chouquettise'; ?>">
-                    <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
-                    <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
-                        <div class="category-fiche-header-icon">
+                <article id="<?php echo get_the_ID(); ?>" class="card fiches-map-fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'category-fiche-chouquettise'; ?>">
+                    <a class="fiches-map-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
+                    <div class="card-header fiches-map-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
+                        <div class="fiches-map-fiche-header-icon">
                             <?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?>
                         </div>
                     </div>
