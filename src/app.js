@@ -11,9 +11,6 @@ require("bootstrap-select/dist/js/i18n/defaults-fr_FR");
 
 import Swiper from 'swiper';
 
-/* JS imports */
-require("./mailchimp.js");
-
 /* CSS imports */
 require("./styles/main.scss");
 
