@@ -30,7 +30,7 @@ while (have_posts()) :
     </div>
 <?php endif; ?>
 
-    <article class="container cq-single-post">
+    <article id="<?php echo get_the_ID(); ?>" class="container cq-single-post">
         <div class="row cq-single-post-header mt-0 mt-lg-4">
             <div class="col p-0">
                 <?php the_post_thumbnail('large', ['class' => 'cq-single-post-header-img']); ?>
@@ -214,126 +214,7 @@ while (have_posts()) :
                     </div>
                 </div>
             </aside>
-
-            <!-- Only load map if has fiches -->
-            <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-            <script>
-                var map = null; // google map
-
-                function initMap() {
-                    map = new google.maps.Map(document.getElementById('fichesMap'), {
-                        zoom: 15,
-                        disableDefaultUI: true,
-                        gestureHandling: 'cooperative',
-                        restriction: {
-                            latLngBounds: SWITZERLAND_BOUNDS,
-                            strictBounds: false,
-                        },
-                        styles: MAP_STYLES,
-                    });
-
-                    google.maps.event.addListener(map, "click", function (event) {
-                        app.clearFiches(true);
-                        if (app.markers.size > 1) map.fitBounds(app.bounds);
-                    });
-
-                    app.addLocationsToMap();
-                };
-
-                var app = new Vue({
-                    el: '#app',
-                    data() {
-                        return {
-                            locations: new Map(),
-                            markers: new Map(),
-                            bounds: null,
-                            currentMarker: null,
-                            currentLocation: null
-                        }
-                    },
-                    computed: {
-                        // helper to show/hide fiche
-                        showLocation: function (id) {
-                            return true;
-                        }
-                    },
-                    methods: {
-                        addLocationsToMap: function () {
-                            axios({
-                                method: 'get',
-                                url: 'http://chouquette.test/wp-json/cq/v1/post/<?php echo get_the_ID() ?>/location',
-                            })
-                                .then(function (response) {
-                                    app.bounds = new google.maps.LatLngBounds();
-                                    response.data.forEach(function (loc) {
-                                        var marker = new google.maps.Marker({position: loc, icon: loc.icon, map: map});
-                                        app.markers.set(loc.id, marker);
-                                        app.locations.set(loc.id, loc);
-                                        app.bounds.extend(marker.getPosition());
-
-                                        // action on marker
-                                        marker.addListener('click', function () {
-                                            app.clearFiches();
-
-                                            // set currentLocation and toggle
-                                            if (app.currentMarker != this) {
-                                                app.currentLocation = loc;
-                                                $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
-
-                                                app.currentMarker = this;
-                                                map.setZoom(ZOOM_LEVEL_ACTIVED);
-                                                map.setCenter(app.currentMarker.getPosition());
-                                                bounce(app.currentMarker);
-                                            } else {
-                                                if (app.currentLocation) {
-                                                    $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
-                                                }
-
-                                                app.currentMarker = null;
-                                                app.currentLocation = null;
-                                            }
-                                        });
-                                    });
-
-                                    app.clearFiches();
-                                });
-                        },
-                        // stop current animation and close fiches
-                        clearFiches: function () {
-                            if (this.currentMarker) {
-                                this.currentMarker.setAnimation(null);
-                            }
-
-                            if (this.markers.size > 1) {
-                                map.fitBounds(this.bounds);
-                            } else if (this.markers.size) {
-                                map.setCenter(this.markers.values().next().value.getPosition());
-                            }
-                        },
-                        // locate on fiche on the map and activate animation
-                        locateFiche: function (ficheId) {
-                            this.clearFiches(false);
-
-                            targetLocation = this.locations.get(ficheId);
-                            if (targetLocation != this.currentLocation) {
-                                this.currentLocation = targetLocation;
-                                // no need to toggle fiche, bootstrap does that already
-
-                                this.currentMarker = this.markers.get(ficheId);
-                                map.setZoom(ZOOM_LEVEL_ACTIVED);
-                                map.setCenter(this.currentMarker.getPosition());
-                                bounce(this.currentMarker);
-                            } else {
-                                this.currentMarker = null;
-                                this.currentLocation = null;
-                            }
-                        },
-                    }
-                })
-            </script>
         <?php endif; ?>
-        </div>
 
         <div class="row cq-single-post-author">
             <div class="col border shadow-sm text-center m-3 m-lg-0">
@@ -389,17 +270,11 @@ while (have_posts()) :
             </div>
         <?php endif; ?>
     </article>
-
-    <script>
-        var recaptchaEnabler = function () {
-            grecaptcha.execute('<?php echo CQ_RECAPTCHA_SITE ?>', {action: 'article'}).then(function (token) {
-                var elements = document.getElementsByName("recaptcha-response");
-                for (i = 0; i < elements.length; i++) {
-                    elements[i].value = token;
-                }
-            });
-        };
-    </script>
 <?php
 endwhile;
+
+wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', null, null, true);
+wp_enqueue_script('google-maps-custom', get_template_directory_uri() . '/js/google-maps.js', null, null, true);
+wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=" . CQ_GOOGLEMAPS_KEY . "&callback=bootstrapMap", null, null, true);
+
 get_footer();
