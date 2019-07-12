@@ -157,6 +157,8 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_enqueue_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js', null, null, true);
 
+        wp_enqueue_script('underscore', 'https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js', null, null, true);
+
         wp_enqueue_script('vendor', get_template_directory_uri() . '/dist/vendor.js', null, CQ_THEME_VERSION, true);
 
         wp_enqueue_script('recaptcha', "https://www.google.com/recaptcha/api.js?render=" . CQ_RECAPTCHA_SITE, null, null, true);

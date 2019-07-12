@@ -30,6 +30,7 @@
 <script>
     // Global variables
     CQ_RECAPTCHA_SITE = "<?php echo CQ_RECAPTCHA_SITE ?>";
+    CQ_CATEGORY_PAGING_NUMBER = <?php echo CQ_CATEGORY_PAGING_NUMBER ?>;
 </script>
 
 <?php wp_footer(); ?>
