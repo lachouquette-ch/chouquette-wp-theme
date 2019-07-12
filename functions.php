@@ -8,8 +8,7 @@
  */
 
 /* Chouquette constants */
-$chouquette_theme = wp_get_theme();
-define('CQ_THEME_VERSION', $chouquette_theme->get('Version'));
+define('CQ_THEME_VERSION', wp_get_theme()->get('Version'));
 define('CQ_PRIMARY_MENU', 'primary-menu');
 define('CQ_FOOTER_MENU', 'footer-menu');
 
@@ -147,21 +146,31 @@ add_action('after_setup_theme', 'chouquette_setup');
 if (!function_exists('chouquette_scripts')) :
     function chouquette_scripts()
     {
+        /* styles */
+
         wp_enqueue_style('style', get_template_directory_uri() . '/dist/style.css', null, CQ_THEME_VERSION, 'all');
 
         wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.7.2/css/all.css', null, null, 'all');
 
-        wp_enqueue_script('mailchimp', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', null, null, true);
+        /* scripts registry */
 
-        wp_enqueue_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js', null, null, true);
+        wp_register_script('mailchimp', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', null, null, true);
 
-        wp_enqueue_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js', null, null, true);
+        wp_register_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js', null, null, true);
 
-        wp_enqueue_script('underscore', 'https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js', null, null, true);
+        wp_register_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js', ['axios'], null, true);
+
+        wp_register_script('underscore', 'https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js', null, null, true);
+
+        wp_register_script('google-maps-custom', get_template_directory_uri() . '/js/google-maps.js', null, null, true);
+
+        wp_register_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=" . CQ_GOOGLEMAPS_KEY . "&callback=bootstrapMap", ['google-maps-custom'], null, true);
+
+        wp_register_script('recaptcha', "https://www.google.com/recaptcha/api.js?render=" . CQ_RECAPTCHA_SITE, null, null, true);
+
+        /* scripts (mandatory) */
 
         wp_enqueue_script('vendor', get_template_directory_uri() . '/dist/vendor.js', null, CQ_THEME_VERSION, true);
-
-        wp_enqueue_script('recaptcha', "https://www.google.com/recaptcha/api.js?render=" . CQ_RECAPTCHA_SITE, null, null, true);
 
         wp_enqueue_script('script', get_template_directory_uri() . '/dist/app.js', null, CQ_THEME_VERSION, true);
 
@@ -172,6 +181,16 @@ if (!function_exists('chouquette_scripts')) :
     }
 endif;
 add_action('wp_enqueue_scripts', 'chouquette_scripts');
+
+/**
+ * Hack to add async and defer for google maps
+ */
+function google_maps_add_async_defer_attribute($tag, $handle) {
+    if ( 'google-maps' !== $handle )
+        return $tag;
+    return str_replace( ' src', ' async defer src', $tag );
+}
+add_filter('script_loader_tag', 'google_maps_add_async_defer_attribute', 10, 2);
 
 /**
  * PHPMailer configuration

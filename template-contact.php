@@ -62,6 +62,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
-wp_enqueue_script('template_contact', get_template_directory_uri() . '/template-contact.js', null, null, true);
+wp_enqueue_script('template_contact', get_template_directory_uri() . '/template-contact.js', ['recaptcha'], null, true);
 
 get_footer();

@@ -273,8 +273,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', null, null, true);
-wp_enqueue_script('google-maps-custom', get_template_directory_uri() . '/js/google-maps.js', null, null, true);
-wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=" . CQ_GOOGLEMAPS_KEY . "&callback=bootstrapMap", null, null, true);
+wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['vue', 'recaptcha', 'google-maps'], null, true);
 
 get_footer();

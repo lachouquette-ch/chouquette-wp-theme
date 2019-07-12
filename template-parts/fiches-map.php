@@ -168,6 +168,4 @@ $default_location = get_query_var('default_location');
 
 <?php
 
-wp_enqueue_script('fiches-map', get_template_directory_uri() . '/template-parts/fiches-map.js', null, null, true);
-wp_enqueue_script('google-maps-custom', get_template_directory_uri() . '/js/google-maps.js', null, null, true);
-wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=" . CQ_GOOGLEMAPS_KEY . "&callback=bootstrapMap", null, null, true);
+wp_enqueue_script('fiches-map', get_template_directory_uri() . '/template-parts/fiches-map.js', ['vue', 'google-maps'], CQ_THEME_VERSION, true);
