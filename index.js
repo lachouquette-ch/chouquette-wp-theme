@@ -15,6 +15,9 @@ var app = new Vue({
             } else if (this.loc) {
                 return `location/${this.loc}`;
             }
+        },
+        searchName: function () {
+            return (this.cat || this.loc) ? 'search' : 's';
         }
     },
 });

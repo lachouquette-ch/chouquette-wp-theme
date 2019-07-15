@@ -15,9 +15,9 @@
                 <a href="<?php bloginfo('atom_url'); ?>" title="RSS"><i class="fas fa-rss ml-3"></i></a>
                 <a href="#" title="Recherche" class="d-none d-md-inline-block" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search ml-3"></i></a>
             </div>
-            <form class="d-md-none">
+            <form action='/' class="d-md-none">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="search" placeholder="Recherche" aria-label="Search">
+                    <input class="form-control" type="search" name="s" placeholder="Recherche" aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
@@ -32,9 +32,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form>
+                <form action="/">
                     <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Mots clefs ?" aria-label="Mots clefs ?">
+                        <input class="form-control" type="search" name="s" placeholder="Mots clefs ?" aria-label="Mots clefs ?" autofocus />
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                         </div>

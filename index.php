@@ -87,7 +87,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 index-header-filters-item">
-                                    <input class="form-control" type="text" placeholder="Un mot clef ?" name="search" v-model="search">
+                                    <input class="form-control" type="text" placeholder="Un mot clef ?" :name="searchName" v-model="search">
                                 </div>
                             </div>
                             <div class="row">
