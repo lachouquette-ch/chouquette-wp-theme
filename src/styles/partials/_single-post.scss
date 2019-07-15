@@ -53,6 +53,11 @@
   }
 }
 
+/* Wordpress hack to handle fixed menu and admin bar */
+.admin-bar #gotoFiche {
+  top: $header-height + 46px;
+}
+
 #fichesTarget:target {
   display: block;
   position: relative;
