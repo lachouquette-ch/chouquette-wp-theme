@@ -85,58 +85,10 @@ $default_location = get_query_var('default_location');
                 echo '<div class="category-fiche-container py-4">';
                 if ($loop->have_posts()):
                     echo '<div class="d-flex justify-content-around flex-wrap">';
-                    while ($loop->have_posts()) :
+                    while ($loop->have_posts()) {
                         $loop->the_post();
-                        if ($default_category) {
-                            $fiche_category = chouquette_category_get_single_sub_category(get_the_ID(), $default_category);
-                        } else {
-                            $fiche_category = chouquette_categories_get_tops(get_the_ID())[0];
-                        }
-                        $taxonomies = chouquette_fiche_get_taxonomies(get_post());
-                        $posts = get_posts(array(
-                            'meta_query' => array(
-                                array(
-                                    'key' => CQ_FICHE_SELECTOR, // name of custom field
-                                    'value' => '"' . get_the_ID() . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
-                                    'compare' => 'LIKE'
-                                )
-                            )
-                        ));
-                        ?>
-                        <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'category-fiche-chouquettise'; ?>">
-                            <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
-                            <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
-                                <div class="category-fiche-header-icon">
-                                    <?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo get_the_title(); ?></h5>
-                                <p class="card-text"><?php echo get_the_content(); ?></p>
-                                <?php
-                                $terms = chouquette_fiche_flatten_terms($taxonomies);
-                                if (!empty($terms)):
-                                    ?>
-                                    <p class="card-text small text-secondary">
-                                        <?php
-                                        echo implode(", ", array_slice($terms, 0, 4));
-                                        echo sizeof($terms) > 4 ? '...' : '';
-                                        ?>
-                                    </p>
-                                <?php endif; ?>
-                                <div class="w-100">
-                                    <?php
-                                    if (!empty($posts)) {
-                                        $lastest_post = $posts[0];
-                                        echo sprintf('<a href="%s" title="%s" class="btn btn-sm btn-outline-secondary">Article</a>', get_the_permalink($lastest_post), esc_html($lastest_post->post_title));
-                                    }
-                                    ?>
-                                    <button class="btn btn-sm btn-outline-secondary" v-on:click="locateFiche(<?php echo get_the_ID(); ?>)">Voir</button>
-                                </div>
-                            </div>
-                        </article>
-                    <?php
-                    endwhile;
+                        get_template_part('template-parts/fiche');
+                    }
                     echo '</div>';
                     echo '<div class="text-center mt-3">';
                     global $wp;

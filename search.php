@@ -55,28 +55,21 @@ global $wp_query;
         $loop->parse_query_vars();
         ?>
         <h3 class="m-3"><?php echo sprintf(_n('%s fiche trouvée', '%s fiches trouvées', $loop->found_posts), $loop->found_posts); ?></h3>
-        <?php if ($loop->have_posts()): ?>
-        <div class="d-flex justify-content-center flex-wrap">
-            <?php while ($loop->have_posts()): $loop->the_post(); ?>
-                <div class="card m-1 mt-3" style="width: 16rem;">
-                    <?php the_post_thumbnail('medium', ['class' => 'card-img-top']); ?>
-                    <div class="card-body">
-                        <h5 class="card-title"><?php the_title(); ?></h5>
-                        <p class="card-text"><?php the_excerpt(); ?></p>
-                        <a href="#" class="btn btn-primary">Voir la fiche</a>
-                    </div>
-                </div>
-            <?php
-            endwhile;
-            endif;
-
-            if ($loop->found_posts > $loop->post_count) {
-            echo '<div class="card m-1 mt-3" style="width: 16rem;">';
-                echo '<button class="btn btn-outline-secondary w-100" style="height: 100%">Les autres fiches</button>';
-            echo '</div>';
+        <?php
+        if ($loop->have_posts()) {
+            echo '<div class="d-flex justify-content-center flex-wrap">';
+            while ($loop->have_posts()) {
+                $loop->the_post();
+                get_template_part('template-parts/fiche');
             }
-            ?>
-        </div>
+        }
+
+        if ($loop->found_posts > $loop->post_count): ?>
+            <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4">
+                <button class="btn btn-outline-secondary w-100" style="height: 100%">Les autres fiches</button>
+            </article>
+        <?php endif; ?>
+    </div>
     </div>
 <?php
 
