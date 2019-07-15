@@ -70,7 +70,7 @@ global $wp_query;
             endwhile;
             endif;
 
-            if ($wp_query->found_posts > $wp_query->post_count) {
+            if ($loop->found_posts > $loop->post_count) {
             echo '<div class="card m-1 mt-3" style="width: 16rem;">';
                 echo '<button class="btn btn-outline-secondary w-100" style="height: 100%">Les autres fiches</button>';
             echo '</div>';
