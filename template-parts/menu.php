@@ -17,7 +17,7 @@
             </div>
             <form action='/' class="d-md-none">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="search" name="s" placeholder="Recherche" aria-label="Search">
+                    <input class="form-control" type="search" name="s" placeholder="Recherche" aria-label="Search" required>
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
@@ -34,7 +34,7 @@
             <div class="modal-body">
                 <form action="/">
                     <div class="input-group">
-                        <input class="form-control" type="search" name="s" placeholder="Mots clefs ?" aria-label="Mots clefs ?" autofocus />
+                        <input class="form-control" type="search" name="s" placeholder="Mots clefs ?" aria-label="Mots clefs ?" autofocus required/>
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                         </div>
