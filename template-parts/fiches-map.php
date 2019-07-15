@@ -16,10 +16,10 @@ $default_location = get_query_var('default_location');
     <div id="app" class="container-fluid">
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
-                <a class="fiches-map-fiche-target" id="targetMap"></a>
-                <div id="fichesMap" class="fiches-map-map"></div>
+                <a class="category-fiche-target" id="targetMap"></a>
+                <div id="fichesMap" class="category-map"></div>
             </div>
-            <div class="col-md-6 order-md-0 p-0 fiches-map-result-col">
+            <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
                 <form class="mb-4 px-4">
                     <h3 class="mb-3 h5">Je recherche :</h3>
@@ -56,7 +56,7 @@ $default_location = get_query_var('default_location');
                     </div>
                     <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
-                    <div id="collapseCriteria" v-bind:class="{ show: hasCriterias }" class="collapse fiches-map-criteria  mt-2">
+                    <div id="collapseCriteria" v-bind:class="{ show: hasCriterias }" class="collapse category-criteria  mt-2">
                         <div class="container-fluid">
                             <div v-for="criteriaRow in criteriaRows" class="row">
                                 <div v-for="criteria in criteriaRow" class="col-md-6 pt-2 px-2">
@@ -82,7 +82,7 @@ $default_location = get_query_var('default_location');
                 $loop = new WP_Query($args);
                 $number_of_fiches = $loop->post_count;
 
-                echo '<div class="fiches-map-fiche-container py-4">';
+                echo '<div class="category-fiche-container py-4">';
                 if ($loop->have_posts()):
                     echo '<div class="d-flex justify-content-around flex-wrap">';
                     while ($loop->have_posts()) :
@@ -103,10 +103,10 @@ $default_location = get_query_var('default_location');
                             )
                         ));
                         ?>
-                        <article id="<?php echo get_the_ID(); ?>" class="card fiches-map-fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'category-fiche-chouquettise'; ?>">
-                            <a class="fiches-map-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
-                            <div class="card-header fiches-map-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
-                                <div class="fiches-map-fiche-header-icon">
+                        <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'category-fiche-chouquettise'; ?>">
+                            <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
+                            <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
+                                <div class="category-fiche-header-icon">
                                     <?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?>
                                 </div>
                             </div>

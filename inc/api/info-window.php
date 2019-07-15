@@ -4,7 +4,7 @@ $fiche_fields = get_fields(get_the_ID());
 $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
 $is_chouquettise = chouquette_fiche_is_chouquettise($fiche->ID);
 ?>
-<div class="fiches-map-info-window container-fluid">
+<div class="category-info-window container-fluid">
     <div class="row">
         <div class="col-lg-3 text-center p-0 mb-2 mb-lg-0">
             <img width="100%" class="rounded d-none d-lg-block" src="<?php esc_url(the_post_thumbnail_url('thumbnail')); ?>" alt="<?php get_the_title($fiche->ID); ?>">
