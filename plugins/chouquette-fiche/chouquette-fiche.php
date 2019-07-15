@@ -31,7 +31,7 @@ if (!function_exists('chouquette_fiche_post_type')) :
             'show_in_nav_menus' => true,
             'can_export' => true,
             'has_archive' => false,
-            'exclude_from_search' => false,
+            'exclude_from_search' => true,
             'publicly_queryable' => true,
             'query_var' => true,
             'capability_type' => 'post'
