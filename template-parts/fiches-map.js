@@ -14,10 +14,10 @@ function bootstrapMap() {
         center: LAUSANNE_LOCALISATION
     });
 
-    google.maps.event.addListener(map, "click", function (event) {
+    /*google.maps.event.addListener(map, "click", function (event) {
         app.clearMap();
         if (app.markers.size > 1) map.fitBounds(app.bounds);
-    });
+    });*/
 
     app.addFichesToMap();
 };
@@ -69,7 +69,7 @@ var app = new Vue({
                             return;
                         }
 
-                        var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon, map: map});
+                        var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon});
                         marker.defaultZIndex = fiche.chouquettise ? Z_INDEX_CHOUQUETTISE : Z_INDEX_DEFAULT;
                         marker.setZIndex(marker.defaultZIndex); // to start
                         app.markers.set(fiche.id, marker);
@@ -91,7 +91,11 @@ var app = new Vue({
                             app.currentInfoWindow = infoWindow;
                             app.currentInfoWindow.open(map, app.currentMarker);
                         });
+
                     });
+
+                    // add marker clusterer
+                    new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: 'http://chouquette.test/wp-content/uploads/2019/07/m'});
 
                     if (app.markers.size > 1) {
                         map.fitBounds(app.bounds);

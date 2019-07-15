@@ -168,7 +168,9 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_register_script('google-maps-custom', get_template_directory_uri() . '/js/google-maps.js', null, null, true);
 
-        wp_register_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=" . CQ_GOOGLEMAPS_KEY . "&callback=bootstrapMap", ['google-maps-custom'], null, true);
+        wp_register_script('google-maps-marker-clusterer', 'https://cdn.jsdelivr.net/npm/gmaps-marker-clusterer@1.2.2/src/markerclusterer.min.js', null, null, true);
+
+        wp_register_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=" . CQ_GOOGLEMAPS_KEY . "&callback=bootstrapMap", ['google-maps-custom', 'google-maps-marker-clusterer'], null, true);
 
         wp_register_script('recaptcha', "https://www.google.com/recaptcha/api.js?render=" . CQ_RECAPTCHA_SITE, null, null, true);
 
@@ -189,11 +191,13 @@ add_action('wp_enqueue_scripts', 'chouquette_scripts');
 /**
  * Hack to add async and defer for google maps
  */
-function google_maps_add_async_defer_attribute($tag, $handle) {
-    if ( 'google-maps' !== $handle )
+function google_maps_add_async_defer_attribute($tag, $handle)
+{
+    if ('google-maps' !== $handle)
         return $tag;
-    return str_replace( ' src', ' async defer src', $tag );
+    return str_replace(' src', ' async defer src', $tag);
 }
+
 add_filter('script_loader_tag', 'google_maps_add_async_defer_attribute', 10, 2);
 
 /**
