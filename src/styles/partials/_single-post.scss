@@ -53,7 +53,7 @@
   }
 }
 
-/* Wordpress hack to handle fixed menu and admin bar */
+/* Wordpress hack to handle admin bar */
 .admin-bar #gotoFiche {
   top: $header-height + 46px;
 }
@@ -63,6 +63,11 @@
   position: relative;
   top: $header-height * -1.4;
   visibility: hidden;
+}
+
+/* Wordpress hack to handle admin bar */
+.admin-bar #fichesTarget:target {
+  top: $header-height * -1.4 - 46px;
 }
 
 .cq-single-post-content-title {
