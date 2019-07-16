@@ -40,7 +40,7 @@ $posts = get_posts(array(
         <?php
         endif;
         // only for category pages or locations
-        if (is_category() || is_tax(CQ_TAXONOMY_LOCATION) ):
+        if (is_category() && !is_category(CQ_CATEGORY_SERVICES) || is_tax(CQ_TAXONOMY_LOCATION)):
             ?>
             <div class="w-100">
                 <?php

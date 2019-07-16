@@ -21,7 +21,7 @@ define('CQ_CATEGORY_BAR_RETOS', 'bar-et-restaurant');
 define('CQ_CATEGORY_LOISIRS', 'loisirs');
 define('CQ_CATEGORY_CULTURE', 'culture-future');
 define('CQ_CATEGORY_SHOPPING', 'shopping');
-define('CQ_CATEGORY_CHOUCHOUS', 'services');
+define('CQ_CATEGORY_SERVICES', 'les-services');
 
 define('CQ_CATEGORY_LOGO_YELLOW', 'logo_yellow');
 define('CQ_CATEGORY_LOGO_WHITE', 'logo_white');
