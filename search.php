@@ -65,7 +65,7 @@ global $wp_query;
         }
 
         if ($loop->found_posts > $loop->post_count): ?>
-            <article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4">
+            <article id="<?php echo get_the_ID(); ?>" class="card fiche mb-4">
                 <button class="btn btn-outline-secondary w-100" style="height: 100%">Les autres fiches</button>
             </article>
         <?php endif; ?>

@@ -142,7 +142,7 @@ var app = new Vue({
         if (num) {
             var numGotoFiche = num - CQ_CATEGORY_PAGING_NUMBER;
             // compute first fiche to go to
-            var fiche = document.getElementsByClassName("category-fiche")[numGotoFiche];
+            var fiche = document.getElementsByClassName("fiche")[numGotoFiche];
             setTimeout(function () {
                 fiche.childNodes[0].scrollIntoView(true, {behavior: "smooth"});
             }, 1500);

@@ -1,0 +1,39 @@
+.fiche {
+  @extend .mx-md-2;
+  width: 280px;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    margin: 0 1rem;
+  }
+
+  &-chouquettise {
+    box-shadow: 0px 0px 3px 2px rgba($chouquette-yellow, 1);
+  }
+}
+
+.fiche-target {
+  display: block;
+  position: relative;
+  top: $header-height * -1.2;
+  visibility: hidden;
+}
+
+.fiche-header {
+  min-height: 250px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.fiche-header-icon {
+  @extend .rounded-circle;
+  @extend .float-left;
+  background-color: $chouquette-yellow;
+  padding: 0.75rem;
+
+  > img {
+    max-width: 35px;
+  }
+}

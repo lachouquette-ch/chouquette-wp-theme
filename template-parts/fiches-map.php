@@ -16,7 +16,7 @@ $default_location = get_query_var('default_location');
     <div id="app" class="container-fluid">
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
-                <a class="category-fiche-target" id="targetMap"></a>
+                <a class="fiche-target" id="targetMap"></a>
                 <div id="fichesMap" class="category-map"></div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">

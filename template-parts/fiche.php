@@ -17,10 +17,10 @@ $posts = get_posts(array(
     )
 ));
 ?>
-<article id="<?php echo get_the_ID(); ?>" class="card category-fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'category-fiche-chouquettise'; ?>">
-    <a class="category-fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
-    <div class="card-header category-fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
-        <div class="category-fiche-header-icon">
+<article id="<?php echo get_the_ID(); ?>" class="card fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'fiche-chouquettise'; ?>">
+    <a class="fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
+    <div class="card-header fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
+        <div class="fiche-header-icon">
             <?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?>
         </div>
     </div>
