@@ -146,6 +146,15 @@ function cq_filter_criterias_params(array $queryParams)
     }, ARRAY_FILTER_USE_KEY);
 }
 
+function cq_get_locations_for_id(int $id)
+{
+    return array(
+        'post_type' => CQ_FICHE_POST_TYPE,
+        'post__in' => [$id], // why doesn't p works... mystery
+        'post_status' => 'any', // TODO to remove
+    );
+}
+
 function cq_get_locations_for_category_prepare_query($category, int $number = null, string $location = '', string $search = '', array $criterias = array())
 {
     if (is_null($number) || $number < 1) {
@@ -204,8 +213,11 @@ function cq_get_locations_for_category($data)
 
     $category = get_category_by_slug($data['slug']);
     $criterias = cq_filter_criterias_params($_GET);
-    $args = cq_get_locations_for_category_prepare_query($category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
-
+    if ($_GET['id']) {
+        $args = cq_get_locations_for_id($_GET['id']);
+    } else {
+        $args = cq_get_locations_for_category_prepare_query($category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
+    }
     $fiches = new WP_Query($args);
     if ($fiches->have_posts()) {
         while ($fiches->have_posts()) {

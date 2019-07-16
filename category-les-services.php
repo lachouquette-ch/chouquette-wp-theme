@@ -66,7 +66,11 @@ $locations = get_terms(array(
 
         <?php
         $criterias = cq_filter_criterias_params($_GET);
-        $args = cq_get_locations_for_category_prepare_query($category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
+        if (!empty($_GET['id'])) {
+            $args = cq_get_locations_for_id($_GET['id']);
+        } else {
+            $args = cq_get_locations_for_category_prepare_query($category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
+        }
         $loop = new WP_Query($args);
         $number_of_fiches = $loop->post_count;
 

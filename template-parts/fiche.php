@@ -39,7 +39,7 @@ $posts = get_posts(array(
             </p>
         <?php
         endif;
-        // only for category pages or locations
+        // only for category pages or locations (not services)
         if (is_category() && !is_category(CQ_CATEGORY_SERVICES) || is_tax(CQ_TAXONOMY_LOCATION)):
             ?>
             <div class="w-100">
@@ -51,6 +51,9 @@ $posts = get_posts(array(
                 ?>
                 <button class="btn btn-sm btn-outline-secondary" v-on:click="locateFiche(<?php echo get_the_ID(); ?>)">Voir</button>
             </div>
-        <?php endif; ?>
+        <?php elseif (is_search()):
+            $fiche_link = add_query_arg('id', get_the_ID(), get_category_link($fiche_category));
+            echo "<a class='btn btn-sm btn-outline-secondary' href='${fiche_link}'>Voir</a>";
+        endif; ?>
     </div>
 </article>

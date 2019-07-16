@@ -74,7 +74,9 @@ $default_location = get_query_var('default_location');
 
                 <?php
                 $criterias = cq_filter_criterias_params($_GET);
-                if ($default_category) {
+                if (!empty($_GET['id'])) {
+                    $args = cq_get_locations_for_id($_GET['id']);
+                } elseif ($default_category) {
                     $args = cq_get_locations_for_category_prepare_query($default_category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
                 } else {
                     $args = cq_get_locations_for_location_prepare_query($default_location, $_GET['num'] ?? null, $_GET['cat'] ?? '', $_GET['search'] ?? '', $criterias);
