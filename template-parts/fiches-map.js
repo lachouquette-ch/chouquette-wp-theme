@@ -14,6 +14,9 @@ function bootstrapMap() {
         center: LAUSANNE_LOCALISATION
     });
 
+    var legend = document.getElementById('fichesMapLegend');
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
     google.maps.event.addListener(map, "click", function (event) {
         app.clearMap();
         if (app.markers.size > 1) map.fitBounds(app.bounds);

@@ -18,6 +18,9 @@ $default_location = get_query_var('default_location');
             <div class="col-md-6 order-md-1 p-0">
                 <a class="fiche-target" id="targetMap"></a>
                 <div id="fichesMap" class="category-map"></div>
+                <div id="fichesMapLegend" class="m-1 p-2 border rounded">
+                    <p class="m-0"><img height="20px" src="http://chouquette.test/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux <a href="what" class="link-secondary">chouquettisés</a></p>
+                </div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
