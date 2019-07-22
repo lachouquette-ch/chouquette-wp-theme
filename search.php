@@ -37,7 +37,11 @@ global $wp_query;
             endif;
 
             if ($wp_query->found_posts > $wp_query->post_count) {
-                echo '<button class="btn btn-outline-secondary w-100" style="height: 5rem;">Les autres articles</button>';
+                $more_posts_url = add_query_arg(array(
+                    'post_type' => 'post',
+                    'paged' => 2
+                ));
+                echo "<a href='$more_posts_url' class='btn btn-outline-secondary w-100' role='button' style='line-height: 5rem;'>Les autres articles</a>";
             }
             ?>
         </div>
@@ -46,8 +50,8 @@ global $wp_query;
             'post_type' => CQ_FICHE_POST_TYPE,
             'meta_key' => CQ_FICHE_CHOUQUETTISE_TO,
             'meta_type' => 'DATE',
-            'orderby' => 'meta_value',
-            'order' => 'DESC',
+            'orderby' => 'meta_value date',
+            'order' => 'DESC DESC',
             'post_status' => 'any' // TODO to remove
         );
         $args = array_merge($wp_query->query_vars, $args);
@@ -62,14 +66,19 @@ global $wp_query;
                 $loop->the_post();
                 get_template_part('template-parts/fiche');
             }
-        }
+            if ($loop->found_posts > $loop->post_count) {
+                $more_posts_url = add_query_arg(array(
+                    'post_type' => 'fiche',
+                    'paged' => 2
+                ));
 
-        if ($loop->found_posts > $loop->post_count): ?>
-            <article id="<?php echo get_the_ID(); ?>" class="card fiche mb-4">
-                <button class="btn btn-outline-secondary w-100" style="height: 100%">Les autres fiches</button>
-            </article>
-        <?php endif; ?>
-    </div>
+                echo sprintf('<article id="%s" class="card fiche mb-4">', get_the_ID());
+                echo "<a href='$more_posts_url' class='btn btn-outline-secondary d-flex align-items-center' role='button' style='height: 100%;'><span class='w-100 text-center'>Les autres fiches</span></a>";
+                echo '</article >';
+            }
+            echo '</div>';
+        }
+        ?>
     </div>
 <?php
 

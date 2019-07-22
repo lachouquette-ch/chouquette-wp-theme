@@ -189,11 +189,13 @@ add_action('wp_enqueue_scripts', 'chouquette_scripts');
 /**
  * Hack to add async and defer for google maps
  */
-function google_maps_add_async_defer_attribute($tag, $handle) {
-    if ( 'google-maps' !== $handle )
+function google_maps_add_async_defer_attribute($tag, $handle)
+{
+    if ('google-maps' !== $handle)
         return $tag;
-    return str_replace( ' src', ' async defer src', $tag );
+    return str_replace(' src', ' async defer src', $tag);
 }
+
 add_filter('script_loader_tag', 'google_maps_add_async_defer_attribute', 10, 2);
 
 /**
@@ -224,6 +226,26 @@ if (!function_exists('chouquette_smtp')) :
     }
 endif;
 add_action('phpmailer_init', 'chouquette_smtp');
+
+/**
+ * Custom search templates
+ */
+if (!function_exists('chouquette_custom_search')) :
+    function chouquette_custom_search($template)
+    {
+        global $wp_query;
+        if ($wp_query->is_search) {
+            switch (get_query_var('post_type')) {
+                case 'post':
+                    return locate_template('search-post.php');
+                case CQ_FICHE_POST_TYPE:
+                    return locate_template('search-fiche.php');
+            }
+        }
+        return $template;
+    }
+endif;
+add_filter('template_include', 'chouquette_custom_search');
 
 /**
  * Implement the Custom Header feature.

@@ -1,0 +1,8 @@
+// custom wordpress pagination
+.navigation.pagination {
+  @extend .w-100, .justify-content-center, .my-3;
+
+  a {
+    @extend .link-secondary, .link-no-decoration;
+  }
+}
