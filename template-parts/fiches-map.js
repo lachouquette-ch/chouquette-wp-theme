@@ -14,8 +14,13 @@ function bootstrapMap() {
         center: LAUSANNE_LOCALISATION
     });
 
-    var legend = document.getElementById('fichesMapLegend');
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+    google.maps.event.addListenerOnce(map, "tilesloaded", function (event) {
+        var legend = $(`
+            <div id="fichesMapLegend" class="m-1 p-2 border rounded">
+                <img height="20px" src="http://chouquette.test/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux <a href="http://test.com" class="link-secondary">chouquettisés</a> 
+            </div>`);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend.get(0));
+    });
 
     google.maps.event.addListener(map, "click", function (event) {
         app.clearMap();
