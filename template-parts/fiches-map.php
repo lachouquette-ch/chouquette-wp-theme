@@ -21,7 +21,7 @@ $default_location = get_query_var('default_location');
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
-                <form class="mb-4 px-4">
+                <form class="mb-4 px-4 <?php echo empty($_GET['id']) ? '' : 'd-none'?>">
                     <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -92,8 +92,8 @@ $default_location = get_query_var('default_location');
                         get_template_part('template-parts/fiche');
                     }
                     echo '</div>';
+
                     echo '<div class="text-center mt-3">';
-                    global $wp;
                     $current_url = "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                     $next_url = add_query_arg('num', $number_of_fiches + CQ_CATEGORY_PAGING_NUMBER, $current_url);
 
@@ -108,7 +108,11 @@ $default_location = get_query_var('default_location');
                         $pagination_text = "Plus de fiches";
                     }
 
-                    echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s" href="%s" role="button">%s</a>', $pagination_disabled ? 'disabled' : '', $next_url, $pagination_text);
+                    echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s %s" href="%s" role="button">%s</a>',
+                        $pagination_disabled ? 'disabled' : '',
+                        empty($_GET['id']) ? '' : 'd-none',
+                        $next_url,
+                        $pagination_text);
                     echo '</div>';
                 else:
                     echo "<span class='d-block text-center'>Pas de résultat pour cette recherche</span>";
