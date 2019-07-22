@@ -41,7 +41,7 @@
   }
 }
 
-.home-header-category-logo {
+.home-header-category-logo, .home-header-menu-next {
   @extend .rounded-circle;
   background-color: rgba($black, 0.5);
   width: 100px;

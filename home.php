@@ -99,10 +99,10 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center mb-5">
-                <a href="#homeContent">
-                    <i class="fas fa-chevron-down"></i>
-                    <p class="m-0">La suite</p>
+            <div class="home-header-menu-next align-self-center d-flex align-items-center justify-content-center mb-5">
+                <a href="#homeContent" class="text-center">
+                    <i class="fas fa-chevron-down"></i><br/>
+                    <span>La suite</span>
                 </a>
             </div>
         </div>
