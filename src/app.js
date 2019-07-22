@@ -6,8 +6,6 @@ require("textillate");
 require("swiper");
 require("swiper/dist/css/swiper.css");
 require("bootstrap");
-require("bootstrap-select");
-require("bootstrap-select/dist/js/i18n/defaults-fr_FR");
 
 import Swiper from 'swiper';
 
