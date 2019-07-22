@@ -95,8 +95,12 @@ var app = new Vue({
 
                     if (app.markers.size > 1) {
                         map.fitBounds(app.bounds);
-                    } else if (app.markers.size) {
-                        map.setCenter(app.markers.values().next().value.getPosition());
+                    } else if (app.markers.size) { // single marker
+                        app.currentMarker = app.markers.values().next().value;
+                        map.setCenter(app.currentMarker.getPosition());
+
+                        app.currentInfoWindow = app.infoWindows.values().next().value;
+                        app.currentInfoWindow.open(map, app.currentMarker);
                     }
                 });
         },
