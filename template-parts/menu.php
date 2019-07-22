@@ -65,7 +65,7 @@
                             <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary">Je m'inscris</button>
                         </div>
                     </div>
-                    <div id="mce-responses" class="index-newsletter-response">
+                    <div id="mce-responses" class="home-newsletter-response">
                         <div class="index-newsletter-response-error mt-2" id="mce-error-response" style="display:none"></div>
                         <div class="index-newsletter-response-success mt-2" id="mce-success-response" style="display:none"></div>
                     </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->

@@ -1,4 +1,4 @@
-.index-header {
+.home-header {
   height: 100vh;
   min-height: 500px;
   background-image: url('http://findme.elated-themes.com/wp-content/uploads/2017/06/h1-title-area-backround.jpg?id=1843');
@@ -25,23 +25,23 @@
   }
 }
 
-.index-header-menu {
+.home-header-menu {
   margin-top: -1 * $header-height;
 }
 
-.index-header-sn {
+.home-header-sn {
   font-size: 2rem;
   color: $chouquette-yellow;
 }
 
-.index-header-category {
+.home-header-category {
   h2 {
     font-size: 1rem;
     color: $chouquette-yellow;
   }
 }
 
-.index-header-category-logo {
+.home-header-category-logo {
   @extend .rounded-circle;
   background-color: rgba($black, 0.5);
   width: 100px;
@@ -53,12 +53,12 @@
   }
 }
 
-.index-header-category-icon {
+.home-header-category-icon {
   color: $white;
   font-size: 3rem;
 }
 
-.index-header-filters {
+.home-header-filters {
   width: 75%;
 
   @include media-breakpoint-only(xl) {
@@ -66,7 +66,7 @@
   }
 }
 
-.index-header-filters-item {
+.home-header-filters-item {
   @extend .p-0;
   margin-bottom: 1rem;
 
@@ -87,7 +87,7 @@
   }
 }
 
-.index-content {
+.home-content {
   h2 {
     font-family: $font-family-brand;
     font-size: 2rem;
@@ -98,7 +98,7 @@
   }
 }
 
-.index-content-latest-container {
+.home-content-latest-container {
   padding: 0.25rem;
 
   @include media-breakpoint-down(md) {
@@ -106,8 +106,8 @@
   }
 }
 
-.index-newsletter {
-  padding: 4rem 3rem;
+.home-newsletter {
+  //padding: 4rem 3rem;
   background-color: $chouquette-yellow;
   color: black;
 
@@ -121,7 +121,7 @@
   }
 }
 
-.index-newsletter-response {
+.home-newsletter-response {
   &-error, a {
     color: red;
   }

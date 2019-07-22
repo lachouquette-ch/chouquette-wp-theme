@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-    <header class="index-header p-0 container-fluid h-100">
+    <header class="home-header p-0 container-fluid h-100">
         <nav class="navbar navbar-chouquette">
             <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
             <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">
                 <h1><?php bloginfo('name'); ?></h1>
             </a>
-            <div class="index-header-sn mr-md-5 my-2">
+            <div class="home-header-sn mr-md-5 my-2">
                 <a href="<?php echo esc_url(CQ_SN_FACEBOOK); ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="<?php echo esc_url(CQ_SN_INSTAGRAM); ?>" title="Instagram"><i class="fab fa-instagram ml-4"></i></a>
                 <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-4"></i></a>
@@ -21,7 +21,7 @@
             </div>
         </nav>
 
-        <div class="index-header-menu d-flex flex-column h-100 p-3">
+        <div class="home-header-menu d-flex flex-column h-100 p-3">
             <div class="flex-grow-1">
                 <div class="d-flex flex-column h-100 justify-content-center align-items-center">
                     <div class="text-center">
@@ -34,9 +34,9 @@
                     if (!empty ($menu_items)) {
                         echo '<div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">';
                         foreach ($menu_items as $menu_item) :
-                            echo '<div class="index-header-category m-4">';
+                            echo '<div class="home-header-category m-4">';
                             echo sprintf("<a href='%s' title='%s'>", esc_url($menu_item->url), $menu_item->description);
-                            echo '<div class="index-header-category-logo p-3">';
+                            echo '<div class="home-header-category-logo p-3">';
                             echo chouquette_taxonomy_logo($menu_item);
                             echo '</div>';
                             echo "<h2 class='my-2'>{$menu_item->title}</h2>";
@@ -48,10 +48,10 @@
                         trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
                     }
                     ?>
-                    <div class="index-header-filters text-center">
+                    <div class="home-header-filters text-center">
                         <form :action="action" id="app">
                             <div class="row">
-                                <div class="col-md-4 index-header-filters-item">
+                                <div class="col-md-4 home-header-filters-item">
                                     <select class="form-control" title="Où veux-tu aller ?" name="loc" v-model="loc">
                                         <option title="" value="">Où veux-tu aller ?</option>
                                         <?php
@@ -69,7 +69,7 @@
                                         ?>
                                     </select>
                                 </div>
-                                <div class="col-md-4 index-header-filters-item">
+                                <div class="col-md-4 home-header-filters-item">
                                     <select class="form-control" title="Qu'aimerais-tu faire ?" name="cat" v-model="cat">
                                         <option title="" value="">Qu'aimerais-tu faire ?</option>
                                         <?php
@@ -86,12 +86,12 @@
                                         ?>
                                     </select>
                                 </div>
-                                <div class="col-md-4 index-header-filters-item">
+                                <div class="col-md-4 home-header-filters-item">
                                     <input class="form-control" type="text" placeholder="Un mot clef ?" :name="searchName" v-model="search">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col index-header-filters-item">
+                                <div class="col home-header-filters-item">
                                     <button class="btn btn-primary py-2 px-5" type="submit">Rechercher</button>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
         </div>
     </header>
 
-    <div class="index-content">
+    <div class="home-content">
         <div class="index-content-latest container my-3">
             <div class="row mb-xl-1">
                 <div class="col text-center">
@@ -117,7 +117,7 @@
                     <?php
                     while ($latest_posts->have_posts()) :
                         $latest_posts->the_post();
-                        echo '<div class="index-content-latest-container col-lg-4">';
+                        echo '<div class="home-content-latest-container col-lg-4">';
                         get_template_part('template-parts/article-card');
                         echo '</div>';
                     endwhile;
@@ -126,7 +126,7 @@
             <?php endif; ?>
         </div>
 
-        <div id="newsletter" class="container-fluid index-newsletter">
+        <div id="newsletter" class="container-fluid home-newsletter px-4 py-4 mt-5">
             <div class="row">
                 <div class="col-lg-6 m-md-auto mb-3">
                     <h2 class="w-75 m-auto text-center">Pour être dans la confidence du meilleur de chez toi</h2>
@@ -141,7 +141,7 @@
                                 <div class="col-lg-8 mb-2">
                                     <input type="email" value="" name="EMAIL" class="required email form-control form-control-lg w-100" id="mce-EMAIL" aria-describedby="emailHelp"
                                            placeholder="Ton email">
-                                    <div id="mce-responses" class="index-newsletter-response">
+                                    <div id="mce-responses" class="home-newsletter-response">
                                         <div class="index-newsletter-response-error mt-2" id="mce-error-response" style="display:none"></div>
                                         <div class="index-newsletter-response-success mt-2" id="mce-success-response" style="display:none"></div>
                                     </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
