@@ -79,11 +79,11 @@ $is_chouquettise = chouquette_fiche_is_chouquettise($fiche->ID);
         echo implode(", ", $terms);
         ?>
     </div>
+    <img width="100%" class="d-block d-lg-none mt-3" src="<?php esc_url(the_post_thumbnail_url('thumbnail')); ?>" alt="<?php get_the_title($fiche->ID); ?>">
     <?php if ($is_chouquettise): ?>
         <div class="row mt-2 float-right">
             <a href="<?php echo esc_url('https://maps.google.com/?q=' . $fiche_fields[CQ_FICHE_LOCATION]['address']); ?>" class="link-secondary" title="Ouvrir avec Google maps" target="_blank"><i
                         class="fas fa-map-marker-alt pr-1"></i> Ouvrir dans google maps</a>
         </div>
     <?php endif; ?>
-    <img width="100%" class="d-block d-lg-none mt-3" src="<?php esc_url(the_post_thumbnail_url('thumbnail')); ?>" alt="<?php get_the_title($fiche->ID); ?>">
 </div>
