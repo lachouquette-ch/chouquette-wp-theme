@@ -100,7 +100,7 @@ $default_location = get_query_var('default_location');
                     $current_url = "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                     $next_url = add_query_arg('num', $number_of_fiches + CQ_CATEGORY_PAGING_NUMBER, $current_url);
 
-                    if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches) {
+                    if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches || $number_of_fiches >= $loop->found_posts) {
                         $pagination_disabled = true;
                         $pagination_text = "Plus d'article pour cette recherche";
                     } elseif ($number_of_fiches >= CQ_CATEGORY_MAX_FICHES) {
