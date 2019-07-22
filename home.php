@@ -187,6 +187,6 @@
     </div>
 <?php
 
-wp_enqueue_script('index', get_template_directory_uri() . '/index.js', ['vue'], null, true);
+wp_enqueue_script('index', get_template_directory_uri() . '/home.js', ['vue'], null, true);
 
 get_footer();
