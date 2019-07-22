@@ -99,14 +99,20 @@
                     </div>
                 </div>
             </div>
+            <div class="text-center mb-5">
+                <a href="#homeContent">
+                    <i class="fas fa-chevron-down"></i>
+                    <p class="m-0">La suite</p>
+                </a>
+            </div>
         </div>
     </header>
 
-    <div class="home-content">
-        <div class="index-content-latest container my-3">
+    <div id="homeContent" class="home-content">
+        <div class="home-content-latest container">
             <div class="row mb-xl-1">
                 <div class="col text-center">
-                    <h2>Nos derniers articles</h2>
+                    <h2 class="my-4">Nos derniers articles</h2>
                 </div>
             </div>
             <?php
@@ -126,7 +132,7 @@
             <?php endif; ?>
         </div>
 
-        <div id="newsletter" class="container-fluid home-newsletter px-4 py-4 mt-5">
+        <div id="newsletter" class="container-fluid home-newsletter px-4 py-4 my-5">
             <div class="row">
                 <div class="col-lg-6 m-md-auto mb-3">
                     <h2 class="w-75 m-auto text-center">Pour être dans la confidence du meilleur de chez toi</h2>
@@ -157,7 +163,7 @@
             </div>
         </div>
 
-        <div class="container p-3 my-3">
+        <div class="container mb-4">
             <div class="row mb-3">
                 <div class="col text-center">
                     <h2>Nos tops !</h2>
