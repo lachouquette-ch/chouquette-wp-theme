@@ -15,16 +15,10 @@ function bootstrapMap() {
     });
 
     google.maps.event.addListenerOnce(map, "tilesloaded", function (event) {
-        var legend = $(`
-            <div id="fichesMapLegend" class="m-1 p-2 border rounded">
-                <img height="20px" src="http://chouquette.test/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux <a href="http://test.com" class="link-secondary">chouquettisés</a> 
-            </div>`);
+        var legend = $("#fichesMapLegend").children(0);
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend.get(0));
-    });
-
-    google.maps.event.addListener(map, "click", function (event) {
-        app.clearMap();
-        if (app.markers.size > 1) map.fitBounds(app.bounds);
+        var reset = $("#fichesMapReset").children(0);
+        map.controls[google.maps.ControlPosition.LEFT_TOP].push(reset.get(0));
     });
 
     app.addFichesToMap();
@@ -46,6 +40,10 @@ var app = new Vue({
         }
     },
     methods: {
+        resetMap: function() {
+            this.clearMap();
+            if (app.markers.size > 1) map.fitBounds(app.bounds);
+        },
         // stop current animation and close current info window
         clearMap: function () {
             if (app.currentMarker) {
@@ -77,7 +75,7 @@ var app = new Vue({
                             return;
                         }
 
-                        var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon, map: map});
+                        var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon});
                         marker.defaultZIndex = fiche.chouquettise ? Z_INDEX_CHOUQUETTISE : Z_INDEX_DEFAULT;
                         marker.setZIndex(marker.defaultZIndex); // to start
                         app.markers.set(fiche.id, marker);
@@ -100,6 +98,9 @@ var app = new Vue({
                             app.currentInfoWindow.open(map, app.currentMarker);
                         });
                     });
+
+                    // add marker clusterer
+                    new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: 'http://chouquette.test/wp-content/uploads/2019/07/m'});
 
                     if (app.markers.size > 1) {
                         map.fitBounds(app.bounds);

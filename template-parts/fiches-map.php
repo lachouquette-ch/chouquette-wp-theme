@@ -16,12 +16,24 @@ $default_location = get_query_var('default_location');
     <div id="app" class="container-fluid">
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
+                <div id="fichesMapLegend" class="d-none">
+                    <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                        <img height="40px" src="http://chouquette.test/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux
+                        <a href="http://test.com" class="link-secondary">chouquettisés</a>
+                    </div>
+                </div>
+                <div id="fichesMapReset" class="d-none">
+                    <button v-on:click="resetMap" draggable="false" title="Reset view map" aria-label="Reset view map" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"
+                            style="margin: 10px; height: 40px; width: 40px;">
+                        <i class="far fa-eye"></i>
+                    </button>
+                </div>
                 <a class="fiche-target" id="targetMap"></a>
                 <div id="fichesMap" class="category-map"></div>
             </div>
             <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
-                <form class="mb-4 px-4 <?php echo empty($_GET['id']) ? '' : 'd-none'?>">
+                <form class="mb-4 px-4 <?php echo empty($_GET['id']) ? '' : 'd-none' ?>">
                     <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
                         <div class="form-group col-md-4">
