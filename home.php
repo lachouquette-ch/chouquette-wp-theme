@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="home-header-menu-next align-self-center d-flex align-items-center justify-content-center mb-5">
+            <div class="home-header-menu-next align-self-center d-flex align-items-center justify-content-center">
                 <a href="#homeContent" class="text-center">
                     <i class="fas fa-chevron-down"></i><br/>
                     <span>La suite</span>
