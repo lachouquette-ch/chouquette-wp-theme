@@ -40,7 +40,7 @@ var app = new Vue({
         }
     },
     methods: {
-        resetMap: function() {
+        resetMap: function () {
             this.clearMap();
             if (app.markers.size > 1) map.fitBounds(app.bounds);
         },
@@ -71,7 +71,7 @@ var app = new Vue({
 
                         // create marker
                         if (_.isEmpty(fiche.location)) {
-                            console.log(`${fiche.title} has no location`);
+                            $("#" + fiche.id + " button").hide();
                             return;
                         }
 
