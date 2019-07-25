@@ -18,10 +18,15 @@ get_template_part('template-parts/fiche-report');
         <div class="row">
             <div class="col-md-6 order-md-1 p-0">
                 <div id="fichesMapLegend" class="d-none">
-                    <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
-                        <img height="40px" src="http://chouquette.test/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux
-                        <a href="http://test.com" class="link-secondary">chouquettisés</a>
-                    </div>
+                    <?php
+                    $url = get_page_by_title('Charte éditoriale') ? get_permalink(get_page_by_title('Charte éditoriale')) : null;
+                    if (!empty($url)) :
+                        ?>
+                        <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                            <img height="40px" src="http://chouquette.test/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux
+                            <a href="<?php echo $url; ?>" class="link-secondary">chouquettisés</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div id="fichesMapReset" class="d-none">
                     <button v-on:click="resetMap" draggable="false" title="Reset view map" aria-label="Reset view map" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"
