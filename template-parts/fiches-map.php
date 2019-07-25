@@ -23,7 +23,7 @@ get_template_part('template-parts/fiche-report');
                     if (!empty($url)) :
                         ?>
                         <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
-                            <img height="40px" src="http://chouquette.test/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux
+                            <img height="40px" src="/wp-content/uploads/2019/06/shopping-web_marker_yellow-e1561457387210.png"> Lieux
                             <a href="<?php echo $url; ?>" class="link-secondary">chouquettisés</a>
                         </div>
                     <?php endif; ?>

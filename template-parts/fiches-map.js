@@ -100,7 +100,7 @@ var app = new Vue({
                     });
 
                     // add marker clusterer
-                    new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: 'http://chouquette.test/wp-content/uploads/2019/07/m'});
+                    new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: '/wp-content/uploads/2019/07/m'});
 
                     if (app.markers.size > 1) {
                         map.fitBounds(app.bounds);
@@ -144,9 +144,9 @@ var app = new Vue({
         this.refreshCriterias(this.category);
 
         if (this.category) {
-            this.ficheApiURL = `http://chouquette.test/wp-json/cq/v1/category/${this.category}/fiche`;
+            this.ficheApiURL = `/wp-json/cq/v1/category/${this.category}/fiche`;
         } else {
-            this.ficheApiURL = `http://chouquette.test/wp-json/cq/v1/location/${this.location}/fiche`;
+            this.ficheApiURL = `/wp-json/cq/v1/location/${this.location}/fiche`;
         }
 
         // scroll to current fiche

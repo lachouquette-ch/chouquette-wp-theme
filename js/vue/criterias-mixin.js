@@ -23,7 +23,7 @@ var VUE_CRITERIAS_MIXIN = {
         // get criterias from remote based on given category
         refreshCriterias: function (category) {
             axios
-                .get(`http://chouquette.test/wp-json/cq/v1/category/taxonomy?cat=${category}`)
+                .get(`/wp-json/cq/v1/category/taxonomy?cat=${category}`)
                 .then(function (response) {
                     response.data.forEach(function (taxonomy) {
                         taxonomy.terms.forEach(function (term) {
