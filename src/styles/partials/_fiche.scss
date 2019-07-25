@@ -6,10 +6,6 @@
     width: 100%;
     margin: 0 1rem;
   }
-
-  &-chouquettise {
-    box-shadow: 0px 0px 3px 2px rgba($chouquette-yellow, 1);
-  }
 }
 
 .fiche-target {
@@ -30,10 +26,29 @@
 .fiche-header-icon {
   @extend .rounded-circle;
   @extend .float-left;
-  background-color: $chouquette-yellow;
+  background-color: $white;
   padding: 0.75rem;
 
   > img {
     max-width: 35px;
+  }
+}
+
+.fiche-report {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+
+  > i {
+    color: $chouquette-grey;
+  }
+}
+
+// special treatment to chouquettise
+.fiche-chouquettise {
+  box-shadow: 0px 0px 3px 2px rgba($chouquette-yellow, 1);
+
+  .fiche-header-icon {
+    background-color: $chouquette-yellow;
   }
 }

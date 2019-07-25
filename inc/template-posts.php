@@ -21,7 +21,7 @@ if (!function_exists('chouquette_posts_fiche_contact')) :
                         }
                     },
                     function () use ($contact_mail) {
-                        chouquette_ref_redirect('failure', "Problème lors de l'envoi de l'email à " . $contact_mail);
+                        chouquette_ref_redirect('failure', "Problème de validation de ton message (recaptcha). Merci de réessayer plus tard.");
                     }
                 );
             }
@@ -58,7 +58,7 @@ if (!function_exists('chouquette_posts_contact')) :
                     }
                 },
                 function () use ($contact_mail) {
-                    chouquette_ref_redirect('failure', "Problème lors de l'envoi de l'email à " . $contact_mail);
+                    chouquette_ref_redirect('failure', "Problème de validation de ton message (recaptcha). Merci de réessayer plus tard.");
                 }
             );
         }
@@ -66,3 +66,30 @@ if (!function_exists('chouquette_posts_contact')) :
 endif;
 add_action('admin_post_nopriv_contact', 'chouquette_posts_contact');
 add_action('admin_post_contact', 'chouquette_posts_contact');
+
+if (!function_exists('chouquette_posts_fiche_report')) :
+    function chouquette_posts_fiche_report()
+    {
+        if (!empty ($_POST)) {
+            if (isset($_POST['fiche-id'])) {
+                $fiche_title = get_the_title($_POST['fiche-id']);
+                chouquette_recaptcha(
+                    function () use ($fiche_title) {
+                        $fiche_edit_link = get_edit_post_link($_POST['fiche-id']);
+                        $result = chouquette_mail('do-not-reply', 'do-not-reply@lachouquette.ch', MAIL_FALLBACK, 'Commentaire sur la fiche ' . $fiche_title, $_POST['report-text'] . "<br/><a href='${fiche_edit_link}' target='_blank'>Editer la fiche</a>");
+                        if ($result) {
+                            chouquette_ref_redirect('success', sprintf('Merci beaucoup pour ton message concernant la fiche %s. Nous le traiterons dans les plus brefs délais :-)', $fiche_title));
+                        } else {
+                            chouquette_ref_redirect('failure', "Problème lors de l'envoi de ton commantaire sur la fiche " . $fiche_title);
+                        }
+                    },
+                    function () use ($fiche_title) {
+                        chouquette_ref_redirect('failure', "Problème de validation de ton message (recaptcha). Merci de réessayer plus tard.");
+                    }
+                );
+            }
+        }
+    }
+endif;
+add_action('admin_post_nopriv_fiche_report', 'chouquette_posts_fiche_report');
+add_action('admin_post_fiche_report', 'chouquette_posts_fiche_report');

@@ -28,7 +28,7 @@
 </header>
 
 <!-- Search Modal -->
-<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+<div class="modal fade cq-modal" id="searchModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -46,7 +46,7 @@
 </div>
 
 <!-- Newsletter Modal -->
-<div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalTitle" aria-hidden="true">
+<div class="modal fade cq-modal" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">

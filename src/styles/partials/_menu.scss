@@ -32,17 +32,3 @@
   }
 
 }
-
-#newsletterModal, #searchModal {
-  color: $white;
-
-  .close {
-    color: $chouquette-yellow;
-    opacity: 1;
-    text-shadow: none;
-  }
-
-  .modal-content {
-    background-color: rgba($black, 0.6);
-  }
-}

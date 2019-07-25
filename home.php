@@ -193,6 +193,6 @@
     </div>
 <?php
 
-wp_enqueue_script('index', get_template_directory_uri() . '/home.js', ['vue'], null, true);
+wp_enqueue_script('index', get_template_directory_uri() . '/home.js', ['vue'], CQ_THEME_VERSION, true);
 
 get_footer();

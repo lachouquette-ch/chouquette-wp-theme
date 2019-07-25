@@ -199,7 +199,7 @@ while (have_posts()) :
                                                                 </div>
                                                                 <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
                                                                 <input type="hidden" name="action" value="fiche_contact"> <!-- trigger fiche_contact -->
-                                                                <input type="hidden" name="fiche-id" value="<?php echo $fiche->ID ?>"> <!-- trigger fiche_contact -->
+                                                                <input type="hidden" name="fiche-id" value="<?php echo $fiche->ID ?>">
                                                                 <button type="submit" class="btn btn-primary">Envoyer</button>
                                                             </form>
                                                         </div>
@@ -273,6 +273,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['vue', 'recaptcha', 'google-maps'], null, true);
+wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['vue', 'recaptcha', 'google-maps'], CQ_THEME_VERSION, true);
 
 get_footer();

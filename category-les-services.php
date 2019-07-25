@@ -21,6 +21,7 @@ $locations = get_terms(array(
     'orderby' => 'term_group'
 ));
 
+get_template_part('template-parts/fiche-report');
 ?>
     <div id="app">
         <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>

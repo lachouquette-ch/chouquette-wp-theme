@@ -78,9 +78,30 @@ main {
   }
 }
 
-
 /* Fonts */
 
 .cq-font {
   font-family: $font-family-brand;
+}
+
+/* Modal */
+
+.cq-modal {
+  color: $white;
+
+  .close {
+    color: $chouquette-yellow;
+    opacity: 1;
+    text-shadow: none;
+  }
+
+  .modal-content {
+    background-color: rgba($black, 0.6);
+  }
+}
+
+/* Alerts */
+
+.alert {
+  z-index: 1; // get over google maps
 }

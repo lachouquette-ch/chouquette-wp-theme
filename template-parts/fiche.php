@@ -56,4 +56,7 @@ $posts = get_posts(array(
             echo "<a class='btn btn-sm btn-outline-secondary' href='${fiche_link}'>Voir</a>";
         endif; ?>
     </div>
+    <a class="fiche-report" title="Reporter une précision ou erreur sur la fiche" href="#" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>" data-fiche-id="<?php echo get_the_ID(); ?>">
+        <i class="fas fa-exclamation-circle"></i>
+    </a>
 </article>
