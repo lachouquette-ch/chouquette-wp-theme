@@ -49,7 +49,7 @@
                     }
                     ?>
                     <div class="home-header-filters text-center">
-                        <form :action="action" id="app">
+                        <form :action="action" v-on:submit.capture="doSearch" id="app">
                             <div class="row">
                                 <div class="col-md-4 home-header-filters-item">
                                     <select class="form-control" title="Où veux-tu aller ?" name="loc" v-model="loc">

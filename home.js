@@ -20,4 +20,9 @@ var app = new Vue({
             return (this.cat || this.loc) ? 'search' : 's';
         }
     },
+    methods: {
+        doSearch: function () {
+            $("select[name='cat']").attr('disabled', true);
+        },
+    }
 });

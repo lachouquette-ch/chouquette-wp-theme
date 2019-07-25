@@ -138,10 +138,9 @@ var app = new Vue({
     },
     mounted() {
         // get selections
-        var selectedLocation = document.getElementById("search-loc");
-        this.location = selectedLocation.options[selectedLocation.selectedIndex].value;
-        var selectCategory = document.getElementById("search-cat");
-        this.category = selectCategory.options[selectCategory.selectedIndex].value;
+        console.log("here");
+        this.location = document.getElementById("search-loc").value;
+        this.category = document.getElementById("search-cat").value;
         this.refreshCriterias(this.category);
 
         if (this.category) {

@@ -40,12 +40,15 @@ get_template_part('template-parts/fiche-report');
             <div class="col-md-6 order-md-0 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
                 <form class="mb-4 px-4 <?php echo empty($_GET['id']) ? '' : 'd-none' ?>">
+                    <input id="search-cat" type="hidden" value="<?php echo $default_category->slug ?? '' ?>">
+                    <input id="search-loc" type="hidden" value="<?php echo $default_location->slug ?? '' ?>">
+
                     <h3 class="mb-3 h5">Je recherche :</h3>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <select id="search-cat" class="form-control" title="Sous catégorie" name="cat"
+                            <select class="form-control" title="Sous catégorie" name="cat"
                                     onchange="app.refreshCriterias(this.options[this.selectedIndex].value)">
-                                <option title="" value="<?php echo $default_category->slug ?? '' ?>">Je veux ...</option>
+                                <option title="" value="">Je veux ...</option>
                                 <?php
                                 foreach ($search_categories as $search_category) {
                                     $attr_selected = isset($_GET['cat']) && $_GET['cat'] == $search_category->slug ? 'selected' : '';
@@ -55,8 +58,8 @@ get_template_part('template-parts/fiche-report');
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <select id="search-loc" class="form-control" title="Où veux-tu aller ?" name="loc">
-                                <option title="" value="<?php echo $default_location->slug ?? '' ?>">Où ça ...</option>
+                            <select class="form-control" title="Où veux-tu aller ?" name="loc">
+                                <option title="" value="">Où ça ...</option>
                                 <?php
                                 foreach ($search_locations as $search_location) {
                                     $term_style = $search_location->parent == 0 ? 'font-weight: bold' : '';
