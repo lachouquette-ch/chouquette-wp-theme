@@ -40,7 +40,7 @@ var app = new Vue({
         addLocationsToMap: function () {
             axios({
                 method: 'get',
-                url: `//chouquette.test/wp-json/cq/v1/post/${this.post}/location`,
+                url: `/wp-json/cq/v1/post/${this.post}/location`,
             })
                 .then(function (response) {
                     app.bounds = new google.maps.LatLngBounds();
