@@ -102,7 +102,7 @@ get_template_part('template-parts/fiche-report');
             echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s" href="%s" role="button">%s</a>', $pagination_disabled ? 'disabled' : '', $next_url, $pagination_text);
             echo '</div>';
         else:
-            echo "<span class='d-block text-center'>Pas de résultat pour cette recherche</span>";
+            echo "<span class='d-block text-center'>Oh mince, nous n'avons rien trouvé pour toi <i class='far fa-frown'></i>. Continue avec d'autres critères et c'est sûr, tu vas trouver ton bonheur</span>";
         endif;
         echo '</div>';
         ?>
