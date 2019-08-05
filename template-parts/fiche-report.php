@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                     <div class="form-group">
-                        <label for="ficheReportText">Une erreure, une remarque, une suggestion sur la fiche ? Merci de nous en faire part <i class="far fa-smile"></i></label>
+                        <label for="ficheReportText">Une erreur, une remarque, une suggestion sur la fiche ? Merci de nous en faire part <i class="far fa-smile"></i></label>
                         <textarea class="form-control" name="report-text" id="ficheReportText" rows="10" required></textarea>
                     </div>
                     <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
