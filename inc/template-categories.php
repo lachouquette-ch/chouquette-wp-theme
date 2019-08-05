@@ -19,8 +19,8 @@ if (!(function_exists('chouquette_categories'))) :
     function chouquette_categories(int $id, int $parent_id = null)
     {
         // get fiche
-        $linkFiches = get_field(CQ_FICHE_SELECTOR, $id);
-        if ($linkFiches) {
+        $linkFiches = chouquette_fiche_get_all($id);
+        if (!empty($linkFiches)) {
             $taxonomy_ids = array_column($linkFiches, 'ID');
         } else {
             $taxonomy_ids = array($id); // fallback to article if no fiche (ex : tops)

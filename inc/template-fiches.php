@@ -107,3 +107,24 @@ if (!function_exists('chouquette_fiche_get_taxonomies')) :
         return $fields;
     }
 endif;
+
+if (!function_exists('chouquette_fiche_get_all')) :
+    /**
+     * Get all fiches for given post
+     *
+     * @param int|WP_Post|null $post Post ID or post object of null to get globa $post
+     *
+     * @return array of posts (fiches). Empty array if none.
+     */
+    function chouquette_fiche_get_all($post = null)
+    {
+        $fiches = get_field(CQ_FICHE_SELECTOR, $post);
+        if (!$fiches) {
+            return [];
+        } elseif (!is_array($fiches)) {
+            $fiches = array($fiches);
+        } else {
+            return $fiches;
+        }
+    }
+endif;

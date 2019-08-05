@@ -14,12 +14,7 @@ while (have_posts()) :
     $tag_ids = array_column($tags, 'term_id');
 
     // get fiche
-    $linkFiches = get_field(CQ_FICHE_SELECTOR);
-    if (!$linkFiches) {
-        $linkFiches = [];
-    } elseif (!is_array($linkFiches)) {
-        $linkFiches = array($linkFiches);
-    }
+    $linkFiches = chouquette_fiche_get_all();
     ?>
 
     <?php if (!empty($linkFiches)) : ?>

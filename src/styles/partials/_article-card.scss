@@ -10,6 +10,12 @@
     text-decoration: none !important;
 }
 
+.article-card-chouquettise {
+  .article-card-category {
+    background-color: $chouquette-yellow;
+  }
+}
+
 .article-card-header {
   background-color: rgba($black, 0.6);
   color: $white;

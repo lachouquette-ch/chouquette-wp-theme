@@ -33,7 +33,7 @@ function cq_categories_dto(int $fiche_id)
  */
 function cq_get_locations_for_post($data)
 {
-    $fiches = get_field(CQ_FICHE_SELECTOR, $data['id']);
+    $fiches = chouquette_fiche_get_all($data['id']);
 
     $dtos = [];
     foreach ($fiches as $fiche) {
