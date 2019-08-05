@@ -38,7 +38,14 @@ while (have_posts()) :
                         echo $print_date;
                         ?>
                     </span>
-                    <span>dans <?php the_category(' / '); ?></span>
+                    <span>dans <?php
+                        foreach ($categories as $index => $category) {
+                            echo sprintf('<a href="%s" title="%s">%s</a>', get_category_link($category), $category->description, $category->name);
+                            if (sizeof($categories) - 1 > $index) {
+                                echo ' / ';
+                            }
+                        }
+                        ?></span>
                 </div>
             </div>
         </div>
