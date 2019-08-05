@@ -145,8 +145,7 @@
                               id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
                             <div class="form-row w-100">
                                 <div class="col-lg-8 mb-2">
-                                    <input type="email" value="" name="EMAIL" class="required email form-control form-control-lg w-100" id="mce-EMAIL" aria-describedby="emailHelp"
-                                           placeholder="Ton email">
+                                    <input type="email" value="" name="EMAIL" class="required email form-control form-control-lg w-100" id="mce-EMAIL" placeholder="Ton email">
                                     <div id="mce-responses" class="home-newsletter-response">
                                         <div class="index-newsletter-response-error mt-2" id="mce-error-response" style="display:none"></div>
                                         <div class="index-newsletter-response-success mt-2" id="mce-success-response" style="display:none"></div>
