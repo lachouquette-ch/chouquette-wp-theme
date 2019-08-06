@@ -109,6 +109,6 @@ get_template_part('template-parts/fiche-report');
     </div>
 <?php
 
-wp_enqueue_script('category-les-services', get_template_directory_uri() . '/category-les-services.js', ['vue', 'underscore'], CQ_THEME_VERSION, true);
+wp_enqueue_script('category-les-services', get_template_directory_uri() . '/category-services.js', ['vue', 'underscore'], CQ_THEME_VERSION, true);
 
 get_footer();
