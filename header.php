@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="Content-Type" content="text/html"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="profile" href="https://gmpg.org/xfn/11"/>
+    <link rel="alternate" type="application/atom+xml" href="<?php bloginfo('atom_url'); ?>"/>
     <meta name="theme-color" content="#f8ef28"/>
 
     <?php wp_head(); ?>
@@ -13,8 +14,8 @@
 <span id="colTrigger" class="d-none d-md-inline"></span>
 
 <?php
-if ( !is_home() ) :
-    get_template_part( 'template-parts/menu' );
+if (!is_home()) :
+    get_template_part('template-parts/menu');
 endif;
 
 /* Print messages (mostly from posting redirects) */
