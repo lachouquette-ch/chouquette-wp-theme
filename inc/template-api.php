@@ -213,7 +213,7 @@ function cq_get_locations_for_category($data)
 
     $category = get_category_by_slug($data['slug']);
     $criterias = cq_filter_criterias_params($_GET);
-    if ($_GET['id']) {
+    if (isset($_GET['id'])) {
         $args = cq_get_locations_for_id($_GET['id']);
     } else {
         $args = cq_get_locations_for_category_prepare_query($category, $_GET['num'] ?? null, $_GET['loc'] ?? '', $_GET['search'] ?? '', $criterias);
