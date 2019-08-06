@@ -38,10 +38,7 @@ var app = new Vue({
     },
     methods: {
         addLocationsToMap: function () {
-            axios({
-                method: 'get',
-                url: `/wp-json/cq/v1/post/${this.post}/location`,
-            })
+            axios.get(`/wp-json/cq/v1/post/${this.post}/location`)
                 .then(function (response) {
                     app.bounds = new google.maps.LatLngBounds();
                     response.data.forEach(function (loc) {

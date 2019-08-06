@@ -134,7 +134,7 @@ if (!function_exists('chouquette_recaptcha')) :
             $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
             $recaptcha_response = $_POST['recaptcha-response'];
 
-            // Make and decode POST request:
+            // Make and decode POST request
             $recaptcha = file_get_contents($recaptcha_url . '?secret=' . CQ_RECAPTCHA_SECRET . '&response=' . $recaptcha_response);
             $recaptcha = json_decode($recaptcha);
 

@@ -58,10 +58,7 @@ var app = new Vue({
         },
         // get fiches from URL and add it to map
         addFichesToMap: function () {
-            axios({
-                method: 'get',
-                url: this.ficheApiURL + location.search,
-            })
+            axios.get(this.ficheApiURL + location.search)
                 .then(function (response) {
                     app.bounds = new google.maps.LatLngBounds();
                     response.data.forEach(function (fiche) {
