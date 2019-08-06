@@ -15,6 +15,9 @@ while (have_posts()) :
 
     // get fiche
     $linkFiches = chouquette_fiche_get_all();
+    $linkFichesWithLocations = array_filter($linkFiches, function ($fiche) {
+        return !empty(get_field(CQ_FICHE_LOCATION, $fiche));
+    });
     ?>
 
     <?php if (!empty($linkFiches)) : ?>
@@ -62,12 +65,16 @@ while (have_posts()) :
 
         <?php
         if (!empty($linkFiches)) :
-            $fiche_markers = [];
             ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
                 <div id="app" class="shadow">
                     <a id="fichesTarget"></a>
-                    <div id="fichesMap" class="cq-fiches-map border"></div>
+                    <?php if (!empty($linkFichesWithLocations)) {
+                        // add map
+                        echo '<div id="fichesMap" class="cq-fiches-map border"></div>';
+                        // and related script
+                        wp_enqueue_script('single-post_maps', get_template_directory_uri() . '/single-post_maps.js', ['vue', 'google-maps'], CQ_THEME_VERSION, true);
+                    } ?>
                     <div id="fichesAccordion" class="cq-fiches">
                         <?php
                         foreach ($linkFiches as $ficheIndex => $fiche):
@@ -77,7 +84,7 @@ while (have_posts()) :
                             ?>
                             <div class="card">
                                 <div class="card-header cq-fiches-header">
-                                    <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="collapsed link-no-decoration" data-toggle="collapse"
+                                    <a id="<?php echo 'ficheLink' . $fiche->ID ?>" class="<?php echo $ficheIndex == 0 && sizeof($linkFiches) == 1 ? '' : 'collapsed' ?> link-no-decoration" data-toggle="collapse"
                                        href="<?php echo '#ficheContent' . $fiche->ID; ?>"
                                        aria-expanded="false" aria-controls="collapseTwo" v-on:click="locateFiche(<?php echo $fiche->ID; ?>)">
                                         <i class="shown far fa-minus-square mr-2"></i>
@@ -85,7 +92,7 @@ while (have_posts()) :
                                         <?php echo $fiche->post_title ?>
                                     </a>
                                 </div>
-                                <div id="<?php echo 'ficheContent' . $fiche->ID; ?>" class="collapse" aria-labelledby="headingTwo"
+                                <div id="<?php echo 'ficheContent' . $fiche->ID; ?>" class="collapse <?php echo $ficheIndex == 0 && sizeof($linkFiches) == 1 ? 'show' : '' ?>" aria-labelledby="headingTwo"
                                      data-parent="#fichesAccordion">
                                     <div class="card-body p-2">
                                         <nav>
@@ -275,6 +282,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['vue', 'recaptcha', 'google-maps'], CQ_THEME_VERSION, true);
+wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['recaptcha'], CQ_THEME_VERSION, true);
 
 get_footer();
