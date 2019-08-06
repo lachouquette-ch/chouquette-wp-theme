@@ -64,6 +64,8 @@ jQuery(function ($) {
         return true; // ensure form still submits
     });
 
+    window.onunload = function () {
+        $("form").find(":input").prop("disabled", false);
+    };
     // Un-disable form fields when page loads, in case they click back after submission
-    $( "form" ).find( ":input" ).prop( "disabled", false );
 });
