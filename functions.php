@@ -191,14 +191,13 @@ add_action('wp_enqueue_scripts', 'chouquette_scripts');
 /**
  * Hack to add async and defer for google maps
  */
-function google_maps_add_async_defer_attribute($tag, $handle)
+function google_maps_add_async_defer_attribute($tag, $handle, $src)
 {
     if ('google-maps' !== $handle)
         return $tag;
-    return str_replace(' src', ' async defer src', $tag);
+    return "<script type='text/javascript' defer='defer' src='${src}'></script>";
 }
-
-add_filter('script_loader_tag', 'google_maps_add_async_defer_attribute', 10, 2);
+add_filter('script_loader_tag', 'google_maps_add_async_defer_attribute', 10, 3);
 
 /**
  * PHPMailer configuration
