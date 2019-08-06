@@ -100,7 +100,7 @@ var app = new Vue({
                     });
 
                     // add marker clusterer
-                    new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: '/wp-content/uploads/2019/07/m'});
+                    new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: CQ_IMG_PATH + '/maps_cluster/m'});
 
                     if (app.markers.size > 1) {
                         map.fitBounds(app.bounds);
