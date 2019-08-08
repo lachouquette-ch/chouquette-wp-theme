@@ -26,7 +26,7 @@ $posts = get_posts(array(
     </div>
     <div class="card-body">
         <h5 class="card-title"><?php the_title(); ?></h5>
-        <p class="card-text"><?php the_excerpt(); ?></p>
+        <p class="card-text"><?php echo strip_tags(get_the_excerpt()); ?></p>
         <?php
         $terms = chouquette_fiche_flatten_terms($taxonomies);
         if (!empty($terms)):
