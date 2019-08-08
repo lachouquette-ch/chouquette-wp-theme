@@ -6,6 +6,14 @@
         <a class="navbar-brand ml-3 mr-md-5" href="/"><?php bloginfo('name'); ?></a>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
+            <form action='/' class="d-md-none mb-2">
+                <div class="input-group input-group-sm">
+                    <input class="form-control" type="search" name="s" placeholder="Recherche" aria-label="Search" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
             <?php chouquette_navbar_nav(); ?>
             <div class="navbar-divider"></div>
             <div class="navbar-sn mr-3">
@@ -15,14 +23,6 @@
                 <a href="<?php bloginfo('atom_url'); ?>" title="RSS" target="_blank"><i class="fas fa-rss ml-3"></i></a>
                 <a href="#" title="Recherche" class="d-none d-md-inline-block" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search ml-3"></i></a>
             </div>
-            <form action='/' class="d-md-none">
-                <div class="input-group input-group-sm">
-                    <input class="form-control" type="search" name="s" placeholder="Recherche" aria-label="Search" required>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </form>
         </div>
     </nav>
 </header>
