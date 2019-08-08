@@ -158,9 +158,11 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_register_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js', null, null, true);
 
-        wp_register_script('criterias-mixin', get_template_directory_uri() . '/js/vue/criterias-mixin.js', CQ_THEME_VERSION, true);
+        wp_register_script('url-search-params', 'https://unpkg.com/@ungap/url-search-params', null, null, true);
 
-        wp_register_script('utility-mixin', get_template_directory_uri() . '/js/vue/utility-mixin.js', CQ_THEME_VERSION, true);
+        wp_register_script('criterias-mixin', get_template_directory_uri() . '/js/vue/criterias-mixin.js', null, CQ_THEME_VERSION, true);
+
+        wp_register_script('utility-mixin', get_template_directory_uri() . '/js/vue/utility-mixin.js', ['url-search-params'], CQ_THEME_VERSION, true);
 
         wp_register_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js', ['axios', 'criterias-mixin', 'utility-mixin'], null, true);
 
