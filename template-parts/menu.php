@@ -3,7 +3,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand ml-3 mr-md-5" href="/"><?php bloginfo('name'); ?></a>
+        <a class="navbar-brand mx-auto" href="/"><?php bloginfo('name'); ?></a>
 
         <div class="collapse navbar-collapse" id="navbarChouquette">
             <form action='/' class="d-md-none mb-2">
