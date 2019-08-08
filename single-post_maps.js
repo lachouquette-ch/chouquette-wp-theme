@@ -20,7 +20,7 @@ function bootstrapMap() {
 
 var app = new Vue({
     el: '#app',
-    data() {
+    data: function () {
         return {
             locations: new Map(),
             markers: new Map(),
@@ -38,7 +38,7 @@ var app = new Vue({
     },
     methods: {
         addLocationsToMap: function () {
-            axios.get(`/wp-json/cq/v1/post/${this.post}/location`)
+            axios.get('/wp-json/cq/v1/post/' + this.post + '/location')
                 .then(function (response) {
                     app.bounds = new google.maps.LatLngBounds();
                     response.data.forEach(function (loc) {
@@ -54,7 +54,7 @@ var app = new Vue({
                             // set currentLocation and toggle
                             if (app.currentMarker != this) {
                                 app.currentLocation = loc;
-                                $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
+                                $('#ficheContent' + app.currentLocation.id).collapse('toggle');
 
                                 app.currentMarker = this;
                                 map.setZoom(ZOOM_LEVEL_ACTIVED);
@@ -62,7 +62,7 @@ var app = new Vue({
                                 bounce(app.currentMarker);
                             } else {
                                 if (app.currentLocation) {
-                                    $(`#ficheContent${app.currentLocation.id}`).collapse('toggle');
+                                    $('#ficheContent' + app.currentLocation.id).collapse('toggle');
                                 }
 
                                 app.currentMarker = null;
@@ -105,7 +105,7 @@ var app = new Vue({
             }
         },
     },
-    mounted() {
+    mounted: function () {
         this.post = $("article").attr('id');
     }
 })

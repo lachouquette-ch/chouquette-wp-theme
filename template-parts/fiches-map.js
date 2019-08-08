@@ -27,7 +27,7 @@ function bootstrapMap() {
 var app = new Vue({
     el: '#app',
     mixins: [VUE_CRITERIAS_MIXIN, VUE_UTILITY_MIXIN],
-    data() {
+    data: function () {
         return {
             category: null,
             location: null,
@@ -133,16 +133,16 @@ var app = new Vue({
             }
         }
     },
-    mounted() {
+    mounted: function () {
         // get selections
         this.location = document.getElementById("search-loc").value;
         this.category = document.getElementById("search-cat").value;
         this.refreshCriterias(this.category);
 
         if (this.category) {
-            this.ficheApiURL = `/wp-json/cq/v1/category/${this.category}/fiche`;
+            this.ficheApiURL = '/wp-json/cq/v1/category/' + this.category + '/fiche';
         } else {
-            this.ficheApiURL = `/wp-json/cq/v1/location/${this.location}/fiche`;
+            this.ficheApiURL = '/wp-json/cq/v1/location/' + this.location + '/fiche';
         }
 
         // scroll to current fiche

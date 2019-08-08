@@ -1,6 +1,6 @@
 var app = new Vue({
     el: '#app',
-    data() {
+    data: function () {
         return {
             loc: '',
             cat: '',
@@ -11,9 +11,9 @@ var app = new Vue({
         // helper to create proper grid columns
         action: function () {
             if (this.cat) {
-                return `category/${this.cat}`;
+                return 'category/' + this.cat;
             } else if (this.loc) {
-                return `location/${this.loc}`;
+                return 'location/' + this.loc;
             }
         },
         searchName: function () {

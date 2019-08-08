@@ -8,7 +8,7 @@
                 echo sprintf('<img class="mx-auto" src="%s">', esc_url($logo[0]));
             }
             ?>
-            <p class="my-3">
+            <div class="my-3">
                 <?php
                 $menu_args = array(
                     'theme_location' => CQ_FOOTER_MENU,
@@ -16,9 +16,8 @@
                 );
                 wp_nav_menu($menu_args);
                 ?>
-            </p>
+            </div>
         </div>
-    </div>
     </div>
     <div class="footer-bottom row py-3">
         <div class="col">

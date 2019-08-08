@@ -1,5 +1,5 @@
 var VUE_UTILITY_MIXIN = {
-    data() {
+    data: function () {
         return {
             $_params: null
         }
@@ -10,7 +10,7 @@ var VUE_UTILITY_MIXIN = {
             return window.getComputedStyle(document.getElementById('colTrigger')).display != "none";
         }
     },
-    created() {
+    created: function () {
         // create instance of URLSearch
         var queryParams = location.search.replace(/%5B%5D/g, ''); // remove []
         this.$_params = new URLSearchParams(queryParams);

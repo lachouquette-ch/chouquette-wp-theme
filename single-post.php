@@ -135,7 +135,7 @@ while (have_posts()) :
                                                         }
                                                         ?>
                                                         <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) : ?>
-                                                            <p class="mt-3 mb-0">
+                                                            <div class="mt-3 mb-0">
                                                                 <span class="mr-2">Réseaux :</span>
                                                                 <?php
                                                                 if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_FACEBOOK]) . '" title="Facebook" target="_blank" class="mr-2"><i class="fab fa-facebook-f"></i></a>';
@@ -143,7 +143,7 @@ while (have_posts()) :
                                                                 if (!empty($fiche_fields[CQ_FICHE_TWITTER])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_TWITTER]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-twitter"></i></a>';
                                                                 if (!empty($fiche_fields[CQ_FICHE_PINTEREST])) echo '<a href="' . esc_url($fiche_fields[CQ_FICHE_PINTEREST]) . '" title="Twitter" target="_blank" class="mr-2"><i class="fab fa-pinterest-p"></i></a>';
                                                                 ?>
-                                                            </p>
+                                                            </div>
                                                         <?php endif; ?>
                                                     </div>
                                                     <ul class="list-group list-group-flush">
@@ -162,23 +162,23 @@ while (have_posts()) :
                                                         <?php endif; ?>
                                                         <?php if (!empty($fiche_taxonomies)): ?>
                                                             <li class="list-group-item">
-                                                                <p class="mb-0">
-                                                                <ul class="cq-fiche-info">
-                                                                    <?php
-                                                                    foreach ($fiche_taxonomies as $taxonomy) {
-                                                                        if (!empty($taxonomy['terms'])) {
-                                                                            echo '<li><span class="mr-2">' . $taxonomy['label'] . '</span>';
-                                                                            echo '<ol>';
-                                                                            foreach ($taxonomy['terms'] as $term) {
-                                                                                echo '<li>' . $term->name . '</li>';
+                                                                <div class="mb-0">
+                                                                    <ul class="cq-fiche-info">
+                                                                        <?php
+                                                                        foreach ($fiche_taxonomies as $taxonomy) {
+                                                                            if (!empty($taxonomy['terms'])) {
+                                                                                echo '<li><span class="mr-2">' . $taxonomy['label'] . '</span>';
+                                                                                echo '<ol>';
+                                                                                foreach ($taxonomy['terms'] as $term) {
+                                                                                    echo '<li>' . $term->name . '</li>';
+                                                                                }
+                                                                                echo '</ol>';
+                                                                                echo '</li>';
                                                                             }
-                                                                            echo '</ol>';
-                                                                            echo '</li>';
                                                                         }
-                                                                    }
-                                                                    ?>
-                                                                </ul>
-                                                                </p>
+                                                                        ?>
+                                                                    </ul>
+                                                                </div>
                                                             </li>
                                                         <?php endif; ?>
                                                     </ul>
