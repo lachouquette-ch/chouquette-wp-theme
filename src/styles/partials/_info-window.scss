@@ -1,0 +1,22 @@
+.info-window-header {
+  > a {
+    font-size: $font-size-base;
+  }
+}
+
+.info-window-extra {
+  > div {
+    margin-bottom: 0.2rem;
+  }
+
+  label {
+    width: 4rem;
+    margin-bottom: 0;
+  }
+
+  ul {
+    padding-left: 4rem;
+    list-style-type: none;
+  }
+}
+
