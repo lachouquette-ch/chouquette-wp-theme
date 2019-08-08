@@ -29,6 +29,12 @@
   margin-top: -1 * $header-height;
 }
 
+.home-header-menu-description {
+  @media (max-height: 600px) {
+    display: none;
+  }
+}
+
 .home-header-sn {
   font-size: 2rem;
   color: $chouquette-yellow;
