@@ -111,6 +111,6 @@ if (!function_exists('chouquette_taxonomy_logo')) :
                 throw new Exception("$color is undefined");
         }
         $image_src = wp_get_attachment_image_src($logo['id'], $size)[0];
-        return sprintf('<img src="%s" alt="%s" class="%s">', $image_src, $taxonomy->title, join(" ", $classes));
+        return sprintf('<img src="%s" alt="%s" title="%s" class="%s" />', $image_src, $taxonomy->name, $taxonomy->name, join(" ", $classes));
     }
 endif;
