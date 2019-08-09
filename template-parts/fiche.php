@@ -37,26 +37,28 @@ $posts = get_posts(array(
                 echo sizeof($terms) > 4 ? '...' : '';
                 ?>
             </p>
-        <?php
-        endif;
+        <?php endif;
+
         // only for category pages or locations (not services)
-        if (is_category() && !is_category(CQ_CATEGORY_SERVICES) || is_tax(CQ_TAXONOMY_LOCATION)):
-            ?>
+        if (is_category() || is_tax(CQ_TAXONOMY_LOCATION)): ?>
             <div class="w-100">
-                <?php
-                if (!empty($posts)) {
+                <?php if (!empty($posts)) {
                     $lastest_post = $posts[0];
                     echo sprintf('<a href="%s" title="%s" class="btn btn-sm btn-outline-secondary">Article</a>', get_the_permalink($lastest_post), esc_html($lastest_post->post_title));
-                }
-                ?>
-                <button class="btn btn-sm btn-outline-secondary" v-on:click="locateFiche(<?php echo get_the_ID(); ?>)">Voir</button>
+                } ?>
+
+                <?php // not for services (no map)
+                if (!is_category(CQ_CATEGORY_SERVICES)): ?>
+                    <button class="btn btn-sm btn-outline-secondary" v-on:click="locateFiche(<?php echo get_the_ID(); ?>)">Voir</button>
+                <?php endif; ?>
             </div>
         <?php elseif (is_search()):
             $fiche_link = add_query_arg('id', get_the_ID(), get_category_link($fiche_category));
             echo "<a class='btn btn-sm btn-outline-secondary' href='${fiche_link}'>Voir</a>";
         endif; ?>
     </div>
-    <a class="fiche-report" title="Reporter une précision ou erreur sur la fiche" href="#" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>" data-fiche-id="<?php echo get_the_ID(); ?>">
+    <a class="fiche-report" title="Reporter une précision ou erreur sur la fiche" href="#" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>"
+       data-fiche-id="<?php echo get_the_ID(); ?>">
         <i class="fas fa-exclamation-circle"></i>
     </a>
 </article>
