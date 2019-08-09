@@ -47,13 +47,13 @@ $is_chouquettise = chouquette_fiche_is_chouquettise($fiche->ID);
                     <?php
                     if (chouquette_fiche_has_openings($fiche_fields)):
                         $raw_planning = array(
-                            $fiche_fields[CQ_FICHE_OPENING_MONDAY],
-                            $fiche_fields[CQ_FICHE_OPENING_TUESDAY],
-                            $fiche_fields[CQ_FICHE_OPENING_WEDNESDAY],
-                            $fiche_fields[CQ_FICHE_OPENING_THURSDAY],
-                            $fiche_fields[CQ_FICHE_OPENING_FRIDAY],
-                            $fiche_fields[CQ_FICHE_OPENING_SATURDAY],
-                            $fiche_fields[CQ_FICHE_OPENING_SUNDAY],
+                            !in_array($fiche_fields[CQ_FICHE_OPENING_MONDAY], CQ_FICHE_OPERNING_CLOSED) ? $fiche_fields[CQ_FICHE_OPENING_MONDAY] : 'Fermé',
+                            !in_array($fiche_fields[CQ_FICHE_OPENING_TUESDAY], CQ_FICHE_OPERNING_CLOSED) ? $fiche_fields[CQ_FICHE_OPENING_TUESDAY] : 'Fermé',
+                            !in_array($fiche_fields[CQ_FICHE_OPENING_WEDNESDAY], CQ_FICHE_OPERNING_CLOSED) ? $fiche_fields[CQ_FICHE_OPENING_WEDNESDAY] : 'Fermé',
+                            !in_array($fiche_fields[CQ_FICHE_OPENING_THURSDAY], CQ_FICHE_OPERNING_CLOSED) ? $fiche_fields[CQ_FICHE_OPENING_THURSDAY] : 'Fermé',
+                            !in_array($fiche_fields[CQ_FICHE_OPENING_FRIDAY], CQ_FICHE_OPERNING_CLOSED) ? $fiche_fields[CQ_FICHE_OPENING_FRIDAY] : 'Fermé',
+                            !in_array($fiche_fields[CQ_FICHE_OPENING_SATURDAY], CQ_FICHE_OPERNING_CLOSED) ? $fiche_fields[CQ_FICHE_OPENING_SATURDAY] : 'Fermé',
+                            !in_array($fiche_fields[CQ_FICHE_OPENING_SUNDAY], CQ_FICHE_OPERNING_CLOSED) ? $fiche_fields[CQ_FICHE_OPENING_SUNDAY] : 'Fermé',
                         );
                         ?>
                         <div>

@@ -68,6 +68,8 @@ define('CQ_FICHE_OPENING_CLOSED', 'closed');
 define('CQ_FICHE_CHOUQUETTISE_FROM', 'chouquettise_from');
 define('CQ_FICHE_CHOUQUETTISE_TO', 'chouquettise_to');
 
+define('CQ_FICHE_OPERNING_CLOSED', ['closed', '"closed"', "'closed'"]);
+
 define('CQ_USER_ROLE', 'role');
 define('CQ_LOCALISATION_AMBASSADOR', 'ambassadeur');
 
