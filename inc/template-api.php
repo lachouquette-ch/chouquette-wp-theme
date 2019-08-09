@@ -77,9 +77,9 @@ function cq_get_taxonomies_for_category($data)
         $terms = array_map(function (WP_Term $term) {
             $result = [];
             $result['term_id'] = $term->term_id;
-            $result['name'] = $term->name;
+            $result['name'] = wp_specialchars_decode($term->name);
             $result['slug'] = $term->slug;
-            $result['description'] = $term->description;
+            $result['description'] = wp_specialchars_decode($term->description);
             return $result;
 
         }, $taxonomy['terms']);
