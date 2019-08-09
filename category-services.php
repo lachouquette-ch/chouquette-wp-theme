@@ -83,12 +83,12 @@ get_template_part('template-parts/fiche-report');
                 get_template_part('template-parts/fiche');
             }
             echo '</div>';
+
             echo '<div class="text-center mt-3">';
-            global $wp;
             $current_url = "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             $next_url = add_query_arg('num', $number_of_fiches + CQ_CATEGORY_PAGING_NUMBER, $current_url);
 
-            if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches) {
+            if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches || $number_of_fiches >= $loop->found_posts) {
                 $pagination_disabled = true;
                 $pagination_text = "Plus d'article pour cette recherche";
             } elseif ($number_of_fiches >= CQ_CATEGORY_MAX_FICHES) {
@@ -99,7 +99,11 @@ get_template_part('template-parts/fiche-report');
                 $pagination_text = "Plus de fiches";
             }
 
-            echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s" href="%s" role="button">%s</a>', $pagination_disabled ? 'disabled' : '', $next_url, $pagination_text);
+            echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s %s" href="%s" role="button">%s</a>',
+                $pagination_disabled ? 'disabled' : '',
+                empty($_GET['id']) ? '' : 'd-none',
+                $next_url,
+                $pagination_text);
             echo '</div>';
         else:
             echo "<span class='d-block text-center'>Oh mince, nous n'avons rien trouvé pour toi <i class='far fa-frown'></i>. Continue avec d'autres critères et c'est sûr, tu vas trouver ton bonheur</span>";
