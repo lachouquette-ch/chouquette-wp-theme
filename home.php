@@ -21,85 +21,81 @@
             </div>
         </nav>
 
-        <div class="home-header-menu d-flex flex-column h-100 p-3">
-            <div class="flex-grow-1">
-                <div class="d-flex flex-column h-100 justify-content-center align-items-center">
-                    <div class="text-center">
-                        <h1 class="d-block d-md-none mb-5"><?php bloginfo('name'); ?></h1>
-                        <h3 class="home-header-menu-description mb-3"><?php bloginfo('description'); ?></h3>
-                    </div>
-                    <?php
-                    // get menu items
-                    $menu_items = chouquette_menu_items();
-                    if (!empty ($menu_items)) {
-                        echo '<div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">';
-                        foreach ($menu_items as $menu_item) :
-                            echo '<div class="home-header-category m-4">';
-                            echo sprintf("<a href='%s' title='%s'>", esc_url($menu_item->url), $menu_item->description);
-                            echo '<div class="home-header-category-logo p-3">';
-                            echo chouquette_taxonomy_logo($menu_item);
-                            echo '</div>';
-                            echo "<h2 class='my-2'>{$menu_item->title}</h2>";
-                            echo '</a>';
-                            echo '</div>';
-                        endforeach;
-                        echo '</div>';
-                    } else {
-                        trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
-                    }
-                    ?>
-                    <div class="home-header-filters text-center">
-                        <form :action="action" v-on:submit.capture="doSearch" id="app">
-                            <div class="row">
-                                <div class="col-md-4 home-header-filters-item">
-                                    <select class="form-control" title="Où veux-tu aller ?" name="loc" v-model="loc">
-                                        <option title="" value="">Où veux-tu aller ?</option>
-                                        <?php
-                                        $terms = get_terms(array(
-                                            'taxonomy' => CQ_TAXONOMY_LOCATION,
-                                            'hide_empty' => false,
-                                            'orderby' => 'term_group'
-                                        ));
-                                        foreach ($terms as $term) {
-                                            $term_style = $term->parent == 0 ? 'font-weight: bold' : '';
-                                            $term_display = $term->parent != 0 ? '&nbsp;&nbsp;' : '';
-                                            $term_display .= $term->name;
-                                            echo "<option title='{$term->name}' value='{$term->slug}' style='${term_style}'>{$term_display}</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 home-header-filters-item">
-                                    <select class="form-control" title="Qu'aimerais-tu faire ?" name="cat" v-model="cat">
-                                        <option title="" value="">Qu'aimerais-tu faire ?</option>
-                                        <?php
-                                        // get menu items
-                                        $menu_items = chouquette_menu_items();
-                                        if (!empty ($menu_items)) {
-                                            foreach ($menu_items as $menu_item) :
-                                                $category = get_category($menu_item->object_id);
-                                                echo "<option title='{$menu_item->title}' value='{$category->slug}'>{$category->name}</option>";
-                                            endforeach;
-                                        } else {
-                                            trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 home-header-filters-item">
-                                    <input class="form-control" type="text" placeholder="Un mot clef ?" :name="searchName" v-model="search">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col home-header-filters-item">
-                                    <button class="btn btn-primary py-2 px-5" type="submit">Rechercher</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="home-header-menu p-3 vh-100 d-flex flex-column justify-content-center align-items-center">
+            <div class="text-center w-100">
+                <h1 class="d-block d-md-none mb-5"><?php bloginfo('name'); ?></h1>
+                <h3 class="home-header-menu-description mb-3"><?php bloginfo('description'); ?></h3>
             </div>
-            <div class="home-header-menu-next align-self-center d-flex align-items-center justify-content-center text-center">
+            <?php
+            // get menu items
+            $menu_items = chouquette_menu_items();
+            if (!empty ($menu_items)) {
+                echo '<div class="d-none d-md-flex flex-row flex-wrap justify-content-center text-center">';
+                foreach ($menu_items as $menu_item) :
+                    echo '<div class="home-header-category m-4">';
+                    echo sprintf("<a href='%s' title='%s'>", esc_url($menu_item->url), $menu_item->description);
+                    echo '<div class="home-header-category-logo p-3">';
+                    echo chouquette_taxonomy_logo($menu_item);
+                    echo '</div>';
+                    echo "<h2 class='my-2'>{$menu_item->title}</h2>";
+                    echo '</a>';
+                    echo '</div>';
+                endforeach;
+                echo '</div>';
+            } else {
+                trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
+            }
+            ?>
+            <div class="home-header-filters text-center">
+                <form :action="action" v-on:submit.capture="doSearch" id="app">
+                    <div class="row">
+                        <div class="col-md-4 home-header-filters-item">
+                            <select class="form-control" title="Où veux-tu aller ?" name="loc" v-model="loc">
+                                <option title="" value="">Où veux-tu aller ?</option>
+                                <?php
+                                $terms = get_terms(array(
+                                    'taxonomy' => CQ_TAXONOMY_LOCATION,
+                                    'hide_empty' => false,
+                                    'orderby' => 'term_group'
+                                ));
+                                foreach ($terms as $term) {
+                                    $term_style = $term->parent == 0 ? 'font-weight: bold' : '';
+                                    $term_display = $term->parent != 0 ? '&nbsp;&nbsp;' : '';
+                                    $term_display .= $term->name;
+                                    echo "<option title='{$term->name}' value='{$term->slug}' style='${term_style}'>{$term_display}</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4 home-header-filters-item">
+                            <select class="form-control" title="Qu'aimerais-tu faire ?" name="cat" v-model="cat">
+                                <option title="" value="">Qu'aimerais-tu faire ?</option>
+                                <?php
+                                // get menu items
+                                $menu_items = chouquette_menu_items();
+                                if (!empty ($menu_items)) {
+                                    foreach ($menu_items as $menu_item) :
+                                        $category = get_category($menu_item->object_id);
+                                        echo "<option title='{$menu_item->title}' value='{$category->slug}'>{$category->name}</option>";
+                                    endforeach;
+                                } else {
+                                    trigger_error(sprintf("Menu principal du thème '%s' non renseigné", CQ_PRIMARY_MENU), E_USER_WARNING);
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4 home-header-filters-item">
+                            <input class="form-control" type="text" placeholder="Un mot clef ?" :name="searchName" v-model="search">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col home-header-filters-item">
+                            <button class="btn btn-primary py-2 px-5" type="submit">Rechercher</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="home-header-menu-next d-flex align-items-center justify-content-center text-center">
                 <a href="#homeContent">
                     <i class="fas fa-chevron-down"></i><br/>
                     <span>La suite</span>

@@ -26,7 +26,8 @@
 }
 
 .home-header-menu {
-  margin-top: -1 * $header-height;
+  position: relative;
+  top: -1 * $header-height;
 }
 
 .home-header-menu-description {
