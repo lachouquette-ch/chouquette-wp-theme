@@ -105,3 +105,9 @@ main {
 .alert {
   z-index: 1; // get over google maps
 }
+
+/* Vuejs */
+
+[v-cloak] {
+  display: none;
+}

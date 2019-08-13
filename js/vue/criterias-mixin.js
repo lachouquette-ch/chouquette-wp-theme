@@ -1,46 +1,48 @@
 var VUE_CRITERIAS_MIXIN = {
     data: function () {
         return {
-            criterias: null,
-            hasCriterias: false,
+            criterias: [],
         }
     },
     computed: {
-        // helper to create proper grid columns
-        criteriaRows: function () {
-            if (!this.criterias) {
-                return [];
-            }
-
-            var result = [];
-            for (var i = 0; i < this.criterias.length; i = i + 2) {
-                result.push(this.criterias.slice(i, i + 2));
-            }
-            return result;
+        criteriaCount: function() {
+            var count = 0;
+            this.criterias.forEach(function(criteria) {
+                count += criteria.selectedTerms.length;
+            })
+            return count;
         },
+        criteriaLabel: function() {
+            if (this.criteriaCount > 1) {
+                return this.criteriaCount + " critères sélectionnés";
+            } else if (this.criteriaCount == 1) {
+                return "1 critère sélectionné";
+            } else {
+                return "Plus de critères";
+            }
+        }
     },
     methods: {
         // get criterias from remote based on given category
         refreshCriterias: function (category) {
+            var self = this;
             axios.get('/wp-json/cq/v1/category/taxonomy?cat=' + category)
                 .then(function (response) {
                     response.data.forEach(function (taxonomy) {
+                        taxonomy.selectedTerms = [];
                         taxonomy.terms.forEach(function (term) {
-                            if (app.$_params.getAll(taxonomy.name).includes(term.slug)) {
-                                term.checked = true;
-                                app.hasCriterias = true;
+                            if (self.$_params.getAll(taxonomy.name).includes(term.slug)) {
+                                taxonomy.selectedTerms.push(term.slug);
                             }
                         });
                     });
-                    app.criterias = response.data;
+                    self.criterias = response.data;
                 });
         },
         // uncheck add criterias
         resetCriterias: function () {
             this.criterias.forEach(function (taxonomy) {
-                taxonomy.terms.forEach(function (term) {
-                    term.checked = false;
-                })
+                taxonomy.selectedTerms = [];
             })
         }
     }

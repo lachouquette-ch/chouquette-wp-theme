@@ -40,6 +40,10 @@ var app = new Vue({
         }
     },
     methods: {
+        updateCriterias: function (event) {
+            var value = event.target.value;
+            this.refreshCriterias(value ? value : this.category);
+        },
         resetMap: function () {
             this.clearMap();
             if (app.markers.size > 1) map.fitBounds(app.bounds);

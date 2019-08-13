@@ -47,7 +47,7 @@ get_template_part('template-parts/fiche-report');
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <select class="form-control" title="Sous catégorie" name="cat"
-                                    onchange="app.refreshCriterias(this.options[this.selectedIndex].value)">
+                                    v-on:change="updateCriterias($event)">
                                 <option title="" value="">Je veux ...</option>
                                 <?php
                                 foreach ($search_categories as $search_category) {
@@ -75,21 +75,16 @@ get_template_part('template-parts/fiche-report');
                             <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'" ?>>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
+                    <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria" v-cloak><i class="fa"></i>{{ criteriaLabel }}</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
-                    <div id="collapseCriteria" v-bind:class="{ show: hasCriterias }" class="collapse category-criteria  mt-2">
-                        <div class="container-fluid">
-                            <div v-for="criteriaRow in criteriaRows" class="row">
-                                <div v-for="criteria in criteriaRow" class="col-md-6 pt-2 px-2">
-                                    <span class="col-form-label" class="white-space: nowrap;">{{ criteria.label }}</span>
-                                    <div class="form-check ml-3" v-for="term in criteria.terms">
-                                        <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked">
-                                        <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#" class="d-block link-secondary small mt-3" v-on:click.prevent="resetCriterias">Tout déselectionner</a>
+                    <div id="collapseCriteria" class="collapse category-criteria mt-2 pl-2">
+                        <div v-for="criteria in criterias" class="form-group">
+                            <label :for="criteria.name">{{ criteria.label }}</label>
+                            <select :id="criteria.name" class="form-control" :name="criteria.name + '[]'" multiple="multiple" v-model="criteria.selectedTerms" size="3">
+                                <option v-for="term in criteria.terms" :value="term.slug">{{ term.name }}</option>
+                            </select>
                         </div>
+                        <a href="#" class="d-block link-secondary small mt-3" v-on:click.prevent="resetCriterias">Tout déselectionner</a>
                     </div>
                 </form>
 
