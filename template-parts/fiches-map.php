@@ -79,7 +79,7 @@ get_template_part('template-parts/fiche-report');
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
                     <div id="collapseCriteria" class="collapse category-criteria mt-2 pl-2">
                         <div v-for="criteria in criterias" class="form-group">
-                            <label :for="criteria.name">{{ criteria.label }}</label>
+                            <label :for="criteria.name">{{ criteria.label }}</label> <i class="small fas fa-question d-none d-md-inline" data-toggle="tooltip" title="Ctrl + click pour sélectionner plusieurs critères"></i>
                             <select :id="criteria.name" class="form-control" :name="criteria.name + '[]'" multiple="multiple" v-model="criteria.selectedTerms" size="3">
                                 <option v-for="term in criteria.terms" :value="term.slug">{{ term.name }}</option>
                             </select>

@@ -5,14 +5,14 @@ var VUE_CRITERIAS_MIXIN = {
         }
     },
     computed: {
-        criteriaCount: function() {
+        criteriaCount: function () {
             var count = 0;
-            this.criterias.forEach(function(criteria) {
+            this.criterias.forEach(function (criteria) {
                 count += criteria.selectedTerms.length;
             })
             return count;
         },
-        criteriaLabel: function() {
+        criteriaLabel: function () {
             if (this.criteriaCount > 1) {
                 return this.criteriaCount + " critères sélectionnés";
             } else if (this.criteriaCount == 1) {
@@ -37,7 +37,14 @@ var VUE_CRITERIAS_MIXIN = {
                         });
                     });
                     self.criterias = response.data;
-                });
+                })
+                .then(function () {
+                    // activate new tooltips
+                    // next cycle (for IE)
+                    Vue.nextTick(function () {
+                        $('.category-criteria i[data-toggle="tooltip"]').tooltip();
+                    });
+                })
         },
         // uncheck add criterias
         resetCriterias: function () {
