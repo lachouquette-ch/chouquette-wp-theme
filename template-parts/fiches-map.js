@@ -61,32 +61,34 @@ var app = new Vue({
                 const ficheName = parent.attr("data-fiche-name");
                 const ficheLat = parseFloat(parent.attr("data-fiche-lat"));
                 const ficheLng = parseFloat(parent.attr("data-fiche-lng"));
-                const fichePosition = {lat: ficheLat, lng: ficheLng};
+                const fichePosition = (ficheLat && ficheLng) ? {lat: ficheLat, lng: ficheLng} : null;
                 const ficheIcon = parent.attr("data-fiche-icon");
 
-                var map = new google.maps.Map(mapContainer.get(0), {
-                    center: fichePosition,
-                    clickableIcons: false,
-                    disableDefaultUI: true,
-                    gestureHandling: "none",
-                    restriction: {
-                        latLngBounds: SWITZERLAND_BOUNDS,
-                        strictBounds: false,
-                    },
-                    scaleControl: true,
-                    styles: MAP_STYLES,
-                    zoom: 15,
-                    zoomControl: true
-                });
-                // add marker
-                new google.maps.Marker({
-                    animation: google.maps.Animation.DROP,
-                    clickable: false,
-                    icon: parent.attr("data-fiche-icon"),
-                    map: map,
-                    position: fichePosition,
-                    title: parent.attr("data-fiche-name"),
-                });
+                if (fichePosition) {
+                    var map = new google.maps.Map(mapContainer.get(0), {
+                        center: fichePosition,
+                        clickableIcons: false,
+                        disableDefaultUI: true,
+                        gestureHandling: "none",
+                        restriction: {
+                            latLngBounds: SWITZERLAND_BOUNDS,
+                            strictBounds: false,
+                        },
+                        scaleControl: true,
+                        styles: MAP_STYLES,
+                        zoom: 15,
+                        zoomControl: true
+                    });
+                    // add marker
+                    new google.maps.Marker({
+                        animation: google.maps.Animation.DROP,
+                        clickable: false,
+                        icon: parent.attr("data-fiche-icon"),
+                        map: map,
+                        position: fichePosition,
+                        title: parent.attr("data-fiche-name"),
+                    });
+                }
             }
         }
         ,
