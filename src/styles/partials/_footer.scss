@@ -1,6 +1,8 @@
 .footer {
   color: $white;
   z-index: $zindex-fixed;
+  position: relative;
+  display: inline-block;
 }
 
 .footer-top {

@@ -65,7 +65,7 @@ var app = new Vue({
                 const ficheIcon = parent.attr("data-fiche-icon");
 
                 if (fichePosition) {
-                    var map = new google.maps.Map(mapContainer.get(0), {
+                    var ficheMap = new google.maps.Map(mapContainer.get(0), {
                         center: fichePosition,
                         clickableIcons: false,
                         disableDefaultUI: true,
@@ -84,7 +84,7 @@ var app = new Vue({
                         animation: google.maps.Animation.DROP,
                         clickable: false,
                         icon: parent.attr("data-fiche-icon"),
-                        map: map,
+                        map: ficheMap,
                         position: fichePosition,
                         title: parent.attr("data-fiche-name"),
                     });
