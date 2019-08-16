@@ -31,7 +31,7 @@ get_template_part('template-parts/fiche-report');
                 <div id="fichesMapReset" class="d-none">
                     <button v-on:click="resetMap" draggable="false" title="Reset view map" aria-label="Reset view map" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"
                             style="margin: 10px; height: 40px; width: 40px;">
-                        <i class="far fa-eye"></i>
+                        <i class="fas fa-bullseye"></i>
                     </button>
                 </div>
                 <a class="fiche-target" id="targetMap"></a>
