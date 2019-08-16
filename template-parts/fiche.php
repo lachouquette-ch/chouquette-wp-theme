@@ -22,7 +22,13 @@ $posts = get_posts(array(
 ));
 ?>
 
-<article class="fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'fiche-chouquettise'; ?>" v-cloak>
+<article class="fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'fiche-chouquettise'; ?>"
+         v-cloak
+         data-fiche-id="<?php echo get_the_ID(); ?>"
+         data-fiche-name="<?php echo get_the_title(); ?>"
+         data-fiche-lat="<?php echo $fiche_fields[CQ_FICHE_LOCATION]['lat']; ?>"
+         data-fiche-lng="<?php echo $fiche_fields[CQ_FICHE_LOCATION]['lng']; ?>"
+         data-fiche-icon="<?php echo chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID)) ?>">
     <a class="fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
     <div class="fiche-container">
         <div class="fiche-front">
@@ -102,13 +108,7 @@ $posts = get_posts(array(
         <div class="fiche-back">
             <div class="card">
                 <?php if (!empty($fiche_fields[CQ_FICHE_LOCATION])): ?>
-                    <iframe
-                            height="250"
-                            frameborder="0"
-                            style="border:0"
-                            src="https://www.google.com/maps/embed/v1/place?key=<?php echo CQ_GOOGLEMAPS_KEY; ?>&q=<?php echo $fiche_fields["location"]["lat"] . '%2C' . $fiche_fields["location"]["lng"]; ?>"
-                            allowfullscreen>
-                    </iframe>
+                    <div class="fiche-header" id="<?php echo 'ficheMap' . get_the_ID(); ?>"></div>
                 <?php endif; ?>
                 <?php if ($is_chouquettise): ?>
                     <ul class="list-group list-group-flush">

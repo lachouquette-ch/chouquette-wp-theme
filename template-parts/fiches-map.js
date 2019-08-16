@@ -50,6 +50,18 @@ var app = new Vue({
                 parent.find('.fiche-front').css('transform', 'rotateY(0deg)');
             }
             parent.toggleClass('flipped');
+
+            var myLatLng = {lat: parseFloat(parent.attr("data-fiche-lat")), lng: parseFloat(parent.attr("data-fiche-lng"))};
+            var map = new google.maps.Map(document.getElementById('ficheMap' + parent.attr("data-fiche-id")), {
+                zoom: 15,
+                center: myLatLng
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: parent.attr("data-fiche-name"),
+                icon: parent.attr("data-fiche-icon")
+            });
         },
         updateCriterias: function (event) {
             var value = event.target.value;
