@@ -56,7 +56,6 @@ var app = new Vue({
             // create map if none
             const mapContainer = $('#ficheMap' + parent.attr("data-fiche-id"));
             if (mapContainer.children().length === 0) {
-                console.log("create map");
                 // get fiche data from parent attributes
                 const ficheId = parent.attr("data-fiche-id");
                 const ficheName = parent.attr("data-fiche-name");
@@ -69,8 +68,7 @@ var app = new Vue({
                     center: fichePosition,
                     clickableIcons: false,
                     disableDefaultUI: true,
-                    fullscreenControl: true,
-                    gestureHandling: "cooperative",
+                    gestureHandling: "none",
                     restriction: {
                         latLngBounds: SWITZERLAND_BOUNDS,
                         strictBounds: false,
