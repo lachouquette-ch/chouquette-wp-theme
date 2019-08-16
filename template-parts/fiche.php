@@ -81,7 +81,7 @@ $posts = get_posts(array(
                         if (!empty($posts)):
                             $lastest_post = $posts[0];
                             ?>
-                            <a href="<?php get_the_permalink($lastest_post); ?>"
+                            <a href="<?php echo get_the_permalink($lastest_post); ?>"
                                title="Dernier article sur le lieu"
                                class="btn btn-outline-secondary">
                                 <i class="far fa-newspaper"></i>
@@ -190,7 +190,7 @@ $posts = get_posts(array(
                         if (!empty($posts)):
                             $lastest_post = $posts[0];
                             ?>
-                            <a href="<?php get_the_permalink($lastest_post); ?>"
+                            <a href="<?php echo get_the_permalink($lastest_post); ?>"
                                title="Dernier article sur le lieu"
                                class="btn btn-outline-secondary">
                                 <i class="far fa-newspaper"></i>
