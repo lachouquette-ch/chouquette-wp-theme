@@ -40,6 +40,17 @@ var app = new Vue({
         }
     },
     methods: {
+        ficheFlip: function (event) {
+            const parent = $(event.target).parents('.fiche');
+            if (parent.hasClass('flipped') == false) {
+                parent.find('.fiche-back').css('transform', 'rotateY(0deg)');
+                parent.find('.fiche-front').css('transform', 'rotateY(180deg)');
+            } else {
+                parent.find('.fiche-back').css('transform', 'rotateY(180deg)');
+                parent.find('.fiche-front').css('transform', 'rotateY(0deg)');
+            }
+            parent.toggleClass('flipped');
+        },
         updateCriterias: function (event) {
             var value = event.target.value;
             this.refreshCriterias(value ? value : this.category);
@@ -159,5 +170,18 @@ var app = new Vue({
                 fiche.childNodes[0].scrollIntoView(true, {behavior: "smooth"});
             }, 1500);
         }
+
+        // handle fiche heights
+        $('.fiche').each(function (index) {
+            // compute each fiche height
+            var frontHeight = $(this).find('.fiche-front .card').outerHeight();
+            var backHeight = $(this).find('.fiche-back .card').outerHeight();
+
+            if (frontHeight > backHeight) {
+                $('.fiche, .fiche-back .card').height(frontHeight);
+            } else {
+                $('.fiche, .fiche-front .card').height(backHeight);
+            }
+        });
     }
 });

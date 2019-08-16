@@ -1,6 +1,10 @@
 .fiche {
   @extend .mx-md-2;
-  width: 280px;
+  width: 300px;
+  height: 0px;
+
+  background-color: transparent;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
 
   @include media-breakpoint-down(sm) {
     width: 100%;
@@ -15,8 +19,32 @@
   visibility: hidden;
 }
 
+/* This container is needed to position the front and back side */
+.fiche-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Position the front and back side */
+.fiche-front, .fiche-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+
+  background-color: white;
+}
+
+.fiche-back {
+  transform: rotateY(180deg);
+}
+
 .fiche-header {
-  min-height: 250px;
+  height: 250px;
 
   background-size: cover;
   background-position: center;
@@ -29,8 +57,57 @@
   background-color: $white;
   padding: 0.75rem;
 
+  position: absolute;
+  top: 5px;
+  left: 5px;
+
   > img {
-    max-width: 35px;
+    width: 35px;
+  }
+}
+
+a.fiche-social {
+  @extend .border, .border-secondary, .rounded-circle;
+
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+
+  text-align: center;
+  vertical-align: middle;
+  line-height: 35px;
+
+  color: $black;
+
+  @include hover-focus-active {
+    background-color: $chouquette-yellow;
+    border-color: $chouquette-yellow !important;
+  }
+}
+
+.fiche-price:not(.fiche-price-selected) {
+  color: $chouquette-light-grey;
+}
+
+.fiche-planning {
+  > a {
+    white-space: normal !important;
+  }
+
+  .dropdown-menu {
+    left: -5rem !important;
+
+    ul {
+      list-style-type: none;
+      padding: 0 0.75rem;
+    }
+
+    li {
+      > label {
+        width: 7rem;
+      }
+      white-space: nowrap;
+    }
   }
 }
 
@@ -45,10 +122,6 @@
 }
 
 // special treatment to chouquettise
-.fiche-chouquettise {
-  box-shadow: 0px 0px 3px 2px rgba($chouquette-yellow, 1);
-
-  .fiche-header-icon {
-    background-color: $chouquette-yellow;
-  }
+.fiche-chouquettise .fiche-header-icon {
+  background-color: $chouquette-yellow;
 }
