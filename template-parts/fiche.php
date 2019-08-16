@@ -30,7 +30,7 @@ $posts = get_posts(array(
                 <div class="card-header fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
                     <div class="fiche-header-icon"><?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?></div>
                 </div>
-                <div class="card-body d-flex flex-column">
+                <div class="card-body d-flex flex-column position-relative">
                     <h5 class="card-title"><?php the_title(); ?></h5>
                     <p class="card-text"><?php echo strip_tags(the_content()); ?></p>
                     <?php if ($is_chouquettise): ?>
@@ -56,6 +56,9 @@ $posts = get_posts(array(
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
+                    <a class="fiche-report" title="Reporter une précision ou erreur sur la fiche" href="#" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>" data-fiche-id="<?php echo get_the_ID(); ?>">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </a>
                 </div>
                 <div class="card-footer">
                     <?php if (!empty($fiche_fields[CQ_FICHE_LOCATION])): ?>
@@ -134,10 +137,12 @@ $posts = get_posts(array(
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
-                <div class="card-body">
-                    <label class="mb-0">Critères :</label>
+                <div class="card-body position-relative">
                     <span><?php $terms = chouquette_fiche_flatten_terms($fiche_taxonomies);
                         echo implode(", ", $terms); ?></span>
+                    <a class="fiche-report" title="Reporter une précision ou erreur sur la fiche" href="#" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>" data-fiche-id="<?php echo get_the_ID(); ?>">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </a>
                 </div>
                 <div class="card-footer">
                     <?php if (!empty($fiche_fields[CQ_FICHE_LOCATION])): ?>

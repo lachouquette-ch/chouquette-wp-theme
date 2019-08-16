@@ -114,11 +114,16 @@ a.fiche-social {
 .fiche-report {
   position: absolute;
   right: 5px;
-  bottom: 5px;
 
   > i {
     color: $chouquette-grey;
   }
+}
+.fiche-front .fiche-report {
+  top: 5px;
+}
+.fiche-back .fiche-report {
+  bottom: 5px;
 }
 
 // special treatment to chouquettise
