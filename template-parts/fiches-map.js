@@ -42,6 +42,8 @@ var app = new Vue({
     methods: {
         ficheFlip: function (event) {
             const parent = $(event.target).parents('.fiche');
+
+            // flip card
             if (parent.hasClass('flipped') == false) {
                 parent.find('.fiche-back').css('transform', 'rotateY(0deg)');
                 parent.find('.fiche-front').css('transform', 'rotateY(180deg)');
@@ -51,26 +53,55 @@ var app = new Vue({
             }
             parent.toggleClass('flipped');
 
-            var myLatLng = {lat: parseFloat(parent.attr("data-fiche-lat")), lng: parseFloat(parent.attr("data-fiche-lng"))};
-            var map = new google.maps.Map(document.getElementById('ficheMap' + parent.attr("data-fiche-id")), {
-                zoom: 15,
-                center: myLatLng
-            });
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: parent.attr("data-fiche-name"),
-                icon: parent.attr("data-fiche-icon")
-            });
-        },
+            // create map if none
+            const mapContainer = $('#ficheMap' + parent.attr("data-fiche-id"));
+            if (mapContainer.children().length === 0) {
+                console.log("create map");
+                // get fiche data from parent attributes
+                const ficheId = parent.attr("data-fiche-id");
+                const ficheName = parent.attr("data-fiche-name");
+                const ficheLat = parseFloat(parent.attr("data-fiche-lat"));
+                const ficheLng = parseFloat(parent.attr("data-fiche-lng"));
+                const fichePosition = {lat: ficheLat, lng: ficheLng};
+                const ficheIcon = parent.attr("data-fiche-icon");
+
+                var map = new google.maps.Map(mapContainer.get(0), {
+                    center: fichePosition,
+                    clickableIcons: false,
+                    disableDefaultUI: true,
+                    fullscreenControl: true,
+                    gestureHandling: "cooperative",
+                    restriction: {
+                        latLngBounds: SWITZERLAND_BOUNDS,
+                        strictBounds: false,
+                    },
+                    scaleControl: true,
+                    styles: MAP_STYLES,
+                    zoom: 15,
+                    zoomControl: true
+                });
+                // add marker
+                new google.maps.Marker({
+                    animation: google.maps.Animation.DROP,
+                    clickable: false,
+                    icon: parent.attr("data-fiche-icon"),
+                    map: map,
+                    position: fichePosition,
+                    title: parent.attr("data-fiche-name"),
+                });
+            }
+        }
+        ,
         updateCriterias: function (event) {
             var value = event.target.value;
             this.refreshCriterias(value ? value : this.category);
-        },
+        }
+        ,
         resetMap: function () {
             this.clearMap();
             if (app.markers.size > 1) map.fitBounds(app.bounds);
-        },
+        }
+        ,
         // stop current animation and close current info window
         clearMap: function () {
             if (app.currentMarker) {
@@ -82,7 +113,8 @@ var app = new Vue({
 
             if (app.currentInfoWindow) app.currentInfoWindow.close();
             // reset index
-        },
+        }
+        ,
         // get fiches from URL and add it to map
         addFichesToMap: function () {
             axios.get(this.ficheApiURL + location.search)
@@ -136,7 +168,8 @@ var app = new Vue({
                         app.currentInfoWindow.open(map, app.currentMarker);
                     }
                 });
-        },
+        }
+        ,
         // locate on fiche on the map, display info window and activate animation
         locateFiche: function (ficheId) {
             this.clearMap();
