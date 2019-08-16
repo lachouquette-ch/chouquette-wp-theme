@@ -76,7 +76,7 @@ var app = new Vue({
                         },
                         scaleControl: true,
                         styles: MAP_STYLES,
-                        zoom: 15,
+                        zoom: 18,
                         zoomControl: true
                     });
                     // add marker
