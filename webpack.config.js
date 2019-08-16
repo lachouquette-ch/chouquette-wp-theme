@@ -17,6 +17,8 @@ const miniCssExtract = new MiniCssExtractPlugin({
     chunkFilename: "[id].css",
 });
 
+const autoprefixer = require('autoprefixer');
+
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
@@ -32,8 +34,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
+                    'style-loader',
                     MiniCssExtractPlugin.loader,
                     'css-loader',
+                    'postcss-loader',
                     'sass-loader'
                 ],
             },
@@ -78,6 +82,7 @@ module.exports = {
         cleanWebpack,
         webpackProvide,
         miniCssExtract,
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        autoprefixer
     ]
 };
