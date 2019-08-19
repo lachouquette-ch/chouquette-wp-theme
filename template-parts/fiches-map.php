@@ -16,28 +16,7 @@ get_template_part('template-parts/fiche-report');
 ?>
     <div id="app" class="container-fluid">
         <div class="row">
-            <div class="col-md-6 order-md-1 p-0">
-                <div id="fichesMapLegend" class="d-none">
-                    <?php
-                    $url = get_page_by_title('Charte éditoriale') ? get_permalink(get_page_by_title('Charte éditoriale')) : null;
-                    if (!empty($url)) :
-                        ?>
-                        <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
-                            <img height="40px" src="<?php echo get_template_directory_uri() . '/images/marker_yellow.png' ?>"> Lieux
-                            <a href="<?php echo $url; ?>" class="link-secondary">chouquettisés</a>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <div id="fichesMapReset" class="d-none">
-                    <button v-on:click="resetMap" draggable="false" title="Reset view map" aria-label="Reset view map" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"
-                            style="margin: 10px; height: 40px; width: 40px;">
-                        <i class="fas fa-bullseye"></i>
-                    </button>
-                </div>
-                <a class="fiche-target" id="targetMap"></a>
-                <div id="fichesMap" class="category-map"></div>
-            </div>
-            <div class="col-md-6 order-md-0 p-0 category-result-col">
+            <div class="col-md-6 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
                 <form class="mb-4 px-4 <?php echo empty($_GET['id']) ? '' : 'd-none' ?>">
                     <input id="search-cat" type="hidden" value="<?php echo $default_category->slug ?? '' ?>">
@@ -135,6 +114,32 @@ get_template_part('template-parts/fiche-report');
                 endif;
                 echo '</div>';
                 ?>
+            </div>
+            <div class="col-md-6">
+                <div id="fichesMapLegend" class="d-none">
+                    <?php
+                    $url = get_page_by_title('Charte éditoriale') ? get_permalink(get_page_by_title('Charte éditoriale')) : null;
+                    if (!empty($url)) :
+                        ?>
+                        <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                            <img height="40px" src="<?php echo get_template_directory_uri() . '/images/marker_yellow.png' ?>"> Lieux
+                            <a href="<?php echo $url; ?>" class="link-secondary">chouquettisés</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div id="fichesMapReset" class="d-none">
+                    <button v-on:click="resetMap" draggable="false" title="Reset view map" aria-label="Reset view map" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"
+                            style="margin: 10px; height: 40px; width: 40px;">
+                        <i class="fas fa-bullseye"></i>
+                    </button>
+                </div>
+
+                <div class="category-map-toggle text-center w-100 d-block d-md-none">
+                    <button class="btn btn-sm btn-primary cq-toggle reverse" type="button" v-on:click="toggleMap">
+                        <i class="fa"></i><span class="">La carte</span>
+                    </button>
+                </div>
+                <div id="fichesMap" class="category-map"></div>
             </div>
         </div>
     </div>

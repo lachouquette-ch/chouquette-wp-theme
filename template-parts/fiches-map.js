@@ -1,4 +1,5 @@
 var map = null; // google map
+var mapIsLoaded = false;
 
 function bootstrapMap() {
     map = new google.maps.Map(document.getElementById('fichesMap'), {
@@ -21,7 +22,10 @@ function bootstrapMap() {
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(reset.get(0));
     });
 
-    app.addFichesToMap();
+    if ($("#fichesMap").is(":visible")) {
+        mapIsLoaded = true;
+        app.addFichesToMap();
+    }
 };
 
 var app = new Vue({
@@ -46,7 +50,29 @@ var app = new Vue({
         },
         resetMap: function () {
             this.clearMap();
-            if (app.markers.size > 1) map.fitBounds(app.bounds);
+
+            if (app.markers.size > 1) {
+                map.fitBounds(app.bounds);
+            } else if (app.markers.size) { // single marker
+                app.currentMarker = app.markers.values().next().value;
+                map.setCenter(app.currentMarker.getPosition());
+
+                app.currentInfoWindow = app.infoWindows.values().next().value;
+                app.currentInfoWindow.open(map, app.currentMarker);
+            }
+        },
+        toggleMap: function () {
+            // for mobile
+            if (!mapIsLoaded) {
+                this.addFichesToMap();
+                mapIsLoaded = true;
+            }
+
+            $(".category-map-toggle").toggleClass("open");
+            $(".category-map-toggle button").attr('aria-expanded', function (i, attr) {
+                return attr == 'true' ? 'false' : 'true'
+            });
+            $("#fichesMap").toggle();
         },
         // stop current animation and close current info window
         clearMap: function () {
@@ -103,15 +129,8 @@ var app = new Vue({
                     // add marker clusterer
                     new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: CQ_IMG_PATH + '/maps_cluster/m'});
 
-                    if (app.markers.size > 1) {
-                        map.fitBounds(app.bounds);
-                    } else if (app.markers.size) { // single marker
-                        app.currentMarker = app.markers.values().next().value;
-                        map.setCenter(app.currentMarker.getPosition());
-
-                        app.currentInfoWindow = app.infoWindows.values().next().value;
-                        app.currentInfoWindow.open(map, app.currentMarker);
-                    }
+                    // reset
+                    app.resetMap();
                 });
         },
         // locate on fiche on the map, display info window and activate animation
