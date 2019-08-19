@@ -75,7 +75,7 @@ get_template_part('template-parts/fiche-report');
                             <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'" ?>>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria" v-cloak><i class="fa"></i>{{ criteriaLabel }}</button>
+                    <button class="btn btn-sm btn-secondary mr-1 cq-toggle" type="button" data-toggle="collapse" data-target="#collapseCriteria" v-cloak><i class="fa"></i>{{ criteriaLabel }}</button>
                     <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
                     <div id="collapseCriteria" class="collapse category-criteria mt-2 pl-2">
                         <div v-for="criteria in criterias" class="form-group">

@@ -1,16 +1,5 @@
 .category-result-col {
   min-height: calc(100vh - #{$header-height}); // case no result;
-
-  button[data-target="#collapseCriteria"] {
-    .fa:before {
-      content: "\f078";
-      margin-right: 5px;
-    }
-    &[aria-expanded="true"] .fa:before {
-      content: "\f077";
-      margin-right: 5px;
-    }
-  }
 }
 
 .category-criteria {

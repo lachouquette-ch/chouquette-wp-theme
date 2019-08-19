@@ -97,3 +97,28 @@ html {
 [v-cloak] {
   display: none;
 }
+
+/* Collapse */
+button.cq-toggle {
+  .fa:before {
+    content: "\f078";
+    margin-right: 5px;
+  }
+
+  &[aria-expanded="true"] .fa:before {
+    content: "\f077";
+    margin-right: 5px;
+  }
+}
+
+button.cq-toggle.reverse {
+  .fa:before {
+    content: "\f077";
+    margin-right: 5px;
+  }
+
+  &[aria-expanded="true"] .fa:before {
+    content: "\f078";
+    margin-right: 5px;
+  }
+}
