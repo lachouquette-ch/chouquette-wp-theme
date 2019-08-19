@@ -22,10 +22,7 @@ function bootstrapMap() {
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(reset.get(0));
     });
 
-    if ($("#fichesMap").is(":visible")) {
-        mapIsLoaded = true;
-        app.addFichesToMap();
-    }
+    app.addFichesToMap();
 };
 
 var app = new Vue({
@@ -62,17 +59,16 @@ var app = new Vue({
             }
         },
         toggleMap: function () {
-            // for mobile
-            if (!mapIsLoaded) {
-                this.addFichesToMap();
-                mapIsLoaded = true;
-            }
-
             $(".category-map-toggle").toggleClass("open");
             $(".category-map-toggle button").attr('aria-expanded', function (i, attr) {
                 return attr == 'true' ? 'false' : 'true'
             });
             $("#fichesMap").toggle();
+
+            if (!mapIsLoaded) { // for first load
+                this.resetMap();
+                mapIsLoaded = true;
+            }
         },
         // stop current animation and close current info window
         clearMap: function () {
@@ -112,9 +108,7 @@ var app = new Vue({
                         marker.addListener('click', function () {
                             // only for column display
                             if (app._colEnabled()) {
-                                // goto fiche
-                                var elmnt = document.getElementById('target' + fiche.id);
-                                elmnt.scrollIntoView(true, {behavior: "smooth"});
+                                app.highlightFiche(fiche.id);
                             }
 
                             // work on map
@@ -128,14 +122,29 @@ var app = new Vue({
 
                     // add marker clusterer
                     new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: CQ_IMG_PATH + '/maps_cluster/m'});
-
+                })
+                .then(function () {
                     // reset
                     app.resetMap();
                 });
         },
+        // highlight fiche on fiches list
+        highlightFiche: function (ficheId) {
+            // only for mobile
+            if (!app._colEnabled() && $("#fichesMap").is(":visible")) { // must be on mobile view
+                this.toggleMap();
+            }
+            // goto fiche
+            var elmnt = document.getElementById('target' + ficheId);
+            elmnt.scrollIntoView(true, {behavior: "smooth"});
+        },
         // locate on fiche on the map, display info window and activate animation
         locateFiche: function (ficheId) {
             this.clearMap();
+
+            if (!app._colEnabled() && !$("#fichesMap").is(":visible")) { // must be on mobile view
+                this.toggleMap();
+            }
 
             app.currentMarker = app.markers.get(ficheId);
             // zoom and center map
@@ -149,11 +158,6 @@ var app = new Vue({
             // close current infoWindow
             app.currentInfoWindow = app.infoWindows.get(ficheId);
             app.currentInfoWindow.open(map, app.currentMarker);
-
-            // for mobile
-            if (!this._colEnabled()) {
-                window.scrollTo(0, 0);
-            }
         }
     },
     mounted: function () {
