@@ -1,4 +1,4 @@
-var VUE_UTILITY_MIXIN = {
+const VUE_UTILITY_MIXIN = {
     data: function () {
         return {
             $_params: null

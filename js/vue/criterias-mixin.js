@@ -1,4 +1,4 @@
-var VUE_CRITERIAS_MIXIN = {
+const VUE_CRITERIAS_MIXIN = {
     data: function () {
         return {
             criterias: [],

@@ -166,7 +166,9 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_register_script('utility-mixin', get_template_directory_uri() . '/js/vue/utility-mixin.js', ['url-search-params'], CQ_THEME_VERSION, true);
 
-        wp_register_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js', ['axios', 'criterias-mixin', 'utility-mixin'], null, true);
+        wp_register_script('fiche-mixin', get_template_directory_uri() . '/js/vue/fiche-mixin.js', null, CQ_THEME_VERSION, true);
+
+        wp_register_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js', ['axios', 'criterias-mixin', 'utility-mixin', 'fiche-mixin'], null, true);
 
         wp_register_script('underscore', 'https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js', null, null, true);
 
