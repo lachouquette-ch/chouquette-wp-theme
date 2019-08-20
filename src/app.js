@@ -3,11 +3,11 @@ require("jquery");
 require("popper.js");
 require("lettering.js");
 require("textillate");
-// require("swiper");
-// require("swiper/dist/css/swiper.css");
+require("swiper");
+require("swiper/dist/css/swiper.css");
 require("bootstrap");
 
-// import Swiper from 'swiper';
+import Swiper from 'swiper';
 
 /* CSS imports */
 require("./styles/main.scss");
@@ -18,7 +18,7 @@ jQuery(function ($) {
     $('.tlt').textillate();
 
     // activate swiper
-    /*var swiper = new Swiper('.swiper-container', {
+    var swiper = new Swiper('.swiper-container', {
         grabCursor: true,
         centeredSlides: true,
         loop: true,
@@ -52,7 +52,7 @@ jQuery(function ($) {
                 spaceBetween: 30,
             }
         }
-    });*/
+    });
 
     // Remove empty fields from GET forms
     // Author: Bill Erickson

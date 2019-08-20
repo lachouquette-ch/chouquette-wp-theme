@@ -104,31 +104,27 @@
         </div>
     </header>
 
-    <div id="homeContent" class="home-content">
-        <div class="home-content-latest container">
-            <div class="row mb-xl-1">
-                <div class="col text-center">
-                    <h2 class="my-4">Nos derniers articles</h2>
-                </div>
+    <div id="homeContent" class="home-content py-5">
+        <div class="home-latest container">
+            <div class="text-center">
+                <h2 class="mb-4">Nos derniers articles</h2>
             </div>
             <?php
             $latest_posts = new WP_Query('posts_per_page=6');
             if ($latest_posts->have_posts()) :
                 ?>
-                <div class="row shadow-lg">
+                <div class="home-latest-container d-flex flex-wrap align-items-center justify-content-center">
                     <?php
                     while ($latest_posts->have_posts()) :
                         $latest_posts->the_post();
-                        echo '<div class="home-content-latest-container col-lg-4">';
                         get_template_part('template-parts/article-card');
-                        echo '</div>';
                     endwhile;
                     ?>
                 </div>
             <?php endif; ?>
         </div>
 
-        <div id="newsletter" class="container-fluid home-newsletter px-4 py-4 my-5">
+        <div id="newsletter" class="home-newsletter container-fluid my-5">
             <div class="row">
                 <div class="col-lg-6 m-md-auto mb-3">
                     <h2 class="w-75 m-auto text-center">Pour être dans la confidence du meilleur de chez toi</h2>
@@ -158,23 +154,20 @@
             </div>
         </div>
 
-        <div class="container mb-4">
-            <div class="row mb-3">
-                <div class="col text-center">
-                    <h2>Nos tops !</h2>
-                </div>
+        <div class="home-tops container">
+            <div class="text-center">
+                <h2 class="mb-4">Nos tops !</h2>
             </div>
-            <div class="row swiper-container">
+            <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <?php
-                    $tops_posts = new WP_Query('posts_per_page=10&tag=tops&orderby=rand');
+                    $tops_posts = new WP_Query('posts_per_page=8&tag=tops&orderby=rand');
                     if ($tops_posts->have_posts()) :
                         while ($tops_posts->have_posts()) :
                             $tops_posts->the_post();
-                            ?>
-                            <div class="swiper-slide bg-dark text-white shadow-sm"> <?php
-                                get_template_part('template-parts/article-card');
-                                ?> </div> <?php
+                            echo '<div class="swiper-slide">';
+                            get_template_part('template-parts/article-card');
+                            echo '</div>';
                         endwhile;
                     endif;
                     ?>
@@ -184,8 +177,8 @@
                 <div class="swiper-button-prev swiper-button-black"></div>
             </div>
         </div>
-
     </div>
+
 <?php
 
 wp_enqueue_script('index', get_template_directory_uri() . '/home.js', ['vue'], CQ_THEME_VERSION, true);
