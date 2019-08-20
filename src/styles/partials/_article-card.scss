@@ -3,7 +3,8 @@
   position: relative;
   width: 300px;
 
-  font-family: $font-family-brand;
+  font-family: $font-family-handwriting;
+  font-size: $h5-font-size;
   color: $black;
   @include hover-focus-active {
     color: $black;
@@ -53,6 +54,6 @@
 }
 
 .article-card-caption {
-  padding: 0 5px 5px 5px;
+  padding: 0 10px 5px 10px;
   min-height: 60px;
 }

@@ -37,7 +37,7 @@ $posts = get_posts(array(
                     <div class="fiche-header-icon"><?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?></div>
                 </div>
                 <div class="card-body d-flex flex-column position-relative">
-                    <h5 class="card-title"><?php the_title(); ?></h5>
+                    <h5 class="card-title text-center"><?php the_title(); ?></h5>
                     <p class="card-text"><?php echo strip_tags(get_the_content()); ?></p>
                     <?php if ($is_chouquettise): ?>
                         <div class="card-text d-flex justify-content-around mt-auto">

@@ -1,6 +1,10 @@
 .info-window {
   max-width: 180px;
 
+  h5 {
+    font-family: $font-family-brand;
+  }
+
   @include media-breakpoint-down(sm) {
     max-width: 100%;
   }

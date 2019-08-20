@@ -14,7 +14,7 @@
   }
 
   h3 {
-    font-family: "Satisfy", sans-serif;
+    font-family: $font-family-handwriting;
     color: #f8ef28;
   }
 
@@ -43,7 +43,7 @@
 
 .home-header-category {
   h2 {
-    font-size: 1rem;
+    font-size: $h5-font-size;
     color: $chouquette-yellow;
   }
 }
@@ -53,9 +53,9 @@
   background-color: rgba($black, 0.5);
   width: 100px;
   height: 100px;
+  margin: auto;
 
   img {
-    margin: auto;
     max-width: 60px;
   }
 }
@@ -194,6 +194,7 @@
   }
 
   h2 {
+    font-family: $font-family-handwriting;
     font-size: 1.75rem;
     line-height: 2.5rem;
   }

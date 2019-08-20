@@ -193,23 +193,33 @@ ul.cq-fiche-info {
 .cq-single-post-author {
   margin-top: 4rem;
 
+  h5 {
+    font-family: $font-family-handwriting;
+    font-size: $h3-font-size;
+  }
+
   div.col {
     padding-top: 35px; // corresp. to author image
   }
 
   img {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
 
     position: absolute;
-    top: -35px;
+    top: -50px;
     left: 50%;
-    margin-left: -35px;
+    margin-left: -50px;
   }
 
 }
 
 .cq-single-post-similar {
+  h3 {
+    font-family: $font-family-brand;
+    font-size: $h1-font-size;
+  }
+
   .swiper-wrapper {
     @extend .py-3, .px-1;
   }
@@ -227,6 +237,11 @@ ul.cq-fiche-info {
 }
 
 .cq-single-post-comments {
+  h3 {
+    font-family: $font-family-brand;
+    font-size: $h1-font-size;
+  }
+
   a {
     @extend .link-secondary;
   }

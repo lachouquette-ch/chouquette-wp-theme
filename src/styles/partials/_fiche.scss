@@ -6,6 +6,11 @@
   background-color: transparent;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 
+  h5 {
+    font-family: $font-family-brand;
+    font-size: $h4-font-size;
+  }
+
   @include media-breakpoint-down(sm) {
     font-size: $font-size-sm;
 
@@ -13,7 +18,7 @@
     margin: 0 1rem;
 
     h5 {
-      font-size: $h5-font-size * 0.8;
+      font-size: $h4-font-size * 0.8;
     }
   }
 }
