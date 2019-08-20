@@ -255,7 +255,7 @@ while (have_posts()) :
                         if ($tops_posts->have_posts()) :
                             while ($tops_posts->have_posts()) :
                                 $tops_posts->the_post();
-                                echo '<div class="swiper-slide bg-dark text-white">';
+                                echo '<div class="swiper-slide">';
                                 get_template_part('template-parts/article-card');
                                 echo '</div>';
                             endwhile;
@@ -282,6 +282,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['recaptcha'], CQ_THEME_VERSION, true);
+wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['recaptcha','swiper-custom'], CQ_THEME_VERSION, true);
 
 get_footer();

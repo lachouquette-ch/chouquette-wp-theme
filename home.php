@@ -182,6 +182,5 @@
 <?php
 
 wp_enqueue_script('index', get_template_directory_uri() . '/home.js', ['vue','swiper-custom'], CQ_THEME_VERSION, true);
-wp_enqueue_style('index', get_template_directory_uri() . '/home.js', ['vue','swiper-custom'], CQ_THEME_VERSION, true);
 
 get_footer();

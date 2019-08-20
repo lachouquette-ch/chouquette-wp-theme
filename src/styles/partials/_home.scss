@@ -215,7 +215,7 @@
 
 .home-tops {
   .swiper-container {
-    @extend .py-3;
+    @extend .py-3, .px-1;
   }
 
   .swiper-slide {

@@ -209,6 +209,23 @@ ul.cq-fiche-info {
 
 }
 
+.cq-single-post-similar {
+  .swiper-wrapper {
+    @extend .py-3, .px-1;
+  }
+
+  .swiper-slide {
+    .article-card {
+      height: 100%;
+      width: 100%;
+    }
+
+    .article-card:hover {
+      box-shadow: 0 5px 10px rgba(0, 0, 0, .7);
+    }
+  }
+}
+
 .cq-single-post-comments {
   a {
     @extend .link-secondary;
