@@ -7,8 +7,14 @@
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 
   @include media-breakpoint-down(sm) {
+    font-size: $font-size-sm;
+
     width: 100%;
     margin: 0 1rem;
+
+    h5 {
+      font-size: $h5-font-size * 0.8;
+    }
   }
 }
 
@@ -45,6 +51,7 @@
 
 .fiche-header {
   height: 250px;
+  max-height: 30vh;
 }
 .fiche-front .fiche-header {
   background-size: cover;
@@ -115,6 +122,8 @@ a.fiche-social {
 .fiche-report {
   position: absolute;
   right: 5px;
+
+  font-size: $font-size-base;
 
   > i {
     color: $chouquette-grey;

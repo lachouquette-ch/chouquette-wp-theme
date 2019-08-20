@@ -38,7 +38,7 @@ $posts = get_posts(array(
                 </div>
                 <div class="card-body d-flex flex-column position-relative">
                     <h5 class="card-title"><?php the_title(); ?></h5>
-                    <p class="card-text"><?php echo strip_tags(the_content()); ?></p>
+                    <p class="card-text"><?php echo strip_tags(get_the_content()); ?></p>
                     <?php if ($is_chouquettise): ?>
                         <div class="card-text d-flex justify-content-around mt-auto">
                             <?php if (!empty($fiche_fields[CQ_FICHE_PHONE])): ?>
