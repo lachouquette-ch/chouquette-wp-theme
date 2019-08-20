@@ -182,18 +182,5 @@ var app = new Vue({
                 fiche.childNodes[0].scrollIntoView(true, {behavior: "smooth"});
             }, 1500);
         }
-
-        // handle fiche heights
-        $('.fiche').each(function (index) {
-            // compute each fiche height
-            var frontHeight = $(this).find('.fiche-front .card').outerHeight();
-            var backHeight = $(this).find('.fiche-back .card').outerHeight();
-
-            if (frontHeight > backHeight) {
-                $('.fiche, .fiche-back .card').height(frontHeight);
-            } else {
-                $('.fiche, .fiche-front .card').height(backHeight);
-            }
-        });
     }
 });

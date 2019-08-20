@@ -190,9 +190,13 @@ if (!function_exists('chouquette_scripts')) :
 
         /* scripts (mandatory) */
 
+        wp_enqueue_script('jquery', "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js", null, null, true);
+
         wp_enqueue_script('vendor', get_template_directory_uri() . '/dist/vendor.js', null, CQ_THEME_VERSION, true);
 
         wp_enqueue_script('script', get_template_directory_uri() . '/dist/app.js', null, CQ_THEME_VERSION, true);
+
+        wp_enqueue_script('base', get_template_directory_uri() . '/js/base.js', null, CQ_THEME_VERSION, true);
 
         // https://codex.wordpress.org/Function_Reference/comment_reply_link
         if (is_singular() && comments_open() && get_option('thread_comments')) {
