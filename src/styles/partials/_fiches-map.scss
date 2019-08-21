@@ -6,6 +6,14 @@
   border-left: solid $chouquette-light-grey 3px;
 }
 
+.category-criteria-checkbox {
+  column-count: 2;
+  div {
+    white-space: nowrap;
+    width: 50%;
+  }
+}
+
 .category-fiche-container {
   background-color: rgba($chouquette-light-grey, 0.3);
 }

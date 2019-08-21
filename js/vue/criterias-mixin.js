@@ -5,6 +5,7 @@ const VUE_CRITERIAS_MIXIN = {
         }
     },
     computed: {
+        // for select only (mobile)
         criteriaCount: function () {
             var count = 0;
             this.criterias.forEach(function (criteria) {
@@ -12,17 +13,29 @@ const VUE_CRITERIAS_MIXIN = {
             })
             return count;
         },
-        criteriaLabel: function () {
-            if (this.criteriaCount > 1) {
-                return this.criteriaCount + " critères sélectionnés";
-            } else if (this.criteriaCount == 1) {
+        // for checkbox only (desktop)
+        checkedCount: function () {
+            var count = 0;
+            this.criterias.forEach(function (criteria) {
+                var checkedTerms = criteria.terms.filter(function (term) {
+                    return term.checked;
+                });
+                count += checkedTerms.length;
+            })
+            return count;
+        }
+    },
+    methods: {
+        // get text for critiera button
+        criteriaLabel: function (selectedCriterias) {
+            if (selectedCriterias > 1) {
+                return selectedCriterias + " critères sélectionnés";
+            } else if (selectedCriterias == 1) {
                 return "1 critère sélectionné";
             } else {
                 return "Plus de critères";
             }
-        }
-    },
-    methods: {
+        },
         // get criterias from remote based on given category
         refreshCriterias: function (category) {
             var self = this;
@@ -33,6 +46,7 @@ const VUE_CRITERIAS_MIXIN = {
                         taxonomy.terms.forEach(function (term) {
                             if (self.$_params.getAll(taxonomy.name).includes(term.slug)) {
                                 taxonomy.selectedTerms.push(term.slug);
+                                term.checked = true;
                             }
                         });
                     });
@@ -50,6 +64,9 @@ const VUE_CRITERIAS_MIXIN = {
         resetCriterias: function () {
             this.criterias.forEach(function (taxonomy) {
                 taxonomy.selectedTerms = [];
+                taxonomy.terms.forEach(function (term) {
+                    term.checked = false;
+                });
             })
         }
     }
