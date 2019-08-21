@@ -155,4 +155,4 @@ get_template_part('template-parts/fiche-report');
 
 <?php
 
-wp_enqueue_script('fiches-map', get_template_directory_uri() . '/template-parts/fiches-map.js', ['vue', 'google-maps', 'underscore'], CQ_THEME_VERSION, true);
+wp_enqueue_script('fiches-map', get_template_directory_uri() . '/template-parts/fiches-map.js', ['vue', 'google-maps', 'underscore', 'hammer'], CQ_THEME_VERSION, true);
