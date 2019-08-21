@@ -20,6 +20,7 @@
   bottom: 0px;
   border-top: none;
   border-bottom: 5px solid $chouquette-yellow;
+
   button {
     border-radius: 0.5rem 0.5rem 0 0;
   }
@@ -30,6 +31,7 @@
     bottom: auto;
     border-top: 5px solid $chouquette-yellow;
     border-bottom: none;
+
     button {
       padding: 2px $btn-padding-x;
       border-radius: 0 0 0.5rem 0.5rem;

@@ -4,20 +4,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Wordpress hack to handle fixed menu and admin bar */
-.admin-bar .navbar.fixed-top {
-  top: 32px;
-  @media screen and (max-width: 782px) {
-    top: 46px;
-  }
-}
-
-#wpadminbar {
-  @media screen and (max-width: 600px) {
-    position: fixed;
-  }
-}
-
 /* reCaptcha */
 
 .grecaptcha-badge {
