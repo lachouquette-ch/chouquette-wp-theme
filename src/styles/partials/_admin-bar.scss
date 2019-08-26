@@ -4,43 +4,43 @@
   }
 }
 
+$wp-adminbar-desktop: 32px;
+$wp-adminbar-mobile: 46px;
+$wp-adminbar-breakpoint: 782px;
+
 /* Wordpress hack to handle admin bar */
 .admin-bar {
   // navbar (menu)
   .navbar.fixed-top {
-    top: 32px;
-    @media screen and (max-width: 782px) {
-      top: 46px;
+    top: $wp-adminbar-desktop;
+    @media screen and (max-width: $wp-adminbar-breakpoint) {
+      top: $wp-adminbar-mobile;
     }
   }
 
   // link to fiches
-  .ficheTarget {
-    display: block;
-    position: relative;
-    visibility: hidden;
-
-    top: $header-height * -1.2 - 32px;
-    @media screen and (max-width: 782px) {
-      top: $header-height * -1.2 - 46px;
+  .fiche-target {
+    top: $header-height * -1.2 - $wp-adminbar-desktop;
+    @media screen and (max-width: $wp-adminbar-breakpoint) {
+      top: $header-height * -1.2 - $wp-adminbar-mobile;
     }
   }
 
   // category map toggle (mobile)
   .category-map-toggle.open {
-    top: calc(32px + #{$header-height});
-    @media screen and (max-width: 782px) {
-      top: calc(46px + #{$header-height});
+    top: $wp-adminbar-desktop + $header-height;
+    @media screen and (max-width: $wp-adminbar-breakpoint) {
+      top: $wp-adminbar-mobile + $header-height;
     }
   }
 
   // category map height and top (desktop)
   .category-map {
-    height: calc(100vh - 32px - #{$header-height});
-    top: calc(32px + #{$header-height});
-    @media screen and (max-width: 782px) {
-      height: calc(100vh - 46px - #{$header-height});
-      top: calc(46px + #{$header-height});
+    height: calc(100vh - #{$wp-adminbar-desktop} - #{$header-height});
+    top: $wp-adminbar-desktop + $header-height;
+    @media screen and (max-width: $wp-adminbar-breakpoint) {
+      height: calc(100vh - #{$wp-adminbar-mobile} - #{$header-height});
+      top: $wp-adminbar-mobile + $header-height;
     }
   }
 }

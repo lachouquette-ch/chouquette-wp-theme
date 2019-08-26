@@ -68,7 +68,7 @@ while (have_posts()) :
             ?>
             <aside class="col-lg-4 pr-lg-0 pl-lg-3 px-2">
                 <div id="app" class="shadow">
-                    <a id="fichesTarget" class="ficheTarget"></a>
+                    <a id="fichesTarget" class="fiche-target"></a>
                     <?php if (!empty($linkFichesWithLocations)) {
                         // add map
                         echo '<div id="fichesMap" class="cq-fiches-map border"></div>';
