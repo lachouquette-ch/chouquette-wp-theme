@@ -99,7 +99,7 @@ $posts = get_posts(array(
                     <a href="#"
                        title="Détails"
                        class="btn btn-secondary float-right"
-                       v-on:click.prevent="ficheFlip($event)">
+                       v-on:click.prevent="ficheFlip($event.target)">
                         <i class="fas fa-redo"></i>
                     </a>
                 </div>
@@ -208,7 +208,7 @@ $posts = get_posts(array(
                     <a href="#"
                        title="Détails"
                        class="btn btn-secondary float-right"
-                       v-on:click.prevent="ficheFlip($event)">
+                       v-on:click.prevent="ficheFlip($event.target)">
                         <i class="fas fa-undo"></i>
                     </a>
                 </div>

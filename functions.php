@@ -162,6 +162,8 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_register_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js', null, null, true);
 
+        wp_register_script('hammer', "https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js", null, null, true);
+
         wp_register_script('url-search-params', 'https://unpkg.com/@ungap/url-search-params', null, null, true);
 
         wp_register_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js', ['axios', 'criterias-mixin', 'utility-mixin', 'fiche-mixin'], null, true);
@@ -173,8 +175,6 @@ if (!function_exists('chouquette_scripts')) :
         wp_register_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=" . CQ_GOOGLEMAPS_KEY . "&callback=bootstrapMap", ['google-maps-custom', 'google-maps-marker-clusterer'], null, true);
 
         wp_register_script('recaptcha', "https://www.google.com/recaptcha/api.js?render=" . CQ_RECAPTCHA_SITE, null, null, true);
-
-        wp_register_script('hammer', "https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js", null, null, true);
 
         /* scripts registry */
 
