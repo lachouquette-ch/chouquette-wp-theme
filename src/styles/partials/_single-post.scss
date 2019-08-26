@@ -40,24 +40,6 @@
   color: $white;
 }
 
-#gotoFiche {
-  position: fixed;
-  top: $header-height;
-  z-index: 10;
-
-
-  > a {
-    background-color: $chouquette-yellow;
-    color: $black;
-    border-radius: 0 0 5px 5px;
-  }
-}
-
-/* Wordpress hack to handle admin bar */
-.admin-bar #gotoFiche {
-  top: $header-height + 46px;
-}
-
 .cq-single-post-content-title {
   h1 {
     //display: inline-block;
@@ -100,86 +82,11 @@
   }
 }
 
-.cq-fiches-map {
-  height: 250px;
-}
-
-.cq-fiches {
-  .card {
-    border-radius: unset;
-
-    &:not(:first-child) {
-      border-top: none;
-    }
-  }
-}
-
-.cq-fiches-header {
-  border-bottom: none;
-
-  > a {
-    color: $black;
-
-    // manage hidden/shown sign
-    > i.hidden {
-      display: none;
-    }
-    > i.shown {
-      display: inline;
-    }
-    &.collapsed {
-      > i.hidden {
-        display: inline;
-      }
-      > i.shown {
-        display: none;
-      }
-    }
-  }
-}
-
-.cq-fiche {
-  > img {
-    height: auto;
-  }
-
-  .card-footer {
-    background-color: $chouquette-yellow;
-    color: $chouquette-darker-grey;
-  }
-
-  a {
-    @extend .link-no-decoration;
-  }
-}
-
-.cq-fiche-contact, .cq-fiche {
-  border-top: none !important;
-}
-
-ul.cq-fiche-info {
-  list-style-type: none;
-  padding: 0;
-
-  ol {
-    list-style-type: none;
-    padding: 0;
-    display: inline;
-
-    li {
-      @extend .badge, .badge-yellow;
-      padding: 4px 6px;
-      opacity: 0.85;
-    }
-
-    li + li {
-      margin-left: 0.2rem;
-    }
-  }
-}
-
 .cq-single-post-author {
-  margin-top: 4rem;
+
+  > div {
+    padding-top: 50px;
+  }
 
   h5 {
     font-family: $font-family-handwriting;
