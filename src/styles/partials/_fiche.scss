@@ -23,13 +23,6 @@
   }
 }
 
-.fiche-target {
-  display: block;
-  position: relative;
-  top: $header-height * -1.2;
-  visibility: hidden;
-}
-
 /* This container is needed to position the front and back side */
 .fiche-container {
   position: relative;

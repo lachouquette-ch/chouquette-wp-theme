@@ -58,13 +58,6 @@
   top: $header-height + 46px;
 }
 
-#fichesTarget:target {
-  display: block;
-  position: relative;
-  top: $header-height * -1.4;
-  visibility: hidden;
-}
-
 .cq-single-post-content-title {
   h1 {
     //display: inline-block;
