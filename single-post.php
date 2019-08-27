@@ -19,11 +19,7 @@ while (have_posts()) :
         return !empty(get_field(CQ_FICHE_LOCATION, $fiche));
     });
     ?>
-
-    <?php if (!empty($linkFiches)) : ?>
-<?php endif; ?>
-
-    <article id="<?php echo get_the_ID(); ?>" class="cq-single-post">
+    <article id="post<?php echo get_the_ID(); ?>" class="cq-single-post">
         <div class="cq-single-post-header container p-0">
             <?php the_post_thumbnail('large', ['class' => 'cq-single-post-header-img']); ?>
             <?php echo get_avatar(get_the_author_meta('ID'), 150, null, get_the_author(), ['class' => 'cq-single-post-header-author-img rounded-circle']); ?>
@@ -106,10 +102,41 @@ while (have_posts()) :
                 <?php comments_template(); ?>
             </div>
         <?php endif; ?>
+
+        <div id="app"> <!-- shouldn't encompass comments_template since askimet has script embedded (doesn't suit vuejs) -->
+            <?php if (!empty($linkFiches)) : ?>
+                <div class="cq-single-post-fiches-wrapper accordion rounded-right" id="fichesAccordion" v-cloak>
+                    <button class="cq-single-post-fiches-trigger w-100 btn btn-lg btn-primary closed"
+                            v-on:click="showFiches">
+                        <i class="fas fa-info" v-if="unfold"></i><span class="cq-single-post-fiches-trigger-text" v-if="unfold"><span class="ml-4">Voir les fiches</span></span>
+                        <span v-else>Fermer les fiches <i class="far fa-times-circle float-right"></i></span>
+                    </button>
+                    <div class="cq-single-post-fiches" v-cloak>
+                        <?php foreach ($linkFiches as $ficheIndex => $fiche): ?>
+                            <button class="w-100 btn btn-dark d-block cq-toggle" type="button" data-toggle="collapse" data-target="#fiche<?php echo $fiche->ID; ?>"
+                                    aria-expanded="<?php echo $ficheIndex == 0 ? 'true' : 'false'; ?>" aria-controls="collapseOne">
+                                <i class="fa mr-2"></i><?php echo $fiche->post_title; ?>
+                            </button>
+                            <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 collapse <?php echo $ficheIndex == 0 ? 'show' : ''; ?>" aria-labelledby="headingOne" data-parent="#fichesAccordion">
+                                <div class="fiche fiche-front <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) echo 'fiche-chouquettise'; ?>">
+                                    <?php
+                                    set_query_var('fiche', $fiche);
+                                    set_query_var('fiche_fields', get_fields($fiche->ID));
+                                    set_query_var('fiche_category', chouquette_categories_get_tops($fiche->ID)[0]);
+                                    set_query_var('is_chouquettise', chouquette_fiche_is_chouquettise($fiche->ID));
+                                    get_template_part('template-parts/fiche-front');
+                                    ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
     </article>
 <?php
 endwhile;
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['recaptcha', 'swiper-custom'], CQ_THEME_VERSION, true);
+wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['recaptcha', 'swiper-custom', 'vue'], CQ_THEME_VERSION, true);
 
 get_footer();

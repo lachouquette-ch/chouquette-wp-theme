@@ -7,3 +7,23 @@ grecaptcha.ready(function () {
         }
     });
 });
+
+var app = new Vue({
+    el: '#app',
+    mixins: [VUE_UTILITY_MIXIN],
+    data: function () {
+        return {
+            unfold: true
+        }
+    },
+    methods: {
+        showFiches: function () {
+            $(".cq-single-post-fiches").toggle(200, function() {
+                app.unfold = !app.unfold;
+            });
+        }
+    },
+    mounted: function () {
+        $(".cq-single-post-fiches").hide();
+    }
+});
