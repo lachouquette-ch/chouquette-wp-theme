@@ -35,6 +35,10 @@ button.cq-single-post-fiches-trigger {
   button:last-of-type {
     border-bottom-right-radius: $border-radius;
   }
+
+  > div {
+    background-color: $white;
+  }
 }
 
 .cq-single-post-content {

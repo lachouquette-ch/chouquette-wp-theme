@@ -2,6 +2,8 @@
 
 get_header();
 
+get_template_part('template-parts/fiche-report');
+
 while (have_posts()) :
     the_post();
 
@@ -117,7 +119,7 @@ while (have_posts()) :
                                     aria-expanded="<?php echo $ficheIndex == 0 ? 'true' : 'false'; ?>" aria-controls="collapseOne">
                                 <i class="fa mr-2"></i><?php echo $fiche->post_title; ?>
                             </button>
-                            <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 collapse <?php echo $ficheIndex == 0 ? 'show' : ''; ?>" aria-labelledby="headingOne" data-parent="#fichesAccordion">
+                            <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 shadow collapse <?php echo $ficheIndex == 0 ? 'show' : ''; ?>" aria-labelledby="headingOne" data-parent="#fichesAccordion">
                                 <div class="fiche fiche-front <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) echo 'fiche-chouquettise'; ?>">
                                     <?php
                                     set_query_var('fiche', $fiche);
