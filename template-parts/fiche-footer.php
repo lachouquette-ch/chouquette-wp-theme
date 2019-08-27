@@ -24,13 +24,14 @@
            v-on:click.prevent="ficheFlip($event.target)">
             <i class="fas fa-undo"></i>
         </a>
-    <?php } elseif (is_search()) {
+    <?php } else {
         $fiche_link = add_query_arg('id', $fiche->ID, get_category_link($fiche_category));
         ?>
         <a href="<?php echo $fiche_link; ?>"
            title="Voir la fiche"
-           class="btn btn-sm btn-outline-secondary">
-            <i class="fas fa-eye"></i>
+           class="w-100 btn btn-primary"
+           target="_blank">
+            <i class="fas fa-eye mr-2"></i> Voir la fiche
         </a>
     <?php } ?>
 </div>
