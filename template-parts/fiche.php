@@ -1,13 +1,14 @@
 <?php
+$fiche = !empty(get_query_var('fiche')) ? get_query_var('fiche') : get_post();
+
 $default_category = get_query_var('default_category');
 if ($default_category) {
-    $fiche_category = chouquette_category_get_single_sub_category(get_the_ID(), $default_category);
+    $fiche_category = chouquette_category_get_single_sub_category($fiche->ID, $default_category);
 } else {
-    $fiche_category = chouquette_categories_get_tops(get_the_ID())[0];
+    $fiche_category = chouquette_categories_get_tops($fiche->ID)[0];
 }
 
-$fiche = get_post();
-$fiche_fields = get_fields(get_the_ID());
+$fiche_fields = get_fields($fiche->ID);
 $fiche_taxonomies = chouquette_fiche_get_taxonomies($fiche);
 $is_chouquettise = chouquette_fiche_is_chouquettise($fiche->ID);
 
@@ -15,30 +16,30 @@ $posts = get_posts(array(
     'meta_query' => array(
         array(
             'key' => CQ_FICHE_SELECTOR, // name of custom field
-            'value' => '"' . get_the_ID() . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
+            'value' => '"' . $fiche->ID . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
             'compare' => 'LIKE'
         )
     )
 ));
 ?>
 
-<article class="fiche mb-4 <?php if (chouquette_fiche_is_chouquettise(get_the_ID())) echo 'fiche-chouquettise'; ?>"
+<article class="fiche mb-4 <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) echo 'fiche-chouquettise'; ?>"
          v-cloak
-         data-fiche-id="<?php echo get_the_ID(); ?>"
-         data-fiche-name="<?php echo get_the_title(); ?>"
+         data-fiche-id="<?php echo $fiche->ID; ?>"
+         data-fiche-name="<?php echo $fiche->post_title; ?>"
          data-fiche-lat="<?php echo $fiche_fields[CQ_FICHE_LOCATION] ? $fiche_fields[CQ_FICHE_LOCATION]['lat'] : ''; ?>"
          data-fiche-lng="<?php echo $fiche_fields[CQ_FICHE_LOCATION] ? $fiche_fields[CQ_FICHE_LOCATION]['lng'] : ''; ?>"
          data-fiche-icon="<?php echo chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID)) ?>">
-    <a class="fiche-target" id="<?php echo 'target' . get_the_ID(); ?>"></a>
+    <a class="fiche-target" id="<?php echo 'target' . $fiche->ID; ?>"></a>
     <div class="fiche-container">
         <div class="fiche-front">
             <div class="card">
-                <div class="card-header fiche-header p-2" style="background-image: url('<?php esc_url(the_post_thumbnail_url('medium_large')); ?>');">
+                <div class="card-header fiche-header p-2" style="background-image: url('<?php echo get_the_post_thumbnail_url($fiche, 'medium_large'); ?>');">
                     <div class="fiche-header-icon"><?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?></div>
                 </div>
                 <div class="card-body d-flex flex-column position-relative">
-                    <h5 class="card-title text-center"><?php the_title(); ?></h5>
-                    <p class="card-text"><?php echo strip_tags(get_the_content()); ?></p>
+                    <h5 class="card-title text-center"><?php echo $fiche->post_title; ?></h5>
+                    <p class="card-text"><?php echo strip_tags(get_the_content(null, false, $fiche)); ?></p>
                     <?php if ($is_chouquettise): ?>
                         <div class="card-text d-flex justify-content-around mt-auto">
                             <?php if (!empty($fiche_fields[CQ_FICHE_PHONE])): ?>
@@ -63,7 +64,7 @@ $posts = get_posts(array(
                         </div>
                     <?php endif; ?>
                     <a class="fiche-report" title="Reporter une précision ou erreur sur la fiche" href="#" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>"
-                       data-fiche-id="<?php echo get_the_ID(); ?>">
+                       data-fiche-id="<?php echo $fiche->ID; ?>">
                         <i class="fas fa-exclamation-circle"></i>
                     </a>
                 </div>
@@ -74,7 +75,7 @@ $posts = get_posts(array(
                         <?php if (!empty($fiche_fields[CQ_FICHE_LOCATION])): ?>
                             <a href="#" class="btn btn-outline-secondary"
                                title="Voir la fiche sur la carte"
-                               v-on:click.prevent="locateFiche(<?php echo get_the_ID(); ?>)">
+                               v-on:click.prevent="locateFiche(<?php echo $fiche->ID; ?>)">
                                 <i class=" fas fa-map-marker-alt"></i>
                             </a>
                         <?php endif;
@@ -88,7 +89,7 @@ $posts = get_posts(array(
                             </a>
                         <?php endif;
                     } elseif (is_search()) {
-                        $fiche_link = add_query_arg('id', get_the_ID(), get_category_link($fiche_category));
+                        $fiche_link = add_query_arg('id', $fiche->ID, get_category_link($fiche_category));
                         ?>
                         <a href="<?php echo $fiche_link; ?>"
                            title="Voir la fiche"
@@ -108,7 +109,7 @@ $posts = get_posts(array(
         <div class="fiche-back">
             <div class="card">
                 <?php if (!empty($fiche_fields[CQ_FICHE_LOCATION])): ?>
-                    <div class="fiche-header" id="<?php echo 'ficheMap' . get_the_ID(); ?>"></div>
+                    <div class="fiche-header" id="<?php echo 'ficheMap' . $fiche->ID; ?>"></div>
                 <?php endif; ?>
                 <?php if ($is_chouquettise): ?>
                     <ul class="list-group list-group-flush">
@@ -150,9 +151,9 @@ $posts = get_posts(array(
                             <li class="list-group-item">
                                 <label class="mb-0">Horaires :</label>
                                 <div class="dropup d-inline-block fiche-planning">
-                                    <a class="link-secondary link-no-decoration dropdown-toggle" href="#horaires" role="button" id="<?php echo 'planning' . get_the_ID(); ?>" data-toggle="dropdown"
+                                    <a class="link-secondary link-no-decoration dropdown-toggle" href="#horaires" role="button" id="<?php echo 'planning' . $fiche->ID; ?>" data-toggle="dropdown"
                                        aria-haspopup="true" aria-expanded="false"><?php echo $raw_planning[date('N') - 1]; ?></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="<?php echo 'planning' . get_the_ID(); ?>">
+                                    <div class="dropdown-menu" aria-labelledby="<?php echo 'planning' . $fiche->ID; ?>">
                                         <ul>
                                             <li><label class="mb-0">Lundi</label> <?php echo $raw_planning[0]; ?></li>
                                             <li><label class="mb-0">Mardi</label> <?php echo $raw_planning[1]; ?></li>
@@ -172,7 +173,7 @@ $posts = get_posts(array(
                     <span><?php $terms = chouquette_fiche_flatten_terms($fiche_taxonomies);
                         echo implode(", ", $terms); ?></span>
                     <a href="#" class="fiche-report" title="Reporter une précision ou erreur sur la fiche" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>"
-                       data-fiche-id="<?php echo get_the_ID(); ?>">
+                       data-fiche-id="<?php echo $fiche->ID; ?>">
                         <i class="fas fa-exclamation-circle"></i>
                     </a>
                 </div>
@@ -183,7 +184,7 @@ $posts = get_posts(array(
                         <?php if (!empty($fiche_fields[CQ_FICHE_LOCATION])): ?>
                             <a href="#" class="btn btn-outline-secondary"
                                title="Voir la fiche sur la carte"
-                               v-on:click.prevent="locateFiche(<?php echo get_the_ID(); ?>)">
+                               v-on:click.prevent="locateFiche(<?php echo $fiche->ID; ?>)">
                                 <i class=" fas fa-map-marker-alt"></i>
                             </a>
                         <?php endif;
@@ -197,7 +198,7 @@ $posts = get_posts(array(
                             </a>
                         <?php endif;
                     } elseif (is_search()) {
-                        $fiche_link = add_query_arg('id', get_the_ID(), get_category_link($fiche_category));
+                        $fiche_link = add_query_arg('id', $fiche->ID, get_category_link($fiche_category));
                         ?>
                         <a href="<?php echo $fiche_link; ?>"
                            title="Voir la fiche"
