@@ -1,3 +1,39 @@
+.cq-single-post-fiches {
+  position: fixed;
+  top: $header-height + 60px;
+  left: 0;
+  z-index: $zindex-fixed;
+
+  background-color: $white;
+
+  button {
+    border-radius: unset;
+
+    &:first-of-type {
+      border-top-right-radius: $border-radius;
+    }
+
+    &:last-of-type {
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
+  //> span {
+  //  max-width: 0;
+  //  transition: max-width 0.5s;
+  //  display: inline-block;
+  //  vertical-align: top;
+  //  white-space: nowrap;
+  //  overflow: hidden;
+  //}
+  //
+  //&:hover {
+  //  > span {
+  //    max-width: 10rem;
+  //  }
+  //}
+}
+
 .cq-single-post-content {
   a {
     @extend .link-secondary;

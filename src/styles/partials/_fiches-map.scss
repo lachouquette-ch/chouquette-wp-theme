@@ -16,6 +16,10 @@
 
 .category-fiche-container {
   background-color: rgba($chouquette-light-grey, 0.3);
+
+  .fiche {
+    @extend .mx-md-2;
+  }
 }
 
 .category-map-toggle {
