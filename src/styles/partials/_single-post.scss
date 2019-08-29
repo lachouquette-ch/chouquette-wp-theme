@@ -10,7 +10,7 @@
 
   border-right: 5px solid $chouquette-yellow;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(sm) {
     width: 100%;
     left: -100vw;
 
@@ -28,7 +28,7 @@
   }
 }
 
-cq-single-post-fiches-btn {
+.cq-single-post-fiches-btn {
   height: 48px;
   width: 190px;
 
@@ -48,13 +48,13 @@ cq-single-post-fiches-btn {
   top: 0;
   right: 0px;
 
-  transition: right 0.3s;
+  transition: right 0.5s;
 }
-.cq-single-post-fiches.open .cq-single-post-fiches-btn-sm {
+.cq-single-post-fiches.open > .cq-single-post-fiches-btn-sm {
   width: 100%;
 
   position: relative;
-  right: auto;
+  right: auto !important;
 }
 
 .cq-single-post-fiches-wrapper {
