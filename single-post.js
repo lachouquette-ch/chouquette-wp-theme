@@ -11,12 +11,22 @@ grecaptcha.ready(function () {
 var app = new Vue({
     el: '#app',
     mixins: [VUE_UTILITY_MIXIN, VUE_FICHE_MIXIN],
+    data: function () {
+        return {
+            firstShow: true,
+        }
+    },
     methods: {
         showFiches: function () {
             $(".cq-single-post-fiches").toggleClass("open");
             $(".cq-single-post-fiches > button").attr('aria-expanded', function (i, attr) {
                 return attr == 'true' ? 'false' : 'true'
             });
+
+            if (this.firstShow) {
+                $("#fichesAccordion > div:last-of-type").collapse("show");
+                this.firstShow = false;
+            }
         }
     },
     mounted: function () {
@@ -24,5 +34,9 @@ var app = new Vue({
             $(this).css('right', '-110px');
             next();
         });
+
+        // handle accordion. needs to be launched afterwork so fiche heights can be computed properly
+        $("#fichesAccordion").collapse();
+        $("#fichesAccordion > div").collapse("hide");
     }
 });

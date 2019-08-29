@@ -115,13 +115,13 @@ while (have_posts()) :
                         <i class="fa"></i><span class="ml-2">Les fiches</span>
                     </button>
                     <div class="cq-single-post-fiches-wrapper" v-cloak>
-                        <div class="accordion" id="fichesAccordion">
-                            <?php foreach ($linkFiches as $ficheIndex => $fiche): ?>
+                        <div id="fichesAccordion">
+                            <?php foreach ($linkFiches as $fiche): ?>
                                 <button class="w-100 btn btn-dark d-block cq-toggle" type="button" data-toggle="collapse" data-target="#fiche<?php echo $fiche->ID; ?>"
-                                        aria-expanded="<?php echo $ficheIndex == 0 ? 'true' : 'false'; ?>" aria-controls="collapseOne">
+                                        aria-expanded="true" aria-controls="collapseOne">
                                     <i class="fa mr-2"></i><?php echo $fiche->post_title; ?>
                                 </button>
-                                <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 collapse <?php echo $ficheIndex == 0 ? 'show' : ''; ?>" aria-labelledby="headingOne"
+                                <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 collapse show" aria-labelledby="headingOne"
                                      data-parent="#fichesAccordion">
                                     <?php
                                     set_query_var('fiche', $fiche);
