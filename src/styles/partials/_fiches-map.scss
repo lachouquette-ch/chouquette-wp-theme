@@ -34,6 +34,14 @@
   border-bottom: 5px solid $chouquette-yellow;
 
   button {
+    position: absolute;
+    width: 92px;
+    height: 28px;
+    left: 50%;
+    margin-left: -46px;
+
+    top: -28px;
+
     border-radius: 0.5rem 0.5rem 0 0;
   }
 
@@ -45,7 +53,8 @@
     border-bottom: none;
 
     button {
-      padding: 2px $btn-padding-x;
+      top: 0px;
+
       border-radius: 0 0 0.5rem 0.5rem;
     }
 
@@ -63,8 +72,12 @@
     height: calc(100vh - #{$header-height}); // minus selector
     width: 100vw;
     position: fixed !important;
-    top: $header-height;
+    top: auto;
     left: 0;
-    display: none; // start hidden
+    bottom: calc(-100vh + #{$header-height});
+
+    &.open {
+      bottom: 0;
+    }
   }
 }

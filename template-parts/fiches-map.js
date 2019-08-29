@@ -1,5 +1,4 @@
 var map = null; // google map
-var mapIsLoaded = false;
 
 function bootstrapMap() {
     map = new google.maps.Map(document.getElementById('fichesMap'), {
@@ -63,12 +62,7 @@ var app = new Vue({
             $(".category-map-toggle button").attr('aria-expanded', function (i, attr) {
                 return attr == 'true' ? 'false' : 'true'
             });
-            $("#fichesMap").toggle();
-
-            if (!mapIsLoaded) { // for first load
-                this.resetMap();
-                mapIsLoaded = true;
-            }
+            $("#fichesMap").toggleClass("open");
         },
         // stop current animation and close current info window
         clearMap: function () {
@@ -142,7 +136,7 @@ var app = new Vue({
         locateFiche: function (ficheId) {
             this.clearMap();
 
-            if (!app._colEnabled() && !$("#fichesMap").is(":visible")) { // must be on mobile view
+            if (!app._colEnabled() && !$("#fichesMap").hasClass("open")) { // must be on mobile view
                 this.toggleMap();
             }
 
