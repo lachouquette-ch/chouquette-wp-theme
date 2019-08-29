@@ -62,18 +62,20 @@ const VUE_FICHE_MIXIN = {
         var self = this;
         $('.fiche').each(function (index, element) {
             // compute each fiche height
-            var frontHeight = $(element).find('.fiche-front .card').outerHeight();
-            var backHeight = $(element).find('.fiche-back .card').outerHeight();
+            var frontHeight = $(element).find('.fiche-front .card').height();
+            var backHeight = $(element).find('.fiche-back .card').height();
 
             if (frontHeight > backHeight) {
-                $('.fiche, .fiche-back .card').height(frontHeight);
+                $(element).height(frontHeight);
+                $(element).find('.fiche-back .card').height(frontHeight);
             } else {
-                $('.fiche, .fiche-front .card').height(backHeight);
+                $(element).height(backHeight);
+                $(element).find('.fiche-front .card').height(backHeight);
             }
 
             // add mouse gesture
             var mc = new Hammer(element);
-            mc.on("swipeleft swiperight", function() {
+            mc.on("swipeleft swiperight", function () {
                 self.ficheFlip(element);
             });
         });
