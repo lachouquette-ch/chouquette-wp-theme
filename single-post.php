@@ -107,30 +107,26 @@ while (have_posts()) :
 
         <div id="app"> <!-- shouldn't encompass comments_template since askimet has script embedded (doesn't suit vuejs) -->
             <?php if (!empty($linkFiches)) : ?>
-                <div class="cq-single-post-fiches-wrapper accordion rounded-right" id="fichesAccordion" v-cloak>
-                    <button class="cq-single-post-fiches-trigger w-100 btn btn-lg btn-primary closed"
-                            v-on:click="showFiches">
-                        <i class="fas fa-info" v-if="unfold"></i><span class="cq-single-post-fiches-trigger-text" v-if="unfold"><span class="ml-4">Voir les fiches</span></span>
-                        <span v-else>Fermer les fiches <i class="far fa-times-circle float-right"></i></span>
+                <div class="cq-single-post-fiches" v-cloak>
+                    <button class="btn btn-lg btn-primary cq-toggle reverse" type="button" v-on:click="showFiches">
+                        <i class="fa"></i><span class="ml-2">Les fiches</span>
                     </button>
-                    <div class="cq-single-post-fiches" v-cloak>
-                        <?php foreach ($linkFiches as $ficheIndex => $fiche): ?>
-                            <button class="w-100 btn btn-dark d-block cq-toggle" type="button" data-toggle="collapse" data-target="#fiche<?php echo $fiche->ID; ?>"
-                                    aria-expanded="<?php echo $ficheIndex == 0 ? 'true' : 'false'; ?>" aria-controls="collapseOne">
-                                <i class="fa mr-2"></i><?php echo $fiche->post_title; ?>
-                            </button>
-                            <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 shadow collapse <?php echo $ficheIndex == 0 ? 'show' : ''; ?>" aria-labelledby="headingOne" data-parent="#fichesAccordion">
-                                <div class="fiche fiche-front <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) echo 'fiche-chouquettise'; ?>">
+                    <div class="cq-single-post-fiches-wrapper" v-cloak>
+                        <div class="accordion" id="fichesAccordion">
+                            <?php foreach ($linkFiches as $ficheIndex => $fiche): ?>
+                                <button class="w-100 btn btn-dark d-block cq-toggle" type="button" data-toggle="collapse" data-target="#fiche<?php echo $fiche->ID; ?>"
+                                        aria-expanded="<?php echo $ficheIndex == 0 ? 'true' : 'false'; ?>" aria-controls="collapseOne">
+                                    <i class="fa mr-2"></i><?php echo $fiche->post_title; ?>
+                                </button>
+                                <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 collapse <?php echo $ficheIndex == 0 ? 'show' : ''; ?>" aria-labelledby="headingOne"
+                                     data-parent="#fichesAccordion">
                                     <?php
                                     set_query_var('fiche', $fiche);
-                                    set_query_var('fiche_fields', get_fields($fiche->ID));
-                                    set_query_var('fiche_category', chouquette_categories_get_tops($fiche->ID)[0]);
-                                    set_query_var('is_chouquettise', chouquette_fiche_is_chouquettise($fiche->ID));
-                                    get_template_part('template-parts/fiche-front');
+                                    get_template_part('template-parts/fiche');
                                     ?>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             <?php endif; ?>
@@ -139,6 +135,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['recaptcha', 'swiper-custom', 'vue'], CQ_THEME_VERSION, true);
+wp_enqueue_script('single-post', get_template_directory_uri() . '/single-post.js', ['recaptcha', 'swiper-custom', 'vue', 'google-maps', 'hammer'], CQ_THEME_VERSION, true);
 
 get_footer();

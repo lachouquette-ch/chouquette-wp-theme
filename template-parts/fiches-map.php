@@ -145,7 +145,7 @@ get_template_part('template-parts/fiche-report');
 
                 <div class="category-map-toggle text-center w-100 d-block d-md-none">
                     <button class="btn btn-sm btn-primary cq-toggle reverse" type="button" v-on:click="toggleMap">
-                        <i class="fa"></i><span class="">La carte</span>
+                        <i class="fa"></i><span>La carte</span>
                     </button>
                 </div>
                 <div id="fichesMap" class="category-map"></div>

@@ -18,13 +18,7 @@
                 <i class="far fa-newspaper"></i>
             </a>
         <?php endif; ?>
-        <a href="#"
-           title="Détails"
-           class="btn btn-secondary float-right"
-           v-on:click.prevent="ficheFlip($event.target)">
-            <i class="fas fa-undo"></i>
-        </a>
-    <?php } else {
+    <?php } elseif (is_search()) {
         $fiche_link = add_query_arg('id', $fiche->ID, get_category_link($fiche_category));
         ?>
         <a href="<?php echo $fiche_link; ?>"
@@ -34,4 +28,10 @@
             <i class="fas fa-eye mr-2"></i> Voir la fiche
         </a>
     <?php } ?>
+    <a href="#"
+       title="Détails"
+       class="btn btn-secondary float-right"
+       v-on:click.prevent="ficheFlip($event.target)">
+        <i class="fas fa-undo"></i>
+    </a>
 </div>

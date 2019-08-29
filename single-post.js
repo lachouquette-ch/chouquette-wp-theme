@@ -10,7 +10,7 @@ grecaptcha.ready(function () {
 
 var app = new Vue({
     el: '#app',
-    mixins: [VUE_UTILITY_MIXIN],
+    mixins: [VUE_UTILITY_MIXIN, VUE_FICHE_MIXIN],
     data: function () {
         return {
             unfold: true
@@ -18,12 +18,12 @@ var app = new Vue({
     },
     methods: {
         showFiches: function () {
-            $(".cq-single-post-fiches").toggle(200, function() {
-                app.unfold = !app.unfold;
+            $(".cq-single-post-fiches").toggleClass("open");
+            $(".cq-single-post-fiches > button").attr('aria-expanded', function (i, attr) {
+                return attr == 'true' ? 'false' : 'true'
             });
         }
     },
     mounted: function () {
-        $(".cq-single-post-fiches").hide();
     }
 });

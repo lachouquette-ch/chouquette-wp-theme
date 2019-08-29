@@ -23,7 +23,7 @@ $posts = get_posts(array(
 ));
 ?>
 
-<article class="fiche fiche-flip mb-4 <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) echo 'fiche-chouquettise'; ?>"
+<article class="fiche fiche-flip <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) echo 'fiche-chouquettise'; ?>"
          v-cloak
          data-fiche-id="<?php echo $fiche->ID; ?>"
          data-fiche-name="<?php echo $fiche->post_title; ?>"
@@ -33,12 +33,43 @@ $posts = get_posts(array(
     <a class="fiche-target" id="<?php echo 'target' . $fiche->ID; ?>"></a>
     <div class="fiche-container">
         <div class="fiche-front">
-            <?php
-            set_query_var('fiche_category', $fiche_category);
-            set_query_var('fiche_fields', $fiche_fields);
-            set_query_var('is_chouquettise', $is_chouquettise);
-            get_template_part('template-parts/fiche-front');
-            ?>
+            <div class="card">
+                <div class="card-header fiche-header p-2" style="background-image: url('<?php echo get_the_post_thumbnail_url($fiche, 'medium_large'); ?>');">
+                    <div class="fiche-header-icon"><?php echo chouquette_taxonomy_logo($fiche_category, 'black'); ?></div>
+                </div>
+                <div class="card-body d-flex flex-column position-relative">
+                    <h5 class="card-title text-center"><?php echo $fiche->post_title; ?></h5>
+                    <p class="card-text"><?php echo strip_tags(get_the_content(null, false, $fiche)); ?></p>
+                    <?php if ($is_chouquettise): ?>
+                        <div class="card-text d-flex justify-content-around mt-auto">
+                            <?php if (!empty($fiche_fields[CQ_FICHE_PHONE])): ?>
+                                <a href="tel:<?php echo $fiche_fields[CQ_FICHE_PHONE] ?>" title="Téléphoner" class="fiche-social"><i class="fas fa-phone"></i></a>
+                            <?php endif;
+                            if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
+                                <a href="mailto:<?php echo $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url() ?>"
+                                   title="Email" class="fiche-social"><i class="fas fa-at"></i></a>
+                            <?php endif;
+                            if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])): ?>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_FACEBOOK]); ?>" title="Facebook" class="fiche-social"><i class="fab fa-facebook-f"></i></a>
+                            <?php endif;
+                            if (!empty($fiche_fields[CQ_FICHE_INSTAGRAM])): ?>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]); ?>" title="Instagram" class="fiche-social"><i class="fab fa-instagram"></i></a>
+                            <?php endif;
+                            if (!empty($fiche_fields[CQ_FICHE_TWITTER])): ?>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_TWITTER]); ?>" title="Twitter" class="fiche-social"><i class="fab fa-twitter"></i></a>
+                            <?php endif;
+                            if (!empty($fiche_fields[CQ_FICHE_PINTEREST])): ?>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_PINTEREST]); ?>" title="Pinterest" class="fiche-social"><i class="fab fa-pinterest"></i></a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                    <a class="fiche-report" title="Reporter une précision ou erreur sur la fiche" href="#" data-toggle="modal" data-target="#ficheReportModal" data-fiche-title="<?php the_title(); ?>"
+                       data-fiche-id="<?php echo $fiche->ID; ?>">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </a>
+                </div>
+                <?php include 'fiche-footer.php'; ?>
+            </div>
         </div>
         <div class="fiche-back">
             <div class="card">
