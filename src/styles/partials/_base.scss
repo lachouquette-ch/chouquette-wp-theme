@@ -108,3 +108,15 @@ button.cq-toggle.reverse {
     margin-right: 5px;
   }
 }
+
+button.cq-toggle.horizontal {
+  .fa:before {
+    content: "\f054";
+    margin-right: 5px;
+  }
+
+  &[aria-expanded="true"] .fa:before {
+    content: "\f053";
+    margin-right: 5px;
+  }
+}

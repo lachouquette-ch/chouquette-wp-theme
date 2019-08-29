@@ -1,85 +1,63 @@
 .cq-single-post-fiches {
-  height: calc(100vh - #{$header-height});
+  height: calc(100% - #{$header-height});
   width: 350px;
   background-color: $chouquette-light-grey;
 
   position: fixed;
+  top: $header-height;
+  left: -350px + 5px; // border
   z-index: $zindex-fixed;
+
+  border-right: 5px solid $chouquette-yellow;
 
   @include media-breakpoint-down(md) {
     width: 100%;
-    bottom: calc(-100vh + #{$header-height} + 5px); // border
+    left: -100vw;
 
-    border-top: 5px solid $chouquette-yellow;
-  }
-
-  @include media-breakpoint-up(md) {
-    top: $header-height;
-    left: -345px;
-
-    border-right: 5px solid $chouquette-yellow;
-  }
-
-  // breakpoint up md
-  > button {
-    position: absolute;
-    @include media-breakpoint-down(md) {
-      @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
-      height: 32px;
-      width: 110px;
-
-      top: -32px - 5px; // border
-      left: calc(50% - 55px);
-    }
-
-    @include media-breakpoint-up(md) {
-      @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
-      height: 48px;
-      width: 190px;
-
-      right: -5px; // border
-      bottom: calc(50% - 95px);
-
-      transform: rotate(90deg);
-      transform-origin: bottom right;
-      
-      > span.float-right { // no closing icon
-        display: none;
-      }
-    }
+    border-right: none;
   }
 
   button {
     border-radius: unset;
   }
 
-  transition: all 0.5s;
-  transition-property: left, bottom;
+  transition: left 0.5s;
 
   &.open {
     left: 0;
-    bottom: 0;
-
-    @include media-breakpoint-down(md) {
-      border-top: none;
-
-      > button {
-        position: relative;
-        top: auto;
-        left: auto;
-        width: 100%;
-
-        > i {
-          display: none;
-        }
-      }
-    }
   }
+}
+
+cq-single-post-fiches-btn {
+  height: 48px;
+  width: 190px;
+
+  position: absolute;
+  right: -5px; // border
+  bottom: calc(50% - 95px);
+
+  transform: rotate(90deg);
+  transform-origin: bottom right;
+}
+
+.cq-single-post-fiches-btn-sm {
+  height: 32px;
+  width: 110px;
+
+  position: absolute;
+  top: 0;
+  right: -110px;
+}
+.cq-single-post-fiches.open .cq-single-post-fiches-btn-sm {
+  width: 100%;
+
+  position: relative;
+  right: auto;
 }
 
 .cq-single-post-fiches-wrapper {
   overflow-y: auto;
-  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
 
   height: 100%;
 
