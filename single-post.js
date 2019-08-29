@@ -13,7 +13,7 @@ var app = new Vue({
     mixins: [VUE_UTILITY_MIXIN, VUE_FICHE_MIXIN],
     data: function () {
         return {
-            unfold: true
+            isOpen: false
         }
     },
     methods: {
@@ -22,6 +22,7 @@ var app = new Vue({
             $(".cq-single-post-fiches > button").attr('aria-expanded', function (i, attr) {
                 return attr == 'true' ? 'false' : 'true'
             });
+            app.isOpen = !app.isOpen;
         }
     },
     mounted: function () {

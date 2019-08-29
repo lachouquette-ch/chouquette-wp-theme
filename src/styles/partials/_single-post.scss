@@ -1,43 +1,99 @@
 .cq-single-post-fiches {
   height: calc(100vh - #{$header-height});
   width: 350px;
-  max-width: 100%;
+  background-color: $chouquette-light-grey;
 
   position: fixed;
-  top: $header-height;
-  left: -345px;
   z-index: $zindex-fixed;
 
-  background-color: $chouquette-light-grey;
-  border-right: 5px solid $chouquette-yellow;
+  @include media-breakpoint-down(md) {
+    width: 100%;
+    bottom: calc(-100vh + #{$header-height} + 5px); // border
 
+    border-top: 5px solid $chouquette-yellow;
+  }
+
+  @include media-breakpoint-up(md) {
+    top: $header-height;
+    left: -345px;
+
+    border-right: 5px solid $chouquette-yellow;
+  }
+
+  // breakpoint up md
   > button {
-    height: 48px;
-    width: 190px;
-
     position: absolute;
-    right: -5px; // border
-    bottom: calc(50% - 95px);
-    transform: rotate(90deg);
-    transform-origin: bottom right;
+    @include media-breakpoint-down(md) {
+      @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+      height: 32px;
+      width: 110px;
+
+      top: -32px - 5px; // border
+      left: calc(50% - 55px);
+    }
+
+    @include media-breakpoint-up(md) {
+      @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
+      height: 48px;
+      width: 190px;
+
+      right: -5px; // border
+      bottom: calc(50% - 95px);
+
+      transform: rotate(90deg);
+      transform-origin: bottom right;
+      
+      > span.float-right { // no closing icon
+        display: none;
+      }
+    }
   }
 
   button {
     border-radius: unset;
   }
 
-  transition: left 0.5s;
+  transition: all 0.5s;
+  transition-property: left, bottom;
 
   &.open {
     left: 0;
+    bottom: 0;
+
+    @include media-breakpoint-down(md) {
+      border-top: none;
+
+      > button {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+
+        > i {
+          display: none;
+        }
+      }
+    }
   }
 }
 
 .cq-single-post-fiches-wrapper {
   overflow-y: auto;
   overflow-scrolling: touch;
+
   height: 100%;
 
+  @include media-breakpoint-down(md) {
+    height: calc(100% - 32px); // button
+  }
+
+  background-color: $white;
+
+  article {
+    margin: auto; // center articles
+  }
+
+  // style scrollbar
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba($chouquette-grey, 0.3);
     background-color: $chouquette-light-grey;
@@ -50,13 +106,7 @@
 
   &::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba($chouquette-grey, .3);
-    background-color: $chouquette-dark-grey;
-  }
-
-  background-color: $white;
-
-  article {
-    margin: auto;
+    background-color: $chouquette-grey;
   }
 }
 
