@@ -1,8 +1,10 @@
 <?php
 get_header();
 global $wp_query;
+
+get_template_part('template-parts/fiche-report');
 ?>
-    <div class="container mb-3">
+    <div id="app" class="container mb-3">
         <h1 class="text-center my-4">Résultat(s) pour '<?php echo get_search_query(); ?>'</h1>
         <h3 class="m-3"><?php echo sprintf(_n('%s article trouvé', '%s articles trouvés', $wp_query->found_posts), $wp_query->found_posts); ?></h3>
         <?php if (have_posts()): ?>
@@ -61,7 +63,7 @@ global $wp_query;
         <h3 class="m-3"><?php echo sprintf(_n('%s fiche trouvée', '%s fiches trouvées', $loop->found_posts), $loop->found_posts); ?></h3>
         <?php
         if ($loop->have_posts()) {
-            echo '<div class="d-flex justify-content-center flex-wrap">';
+            echo '<div class="search-fiches d-flex justify-content-around flex-wrap">';
             while ($loop->have_posts()) {
                 $loop->the_post();
                 get_template_part('template-parts/fiche');
@@ -81,5 +83,7 @@ global $wp_query;
         ?>
     </div>
 <?php
+
+wp_enqueue_script('single-post', get_template_directory_uri() . '/search.js', ['vue', 'google-maps', 'hammer'], CQ_THEME_VERSION, true);
 
 get_footer();

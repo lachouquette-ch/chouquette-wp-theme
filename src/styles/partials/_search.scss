@@ -6,3 +6,9 @@
     @extend .link-secondary, .link-no-decoration;
   }
 }
+
+.search-fiches {
+  article {
+    @extend .mb-4;
+  }
+}

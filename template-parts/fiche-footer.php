@@ -1,5 +1,5 @@
 <div class="card-footer">
-    <?php if (is_category() && !is_category(CQ_CATEGORY_SERVICES) || is_tax(CQ_TAXONOMY_LOCATION)) {
+    <?php if (is_category() && !is_category(CQ_CATEGORY_SERVICES) || is_tax(CQ_TAXONOMY_LOCATION)) :
         // only for category pages or locations (not services)
         ?>
         <?php if (!empty($fiche_fields[CQ_FICHE_LOCATION])): ?>
@@ -18,16 +18,7 @@
                 <i class="far fa-newspaper"></i>
             </a>
         <?php endif; ?>
-    <?php } elseif (is_search()) {
-        $fiche_link = add_query_arg('id', $fiche->ID, get_category_link($fiche_category));
-        ?>
-        <a href="<?php echo $fiche_link; ?>"
-           title="Voir la fiche"
-           class="w-100 btn btn-primary"
-           target="_blank">
-            <i class="fas fa-eye mr-2"></i> Voir la fiche
-        </a>
-    <?php } ?>
+    <?php endif; ?>
     <a href="#"
        title="Détails"
        class="btn btn-secondary float-right"
