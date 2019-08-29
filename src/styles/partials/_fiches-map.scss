@@ -18,7 +18,7 @@
   background-color: rgba($chouquette-light-grey, 0.3);
 
   .fiche {
-    @extend .mx-md-2;
+    @extend .mx-md-2, .mb-4;
   }
 }
 
