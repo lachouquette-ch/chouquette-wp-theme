@@ -19,4 +19,10 @@ var app = new Vue({
             });
         }
     },
+    mounted: function () {
+        $(".cq-single-post-fiches-btn-sm").delay(500).queue(function (next) {
+            $(this).css('right', '-110px');
+            next();
+        });
+    }
 });

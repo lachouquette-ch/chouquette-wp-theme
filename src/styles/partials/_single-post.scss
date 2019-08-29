@@ -46,7 +46,9 @@ cq-single-post-fiches-btn {
 
   position: absolute;
   top: 0;
-  right: -110px;
+  right: 0px;
+
+  transition: right 0.3s;
 }
 .cq-single-post-fiches.open .cq-single-post-fiches-btn-sm {
   width: 100%;
