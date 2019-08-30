@@ -19,6 +19,9 @@ $search_locations = get_categories(array(
     'child_of' => get_queried_object()->term_id,
     'hide_empty' => false
 ));
+// add queried location
+array_unshift($search_locations, get_queried_object());
+// selected location can be different
 $default_location = isset($_GET['loc']) ? get_term_by('slug', $_GET['loc'], CQ_TAXONOMY_LOCATION) : get_queried_object();
 
 set_query_var('search_categories', $search_categories);
