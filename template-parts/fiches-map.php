@@ -143,12 +143,12 @@ get_template_part('template-parts/fiche-report');
                     </button>
                 </div>
 
-                <div class="category-map-toggle text-center w-100 d-block d-md-none">
-                    <button class="btn btn-sm btn-primary cq-toggle reverse" type="button" v-on:click="toggleMap">
-                        <i class="fa"></i><span>La carte</span>
+                <div class="category-map">
+                    <button class="btn btn-sm btn-primary cq-toggle horizontal d-md-none" type="button" v-on:click="toggleMap">
+                        <i class="fa"></i><span class="ml-2">La carte</span>
                     </button>
+                    <div id="fichesMap"></div>
                 </div>
-                <div id="fichesMap" class="category-map"></div>
             </div>
         </div>
     </div>

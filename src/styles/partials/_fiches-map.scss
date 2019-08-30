@@ -22,62 +22,47 @@
   }
 }
 
-.category-map-toggle {
-  position: fixed;
-  left: 0px;
-  z-index: $zindex-fixed;
-
-  // button goes down
-  top: auto;
-  bottom: 0px;
-  border-top: none;
-  border-bottom: 5px solid $chouquette-yellow;
-
-  button {
-    position: absolute;
-    width: 92px;
-    height: 28px;
-    left: 50%;
-    margin-left: -46px;
-
-    top: -28px;
-
-    border-radius: 0.5rem 0.5rem 0 0;
-  }
-
-  &.open {
-    // button goes up
-    top: #{$header-height};
-    bottom: auto;
-    border-top: 5px solid $chouquette-yellow;
-    border-bottom: none;
-
-    button {
-      top: 0px;
-
-      border-radius: 0 0 0.5rem 0.5rem;
-    }
-
-  }
-}
-
 .category-map {
   height: calc(100vh - #{$header-height});
+  width: 50%;
+
+  #fichesMap {
+    height: 100%;
+    width: 100%;
+  }
+
   position: fixed !important;
   top: $header-height;
   right: 0;
-  width: 50%;
 
   @include media-breakpoint-down(sm) {
-    height: calc(100vh - #{$header-height}); // minus selector
+    height: calc(100vh - #{$header-height} - 32px);
     width: 100vw;
-    position: fixed !important;
-    top: auto;
-    left: 0;
-    bottom: calc(-100vh + #{$header-height});
+
+    top: $header-height;
+    left: -100vw;
+
+    transition: left 0.5s;
 
     &.open {
-      bottom: 0;
+      left: 0;
     }
   }
+}
+
+.category-map > button {
+  height: 32px;
+  width: 110px;
+
+  position: absolute;
+  top: 0;
+  right: 0px;
+
+  transition: right 1s;
+}
+.category-map.open > button {
+  width: 100%;
+
+  position: relative;
+  right: auto !important;
 }

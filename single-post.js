@@ -20,7 +20,7 @@ var app = new Vue({
         }
     },
     methods: {
-        showFiches: function () {
+        toggleFiches: function () {
             $(".cq-single-post-fiches").toggleClass("open");
             $(".cq-single-post-fiches > button").attr('aria-expanded', function (i, attr) {
                 return attr == 'true' ? 'false' : 'true'

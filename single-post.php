@@ -105,10 +105,10 @@ while (have_posts()) :
         <div id="app"> <!-- shouldn't encompass comments_template since askimet has script embedded (doesn't suit vuejs) -->
             <?php if (!empty($linkFiches)) : ?>
                 <div class="cq-single-post-fiches" v-cloak>
-                    <button class="cq-single-post-fiches-btn btn btn-lg btn-primary cq-toggle reverse d-none d-md-inline-block" type="button" v-on:click="showFiches">
+                    <button class="cq-single-post-fiches-btn btn btn-lg btn-primary cq-toggle reverse d-none d-md-inline-block" type="button" v-on:click="toggleFiches">
                         <i class="fa"></i><span class="ml-2">Les fiches</span>
                     </button>
-                    <button class="cq-single-post-fiches-btn-sm btn btn-sm btn-primary cq-toggle horizontal d-md-none" type="button" v-on:click="showFiches">
+                    <button class="cq-single-post-fiches-btn-sm btn btn-sm btn-primary cq-toggle horizontal d-md-none" type="button" v-on:click="toggleFiches">
                         <i class="fa"></i><span class="ml-2">Les fiches</span>
                     </button>
                     <div class="cq-single-post-fiches-wrapper" v-cloak>

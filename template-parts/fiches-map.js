@@ -58,11 +58,10 @@ var app = new Vue({
             }
         },
         toggleMap: function () {
-            $(".category-map-toggle").toggleClass("open");
-            $(".category-map-toggle button").attr('aria-expanded', function (i, attr) {
+            $(".category-map").toggleClass("open");
+            $(".category-map > button").attr('aria-expanded', function (i, attr) {
                 return attr == 'true' ? 'false' : 'true'
             });
-            $("#fichesMap").toggleClass("open");
         },
         // stop current animation and close current info window
         clearMap: function () {
@@ -176,5 +175,10 @@ var app = new Vue({
                 fiche.childNodes[0].scrollIntoView(true, {behavior: "smooth"});
             }, 1500);
         }
+
+        $(".category-map > button").delay(1000).queue(function (next) {
+            $(this).css('right', '-110px');
+            next();
+        });
     }
 });
