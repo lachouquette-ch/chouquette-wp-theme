@@ -30,7 +30,6 @@ get_template_part('template-parts/fiche-report');
             'meta_type' => 'DATE',
             'orderby' => 'meta_value date',
             'order' => 'DESC DESC',
-            'post_status' => 'any' // TODO to remove
         );
         $args = array_merge($wp_query->query_vars, $args);
         $loop = new WP_Query($args);

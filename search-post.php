@@ -13,7 +13,6 @@ global $wp_query;
                 get_template_part('template-parts/article-card');
             }
             echo '</div>';
-
             the_posts_pagination(array(
                 'mid_size' => 2,
                 'prev_text' => 'Préc.',
