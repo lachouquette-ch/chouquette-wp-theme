@@ -75,3 +75,7 @@
         </div>
     </div>
 </div>
+
+<?php
+
+wp_enqueue_script('menu', get_template_directory_uri() . '/template-parts/menu.js', null, CQ_THEME_VERSION, true);

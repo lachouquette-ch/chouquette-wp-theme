@@ -84,6 +84,6 @@ get_template_part('template-parts/fiche-report');
     </div>
 <?php
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/search.js', ['vue', 'google-maps', 'hammer'], CQ_THEME_VERSION, true);
+wp_enqueue_script('search', get_template_directory_uri() . '/search.js', ['vue', 'google-maps', 'hammer'], CQ_THEME_VERSION, true);
 
 get_footer();
