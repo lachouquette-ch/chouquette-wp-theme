@@ -81,15 +81,15 @@ var app = new Vue({
                 .then(function (response) {
                     app.bounds = new google.maps.LatLngBounds();
                     response.data.forEach(function (fiche) {
-                        // create info window
-                        var infoWindow = new google.maps.InfoWindow({content: fiche.infoWindow});
-                        app.infoWindows.set(fiche.id, infoWindow);
-
                         // create marker
                         if (_.isEmpty(fiche.location)) {
                             $("#" + fiche.id + " button").hide();
                             return;
                         }
+
+                        // create info window
+                        var infoWindow = new google.maps.InfoWindow({content: fiche.infoWindow});
+                        app.infoWindows.set(fiche.id, infoWindow);
 
                         var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon});
                         marker.defaultZIndex = fiche.chouquettise ? Z_INDEX_CHOUQUETTISE : Z_INDEX_DEFAULT;
