@@ -26,14 +26,14 @@
   height: calc(100vh - #{$header-height});
   width: 50%;
 
+  position: fixed !important;
+  top: $header-height;
+  right: 0;
+
   #fichesMap {
     height: 100%;
     width: 100%;
   }
-
-  position: fixed !important;
-  top: $header-height;
-  right: 0;
 
   @include media-breakpoint-down(sm) {
     height: calc(100vh - #{$header-height} - 32px);
@@ -41,6 +41,10 @@
 
     top: $header-height;
     left: -100vw;
+
+    #fichesMap {
+      height: calc(100% - 32px);
+    }
 
     transition: left 0.5s;
 

@@ -26,21 +26,27 @@ $wp-adminbar-breakpoint: 782px;
     }
   }
 
-  // category map toggle (mobile)
-  .category-map-toggle.open {
-    top: $wp-adminbar-desktop + $header-height;
+  // category map height and top
+  .category-map {
+    height: calc(100vh - #{$header-height} - #{$wp-adminbar-desktop});
+    top: $header-height + $wp-adminbar-desktop;
     @media screen and (max-width: $wp-adminbar-breakpoint) {
-      top: $wp-adminbar-mobile + $header-height;
+      height: calc(100vh - #{$header-height} - #{$wp-adminbar-mobile});
+      top: $header-height + $wp-adminbar-mobile;
+
+      #fichesMap {
+
+      }
     }
   }
 
-  // category map height and top (desktop)
-  .category-map {
-    height: calc(100vh - #{$wp-adminbar-desktop} - #{$header-height});
-    top: $wp-adminbar-desktop + $header-height;
+  // post fiches height and top
+  .cq-single-post-fiches {
+    height: calc(100vh - #{$header-height} - #{$wp-adminbar-desktop});
+    top: $header-height + $wp-adminbar-desktop;
     @media screen and (max-width: $wp-adminbar-breakpoint) {
-      height: calc(100vh - #{$wp-adminbar-mobile} - #{$header-height});
-      top: $wp-adminbar-mobile + $header-height;
+      height: calc(100vh - #{$header-height} - #{$wp-adminbar-mobile});
+      top: $header-height + $wp-adminbar-mobile;
     }
   }
 }
