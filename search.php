@@ -4,8 +4,8 @@ global $wp_query;
 
 get_template_part('template-parts/fiche-report');
 ?>
-    <div id="app" class="container mb-3">
-        <h1 class="text-center my-4">Résultat(s) pour '<?php echo get_search_query(); ?>'</h1>
+    <div id="app" class="container py-4">
+        <h1 class="text-center mb-4">Résultat(s) pour '<?php echo get_search_query(); ?>'</h1>
         <h3 class="m-3"><?php echo sprintf(_n('%s article trouvé', '%s articles trouvés', $wp_query->found_posts), $wp_query->found_posts); ?></h3>
         <?php
         if (have_posts()) {
@@ -49,10 +49,7 @@ get_template_part('template-parts/fiche-report');
                     'post_type' => 'fiche',
                     'paged' => 2
                 ));
-
-                echo sprintf('<article id="%s" class="card fiche mb-4">', get_the_ID());
-                echo "<a href='$more_posts_url' class='btn btn-outline-secondary d-flex align-items-center' role='button' style='height: 100%;'><span class='w-100 text-center'>Les autres fiches</span></a>";
-                echo '</article >';
+                echo "<a href='$more_posts_url' class='btn btn-outline-secondary w-100' role='button' style='line-height: 5rem;'>Les autres fiches</a>";
             }
             echo '</div>';
         }

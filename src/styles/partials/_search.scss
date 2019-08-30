@@ -5,6 +5,10 @@
   a {
     @extend .link-secondary, .link-no-decoration;
   }
+
+  .nav-links {
+    @extend .h5;
+  }
 }
 
 .search-fiches {
