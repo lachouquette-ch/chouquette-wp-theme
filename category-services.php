@@ -23,45 +23,48 @@ $locations = get_terms(array(
 
 get_template_part('template-parts/fiche-report');
 ?>
-    <div id="app">
-        <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
+    <div id="app" class="py-4">
+        <h1 class="text-center mb-4 cq-font"><?php echo single_cat_title(); ?></h1>
         <form class="mb-4 px-4">
             <h3 class="mb-3 h5">Je recherche :</h3>
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <select class="form-control" title="Où veux-tu aller ?" name="loc">
                         <option title="" value="">Où ça ...</option>
                         <?php
                         foreach ($locations as $location) {
-                            $location_display = $location->parent != 0 ? ' • ' : '';
-                            $location_display .= $location->name;
+                            $term_style = $location->parent == 0 ? 'font-weight: bold' : '';
+                            $search_location_display = $location->parent != 0 ? '&nbsp;&nbsp;' : '';
+                            $search_location_display .= $location->name;
                             $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $location->slug ? 'selected' : '';
-                            echo "<option title='{$location->name}' value='{$location->slug}' {$attr_selected}>{$location_display}</option>";
+                            echo "<option title='{$location->name}' value='{$location->slug}' style='${term_style}' {$attr_selected}>{$search_location_display}</option>";
                         }
                         ?>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
-                    <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'"; ?>>
-                </div>
-                <div class="form-group col-md-4">
-                    <button class="btn btn-primary" type="submit">Rechercher</button>
+                <div class="form-group col-md-6">
+                    <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'" ?>>
                 </div>
             </div>
-            <button class="btn btn-sm btn-secondary mr-1" type="button" data-toggle="collapse" data-target="#collapseCriteria">Plus de critères</button>
-            <div id="collapseCriteria" v-bind:class="{ show: hasCriterias }" class="collapse category-criteria  mt-2">
-                <div class="container-fluid">
-                    <div v-for="criteriaRow in criteriaRows" class="row">
-                        <div v-for="criteria in criteriaRow" class="col-md-6 pt-2 px-2">
-                            <span class="col-form-label" class="white-space: nowrap;">{{ criteria.label }}</span>
-                            <div class="form-check ml-3" v-for="term in criteria.terms">
-                                <input class="form-check-input" type="checkbox" :id="term.slug" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked">
-                                <label class="form-check-label" :for="term.slug">{{ term.name }}</label>
-                            </div>
+            <button class="btn btn-sm btn-secondary mr-1 cq-toggle" type="button" data-toggle="collapse" data-target="#collapseCriteria" v-cloak>
+                <i class="fa"></i>
+                <span class="d-md-none">{{ criteriaLabel(criteriaCount) }}</span>
+                <span class="d-none d-md-inline">{{ criteriaLabel(checkedCount) }}</span>
+            </button>
+            <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
+            <div id="collapseCriteria" class="collapse category-criteria mt-2 pl-2">
+                <div v-for="criteria in criterias" class="form-group">
+                    <label :for="criteria.name">{{ criteria.label }}</label>
+                    <select :id="criteria.name" class="form-control d-md-none" :name="criteria.name + '[]'" multiple="multiple" v-model="criteria.selectedTerms" size="3">
+                        <option v-for="term in criteria.terms" :value="term.slug">{{ term.name }}</option>
+                    </select>
+                    <div class="category-criteria-checkbox d-none d-md-block">
+                        <div v-for="term in criteria.terms" class="form-check px-3">
+                            <label class="form-check-label"><input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked"> {{ term.name }}</label>
                         </div>
                     </div>
-                    <a href="#" class="d-block link-secondary small mt-3" v-on:click.prevent="resetCriterias">Tout déselectionner</a>
                 </div>
+                <a href="#" class="d-block link-secondary small mt-3" v-on:click.prevent="resetCriterias">Tout déselectionner</a>
             </div>
         </form>
 
@@ -113,6 +116,6 @@ get_template_part('template-parts/fiche-report');
     </div>
 <?php
 
-wp_enqueue_script('category-les-services', get_template_directory_uri() . '/category-services.js', ['vue', 'underscore'], CQ_THEME_VERSION, true);
+wp_enqueue_script('category-les-services', get_template_directory_uri() . '/category-services.js', ['vue', 'underscore', 'hammer'], CQ_THEME_VERSION, true);
 
 get_footer();
