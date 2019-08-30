@@ -7,37 +7,13 @@ get_template_part('template-parts/fiche-report');
     <div id="app" class="container mb-3">
         <h1 class="text-center my-4">Résultat(s) pour '<?php echo get_search_query(); ?>'</h1>
         <h3 class="m-3"><?php echo sprintf(_n('%s article trouvé', '%s articles trouvés', $wp_query->found_posts), $wp_query->found_posts); ?></h3>
-        <?php if (have_posts()): ?>
-        <div class="d-flex flex-wrap">
-            <?php
-            while (have_posts()):
+        <?php
+        if (have_posts()) {
+            echo '<div class="search-articles d-flex justify-content-around flex-wrap">';
+            while (have_posts()) {
                 the_post();
-                ?>
-                <div class="border rounded p-2 mb-2">
-                    <div class="media">
-                        <?php if ($wp_query->current_post % 2 == 0) {
-                            the_post_thumbnail('thumbnail', ['class' => ' mr-3 rounded']);
-                        } ?>
-                        <div class="media-body ml-2">
-                            <h5 class="mt-2"><?php the_title(); ?></h5>
-                            <div class="d-none d-md-block">
-                                <?php the_excerpt(); ?>
-                                <a class="link-secondary" href="<?php the_permalink(); ?>">La suite</a>
-                            </div>
-                        </div>
-                        <?php if ($wp_query->current_post % 2 == 1) {
-                            the_post_thumbnail('thumbnail', ['class' => ' ml-3 rounded']);
-                        } ?>
-                    </div>
-                    <div class="d-md-none mt-3 mx-2">
-                        <?php the_excerpt(); ?>
-                        <a class="link-secondary" href="<?php the_permalink(); ?>">La suite</a>
-                    </div>
-                </div>
-            <?php
-            endwhile;
-            endif;
-
+                get_template_part('template-parts/article-card');
+            }
             if ($wp_query->found_posts > $wp_query->post_count) {
                 $more_posts_url = add_query_arg(array(
                     'post_type' => 'post',
@@ -45,9 +21,9 @@ get_template_part('template-parts/fiche-report');
                 ));
                 echo "<a href='$more_posts_url' class='btn btn-outline-secondary w-100' role='button' style='line-height: 5rem;'>Les autres articles</a>";
             }
-            ?>
-        </div>
-        <?php
+            echo '</div>';
+        }
+
         $args = array(
             'post_type' => CQ_FICHE_POST_TYPE,
             'meta_key' => CQ_FICHE_CHOUQUETTISE_TO,

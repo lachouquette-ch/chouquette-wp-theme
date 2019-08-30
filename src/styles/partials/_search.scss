@@ -9,6 +9,12 @@
 
 .search-fiches {
   article {
-    @extend .mb-4;
+    @extend .m-2, .mb-4;
+  }
+}
+
+.search-articles {
+  article {
+    @extend .m-2, .mb-4;
   }
 }
