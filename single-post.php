@@ -74,9 +74,6 @@ while (have_posts()) :
                         'post__not_in' => array(get_the_ID()),
                         'no_found_rows' => true
                     );
-                    if (!empty($category_ids)) {
-                        $args['category__in'] = $category_ids;
-                    }
                     if (!empty($tag_ids)) {
                         $args['tag__in'] = $tag_ids;
                     }
