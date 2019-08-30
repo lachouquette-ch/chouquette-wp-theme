@@ -17,6 +17,14 @@
       font-size: $h4-font-size * 0.8;
     }
   }
+
+  &.highlight {
+    @include media-breakpoint-up(md) {
+      .card {
+        box-shadow: $box-shadow-lg !important;
+      }
+    }
+  }
 }
 
 .fiche-target {

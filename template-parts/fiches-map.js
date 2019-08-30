@@ -127,9 +127,14 @@ var app = new Vue({
             if (!app._colEnabled() && $("#fichesMap").is(":visible")) { // must be on mobile view
                 this.toggleMap();
             }
+
+            // remove highlights
+            $("article.fiche").removeClass("highlight");
+
             // goto fiche
             var elmnt = document.getElementById('target' + ficheId);
             elmnt.scrollIntoView(true, {behavior: "smooth"});
+            elmnt.parentElement.classList.add("highlight");
         },
         // locate on fiche on the map, display info window and activate animation
         locateFiche: function (ficheId) {
