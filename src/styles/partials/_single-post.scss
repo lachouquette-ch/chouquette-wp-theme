@@ -214,8 +214,7 @@
 
   .swiper-slide {
     .article-card {
-      height: 100%;
-      width: 100%;
+      width: calc(100% - 10px);
     }
 
     .article-card:hover {
