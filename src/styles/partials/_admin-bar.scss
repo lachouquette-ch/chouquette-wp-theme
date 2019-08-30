@@ -10,6 +10,14 @@ $wp-adminbar-breakpoint: 782px;
 
 /* Wordpress hack to handle admin bar */
 .admin-bar {
+  // home header
+  .home-header, .home-header-menu {
+    height: calc(100vh - #{$wp-adminbar-desktop});
+    @media screen and (max-width: $wp-adminbar-breakpoint) {
+      height: calc(100vh - #{$wp-adminbar-mobile});
+    }
+  }
+
   // navbar (menu)
   .navbar.fixed-top {
     top: $wp-adminbar-desktop;

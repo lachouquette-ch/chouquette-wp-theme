@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-    <header class="home-header p-0 container-fluid h-100">
+    <header class="home-header p-0 container-fluid">
         <nav class="navbar navbar-chouquette">
             <button class="navbar-toggler d-inline d-md-none" type="button" data-toggle="collapse" data-target="#navbarChouquette" aria-controls="navbarChouquette" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
             </div>
         </nav>
 
-        <div class="home-header-menu p-3 vh-100 d-flex flex-column justify-content-center align-items-center">
+        <div class="home-header-menu d-flex flex-column justify-content-center align-items-center">
             <div class="text-center w-100">
                 <h1 class="d-block d-md-none mb-5"><?php bloginfo('name'); ?></h1>
                 <h3 class="home-header-menu-description mb-3"><?php bloginfo('description'); ?></h3>
@@ -98,7 +98,6 @@
             <div class="home-header-menu-next d-flex align-items-center justify-content-center text-center">
                 <a href="#homeContent">
                     <i class="fas fa-chevron-down"></i><br/>
-                    <span>La suite</span>
                 </a>
             </div>
         </div>

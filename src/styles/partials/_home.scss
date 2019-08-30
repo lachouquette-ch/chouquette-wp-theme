@@ -26,6 +26,8 @@
 }
 
 .home-header-menu {
+  height: 100vh;
+
   position: relative;
   top: -1 * $header-height;
 }
@@ -61,8 +63,12 @@
 }
 
 .home-header-menu-next {
+  height: 75px;
+  width: 75px;
+
+  font-size: 2rem;
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   right: 0;
   left: 0;
   margin: auto;
