@@ -5,7 +5,7 @@
             $custom_logo_id = get_theme_mod('custom_logo');
             $logo = wp_get_attachment_image_src($custom_logo_id, 'medium');
             if (has_custom_logo()) {
-                echo sprintf('<img class="mx-auto" src="%s">', esc_url($logo[0]));
+                echo sprintf('<img class="mx-auto" src="%s" alt="Logo Chouquette">', esc_url($logo[0]));
             }
             ?>
             <div class="my-3">
