@@ -7,7 +7,6 @@
     <link rel="profile" href="https://gmpg.org/xfn/11"/>
     <link rel="alternate" type="application/atom+xml" href="<?php bloginfo('atom_url'); ?>"/>
     <meta name="theme-color" content="#f8ef28"/>
-    <meta name="description" content="<?php bloginfo('description'); ?>" />
 
     <?php wp_head(); ?>
 </head>
