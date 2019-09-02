@@ -144,6 +144,9 @@ var app = new Vue({
                 this.toggleMap();
             }
 
+            // remove highlights
+            $("article.fiche").removeClass("highlight");
+
             app.currentMarker = app.markers.get(ficheId);
             // zoom and center map
             map.setZoom(ZOOM_LEVEL_ACTIVED);
