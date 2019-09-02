@@ -178,15 +178,15 @@ if (!function_exists('chouquette_scripts')) :
 
         /* scripts registry */
 
-        wp_register_script('criterias-mixin', get_template_directory_uri() . '/js/vue/criterias-mixin.js', null, CQ_THEME_VERSION, true);
+        wp_register_script('criterias-mixin', get_template_directory_uri() . '/src/scripts/vue/criterias-mixin.js', null, CQ_THEME_VERSION, true);
 
-        wp_register_script('utility-mixin', get_template_directory_uri() . '/js/vue/utility-mixin.js', ['url-search-params'], CQ_THEME_VERSION, true);
+        wp_register_script('utility-mixin', get_template_directory_uri() . '/src/scripts/vue/utility-mixin.js', ['url-search-params'], CQ_THEME_VERSION, true);
 
-        wp_register_script('fiche-mixin', get_template_directory_uri() . '/js/vue/fiche-mixin.js', null, CQ_THEME_VERSION, true);
+        wp_register_script('fiche-mixin', get_template_directory_uri() . '/src/scripts/vue/fiche-mixin.js', null, CQ_THEME_VERSION, true);
 
-        wp_register_script('google-maps-custom', get_template_directory_uri() . '/js/google-maps.js', null, CQ_THEME_VERSION, true);
+        wp_register_script('google-maps-custom', get_template_directory_uri() . '/src/scripts/google-maps.js', null, CQ_THEME_VERSION, true);
 
-        wp_register_script('swiper-custom', get_template_directory_uri() . '/js/swiper.js', ['swiper'], CQ_THEME_VERSION, true);
+        wp_register_script('swiper-custom', get_template_directory_uri() . '/src/scripts/swiper.js', ['swiper'], CQ_THEME_VERSION, true);
 
         /* scripts (mandatory) */
 
@@ -198,7 +198,7 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_enqueue_script('script', get_template_directory_uri() . '/dist/app.js', null, CQ_THEME_VERSION, true);
 
-        wp_enqueue_script('base', get_template_directory_uri() . '/js/base.js', null, CQ_THEME_VERSION, true);
+        wp_enqueue_script('base', get_template_directory_uri() . '/src/scripts/base.js', null, CQ_THEME_VERSION, true);
 
         // https://codex.wordpress.org/Function_Reference/comment_reply_link
         if (is_singular() && comments_open() && get_option('thread_comments')) {

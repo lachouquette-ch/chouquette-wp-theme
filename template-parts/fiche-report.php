@@ -26,4 +26,4 @@
 
 <?php
 
-wp_enqueue_script('fiche-report', get_template_directory_uri() . '/template-parts/fiche-report.js', ['recaptcha'], CQ_THEME_VERSION, true);
+wp_enqueue_script('fiche-report', get_template_directory_uri() . '/src/scripts/partials/fiche-report.js', ['recaptcha'], CQ_THEME_VERSION, true);
