@@ -33,8 +33,6 @@
     CQ_IMG_PATH = "<?php echo get_template_directory_uri() . '/images' ?>"
 </script>
 
-<!-- TODO add google analytics -->
-
 <?php wp_footer(); ?>
 
 </body>
