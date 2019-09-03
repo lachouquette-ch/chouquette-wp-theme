@@ -17,7 +17,6 @@ $default_category = '';
 $search_locations = get_categories(array(
     'taxonomy' => CQ_TAXONOMY_LOCATION,
     'child_of' => get_queried_object()->term_id,
-    'hide_empty' => false
 ));
 // add queried location
 array_unshift($search_locations, get_queried_object());

@@ -36,7 +36,6 @@ while (have_posts()) :
                                 <?php
                                 $terms = get_terms(array(
                                     'taxonomy' => CQ_TAXONOMY_LOCATION,
-                                    'hide_empty' => false,
                                     'parent' => 0,
                                     'orderby' => 'name'
                                 ));

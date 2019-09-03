@@ -11,14 +11,12 @@ get_header();
 
 $search_categories = get_categories(array(
     'child_of' => get_queried_object()->term_id,
-    'hide_empty' => true
 ));
 $default_category = isset($_GET['cat']) ? get_category_by_slug($_GET['cat']) : get_queried_object();
 
 $locations = get_terms(array(
     'taxonomy' => CQ_TAXONOMY_LOCATION,
     'orderby' => 'term_group',
-    'hide_empty' => false
 ));
 $default_location = '';
 

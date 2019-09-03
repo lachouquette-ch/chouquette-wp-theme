@@ -12,12 +12,10 @@ get_header();
 $category = get_queried_object();
 $sub_categories = get_categories(array(
     'child_of' => $category->term_id,
-    'hide_empty' => true
 ));
 
 $locations = get_terms(array(
     'taxonomy' => CQ_TAXONOMY_LOCATION,
-    'hide_empty' => false,
     'orderby' => 'term_group'
 ));
 
