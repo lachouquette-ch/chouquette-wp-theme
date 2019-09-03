@@ -95,7 +95,7 @@ function cq_get_taxonomies_for_category($data)
 
         // get upper categories
         $categories = array($category->term_id => $category);
-        while ($category->category_parent != 1232) { // TODO Should be 0
+        while ($category->category_parent) {
             $category = get_category($category->category_parent);
             $categories[$category->term_id] = $category;
         }
@@ -122,9 +122,7 @@ function cq_get_taxonomies_for_category($data)
     // add terms and built DTO
     $result = [];
     foreach ($taxonomy_fields as $key => $value) {
-        $value['terms'] = get_terms($value['taxonomy'], array(
-            'hide_empty' => false, // TODO remove ?
-        ));
+        $value['terms'] = get_terms($value['taxonomy']);
         $dto = build_DTO($value);
         $result[] = $dto;
     }
@@ -151,7 +149,6 @@ function cq_get_locations_for_id(int $id)
     return array(
         'post_type' => CQ_FICHE_POST_TYPE,
         'post__in' => [$id], // why doesn't p works... mystery
-        'post_status' => 'any', // TODO to remove
     );
 }
 
@@ -173,7 +170,6 @@ function cq_get_locations_for_category_prepare_query($category, int $number = nu
         'orderby' => 'meta_value date',
         'order' => 'DESC DESC',
         'posts_per_page' => $number_of_fiches,
-        'post_status' => 'any' // TODO to remove
     );
     // filter location
     $args['tax_query'] = array('relation' => 'AND');
@@ -262,7 +258,6 @@ function cq_get_locations_for_location_prepare_query($location, int $number = nu
         'orderby' => 'meta_value date',
         'order' => 'DESC DESC',
         'posts_per_page' => $number_of_fiches,
-        'post_status' => 'any', // TODO to remove
         'tax_query' => [
             'relation' => 'AND',
             [

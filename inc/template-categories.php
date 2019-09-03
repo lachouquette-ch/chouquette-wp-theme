@@ -28,7 +28,6 @@ if (!(function_exists('chouquette_categories'))) :
 
         $categories = get_categories(array(
             'object_ids' => $taxonomy_ids,
-            'exclude_tree' => "8,9,285,1,14,257", // TODO remove after deployment
             'parent' => $parent_id ?: ''
         ));
 
@@ -67,7 +66,7 @@ if (!(function_exists('chouquette_categories_get_tops'))) :
 
         $result = array();
         foreach ($categories as $category) {
-            while ($category->category_parent != 1232) { // TODO Should be 0
+            while ($category->category_parent) {
                 $category = get_category($category->category_parent);
             }
             array_push($result, $category);
@@ -91,7 +90,7 @@ if (!(function_exists('chouquette_categories_get_all'))) :
         $result = array();
         foreach ($categories as $category) {
             $current = array($category->slug => $category);
-            while ($category->category_parent != 1232) { // TODO Should be 0
+            while ($category->category_parent) {
                 $category = get_category($category->category_parent);
                 $current[$category->slug] = $category;
             }
