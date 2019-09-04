@@ -26,10 +26,10 @@ $posts = get_posts(array(
 <article class="fiche fiche-flip <?php if (chouquette_fiche_is_chouquettise($fiche->ID)) echo 'fiche-chouquettise'; ?>"
          v-cloak
          data-fiche-id="<?php echo $fiche->ID; ?>"
-         data-fiche-name="<?php echo $fiche->post_title; ?>"
+         data-fiche-name="<?php echo esc_url($fiche->post_title); ?>"
          data-fiche-lat="<?php echo $fiche_fields[CQ_FICHE_LOCATION] ? $fiche_fields[CQ_FICHE_LOCATION]['lat'] : ''; ?>"
          data-fiche-lng="<?php echo $fiche_fields[CQ_FICHE_LOCATION] ? $fiche_fields[CQ_FICHE_LOCATION]['lng'] : ''; ?>"
-         data-fiche-icon="<?php echo chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID)) ?>">
+         data-fiche-icon="<?php echo esc_url(chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID))); ?>">
     <a class="fiche-target" id="<?php echo 'target' . $fiche->ID; ?>"></a>
     <div class="fiche-container">
         <div class="fiche-front">
