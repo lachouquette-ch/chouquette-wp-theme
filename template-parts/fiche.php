@@ -46,8 +46,11 @@ $posts = get_posts(array(
                                 <a href="tel:<?php echo $fiche_fields[CQ_FICHE_PHONE] ?>" title="Téléphoner" class="fiche-social" target="_blank"><i class="fas fa-phone"></i></a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                                <a href="mailto:<?php echo $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url() ?>"
-                                   title="Email" class="fiche-social"><i class="fas fa-at"></i></a>
+                                <a href="#" title="Reporter une précision ou erreur sur la fiche" class="fiche-social"
+                                   data-toggle="modal" data-target="#ficheContactModal"
+                                   data-fiche-title="<?php the_title(); ?>" data-fiche-id="<?php echo $fiche->ID; ?>">
+                                    <i class="far fa-envelope"></i>
+                                </a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])): ?>
                                 <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_FACEBOOK]); ?>" title="Facebook" class="fiche-social" target="_blank"><i class="fab fa-facebook-f"></i></a>

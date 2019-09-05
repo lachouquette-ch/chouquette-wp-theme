@@ -2,7 +2,7 @@
 
 get_header();
 
-get_template_part('template-parts/fiche-report');
+get_template_part('template-parts/fiche-modals');
 
 while (have_posts()) :
     the_post();

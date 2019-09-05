@@ -12,7 +12,7 @@ $default_category = get_query_var('default_category');
 $search_locations = get_query_var('search_locations');
 $default_location = get_query_var('default_location');
 
-get_template_part('template-parts/fiche-report');
+get_template_part('template-parts/fiche-modals');
 ?>
     <div id="app" class="container-fluid">
         <div class="row">
