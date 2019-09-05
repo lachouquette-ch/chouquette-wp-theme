@@ -44,8 +44,8 @@ while (have_posts()) :
             </div>
         </div>
 
-        <div class="cq-single-post-content container">
-            <div class="cq-single-post-content-title mt-4">
+        <div class="cq-single-post-content container pt-4">
+            <div class="cq-single-post-content-title">
                 <h1 class="mr-2 mb-4"><?php the_title(); ?></h1>
             </div>
             <main class="cq-single-post-content-text">
@@ -56,7 +56,7 @@ while (have_posts()) :
         <?php if (!empty($linkFiches)) : ?>
         <?php endif; ?>
 
-        <div class="cq-single-post-author container mt-4">
+        <div class="cq-single-post-author container">
             <div class="border shadow-sm text-center position-relative">
                 <?php echo get_avatar(get_the_author_meta('ID'), 150, null, get_the_author(), ['class' => 'cq-single-post-header-author-img rounded-circle']); ?>
                 <h5 class="mt-3 mb-4"><?php the_author() ?></h5>
