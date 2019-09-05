@@ -113,11 +113,11 @@ if (!function_exists('chouquette_category_get_marker_icon')) :
     function chouquette_category_get_marker_icon(object $category, bool $is_chouquettise)
     {
         if ($is_chouquettise) {
-            $icon = get_field(CQ_CATEGORY_LOGO_MARKER_YELLOW, chouquette_acf_generate_post_id($category));
+            $icon_id = get_field(CQ_CATEGORY_LOGO_MARKER_YELLOW, chouquette_acf_generate_post_id($category));
         } else {
-            $icon = get_field(CQ_CATEGORY_LOGO_MARKER_WHITE, chouquette_acf_generate_post_id($category));
+            $icon_id = get_field(CQ_CATEGORY_LOGO_MARKER_WHITE, chouquette_acf_generate_post_id($category));
         }
-        $image_src = wp_get_attachment_image_src($icon['id'], 'full')[0];
+        $image_src = wp_get_attachment_image_src($icon_id, 'full')[0];
         return $image_src;
     }
 endif;

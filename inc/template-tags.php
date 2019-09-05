@@ -99,18 +99,18 @@ if (!function_exists('chouquette_taxonomy_logo')) :
     {
         switch ($color) {
             case 'white':
-                $logo = get_field(CQ_CATEGORY_LOGO_WHITE, chouquette_acf_generate_post_id($taxonomy));
+                $logo_id = get_field(CQ_CATEGORY_LOGO_WHITE, chouquette_acf_generate_post_id($taxonomy));
                 break;
             case 'black':
-                $logo = get_field(CQ_CATEGORY_LOGO_BLACK, chouquette_acf_generate_post_id($taxonomy));
+                $logo_id = get_field(CQ_CATEGORY_LOGO_BLACK, chouquette_acf_generate_post_id($taxonomy));
                 break;
             case 'yellow':
-                $logo = get_field(CQ_CATEGORY_LOGO_YELLOW, chouquette_acf_generate_post_id($taxonomy));
+                $logo_id = get_field(CQ_CATEGORY_LOGO_YELLOW, chouquette_acf_generate_post_id($taxonomy));
                 break;
             default:
                 throw new Exception("$color is undefined");
         }
-        $image_src = wp_get_attachment_image_src($logo['id'], $size)[0];
+        $image_src = wp_get_attachment_image_src($logo_id, $size)[0];
         return sprintf('<img src="%s" alt="%s" title="%s" class="%s" />', $image_src, $taxonomy->title, $taxonomy->description, join(" ", $classes));
     }
 endif;
