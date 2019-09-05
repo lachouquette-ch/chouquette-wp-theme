@@ -43,23 +43,23 @@ $posts = get_posts(array(
                     <?php if ($is_chouquettise): ?>
                         <div class="card-text d-flex justify-content-around mt-auto">
                             <?php if (!empty($fiche_fields[CQ_FICHE_PHONE])): ?>
-                                <a href="tel:<?php echo $fiche_fields[CQ_FICHE_PHONE] ?>" title="Téléphoner" class="fiche-social"><i class="fas fa-phone"></i></a>
+                                <a href="tel:<?php echo $fiche_fields[CQ_FICHE_PHONE] ?>" title="Téléphoner" class="fiche-social" target="_blank"><i class="fas fa-phone"></i></a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
                                 <a href="mailto:<?php echo $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url() ?>"
                                    title="Email" class="fiche-social"><i class="fas fa-at"></i></a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_FACEBOOK])): ?>
-                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_FACEBOOK]); ?>" title="Facebook" class="fiche-social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_FACEBOOK]); ?>" title="Facebook" class="fiche-social" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_INSTAGRAM])): ?>
-                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]); ?>" title="Instagram" class="fiche-social"><i class="fab fa-instagram"></i></a>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_INSTAGRAM]); ?>" title="Instagram" class="fiche-social" target="_blank"><i class="fab fa-instagram"></i></a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_TWITTER])): ?>
-                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_TWITTER]); ?>" title="Twitter" class="fiche-social"><i class="fab fa-twitter"></i></a>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_TWITTER]); ?>" title="Twitter" class="fiche-social" target="_blank"><i class="fab fa-twitter"></i></a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_PINTEREST])): ?>
-                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_PINTEREST]); ?>" title="Pinterest" class="fiche-social"><i class="fab fa-pinterest"></i></a>
+                                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_PINTEREST]); ?>" title="Pinterest" class="fiche-social" target="_blank"><i class="fab fa-pinterest"></i></a>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
@@ -81,7 +81,7 @@ $posts = get_posts(array(
                         <?php if (!empty($fiche_fields[CQ_FICHE_PHONE])): ?>
                             <li class="list-group-item">
                                 <a href="tel:<?php echo $fiche_fields[CQ_FICHE_PHONE] ?>"
-                                   title="Téléphone"
+                                   title="Téléphone" target="_blank"
                                    class="link-secondary link-no-decoration"><i class="fas fa-phone"></i> <?php echo $fiche_fields[CQ_FICHE_PHONE] ?>
                                 </a>
                             </li>
@@ -89,7 +89,7 @@ $posts = get_posts(array(
                         <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
                             <li class="list-group-item">
                                 <a href="mailto:<?php echo $fiche_fields[CQ_FICHE_MAIL] . '?body=%0A---%0AEnvoy%C3%A9%20depuis%20' . get_home_url() ?>"
-                                   title="Email"
+                                   title="Email" target="_blank"
                                    class="link-secondary link-no-decoration"><i class="fas fa-at"></i> <?php echo $fiche_fields[CQ_FICHE_MAIL] ?>
                                 </a>
                             </li>
