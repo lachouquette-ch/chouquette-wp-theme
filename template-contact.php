@@ -30,20 +30,12 @@ while (have_posts()) :
                         <input type="text" class="form-control" id="inputSubject" placeholder="Sujet" name="contact-subject" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputCanton">Canton *</label>
-                        <select id="inputCanton" class="form-control" name="contact-localisation" required>
-                            <option value="" selected>Tous</option>
-                                <?php
-                                $terms = get_terms(array(
-                                    'taxonomy' => CQ_TAXONOMY_LOCATION,
-                                    'parent' => 0,
-                                    'orderby' => 'name'
-                                ));
-                                foreach ($terms as $term) {
-                                    $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($term));
-                                    echo sprintf("<option title='%s' value='%s'>%s %s</option>", $term->name, $term->slug, $term->name, $ambassador ? "({$ambassador->display_name})" : '');
-                                }
-                                ?>
+                        <label for="inputTo">Destinataire *</label>
+                        <select id="inputTo" class="form-control" name="contact-to" required>
+                            <option value="" selected>Choisir un destinataire</option>
+                            <option value="hello">Général (infos, suggestions, partenariats, chouquettisation, ...)</option>
+                            <option value="communication">Réseaux sociaux (Insta, Facebook)</option>
+                            <option value="webmaster">Webmaster (tout ce qui concerne le site)</option>
                         </select>
                     </div>
                 </div>

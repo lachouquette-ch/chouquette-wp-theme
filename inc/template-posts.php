@@ -36,18 +36,25 @@ if (!function_exists('chouquette_posts_contact')) :
     {
         if (!empty ($_POST)) {
             // assert post content
-            if (!isset($_POST['contact-name']) || !isset($_POST['contact-email']) || !isset($_POST['contact-subject']) || !isset($_POST['contact-localisation']) || !isset($_POST['contact-content'])) {
+            if (!isset($_POST['contact-name']) || !isset($_POST['contact-email']) || !isset($_POST['contact-subject']) || !isset($_POST['contact-to']) || !isset($_POST['contact-content'])) {
                 chouquette_ref_redirect('failure', "Le formulaire n'est pas complet");
                 return;
             }
 
-            $localisation = get_term_by('slug', $_POST['contact-localisation'], CQ_TAXONOMY_LOCATION);
-            $ambassador = get_field(CQ_LOCALISATION_AMBASSADOR, chouquette_acf_generate_post_id($localisation));
-            if ($ambassador) {
-                $contact_mail = $ambassador->user_email;
-            } else {
-                $contact_mail = MAIL_FALLBACK;
-            }
+            switch ($_POST['contact-to']) {
+                case "hello":
+                    $contact_mail = "hello@lachouquette.ch";
+                    break;
+                case "communication":
+                    $contact_mail = "communication@lachouquette.ch";
+                    break;
+                case "webmaster":
+                    $contact_mail = "webmaster@lachouquette.ch";
+                    break;
+                default:
+                    chouquette_ref_redirect('failure', "Mauvais destinataire");
+                    return;
+            };
             chouquette_recaptcha(
                 function () use ($contact_mail) {
                     $result = chouquette_mail($_POST['contact-name'], $_POST['contact-email'], $contact_mail, $_POST['contact-subject'], $_POST['contact-content']);
