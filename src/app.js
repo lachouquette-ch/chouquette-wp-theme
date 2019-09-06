@@ -34,7 +34,7 @@ jQuery(function ($) {
     setTimeout(function () {
         const newsletterCookieName = "newsletterModalShown";
         const newsletterModal = $("#newsletterModal");
-        if (!Cookies.get(newsletterCookieName)) {
+        if (Cookies.get(confidentialityCookieName) && !Cookies.get(newsletterCookieName)) {
             newsletterModal.modal('show');
             Cookies.set(newsletterCookieName, 1, {expires: 365});
         }
