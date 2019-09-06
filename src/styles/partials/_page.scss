@@ -1,0 +1,10 @@
+.cq-page {
+  a {
+    @extend .link-secondary;
+  }
+
+  p {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+}
