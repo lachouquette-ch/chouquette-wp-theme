@@ -5,10 +5,10 @@
     background-color: $chouquette-darker-grey;
 
     .navbar-brand {
+      line-height: $header-height;
       font-family: $font-family-brand;
       text-transform: uppercase;
       letter-spacing: 3px;
-      transform: scaleY(1.25);
       font-size: 2.5rem;
 
       @include media-breakpoint-down(lg) {
