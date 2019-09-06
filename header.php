@@ -25,6 +25,36 @@
 <body <?php body_class(); ?>>
 <span id="colTrigger" class="d-none d-md-inline"></span>
 
+<!-- Newsletter Modal -->
+<div class="modal fade cq-modal" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newsletterModalTitle">Rejoins notre newsletter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="validate" action="https://unechouquettealausanne.us8.list-manage.com/subscribe/post?u=570ea90f4cbc136c450fe880a&amp;id=26f7afd6a2" method="post"
+                      id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+                    <div class="input-group">
+                        <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" aria-describedby="emailHelp" placeholder="Enter email" autofocus>
+                        <div class="input-group-append">
+                            <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary">Je m'inscris</button>
+                        </div>
+                    </div>
+                    <div id="mce-responses" class="home-newsletter-response">
+                        <div class="index-newsletter-response-error mt-2" id="mce-error-response" style="display:none"></div>
+                        <div class="index-newsletter-response-success mt-2" id="mce-success-response" style="display:none"></div>
+                    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_570ea90f4cbc136c450fe880a_26f7afd6a2" tabindex="-1" value=""></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php
 if (!is_home()) :
     get_template_part('template-parts/menu');
