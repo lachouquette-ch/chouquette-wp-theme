@@ -8,9 +8,13 @@
   background-color: $chouquette-grey;
 
   h1 {
+    line-height: $header-height;
     font-family: $font-family-brand;
+    text-transform: uppercase;
+    letter-spacing: 3px;
     font-size: 3rem;
     color: $chouquette-yellow;
+    margin: 0;
   }
 
   h3 {
@@ -41,6 +45,10 @@
 .home-header-sn {
   font-size: 2rem;
   color: $chouquette-yellow;
+
+  a {
+    line-height: $header-height;
+  }
 }
 
 .home-header-category {

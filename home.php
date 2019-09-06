@@ -9,7 +9,7 @@
             <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">
                 <h1><?php bloginfo('name'); ?></h1>
             </a>
-            <div class="home-header-sn mr-md-5 my-2">
+            <div class="home-header-sn mr-md-5">
                 <a href="<?php echo esc_url(CQ_SN_FACEBOOK); ?>" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <a href="<?php echo esc_url(CQ_SN_INSTAGRAM); ?>" title="Instagram" target="_blank"><i class="fab fa-instagram ml-4"></i></a>
                 <a href="#newsletter" title="Newsletter"><i class="far fa-envelope ml-4"></i></a>

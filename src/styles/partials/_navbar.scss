@@ -13,11 +13,11 @@ $navbar-chouquette-brand-hover-color: rgba($navbar-chouquette-color, .8);
 .navbar-chouquette {
   height: $header-height;
   z-index: 1035; // over $zindex-fixed
+  padding-top: 0;
+  padding-bottom: 0;
 
   .navbar-brand {
-    font-family: $font-family-heading;
-    color: $navbar-chouquette-brand-color;
-
+    padding: 0;
     @include hover-focus {
       color: $navbar-chouquette-brand-hover-color;
     }
