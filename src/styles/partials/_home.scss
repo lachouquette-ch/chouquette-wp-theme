@@ -110,7 +110,7 @@
 
 .home-content {
   h2 {
-    font-family: $font-family-brand;
+    font-family: $font-family-heading;
     font-size: 2rem;
 
     @include media-breakpoint-up(lg) {
