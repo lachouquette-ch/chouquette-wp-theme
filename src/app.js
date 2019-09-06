@@ -35,14 +35,15 @@ jQuery(function ($) {
         const newsletterCookieName = "newsletterModalShown";
         const newsletterModal = $("#newsletterModal");
         if (!Cookies.get(newsletterCookieName)) {
-            if (newsletterModal.length) {
-                newsletterModal.modal('show');
-                Cookies.set(newsletterCookieName, 1, {expires: 365});
-            }
+            newsletterModal.modal('show');
+            Cookies.set(newsletterCookieName, 1, {expires: 365});
         }
     }, 5000);
 
     $('#newsletterModal').on('shown.bs.modal', function () {
         $('#newsletterModal input:first-of-type').focus();
     })
+
+    // Trigger confidentiality warning
+    setTimeout(showConfidentiality, 1000);
 });

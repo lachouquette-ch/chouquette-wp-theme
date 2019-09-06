@@ -29,3 +29,24 @@ ul.footer-top-menu {
 .footer-bottom {
   background-color: $chouquette-darker-grey;
 }
+
+.footer-confidentiality {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: $chouquette-dark-grey;
+  z-index: $zindex-popover;
+
+  > div {
+    min-height: 10vh;
+
+    @include media-breakpoint-down(sm) {
+      min-height: 25vh;
+    }
+  }
+
+  span {
+    font-size: $font-size-lg;
+    color: $white;
+  }
+}

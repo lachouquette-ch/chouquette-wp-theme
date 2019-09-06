@@ -190,6 +190,8 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_register_script('swiper-custom', get_template_directory_uri() . '/src/scripts/swiper.js', ['swiper'], CQ_THEME_VERSION, true);
 
+        wp_register_script('confidentiality', get_template_directory_uri() . '/src/scripts/confidentiality.js', ['vendor', 'cookie'], CQ_THEME_VERSION, true);
+
         /* scripts (mandatory) */
 
         wp_enqueue_script('jquery', "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js", null, null, true);
@@ -198,7 +200,7 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_enqueue_script('vendor', get_template_directory_uri() . '/dist/vendor.js', null, CQ_THEME_VERSION, true);
 
-        wp_enqueue_script('script', get_template_directory_uri() . '/dist/app.js', ['cookie'], CQ_THEME_VERSION, true);
+        wp_enqueue_script('script', get_template_directory_uri() . '/dist/app.js', ['cookie', 'confidentiality'], CQ_THEME_VERSION, true);
 
         // https://codex.wordpress.org/Function_Reference/comment_reply_link
         if (is_singular() && comments_open() && get_option('thread_comments')) {
