@@ -34,7 +34,7 @@ var app = new Vue({
     },
     mounted: function () {
         $(".cq-single-post-fiches-btn-sm").delay(1000).queue(function (next) {
-            $(this).css('right', '-110px');
+            $(this).css('right', '-150px');
             next();
         });
 
