@@ -3,6 +3,7 @@ var map = null; // google map
 function bootstrapMap() {
     map = new google.maps.Map(document.getElementById('fichesMap'), {
         zoom: 15,
+        clickableIcons: false,
         disableDefaultUI: true,
         fullscreenControl: true,
         gestureHandling: 'greedy',
