@@ -11,7 +11,7 @@ while (have_posts()) :
 
     <div class="container cq-contact py-5">
         <h1 class="mb-3 cq-font text-center"><?php the_title() ?></h1>
-        <div class="mb-5 text-center"><?php the_content(); ?></div>
+        <div class="mb-5"><?php the_content(); ?></div>
         <div class="container">
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                 <div class="form-row">
