@@ -153,6 +153,16 @@
     max-width: 100%;
   }
 
+  figure.alignleft {
+    float: left;
+    margin-right: 15px;
+  }
+
+  figure.alignright {
+    float: right;
+    margin-left: 15px;
+  }
+
   img {
     max-width: 100%;
     height: auto;
