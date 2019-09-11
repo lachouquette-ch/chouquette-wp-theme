@@ -27,12 +27,9 @@ while (have_posts()) :
             <?php echo get_avatar(get_the_author_meta('ID'), 150, null, get_the_author(), ['class' => 'cq-single-post-header-author-img rounded-circle']); ?>
             <div class="cq-single-post-header-meta">
                 <span>par <?php the_author() ?></span>
-                <span>le
-                        <?php
-                        $print_date = get_the_modified_date() ? get_the_modified_date() : get_the_date();
-                        echo $print_date;
-                        ?>
-                    </span>
+                <span>publié le <?php echo get_the_date("d/m/y"); ?>
+                    <?php if (get_the_modified_date()) { echo "(màj le " . get_the_modified_date("d/m/y") . ")"; } ?>
+                </span>
                 <span>dans <?php
                     foreach ($categories as $index => $category) {
                         echo sprintf('<a href="%s" title="%s">%s</a>', get_category_link($category), $category->description, $category->name);
