@@ -115,7 +115,7 @@ while (have_posts()) :
                             <?php foreach ($linkFiches as $fiche): ?>
                                 <button class="w-100 btn btn-dark d-block cq-toggle" type="button" data-toggle="collapse" data-target="#fiche<?php echo $fiche->ID; ?>"
                                         aria-expanded="true" aria-controls="collapseOne">
-                                    <i class="fa mr-2"></i><?php echo $fiche->post_title; ?>
+                                    <i class="fa mr-2 float-left"></i><?php echo $fiche->post_title; ?>
                                 </button>
                                 <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 collapse show" aria-labelledby="headingOne"
                                      data-parent="#fichesAccordion">
