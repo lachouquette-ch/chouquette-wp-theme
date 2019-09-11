@@ -230,6 +230,11 @@
 }
 
 .home-tops {
+  // do not display category for tops
+  .article-card-category {
+    display: none;
+  }
+
   .swiper-container {
     @extend .py-3, .px-1;
   }
