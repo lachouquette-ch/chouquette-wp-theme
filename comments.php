@@ -39,7 +39,7 @@ if (post_password_required()) {
         ?>
     <?php endif; ?>
 
-    <h3 class="mb-3 text-center">Ecrire un commentaire</h3>
+    <h3 class="mb-3 text-center">Laisse-nous un petit mot</h3>
     <?php
     // as documented in https://codex.wordpress.org/Function_Reference/comment_form
 

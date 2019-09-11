@@ -65,7 +65,7 @@ while (have_posts()) :
         </div>
 
         <div class="cq-single-post-similar container mt-5">
-            <h3 class="mb-3 text-center">Articles similaires</h3>
+            <h3 class="mb-3 text-center">Tu vas aussi aimer...</h3>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <?php
@@ -103,13 +103,15 @@ while (have_posts()) :
         <?php endif; ?>
 
         <div id="app"> <!-- shouldn't encompass comments_template since askimet has script embedded (doesn't suit vuejs) -->
-            <?php if (!empty($linkFiches)) : ?>
+            <?php if (!empty($linkFiches)) :
+                $fichesButtonLabel = sizeof($linkFiches) > 1 ? "Voir les fiches" : "Voir la fiche";
+                ?>
                 <div class="cq-single-post-fiches" v-cloak>
                     <button class="cq-single-post-fiches-btn btn btn-lg btn-primary cq-toggle reverse d-none d-md-inline-block" type="button" v-on:click="toggleFiches">
-                        <i class="fa"></i><span class="ml-2">Les fiches</span>
+                        <i class="fa"></i><span class="ml-2"><?php echo $fichesButtonLabel; ?></span>
                     </button>
                     <button class="cq-single-post-fiches-btn-sm btn btn-sm btn-primary cq-toggle horizontal d-md-none" type="button" v-on:click="toggleFiches">
-                        <i class="fa"></i><span class="ml-2">Les fiches</span>
+                        <i class="fa"></i><span class="ml-2"><?php echo $fichesButtonLabel; ?></span>
                     </button>
                     <div class="cq-single-post-fiches-wrapper" v-cloak>
                         <div id="fichesAccordion">

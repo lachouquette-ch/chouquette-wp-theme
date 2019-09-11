@@ -145,7 +145,7 @@ get_template_part('template-parts/fiche-modals');
 
                 <div class="category-map">
                     <button class="btn btn-sm btn-primary cq-toggle horizontal d-md-none" type="button" v-on:click="toggleMap">
-                        <i class="fa"></i><span class="ml-2">La carte</span>
+                        <i class="fa"></i><span class="ml-2">Voir la carte</span>
                     </button>
                     <div id="fichesMap"></div>
                 </div>

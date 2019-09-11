@@ -185,7 +185,7 @@ var app = new Vue({
         }
 
         $(".category-map > button").delay(1000).queue(function (next) {
-            $(this).css('right', '-110px');
+            $(this).css('right', '-130px');
             next();
         });
     }

@@ -91,13 +91,13 @@ get_template_part('template-parts/fiche-report');
 
             if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches || $number_of_fiches >= $loop->found_posts) {
                 $pagination_disabled = true;
-                $pagination_text = "Plus d'article pour cette recherche";
+                $pagination_text = "Arf, désolé nous n'avons pas plus à te proposer";
             } elseif ($number_of_fiches >= CQ_CATEGORY_MAX_FICHES) {
                 $pagination_disabled = true;
                 $pagination_text = "Peux-tu affiner ta recherche ?";
             } else {
                 $pagination_disabled = false;
-                $pagination_text = "Plus de fiches";
+                $pagination_text = "Tu en veux plus ? Cliques ici";
             }
 
             echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s %s" href="%s" role="button">%s</a>',
