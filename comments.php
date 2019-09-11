@@ -74,7 +74,7 @@ if (post_password_required()) {
     }
     $args = array(
         'class_submit' => 'btn btn-primary',
-        'comment_notes_before' => '<p class="comment-notes">Ton email ne sera pas publiée. ' . ( $req ? $required_text : '' ) . '</p>',
+        'comment_notes_before' => '<p class="comment-notes">Ton email ne sera pas publié. ' . ( $req ? $required_text : '' ) . '</p>',
         'comment_field' =>
             '<div class="form-group"><label for="comment">' . _x('Comment', 'noun') .
             '</label><textarea class="form-control" id="comment" name="comment" rows="5" aria-required="true"></textarea>' .
