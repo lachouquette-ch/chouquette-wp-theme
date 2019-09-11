@@ -5,7 +5,7 @@ $default_category = get_query_var('default_category');
 if ($default_category) {
     $fiche_category = chouquette_category_get_single_sub_category($fiche->ID, $default_category);
 } else {
-    $fiche_category = chouquette_categories_get_tops($fiche->ID)[0];
+    $fiche_category = chouquette_categories($fiche->ID)[0];
 }
 
 $fiche_fields = get_fields($fiche->ID);
