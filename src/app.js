@@ -38,7 +38,7 @@ jQuery(function ($) {
             newsletterModal.modal('show');
             Cookies.set(newsletterCookieName, 1, {expires: 365});
         }
-    }, 5000);
+    }, 15000);
 
     $('#newsletterModal').on('shown.bs.modal', function () {
         $('#newsletterModal input:first-of-type').focus();
