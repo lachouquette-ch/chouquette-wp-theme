@@ -105,7 +105,7 @@
     <div id="homeContent" class="home-content py-5">
         <div class="home-latest container">
             <div class="text-center">
-                <h2 class="mb-4">À la une de la gazette</h2>
+                <h2 class="mb-4">La gazette de la Chouquette</h2>
             </div>
             <?php
             $latest_posts = new WP_Query('posts_per_page=6');
