@@ -20,9 +20,9 @@
         <?php endif; ?>
     <?php endif; ?>
     <a href="#"
-       title="Détails"
+       title="Plus de détails (retourner la fiche)"
        class="btn btn-secondary float-right"
        v-on:click.prevent="ficheFlip($event.target)">
-        <i class="fas fa-undo"></i>
+        <i class="fas fa-plus"></i>
     </a>
 </div>
