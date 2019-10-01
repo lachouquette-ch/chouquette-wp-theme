@@ -213,13 +213,14 @@ add_action('wp_enqueue_scripts', 'chouquette_scripts');
 /**
  * Hack to add async and defer for google maps
  */
-function google_maps_add_async_defer_attribute($tag, $handle, $src)
-{
-    if ('google-maps' !== $handle)
-        return $tag;
-    return "<script type='text/javascript' defer='defer' src='${src}'></script>";
-}
-
+if (!function_exists('google_maps_add_async_defer_attribute')) :
+    function google_maps_add_async_defer_attribute($tag, $handle, $src)
+    {
+        if ('google-maps' !== $handle)
+            return $tag;
+        return "<script type='text/javascript' defer='defer' src='${src}'></script>";
+    }
+endif;
 add_filter('script_loader_tag', 'google_maps_add_async_defer_attribute', 10, 3);
 
 /**
@@ -252,56 +253,9 @@ endif;
 add_action('phpmailer_init', 'chouquette_smtp');
 
 /**
- * Custom search templates
+ * Change / enhance Wordpress search
  */
-if (!function_exists('chouquette_custom_search')) :
-    function chouquette_custom_search($template)
-    {
-        global $wp_query;
-        if ($wp_query->is_search) {
-            switch (get_query_var('post_type')) {
-                case 'post':
-                    return locate_template('search-post.php');
-                case CQ_FICHE_POST_TYPE:
-                    return locate_template('search-fiche.php');
-            }
-        }
-        return $template;
-    }
-endif;
-add_filter('template_include', 'chouquette_custom_search');
-
-/* Set search to exact match only (no like) */
-if (!function_exists('chouquette_exact_search')) :
-function chouquette_exact_search( $search, $wp_query ) {
-    global $wpdb;
-
-    if ( empty( $search ) )
-        return $search;
-
-    $q = $wp_query->query_vars;
-    $n = !empty( $q['exact'] ) ? '' : '%';
-
-    $search = $searchand = '';
-
-    foreach ( (array) $q['search_terms'] as $term ) {
-        $term = esc_sql( $wpdb->esc_like( $term ) );
-
-        $search .= "{$searchand}($wpdb->posts.post_title REGEXP '[[:<:]]{$term}[[:>:]]') OR ($wpdb->posts.post_content REGEXP '[[:<:]]{$term}[[:>:]]')";
-
-        $searchand = ' AND ';
-    }
-
-    if ( ! empty( $search ) ) {
-        $search = " AND ({$search}) ";
-        if ( ! is_user_logged_in() )
-            $search .= " AND ($wpdb->posts.post_password = '') ";
-    }
-
-    return $search;
-}
-endif;
-add_filter( 'posts_search', 'chouquette_exact_search', 20, 2 );
+require get_template_directory() . '/inc/custom-search.php';
 
 /**
  * Implement the Custom Header feature.
