@@ -137,7 +137,7 @@ get_template_part('template-parts/fiche-modals');
                     <?php endif; ?>
                 </div>
                 <div id="fichesMapReset" class="d-none">
-                    <button v-on:click="resetMap" draggable="false" title="Reset view map" aria-label="Reset view map" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"
+                    <button v-on:click="resetMap" draggable="false" title="Afficher tous les lieux" aria-label="Afficher tous les lieux" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"
                             style="margin: 10px; height: 40px; width: 40px;">
                         <i class="fas fa-bullseye"></i>
                     </button>

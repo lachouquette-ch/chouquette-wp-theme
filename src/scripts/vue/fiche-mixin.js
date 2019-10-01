@@ -42,7 +42,10 @@ const VUE_FICHE_MIXIN = {
                         scaleControl: true,
                         styles: MAP_STYLES,
                         zoom: 18,
-                        zoomControl: true
+                        zoomControl: true,
+                        zoomControlOptions: {
+                            position: google.maps.ControlPosition.RIGHT_TOP
+                        }
                     });
                     // add marker
                     new google.maps.Marker({

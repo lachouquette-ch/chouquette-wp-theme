@@ -12,7 +12,11 @@ function bootstrapMap() {
             strictBounds: false,
         },
         styles: MAP_STYLES,
-        center: LAUSANNE_LOCALISATION
+        center: LAUSANNE_LOCALISATION,
+        zoomControl: true,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP
+        }
     });
 
     google.maps.event.addListenerOnce(map, "tilesloaded", function (event) {
