@@ -12,6 +12,8 @@ $default_category = get_query_var('default_category');
 $search_locations = get_query_var('search_locations');
 $default_location = get_query_var('default_location');
 
+$carte_editoriale_url = get_permalink(get_page_by_title('Charte éditoriale'));
+
 get_template_part('template-parts/fiche-modals');
 ?>
     <div id="app" class="container-fluid">
@@ -88,8 +90,12 @@ get_template_part('template-parts/fiche-modals');
                 $loop = new WP_Query($args);
                 $number_of_fiches = $loop->post_count;
 
-                echo '<div class="category-fiche-container py-4">';
+                echo '<div class="category-fiche-container pt-5 pb-4 position-relative">';
                 if ($loop->have_posts()):
+                    echo '<div class="category-fiche-legend">';
+                    echo "Lieux Chouquettisés <a title='Charte Editoriale' href='$carte_editoriale_url'>?</a>";
+                    echo '</div>';
+
                     echo '<div class="d-flex justify-content-around flex-wrap">';
                     while ($loop->have_posts()) {
                         $loop->the_post();
@@ -126,15 +132,10 @@ get_template_part('template-parts/fiche-modals');
             </div>
             <div class="col-md-6">
                 <div id="fichesMapLegend" class="d-none">
-                    <?php
-                    $url = get_page_by_title('Charte éditoriale') ? get_permalink(get_page_by_title('Charte éditoriale')) : null;
-                    if (!empty($url)) :
-                        ?>
-                        <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
-                            <img height="40px" src="<?php echo get_template_directory_uri() . '/images/marker_yellow.png' ?>"> Lieux
-                            <a href="<?php echo $url; ?>" class="link-secondary">chouquettisés</a>
-                        </div>
-                    <?php endif; ?>
+                    <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                        <img height="40px" src="<?php echo get_template_directory_uri() . '/images/marker_yellow.png' ?>"> Lieux
+                        <a href="<?php echo $carte_editoriale_url; ?>" title="Charte editoriale" class="link-secondary">chouquettisés</a>
+                    </div>
                 </div>
                 <div id="fichesMapReset" class="d-none">
                     <button v-on:click="resetMap" draggable="false" title="Afficher tous les lieux" aria-label="Afficher tous les lieux" type="button" class="btn btn-white border-0 p-0 shadow rounded-0"

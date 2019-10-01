@@ -8,6 +8,7 @@
 
 .category-criteria-checkbox {
   column-count: 2;
+
   div {
     white-space: nowrap;
     width: 50%;
@@ -19,6 +20,23 @@
 
   .fiche {
     @extend .mx-md-2, .mb-4;
+  }
+}
+
+.category-fiche-legend {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  > a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    color: $black;
+    background: $chouquette-yellow;
   }
 }
 
@@ -64,6 +82,7 @@
 
   transition: right 1s;
 }
+
 .category-map.open > button {
   width: 100%;
 
