@@ -90,6 +90,7 @@ function cq_get_taxonomies_for_category($data)
     }
 
     $taxonomy_fields = array();
+    $top_category = null;
     if (!empty($data['cat'])) {
         $category = get_category_by_slug($data['cat']);
 
@@ -99,6 +100,7 @@ function cq_get_taxonomies_for_category($data)
             $category = get_category($category->category_parent);
             $categories[$category->term_id] = $category;
         }
+        $top_category = end($categories);
 
         // get field objects terms
         foreach ($categories as $category) {
@@ -115,9 +117,11 @@ function cq_get_taxonomies_for_category($data)
         }
     }
 
-    // add overall criterias
-    $other_field = chouquette_acf_get_field_object(CQ_TAXONOMY_CRITERIA)[0];
-    $taxonomy_fields[CQ_TAXONOMY_CRITERIA] = $other_field;
+    // add overall criterias except for services
+    if (!empty($top_category) && $top_category->slug != CQ_CATEGORY_SERVICES) {
+        $other_field = chouquette_acf_get_field_object(CQ_TAXONOMY_CRITERIA)[0];
+        $taxonomy_fields[CQ_TAXONOMY_CRITERIA] = $other_field;
+    }
 
     // add terms and built DTO
     $result = [];
