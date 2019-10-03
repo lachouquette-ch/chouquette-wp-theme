@@ -52,18 +52,7 @@
                         <div class="col-md-4 home-header-filters-item">
                             <select class="form-control" title="Où veux-tu aller ?" name="loc" v-model="loc">
                                 <option title="" value="">Où veux-tu aller ?</option>
-                                <?php
-                                $terms = get_terms(array(
-                                    'taxonomy' => CQ_TAXONOMY_LOCATION,
-                                    'orderby' => 'term_group'
-                                ));
-                                foreach ($terms as $term) {
-                                    $term_style = $term->parent == 0 ? 'font-weight: bold' : '';
-                                    $term_display = $term->parent != 0 ? '&nbsp;&nbsp;' : '';
-                                    $term_display .= $term->name;
-                                    echo "<option title='{$term->name}' value='{$term->slug}' style='${term_style}'>{$term_display}</option>";
-                                }
-                                ?>
+                                <?php chouquette_location_options(); ?>
                             </select>
                         </div>
                         <div class="col-md-4 home-header-filters-item">
@@ -179,6 +168,6 @@
 
 <?php
 
-wp_enqueue_script('index', get_template_directory_uri() . '/src/scripts/partials/home.js', ['vue','swiper-custom'], CQ_THEME_VERSION, true);
+wp_enqueue_script('index', get_template_directory_uri() . '/src/scripts/partials/home.js', ['vue', 'swiper-custom'], CQ_THEME_VERSION, true);
 
 get_footer();

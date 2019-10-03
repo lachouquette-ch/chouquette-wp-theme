@@ -9,7 +9,6 @@
 
 $search_categories = get_query_var('search_categories');
 $default_category = get_query_var('default_category');
-$search_locations = get_query_var('search_locations');
 $default_location = get_query_var('default_location');
 
 $carte_editoriale_url = get_permalink(get_page_by_title('Charte éditoriale'));
@@ -41,15 +40,7 @@ get_template_part('template-parts/fiche-modals');
                         <div class="form-group col-md-4">
                             <select class="form-control" title="Où veux-tu aller ?" name="loc">
                                 <option title="" value="">Où ça ...</option>
-                                <?php
-                                foreach ($search_locations as $search_location) {
-                                    $term_style = $search_location->parent == 0 ? 'font-weight: bold' : '';
-                                    $search_location_display = $search_location->parent != 0 ? '&nbsp;&nbsp;' : '';
-                                    $search_location_display .= $search_location->name;
-                                    $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $search_location->slug ? 'selected' : '';
-                                    echo "<option title='{$search_location->name}' value='{$search_location->slug}' style='${term_style}' {$attr_selected}>{$search_location_display}</option>";
-                                }
-                                ?>
+                                <?php chouquette_location_options(); ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
@@ -109,7 +100,7 @@ get_template_part('template-parts/fiche-modals');
 
                     if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches || $number_of_fiches >= $loop->found_posts) {
                         $pagination_disabled = true;
-                        $pagination_text = "Arf, désolé nous n'avons pas plus à te proposer\"";
+                        $pagination_text = "Arf, désolé nous n'avons pas plus à te proposer";
                     } elseif ($number_of_fiches >= CQ_CATEGORY_MAX_FICHES) {
                         $pagination_disabled = true;
                         $pagination_text = "Peux-tu affiner ta recherche ?";

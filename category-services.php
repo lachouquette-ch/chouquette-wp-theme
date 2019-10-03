@@ -14,11 +14,6 @@ $sub_categories = get_categories(array(
     'child_of' => $category->term_id,
 ));
 
-$locations = get_terms(array(
-    'taxonomy' => CQ_TAXONOMY_LOCATION,
-    'orderby' => 'term_group'
-));
-
 get_template_part('template-parts/fiche-report');
 ?>
     <div id="app" class="py-4">
@@ -29,15 +24,7 @@ get_template_part('template-parts/fiche-report');
                 <div class="form-group col-md-6">
                     <select class="form-control" title="Où veux-tu aller ?" name="loc">
                         <option title="" value="">Où ça ...</option>
-                        <?php
-                        foreach ($locations as $location) {
-                            $term_style = $location->parent == 0 ? 'font-weight: bold' : '';
-                            $search_location_display = $location->parent != 0 ? '&nbsp;&nbsp;' : '';
-                            $search_location_display .= $location->name;
-                            $attr_selected = isset($_GET['loc']) && $_GET['loc'] == $location->slug ? 'selected' : '';
-                            echo "<option title='{$location->name}' value='{$location->slug}' style='${term_style}' {$attr_selected}>{$search_location_display}</option>";
-                        }
-                        ?>
+                        <?php chouquette_location_options(); ?>
                     </select>
                 </div>
                 <div class="form-group col-md-6">

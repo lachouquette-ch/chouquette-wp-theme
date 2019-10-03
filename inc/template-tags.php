@@ -114,3 +114,29 @@ if (!function_exists('chouquette_taxonomy_logo')) :
         return sprintf('<img src="%s" alt="%s" title="%s" class="%s" />', $image_src, $taxonomy->description, $taxonomy->name, join(" ", $classes));
     }
 endif;
+
+if (!function_exists('chouquette_location_options')) :
+    /**
+     * Generate location options for select menu
+     */
+    function chouquette_location_options()
+    {
+        $terms = get_terms(array(
+            'taxonomy' => CQ_TAXONOMY_LOCATION,
+            'parent' => 0,
+            'orderby' => 'count',
+            'order' => 'DESC'
+        ));
+        foreach ($terms as $term) {
+            echo "<option title='{$term->name}' value='{$term->slug}' style='font-weight: bold'>{$term->name}</option>";
+            $subterms = get_terms(array(
+                'taxonomy' => CQ_TAXONOMY_LOCATION,
+                'parent' => $term->term_id,
+                'orderby' => 'name'
+            ));
+            foreach ($subterms as $subterm) {
+                echo "<option title='{$subterm->name}' value='{$subterm->slug}'>&nbsp;&nbsp; {$subterm->name}</option>";
+            }
+        }
+    }
+endif;

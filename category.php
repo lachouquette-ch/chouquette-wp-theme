@@ -14,16 +14,8 @@ $search_categories = get_categories(array(
 ));
 $default_category = isset($_GET['cat']) ? get_category_by_slug($_GET['cat']) : get_queried_object();
 
-$locations = get_terms(array(
-    'taxonomy' => CQ_TAXONOMY_LOCATION,
-    'orderby' => 'term_group',
-));
-$default_location = '';
-
 set_query_var('search_categories', $search_categories);
 set_query_var('default_category', $default_category);
-set_query_var('search_locations', $locations);
-set_query_var('default_location', $default_location);
 get_template_part('template-parts/fiches-map');
 
 get_footer();
