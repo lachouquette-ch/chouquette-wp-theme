@@ -21,9 +21,9 @@
             </div>
         </nav>
 
-        <div class="home-header-menu d-flex flex-column justify-content-center align-items-center">
+        <div class="home-header-menu d-flex flex-column justify-content-md-center align-items-center">
             <div class="text-center w-100">
-                <h1 class="d-block d-md-none mb-5"><?php bloginfo('name'); ?></h1>
+                <h1 class="d-block d-md-none my-2"><?php bloginfo('name'); ?></h1>
                 <h3 class="home-header-menu-description mb-3"><?php bloginfo('description'); ?></h3>
             </div>
             <?php

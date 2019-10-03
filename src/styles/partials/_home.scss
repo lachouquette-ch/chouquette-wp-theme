@@ -32,13 +32,18 @@
 
 .home-header-menu {
   height: 100vh;
+  padding-top: 80px; // for menu
 
   position: relative;
   top: -1 * $header-height;
 }
 
-.home-header-menu-description {
-  @media (max-height: 600px) {
+h3.home-header-menu-description {
+  @include media-breakpoint-down(sm) {
+    font-size: $h4-font-size;
+  }
+
+  @media (max-height: 450px) {
     display: none;
   }
 }
