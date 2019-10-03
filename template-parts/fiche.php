@@ -46,7 +46,7 @@ $posts = get_posts(array(
                                 <a href="tel:<?php echo $fiche_fields[CQ_FICHE_PHONE] ?>" title="Téléphoner" class="fiche-social" target="_blank"><i class="fas fa-phone"></i></a>
                             <?php endif;
                             if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
-                                <a href="#" title="Reporter une précision ou erreur sur la fiche" class="fiche-social"
+                                <a href="#" title="Envoyer un message" class="fiche-social"
                                    data-toggle="modal" data-target="#ficheContactModal"
                                    data-fiche-title="<?php the_title(); ?>" data-fiche-id="<?php echo $fiche->ID; ?>">
                                     <i class="far fa-envelope"></i>
@@ -88,6 +88,14 @@ $posts = get_posts(array(
                                    class="link-secondary link-no-decoration"><i class="fas fa-phone"></i> <?php echo $fiche_fields[CQ_FICHE_PHONE] ?>
                                 </a>
                             </li>
+                        <?php endif; ?>
+                        <?php if (!empty($fiche_fields[CQ_FICHE_WEB])): ?>
+                        <li class="list-group-item">
+                            <a href="<?php echo $fiche_fields[CQ_FICHE_WEB] ?>"
+                               title="Site Internet" target="_blank"
+                               class="link-secondary link-no-decoration"><i class="fas fa-globe"></i> <?php echo $fiche_fields[CQ_FICHE_WEB] ?>
+                            </a>
+                        </li>
                         <?php endif; ?>
                         <?php if (!empty($fiche_fields[CQ_FICHE_MAIL])): ?>
                             <li class="list-group-item">
