@@ -1,5 +1,5 @@
 .cq-single-post-fiches {
-  height: calc(100% - #{$header-height});
+  height: calc(100vh - #{$header-height});
   width: 350px;
   background-color: $chouquette-light-grey;
 
@@ -41,7 +41,7 @@
 }
 
 .cq-single-post-fiches-btn-sm {
-  height: 32px;
+  height: $hidden-content-handle-btn-height;
   width: 150px;
 
   position: absolute;
@@ -62,10 +62,10 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
-  height: 100vh;
+  height: calc(100vh - #{$header-height});
 
   @include media-breakpoint-down(md) {
-    height: calc(100vh - #{$header-height} - 32px); // button
+    height: calc(100vh - #{$header-height} - #{$hidden-content-handle-btn-height}); // button
   }
 
   background-color: $white;

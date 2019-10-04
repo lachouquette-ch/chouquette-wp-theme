@@ -36,25 +36,32 @@ $wp-adminbar-breakpoint: 782px;
 
   // category map height and top
   .category-map {
-    height: calc(100vh - #{$header-height} - #{$wp-adminbar-desktop});
     top: $header-height + $wp-adminbar-desktop;
     @media screen and (max-width: $wp-adminbar-breakpoint) {
-      height: calc(100vh - #{$header-height} - #{$wp-adminbar-mobile});
       top: $header-height + $wp-adminbar-mobile;
+    }
 
-      #fichesMap {
-
+    &, #fichesMap {
+      height: calc(100vh - #{$header-height} - #{$wp-adminbar-desktop});
+      @media screen and (max-width: $wp-adminbar-breakpoint) {
+        height: calc(100vh - #{$header-height} - #{$hidden-content-handle-btn-height} - #{$wp-adminbar-mobile});
       }
     }
   }
 
   // post fiches height and top
   .cq-single-post-fiches {
-    height: calc(100vh - #{$header-height} - #{$wp-adminbar-desktop});
     top: $header-height + $wp-adminbar-desktop;
     @media screen and (max-width: $wp-adminbar-breakpoint) {
-      height: calc(100vh - #{$header-height} - #{$wp-adminbar-mobile});
       top: $header-height + $wp-adminbar-mobile;
     }
+
+    &, .cq-single-post-fiches-wrapper {
+      height: calc(100vh - #{$header-height} - #{$wp-adminbar-desktop});
+      @media screen and (max-width: $wp-adminbar-breakpoint) {
+        height: calc(100vh - #{$header-height} - #{$wp-adminbar-mobile} - #{$hidden-content-handle-btn-height});
+      }
+    }
   }
+
 }

@@ -54,14 +54,14 @@
   }
 
   @include media-breakpoint-down(sm) {
-    height: calc(100vh - #{$header-height} - 32px);
+    height: calc(100vh - #{$header-height} - #{$hidden-content-handle-btn-height});
     width: 100vw;
 
     top: $header-height;
     left: -100vw;
 
     #fichesMap {
-      height: calc(100vh - #{$header-height} - 32px);
+      height: calc(100vh - #{$header-height} - #{$hidden-content-handle-btn-height});
     }
 
     transition: left 0.5s;
@@ -73,7 +73,7 @@
 }
 
 .category-map > button {
-  height: 32px;
+  height: $hidden-content-handle-btn-height;
   width: 130px;
 
   position: absolute;
