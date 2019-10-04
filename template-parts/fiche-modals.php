@@ -9,12 +9,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                <form id="ficheReportForm" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                     <div class="form-group">
                         <label for="ficheReportText">Une erreur, une remarque, une suggestion sur la fiche ? Merci de nous en faire part <i class="far fa-smile"></i></label>
                         <textarea class="form-control" name="report-text" id="ficheReportText" rows="10" required></textarea>
                     </div>
-                    <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
                     <input type="hidden" name="action" value="fiche_report"> <!-- trigger fiche_contact -->
                     <input id="ficheReportModalId" type="hidden" name="fiche-id" value="">
                     <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -35,7 +34,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                <form id="ficheContactForm" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                     <div class="form-group">
                         <label for="ficheContactName">Ton prénom / nom *</label>
                         <input class="form-control" id="ficheContactName" name="contact-name" required>
@@ -48,7 +47,6 @@
                         <label for="ficheContactContent">Une question, une demande, une réservation... écris-lui un petit mot directement ici <i class="far fa-smile"></i></label>
                         <textarea class="form-control" id="ficheContactContent" rows="5" name="contact-content" required></textarea>
                     </div>
-                    <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
                     <input type="hidden" name="action" value="fiche_contact"> <!-- trigger fiche_contact -->
                     <input id="ficheContactModalId" type="hidden" name="fiche-id" value="">
                     <button type="submit" class="btn btn-primary">Envoyer</button>

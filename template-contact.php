@@ -13,7 +13,7 @@ while (have_posts()) :
         <h1 class="mb-3 cq-font text-center"><?php the_title() ?></h1>
         <div class="mb-5"><?php the_content(); ?></div>
         <div class="container">
-            <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+            <form id="contactForm" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputName">Nom (et société) *</label>
@@ -43,7 +43,6 @@ while (have_posts()) :
                     <label for="inputMessage">Message *</label>
                     <textarea class="form-control" id="inputMessage" rows="10" name="contact-content" required></textarea>
                 </div>
-                <input type="hidden" name="recaptcha-response"> <!-- recaptcha v3 -->
                 <input type="hidden" name="action" value="contact"> <!-- trigger fiche_contact -->
                 <span class="float-right"><em>* champs obligatoires</em></span>
                 <button type="submit" class="btn btn-primary">Envoyer</button>

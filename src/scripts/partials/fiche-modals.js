@@ -1,4 +1,4 @@
-$('#ficheReportModal').on('show.bs.modal', function(e) {
+$('#ficheReportModal').on('show.bs.modal', function (e) {
     // get data-id attribute of the clicked element
     var ficheTitle = $(e.relatedTarget).data('fiche-title');
     var ficheId = $(e.relatedTarget).data('fiche-id');
@@ -8,7 +8,7 @@ $('#ficheReportModal').on('show.bs.modal', function(e) {
     $(e.currentTarget).find('#ficheReportModalId').val(ficheId);
 });
 
-$('#ficheContactModal').on('show.bs.modal', function(e) {
+$('#ficheContactModal').on('show.bs.modal', function (e) {
     // get data-id attribute of the clicked element
     var ficheTitle = $(e.relatedTarget).data('fiche-title');
     var ficheId = $(e.relatedTarget).data('fiche-id');
@@ -18,12 +18,30 @@ $('#ficheContactModal').on('show.bs.modal', function(e) {
     $(e.currentTarget).find('#ficheContactModalId').val(ficheId);
 });
 
-// repaptcha for contact
-grecaptcha.ready(function () {
-    grecaptcha.execute(CQ_RECAPTCHA_SITE, {action: 'ficheModals'}).then(function (token) {
-        var elements = document.getElementsByName("recaptcha-response");
-        for (i = 0; i < elements.length; i++) {
-            elements[i].value = token;
-        }
+$('#ficheReportForm').submit(function (event) {
+    // we stoped it
+    event.preventDefault();
+    // needs for recaptacha ready
+    grecaptcha.ready(function () {
+        grecaptcha.execute(CQ_RECAPTCHA_SITE, {action: 'ficheReport'}).then(function (token) {
+            // add token to form
+            $('#ficheReportForm').prepend('<input type="hidden" name="recaptcha-response" value="' + token + '">');
+            // submit form now
+            $('#ficheReportForm').unbind('submit').submit();
+        });
+    });
+});
+
+$('#ficheContactForm').submit(function (event) {
+    // we stoped it
+    event.preventDefault();
+    // needs for recaptacha ready
+    grecaptcha.ready(function () {
+        grecaptcha.execute(CQ_RECAPTCHA_SITE, {action: 'ficheContact'}).then(function (token) {
+            // add token to form
+            $('#ficheContactForm').prepend('<input type="hidden" name="recaptcha-response" value="' + token + '">');
+            // submit form now
+            $('#ficheContactForm').unbind('submit').submit();
+        });
     });
 });
