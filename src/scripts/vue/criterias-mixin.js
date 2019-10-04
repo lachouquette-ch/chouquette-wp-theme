@@ -61,6 +61,17 @@ const VUE_CRITERIAS_MIXIN = {
                     term.checked = false;
                 });
             })
+        },
+        // properly remove uncheck term
+        toggleCheckCritera: function (term) {
+            if (!term.checked) {
+                this.criterias.forEach(function (taxonomy) {
+                    taxonomy.selectedTerms = taxonomy.selectedTerms.filter(function (element) {
+                        return element != term.slug;
+                    });
+                });
+                console.log("unchecked");
+            }
         }
     }
 }
