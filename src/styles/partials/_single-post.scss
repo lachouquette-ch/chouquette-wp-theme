@@ -11,7 +11,7 @@
   border-right: 5px solid $chouquette-yellow;
 
   @include media-breakpoint-down(sm) {
-    width: 100%;
+    width: 100vw;
     left: -100vw;
 
     border-right: none;
@@ -218,7 +218,10 @@
   /* iFrame */
 
   iframe {
-    width: 100%;
+    min-width: auto !important;
+    max-width: none !important;
+    width: 100% !important;
+
   }
 
   /* Gallery */
