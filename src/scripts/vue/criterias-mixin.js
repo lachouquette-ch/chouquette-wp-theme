@@ -52,13 +52,6 @@ const VUE_CRITERIAS_MIXIN = {
                     });
                     self.criterias = response.data;
                 })
-                .then(function () {
-                    // activate new tooltips
-                    // next cycle (for IE)
-                    Vue.nextTick(function () {
-                        $('.category-criteria i[data-toggle="tooltip"]').tooltip();
-                    });
-                })
         },
         // uncheck add criterias
         resetCriterias: function () {
