@@ -37,15 +37,16 @@ get_template_part('template-parts/fiche-report');
                 <span class="d-none d-md-inline">{{ criteriaLabel(checkedCount) }}</span>
             </button>
             <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
-            <div id="collapseCriteria" class="collapse category-criteria mt-2 pl-2">
+            <div id="collapseCriteria" class="collapse category-criteria mt-2 pl-3">
                 <div v-for="criteria in criterias" class="form-group">
                     <label :for="criteria.name">{{ criteria.label }}</label>
                     <select :id="criteria.name" class="form-control d-md-none" :name="criteria.name + '[]'" multiple="multiple" v-model="criteria.selectedTerms" size="3">
                         <option v-for="term in criteria.terms" :value="term.slug">{{ term.name }}</option>
                     </select>
                     <div class="category-criteria-checkbox d-none d-md-block">
-                        <div v-for="term in criteria.terms" class="form-check px-3">
-                            <label class="form-check-label"><input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked"> {{ term.name }}</label>
+                        <div v-for="term in criteria.terms" class="form-check">
+                            <input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked">
+                            <label class="form-check-label">{{ term.name }}</label>
                         </div>
                     </div>
                 </div>
