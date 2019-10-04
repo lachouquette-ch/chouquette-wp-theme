@@ -29,8 +29,8 @@ define('CQ_CATEGORY_LOGO_BLACK', 'logo_black');
 define('CQ_CATEGORY_LOGO_MARKER_YELLOW', 'marker_yellow');
 define('CQ_CATEGORY_LOGO_MARKER_WHITE', 'marker_white');
 
-define('CQ_CATEGORY_PAGING_NUMBER', 10);
-define('CQ_CATEGORY_MAX_FICHES', 30);
+define('CQ_CATEGORY_PAGING_NUMBER', 20);
+define('CQ_CATEGORY_MAX_FICHES', 60);
 
 define('ACF_FIELD_GROUP_TYPE', 'group');
 define('ACF_FIELD_TAXONOMY_TYPE', 'taxonomy');
