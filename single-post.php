@@ -121,7 +121,7 @@ while (have_posts()) :
                                      data-parent="#fichesAccordion">
                                     <?php
                                     set_query_var('fiche', $fiche);
-                                    get_template_part('template-parts/fiche');
+                                    get_template_part('template-parts/fiche_template');
                                     ?>
                                 </div>
                             <?php endforeach; ?>
