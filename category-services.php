@@ -14,7 +14,7 @@ $sub_categories = get_categories(array(
     'child_of' => $category->term_id,
 ));
 
-get_template_part('template-parts/fiche-report');
+get_template_part('template-parts/fiche-modals');
 ?>
     <div id="app" class="py-4">
         <h1 class="text-center mb-4 cq-font"><?php echo single_cat_title(); ?></h1>

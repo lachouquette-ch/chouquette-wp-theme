@@ -2,7 +2,7 @@
 get_header();
 global $wp_query;
 
-get_template_part('template-parts/fiche-report');
+get_template_part('template-parts/fiche-modals');
 ?>
     <div id="app" class="container py-4">
         <h1 class="text-center mb-4">Résultat(s) pour '<?php echo get_search_query(); ?>'</h1>
