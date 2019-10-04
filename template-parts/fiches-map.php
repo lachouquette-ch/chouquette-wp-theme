@@ -85,7 +85,7 @@ get_template_part('template-parts/fiche-modals');
                     echo '<div class="d-flex justify-content-around flex-wrap">';
                     while ($loop->have_posts()) {
                         $loop->the_post();
-                        get_template_part('template-parts/fiche_template');
+                        get_template_part('template-parts/fiche');
                     }
                     echo '</div>';
 

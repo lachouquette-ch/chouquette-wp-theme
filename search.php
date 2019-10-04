@@ -41,7 +41,7 @@ get_template_part('template-parts/fiche-modals');
             echo '<div class="search-fiches d-flex justify-content-around flex-wrap">';
             while ($loop->have_posts()) {
                 $loop->the_post();
-                get_template_part('template-parts/fiche_template');
+                get_template_part('template-parts/fiche');
             }
             if ($loop->found_posts > $loop->post_count) {
                 $more_posts_url = add_query_arg(array(

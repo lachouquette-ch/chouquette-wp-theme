@@ -19,7 +19,7 @@ query_posts(array_merge($wp_query->query_vars, $args));
             echo '<div class="search-fiches d-flex justify-content-around flex-wrap">';
             while (have_posts()) {
                 the_post();
-                get_template_part('template-parts/fiche_template');
+                get_template_part('template-parts/fiche');
             }
             echo '</div>';
             the_posts_pagination(array(

@@ -71,7 +71,7 @@ $posts = get_posts(array(
                         <i class="fas fa-exclamation-circle"></i>
                     </a>
                 </div>
-                <?php include 'fiche_template-footer.php'; ?>
+                <?php include 'fiche-footer.php'; ?>
             </div>
         </div>
         <div class="fiche-back">
@@ -153,7 +153,7 @@ $posts = get_posts(array(
                         <i class="fas fa-exclamation-circle"></i>
                     </a>
                 </div>
-                <?php include 'fiche_template-footer.php'; ?>
+                <?php include 'fiche-footer.php'; ?>
             </div>
         </div>
     </div>
