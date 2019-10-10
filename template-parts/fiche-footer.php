@@ -9,8 +9,8 @@
                 <i class=" fas fa-map-marker-alt"></i>
             </a>
         <?php endif;
-        if (!empty($posts)):
-            $lastest_post = $posts[0];
+        if (!empty($fichePosts)):
+            $lastest_post = $fichePosts[0];
             ?>
             <a href="<?php echo get_the_permalink($lastest_post); ?>"
                title="Dernier article sur le lieu"

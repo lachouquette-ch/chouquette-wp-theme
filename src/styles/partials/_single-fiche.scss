@@ -1,0 +1,32 @@
+.cq-single-fiche {
+  article {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @include media-breakpoint-up(md) {
+    article {
+      width: 50vw;
+      max-width: 750px;
+    }
+
+    div.fiche-container {
+      display: flex;
+      max-width: none;
+    }
+
+    div.card-footer {
+      display: none;
+    }
+
+    div.fiche-front, div.fiche-back {
+      transform: unset !important;
+      position: initial !important;
+      display: inline-block !important;
+    }
+
+    div.fiche-front {
+      margin-right: 2rem;
+    }
+  }
+}

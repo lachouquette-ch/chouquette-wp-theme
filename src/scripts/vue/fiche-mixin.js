@@ -19,44 +19,50 @@ const VUE_FICHE_MIXIN = {
             fiche.toggleClass('flipped');
 
             // create map if none
-            const mapContainer = $('#ficheMap' + fiche.attr("data-fiche-id"));
+            const mapContainer = fiche.find(".fiche-map");
             if (mapContainer.children().length === 0) {
-                // get fiche data from parent attributes
-                const ficheId = fiche.attr("data-fiche-id");
-                const ficheName = fiche.attr("data-fiche-name");
-                const ficheLat = parseFloat(fiche.attr("data-fiche-lat"));
-                const ficheLng = parseFloat(fiche.attr("data-fiche-lng"));
-                const fichePosition = (ficheLat && ficheLng) ? {lat: ficheLat, lng: ficheLng} : null;
-                const ficheIcon = fiche.attr("data-fiche-icon");
+                this.bootstrapFicheMap(fiche);
+            }
+        },
+        bootstrapFicheMap: function (ficheElement) {
+            // get map container
+            const mapContainer = ficheElement.find(".fiche-map");
 
-                if (fichePosition) {
-                    var ficheMap = new google.maps.Map(mapContainer.get(0), {
-                        center: fichePosition,
-                        clickableIcons: false,
-                        disableDefaultUI: true,
-                        gestureHandling: "none",
-                        restriction: {
-                            latLngBounds: SWITZERLAND_BOUNDS,
-                            strictBounds: false,
-                        },
-                        scaleControl: true,
-                        styles: MAP_STYLES,
-                        zoom: 18,
-                        zoomControl: true,
-                        zoomControlOptions: {
-                            position: google.maps.ControlPosition.RIGHT_TOP
-                        }
-                    });
-                    // add marker
-                    new google.maps.Marker({
-                        animation: google.maps.Animation.DROP,
-                        clickable: false,
-                        icon: fiche.attr("data-fiche-icon"),
-                        map: ficheMap,
-                        position: fichePosition,
-                        title: fiche.attr("data-fiche-name"),
-                    });
-                }
+            // get fiche data from parent attributes
+            const ficheId = ficheElement.attr("data-fiche-id");
+            const ficheName = ficheElement.attr("data-fiche-name");
+            const ficheLat = parseFloat(ficheElement.attr("data-fiche-lat"));
+            const ficheLng = parseFloat(ficheElement.attr("data-fiche-lng"));
+            const fichePosition = (ficheLat && ficheLng) ? {lat: ficheLat, lng: ficheLng} : null;
+            const ficheIcon = ficheElement.attr("data-fiche-icon");
+
+            if (fichePosition) {
+                var ficheMap = new google.maps.Map(mapContainer.get(0), {
+                    center: fichePosition,
+                    clickableIcons: false,
+                    disableDefaultUI: true,
+                    gestureHandling: "none",
+                    restriction: {
+                        latLngBounds: SWITZERLAND_BOUNDS,
+                        strictBounds: false,
+                    },
+                    scaleControl: true,
+                    styles: MAP_STYLES,
+                    zoom: 18,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_TOP
+                    }
+                });
+                // add marker
+                new google.maps.Marker({
+                    animation: google.maps.Animation.DROP,
+                    clickable: false,
+                    icon: ficheIcon,
+                    map: ficheMap,
+                    position: fichePosition,
+                    title: ficheName,
+                });
             }
         }
     },
