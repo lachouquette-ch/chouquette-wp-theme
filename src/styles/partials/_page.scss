@@ -1,4 +1,9 @@
 .cq-page {
+  h1 {
+    font-family: $font-family-heading;
+    font-size: 3rem;
+  }
+
   a {
     @extend .link-secondary;
   }

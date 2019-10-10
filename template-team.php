@@ -6,10 +6,10 @@
 get_header();
 ?>
 
-<div class="container cq-team py-5">
-    <div class="row cq-team-title">
+<div class="container cq-page py-5">
+    <div class="row">
         <div class="col text-center">
-            <h1 class="mb-3 cq-font"><?php the_title() ?></h1>
+            <h1 class="mb-3"><?php the_title() ?></h1>
         </div>
     </div>
 
