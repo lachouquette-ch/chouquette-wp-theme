@@ -95,7 +95,7 @@ get_template_part('template-parts/fiche-modals');
 
                     if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches || $number_of_fiches >= $loop->found_posts) {
                         $pagination_disabled = true;
-                        $pagination_text = "Arf, désolé nous n'avons pas plus à te proposer";
+                        $pagination_text = "Arf, désolé nous n'avons pas plus à te proposer pour le moment";
                     } elseif ($number_of_fiches >= CQ_CATEGORY_MAX_FICHES) {
                         $pagination_disabled = true;
                         $pagination_text = "Peux-tu affiner ta recherche ?";
@@ -104,7 +104,7 @@ get_template_part('template-parts/fiche-modals');
                         $pagination_text = "Tu en veux plus ? Cliques ici";
                     }
 
-                    echo sprintf('<a class="btn btn-sm btn-outline-secondary w-50 %s %s" href="%s" role="button">%s</a>',
+                    echo sprintf('<a class="btn btn-sm btn-outline-secondary w-75 %s %s" href="%s" role="button">%s</a>',
                         $pagination_disabled ? 'disabled' : '',
                         empty($_GET['id']) ? '' : 'd-none',
                         $next_url,
