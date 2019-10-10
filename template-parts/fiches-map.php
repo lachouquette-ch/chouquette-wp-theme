@@ -11,7 +11,7 @@ $search_categories = get_query_var('search_categories');
 $default_category = get_query_var('default_category');
 $default_location = get_query_var('default_location');
 
-$carte_editoriale_url = get_permalink(get_page_by_title('Charte éditoriale'));
+$carte_editoriale_url = get_permalink(get_page_by_title('Notre charte éditoriale'));
 
 get_template_part('template-parts/fiche-modals');
 ?>
@@ -79,7 +79,7 @@ get_template_part('template-parts/fiche-modals');
                 echo '<div class="category-fiche-container pt-5 pb-4 position-relative">';
                 if ($loop->have_posts()):
                     echo '<div class="category-fiche-legend">';
-                    echo "Lieux Chouquettisés <a title='Charte Editoriale' href='$carte_editoriale_url'>?</a>";
+                    echo "Lieux Chouquettisés <a title='Notre charte Editoriale' href='$carte_editoriale_url'>?</a>";
                     echo '</div>';
 
                     echo '<div class="d-flex justify-content-around flex-wrap">';
@@ -120,7 +120,7 @@ get_template_part('template-parts/fiche-modals');
                 <div id="fichesMapLegend" class="d-none">
                     <div class="m-1 p-2 border rounded h4" style="background-color: rgba(255,255,255,0.8); font-size: 0.9rem;">
                         <img height="40px" src="<?php echo get_template_directory_uri() . '/images/marker_yellow.png' ?>"> Lieux
-                        <a href="<?php echo $carte_editoriale_url; ?>" title="Charte editoriale" class="link-secondary">chouquettisés</a>
+                        <a href="<?php echo $carte_editoriale_url; ?>" title="Notre charte editoriale" class="link-secondary">chouquettisés</a>
                     </div>
                 </div>
                 <div id="fichesMapReset" class="d-none">
