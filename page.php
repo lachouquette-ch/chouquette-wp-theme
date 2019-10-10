@@ -10,7 +10,7 @@ while (have_posts()) :
     ?>
 
     <div class="container cq-page py-5">
-        <h1 class="mb-5 text-center"><?php the_title() ?></h1>
+        <h1><?php the_title() ?></h1>
         <div><?php the_content(); ?></div>
     </div>
 <?php

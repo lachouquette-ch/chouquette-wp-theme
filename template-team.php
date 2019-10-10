@@ -8,8 +8,9 @@ get_header();
 
 <div class="container cq-page py-5">
     <div class="row">
-        <div class="col text-center">
-            <h1 class="mb-3"><?php the_title() ?></h1>
+        <div class="col">
+            <h1><?php the_title() ?></h1>
+            <div class="mb-5"><?php the_content(); ?></div>
         </div>
     </div>
 

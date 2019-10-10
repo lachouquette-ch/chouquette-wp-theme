@@ -10,7 +10,7 @@ while (have_posts()) :
     ?>
 
     <div class="container cq-page py-5">
-        <h1 class="mb-3 cq-font text-center"><?php the_title() ?></h1>
+        <h1><?php the_title() ?></h1>
         <div class="mb-5"><?php the_content(); ?></div>
         <div class="container">
             <form id="contactForm" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
