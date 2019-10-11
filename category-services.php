@@ -45,8 +45,9 @@ get_template_part('template-parts/fiche-modals');
                     </select>
                     <div class="category-criteria-checkbox d-none d-md-block">
                         <div v-for="term in criteria.terms" class="form-check">
-                            <input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked" v-on:change="toggleCheckCritera(term)">
-                            <label class="form-check-label">{{ term.name }}</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked" v-on:change="toggleCheckCritera(term)"> {{ term.name }}
+                            </label>
                         </div>
                     </div>
                 </div>
