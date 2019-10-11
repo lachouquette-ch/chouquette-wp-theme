@@ -100,7 +100,7 @@
             $latest_posts = new WP_Query('posts_per_page=6');
             if ($latest_posts->have_posts()) :
                 ?>
-                <div class="home-latest-container d-flex flex-wrap align-items-center justify-content-center">
+                <div class="article-card-shuffle-container d-flex flex-wrap align-items-center justify-content-center">
                     <?php
                     while ($latest_posts->have_posts()) :
                         $latest_posts->the_post();
