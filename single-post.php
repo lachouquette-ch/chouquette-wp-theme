@@ -120,7 +120,7 @@ while (have_posts()) :
                                 <div id="fiche<?php echo $fiche->ID; ?>" class="p-2 collapse show" aria-labelledby="headingOne"
                                      data-parent="#fichesAccordion">
                                     <?php
-                                    set_query_var('fiche', $fiche);
+                                    set_query_var('refFiche', $fiche);
                                     get_template_part('template-parts/fiche');
                                     ?>
                                 </div>

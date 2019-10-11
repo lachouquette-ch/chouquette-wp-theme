@@ -1,5 +1,5 @@
 <?php
-$fiche = get_post();
+$fiche = !empty(get_query_var('refFiche')) ? get_query_var('refFiche') : get_post();
 
 $default_category = get_query_var('default_category');
 if ($default_category) {
