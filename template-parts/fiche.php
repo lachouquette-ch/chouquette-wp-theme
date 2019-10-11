@@ -30,7 +30,7 @@ $fichePosts = get_posts(array(
          data-fiche-lat="<?php echo $fiche_fields[CQ_FICHE_LOCATION] ? $fiche_fields[CQ_FICHE_LOCATION]['lat'] : ''; ?>"
          data-fiche-lng="<?php echo $fiche_fields[CQ_FICHE_LOCATION] ? $fiche_fields[CQ_FICHE_LOCATION]['lng'] : ''; ?>"
          data-fiche-icon="<?php echo esc_url(chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID))); ?>">
-    <a class="fiche-target" id="<?php echo 'target' . $fiche->ID; ?>"></a>
+    <a id="<?php echo 'target' . $fiche->ID; ?>"></a>
     <div class="fiche-container">
         <div class="fiche-front">
             <?php include 'fiche-front.php'; ?>
