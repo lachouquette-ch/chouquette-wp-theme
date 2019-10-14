@@ -28,7 +28,7 @@ get_template_part('template-parts/fiche-modals');
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <input class="form-control" type="text" placeholder="Plus précisement ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'" ?>>
+                    <input class="form-control" type="text" placeholder="Plus précisément ..." name="search" <?php echo empty($_GET['search']) ? '' : "value='{$_GET['search']}'" ?>>
                 </div>
             </div>
             <button class="btn btn-sm btn-secondary mr-1 cq-toggle" type="button" data-toggle="collapse" data-target="#collapseCriteria" v-cloak>
