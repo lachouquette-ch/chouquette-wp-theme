@@ -31,7 +31,7 @@ get_template_part('template-parts/fiche-modals');
                                 <option title="" value="">Je veux ...</option>
                                 <?php
                                 foreach ($search_categories as $search_category) {
-                                    $attr_selected = isset($_GET['cat']) && $_GET['cat'] == $search_category->slug ? 'selected' : '';
+                                    $attr_selected = $search_category->slug === $default_category->slug ? 'selected' : '';
                                     echo "<option title='{$search_category->name}' value='{$search_category->slug}' {$attr_selected}>{$search_category->name}</option>";
                                 }
                                 ?>
@@ -40,7 +40,7 @@ get_template_part('template-parts/fiche-modals');
                         <div class="form-group col-md-4">
                             <select class="form-control" title="Où veux-tu aller ?" name="loc">
                                 <option title="" value="">Où ça ...</option>
-                                <?php chouquette_location_options(); ?>
+                                <?php chouquette_location_options($default_location); ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">

@@ -13,6 +13,7 @@ $category = get_queried_object();
 $sub_categories = get_categories(array(
     'child_of' => $category->term_id,
 ));
+$default_location = isset($_GET['loc']) ? get_term_by('slug', $_GET['loc'], CQ_TAXONOMY_LOCATION) : null;
 
 get_template_part('template-parts/fiche-modals');
 ?>
@@ -24,7 +25,7 @@ get_template_part('template-parts/fiche-modals');
                 <div class="form-group col-md-6">
                     <select class="form-control" title="Où veux-tu aller ?" name="loc">
                         <option title="" value="">Où ça ...</option>
-                        <?php chouquette_location_options(); ?>
+                        <?php chouquette_location_options($default_location); ?>
                     </select>
                 </div>
                 <div class="form-group col-md-6">

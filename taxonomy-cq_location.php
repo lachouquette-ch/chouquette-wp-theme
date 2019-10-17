@@ -12,7 +12,7 @@ get_header();
 $search_categories = array_map(function ($item) {
     return get_category($item->object_id);
 }, chouquette_menu_items());
-$default_category = '';
+$default_category = isset($_GET['cat']) ? get_category_by_slug($_GET['cat']) : null;
 
 $search_locations = get_categories(array(
     'taxonomy' => CQ_TAXONOMY_LOCATION,

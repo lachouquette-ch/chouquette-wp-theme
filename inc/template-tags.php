@@ -119,7 +119,7 @@ if (!function_exists('chouquette_location_options')) :
     /**
      * Generate location options for select menu
      */
-    function chouquette_location_options()
+    function chouquette_location_options($selectedLocation = null)
     {
         $terms = get_terms(array(
             'taxonomy' => CQ_TAXONOMY_LOCATION,
@@ -128,14 +128,16 @@ if (!function_exists('chouquette_location_options')) :
             'order' => 'DESC'
         ));
         foreach ($terms as $term) {
-            echo "<option title='{$term->name}' value='{$term->slug}' style='font-weight: bold'>{$term->name}</option>";
+            $attr_selected = $selectedLocation->slug === $term->slug ? 'selected' : '';
+            echo "<option title='{$term->name}' value='{$term->slug}' style='font-weight: bold' {$attr_selected}>{$term->name}</option>";
             $subterms = get_terms(array(
                 'taxonomy' => CQ_TAXONOMY_LOCATION,
                 'parent' => $term->term_id,
                 'orderby' => 'name'
             ));
             foreach ($subterms as $subterm) {
-                echo "<option title='{$subterm->name}' value='{$subterm->slug}'>&nbsp;&nbsp; {$subterm->name}</option>";
+                $attr_selected = $selectedLocation->slug === $subterm->slug ? 'selected' : '';
+                echo "<option title='{$subterm->name}' value='{$subterm->slug}' {$attr_selected}>&nbsp;&nbsp; {$subterm->name}</option>";
             }
         }
     }
