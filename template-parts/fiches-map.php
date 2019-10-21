@@ -111,11 +111,15 @@ get_template_part('template-parts/fiche-modals');
                         $pagination_text = "Tu en veux plus ? Cliques ici";
                     }
 
-                    echo sprintf('<a class="btn btn-sm btn-outline-secondary w-75 %s %s" href="%s" role="button">%s</a>',
-                        $pagination_disabled ? 'disabled' : '',
-                        empty($_GET['id']) ? '' : 'd-none',
-                        $next_url,
-                        $pagination_text);
+                    if ($pagination_disabled) {
+                        echo "<span class='btn btn-sm btn-outline-secondary w-75 disabled' role='button'>$pagination_text</span>";
+                    } else {
+                        echo sprintf('<a class="btn btn-sm btn-outline-secondary w-75 %s %s" href="%s" role="button">%s</a>',
+                            $pagination_disabled ? 'disabled' : '',
+                            empty($_GET['id']) ? '' : 'd-none',
+                            $next_url,
+                            $pagination_text);
+                    }
                     echo '</div>';
                 else:
                     echo "<span class='d-block text-center'>Oh mince, nous n'avons rien trouvé pour toi <i class='far fa-frown'></i>. Continue avec d'autres critères et c'est sûr, tu vas trouver ton bonheur</span>";
