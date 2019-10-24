@@ -1,9 +1,13 @@
 .cq-404 {
-  min-height: 50vh;
-  font-size: 4rem;
+  font-size: $font-size-lg;
 
-  @include media-breakpoint-down(sm) {
-    min-height: auto;
+  @include media-breakpoint-up(md) {
+    min-height: 50vh;
+  }
+}
+
+.cq-404-msg {
+  @include media-breakpoint-up(md) {
     font-size: 2rem;
   }
 }
