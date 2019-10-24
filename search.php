@@ -15,10 +15,10 @@ get_template_part('template-parts/fiche-modals');
                 get_template_part('template-parts/article-card');
             }
             if ($wp_query->found_posts > $wp_query->post_count) {
-                $more_posts_url = add_query_arg(array(
-                    'post_type' => 'post',
-                    'paged' => 2
-                ));
+                $more_posts_url = add_query_arg(array (
+                    's' => get_search_query(),
+                    'post_type' => 'post'
+                ), home_url('page/2/'));
                 echo "<a href='$more_posts_url' class='btn btn-outline-secondary w-100' role='button' style='line-height: 5rem;'>Les autres articles</a>";
             }
             echo '</div>';
@@ -44,10 +44,10 @@ get_template_part('template-parts/fiche-modals');
                 get_template_part('template-parts/fiche');
             }
             if ($loop->found_posts > $loop->post_count) {
-                $more_posts_url = add_query_arg(array(
-                    'post_type' => 'fiche',
-                    'paged' => 2
-                ));
+                $more_posts_url = add_query_arg(array (
+                    's' => get_search_query(),
+                    'post_type' => 'fiche'
+                ), home_url('page/2/'));
                 echo "<a href='$more_posts_url' class='btn btn-outline-secondary w-100' role='button' style='line-height: 5rem;'>Les autres fiches</a>";
             }
             echo '</div>';
