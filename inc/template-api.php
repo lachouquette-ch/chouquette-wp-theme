@@ -4,7 +4,6 @@ function cq_location_dto(int $fiche_id)
 {
     $location = get_field(CQ_FICHE_LOCATION, $fiche_id);
     if (empty($location)) {
-        error_log("Fiche {$fiche_id} has no location");
         return [];
     }
     return array(
@@ -230,7 +229,9 @@ function cq_get_locations_for_category($data)
             $dto['location'] = cq_location_dto($fiche->ID);
             $dto['icon'] = chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID));
             $dto['categories'] = cq_categories_dto($fiche->ID);
-            $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            if (!empty($dto['location'])) {
+                $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            }
             $dto['chouquettise'] = chouquette_fiche_is_chouquettise($fiche->ID);
             $result[] = $dto;
         }
@@ -318,7 +319,9 @@ function cq_get_locations_for_location($data)
             $dto['location'] = cq_location_dto($fiche->ID);
             $dto['icon'] = chouquette_category_get_marker_icon($fiche_category, chouquette_fiche_is_chouquettise($fiche->ID));
             $dto['categories'] = cq_categories_dto($fiche->ID);
-            $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            if (!empty($dto['location'])) {
+                $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            }
             $dto['chouquettise'] = chouquette_fiche_is_chouquettise($fiche->ID);
             $result[] = $dto;
         }
