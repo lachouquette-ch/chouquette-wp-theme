@@ -23,16 +23,19 @@
     <?php wp_head(); ?>
 
     <?php
+    // compute canonical links
+    global $wp;
+    $canonical_url = home_url($wp->request);
+
     if (is_category() || is_tax(CQ_TAXONOMY_LOCATION)) {
-        global $wp;
-        $canonical_url = home_url($wp->request);
         echo "<link rel='canonical' href='$canonical_url'/>";
     }
     if (is_search()) {
-        global $wp;
         $canonical_url = add_query_arg('s', $wp->query_vars['s'], home_url('/'));
         echo "<link rel='canonical' href='$canonical_url'/>";
     }
+    // need to add og:url since yoast canonical is disabled (cf. template-pagination.php)
+    echo "<meta property='og:url' content='$canonical_url'/>";
     ?>
 </head>
 <body <?php body_class(); ?>>
