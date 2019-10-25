@@ -23,7 +23,7 @@
     <?php wp_head(); ?>
 
     <?php
-    if (is_category()) {
+    if (is_category() || is_tax(CQ_TAXONOMY_LOCATION)) {
         global $wp;
         $canonical_url = home_url($wp->request);
         echo "<link rel='canonical' href='$canonical_url'/>";
