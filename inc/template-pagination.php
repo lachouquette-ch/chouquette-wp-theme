@@ -5,6 +5,11 @@
  * @package Chouquette_thème
  */
 
+// Disable YOAST Canonical management
+add_filter('wpseo_canonical', '__return_false');
+add_filter('wpseo_next_rel_link', '__return_false');
+add_filter('wpseo_prev_rel_link', '__return_false');
+
 if (!function_exists('chouquette_pagination_next_url')) :
     /**
      * Get next url for given url
