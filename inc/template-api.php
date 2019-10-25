@@ -231,6 +231,8 @@ function cq_get_locations_for_category($data)
             $dto['categories'] = cq_categories_dto($fiche->ID);
             if (!empty($dto['location'])) {
                 $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            } else {
+                $dto['infoWindow'] = null;
             }
             $dto['chouquettise'] = chouquette_fiche_is_chouquettise($fiche->ID);
             $result[] = $dto;
@@ -321,6 +323,8 @@ function cq_get_locations_for_location($data)
             $dto['categories'] = cq_categories_dto($fiche->ID);
             if (!empty($dto['location'])) {
                 $dto['infoWindow'] = chouquette_load_template_part('inc/api/info-window');
+            } else {
+                $dto['infoWindow'] = null;
             }
             $dto['chouquettise'] = chouquette_fiche_is_chouquettise($fiche->ID);
             $result[] = $dto;
