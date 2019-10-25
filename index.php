@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand d-none d-md-inline ml-md-5" href="/">
-                <h2><?php bloginfo('name'); ?></h2>
+                <h2 class="home-header-name"><?php bloginfo('name'); ?></h2>
             </a>
             <div class="home-header-sn mr-md-5">
                 <a href="<?php echo esc_url(CQ_SN_FACEBOOK); ?>" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -23,7 +23,7 @@
 
         <div class="home-header-menu d-flex flex-column justify-content-md-center align-items-center">
             <div class="text-center w-100">
-                <h1 class="d-block d-md-none my-2"><?php bloginfo('name'); ?></h1>
+                <h1 class="home-header-name d-block d-md-none my-2"><?php bloginfo('name'); ?></h1>
                 <h3 class="home-header-menu-description mb-3"><?php bloginfo('description'); ?></h3>
             </div>
             <?php
