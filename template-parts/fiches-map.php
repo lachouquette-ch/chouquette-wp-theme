@@ -97,28 +97,14 @@ get_template_part('template-parts/fiche-modals');
                     echo '</div>';
 
                     echo '<div class="text-center mt-3">';
-                    $current_url = "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-                    $next_url = add_query_arg('num', $number_of_fiches + CQ_CATEGORY_PAGING_NUMBER, $current_url);
 
-                    if (isset($_GET['num']) && $_GET['num'] > $number_of_fiches || $number_of_fiches >= $loop->found_posts) {
-                        $pagination_disabled = true;
-                        $pagination_text = "Arf, désolé nous n'avons pas plus à te proposer pour le moment";
-                    } elseif ($number_of_fiches >= CQ_CATEGORY_MAX_FICHES) {
-                        $pagination_disabled = true;
-                        $pagination_text = "Peux-tu affiner ta recherche ?";
+                    $next_url = chouquette_pagination_next_url();
+                    if ($number_of_fiches >= $loop->found_posts) {
+                        echo '<span class="btn btn-sm btn-outline-secondary w-75 disabled" role="button">Arf, désolé nous n\'avons pas plus à te proposer pour le moment</span>';
+                    } elseif (!$next_url) {
+                        echo '<span class="btn btn-sm btn-outline-secondary w-75 disabled" role="button">Peux-tu affiner ta recherche ?</span>';
                     } else {
-                        $pagination_disabled = false;
-                        $pagination_text = "Tu en veux plus ? Cliques ici";
-                    }
-
-                    if ($pagination_disabled) {
-                        echo "<span class='btn btn-sm btn-outline-secondary w-75 disabled' role='button'>$pagination_text</span>";
-                    } else {
-                        echo sprintf('<a class="btn btn-sm btn-outline-secondary w-75 %s %s" href="%s" role="button">%s</a>',
-                            $pagination_disabled ? 'disabled' : '',
-                            empty($_GET['id']) ? '' : 'd-none',
-                            $next_url,
-                            $pagination_text);
+                        echo "<a class='btn btn-sm btn-outline-secondary w-75' href='$next_url' role='button'>Tu en veux plus ? Cliques ici</a>";
                     }
                     echo '</div>';
                 else:

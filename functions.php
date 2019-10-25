@@ -271,6 +271,7 @@ require get_template_directory() . '/inc/template-tags.php';
  * Various functions to enhance the theme.
  */
 require get_template_directory() . '/inc/template-functions.php';
+require get_template_directory() . '/inc/template-pagination.php';
 require get_template_directory() . '/inc/template-acf.php';
 require get_template_directory() . '/inc/template-fiches.php';
 require get_template_directory() . '/inc/template-categories.php';
