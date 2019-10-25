@@ -27,15 +27,11 @@
         global $wp;
         $canonical_url = home_url($wp->request);
         echo "<link rel='canonical' href='$canonical_url'/>";
-
-        $prev = chouquette_pagination_prev_url();
-        if (isset($prev)) {
-            echo "<link rel='prev' href='$prev'/>";
-        }
-        $next = chouquette_pagination_next_url();
-        if (isset($next)) {
-            echo "<link rel='next' href='$next'/>";
-        }
+    }
+    if (is_search()) {
+        global $wp;
+        $canonical_url = add_query_arg('s', $wp->query_vars['s'], home_url('/'));
+        echo "<link rel='canonical' href='$canonical_url'/>";
     }
     ?>
 </head>
