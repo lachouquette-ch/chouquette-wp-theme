@@ -28,6 +28,9 @@
                 <?php endif;
                 if (!empty($fiche_fields[CQ_FICHE_PINTEREST])): ?>
                     <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_PINTEREST]); ?>" title="Pinterest" class="fiche-social" target="_blank"><i class="fab fa-pinterest"></i></a>
+                <?php endif;
+                if (!empty($fiche_fields[CQ_FICHE_LINKEDIN])): ?>
+                <a href="<?php echo esc_url($fiche_fields[CQ_FICHE_LINKEDIN]); ?>" title="Linked" class="fiche-social" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <?php endif; ?>
             </div>
         <?php endif; ?>

@@ -57,6 +57,7 @@ define('CQ_FICHE_FACEBOOK', 'sn_facebook');
 define('CQ_FICHE_INSTAGRAM', 'sn_instagram');
 define('CQ_FICHE_TWITTER', 'sn_twitter');
 define('CQ_FICHE_PINTEREST', 'sn_pinterest');
+define('CQ_FICHE_LINKEDIN', 'sn_linkedin');
 define('CQ_FICHE_OPENING_MONDAY', 'opening_monday');
 define('CQ_FICHE_OPENING_TUESDAY', 'opening_tuesday');
 define('CQ_FICHE_OPENING_WEDNESDAY', 'opening_wednesday');
