@@ -22,7 +22,7 @@ if (!function_exists('chouquette_pagination_next_url')) :
         $params = array();
         parse_str($_SERVER['QUERY_STRING'], $params);
 
-        $num = isset($params['num']) ? $params['num'] : 0;
+        $num = isset($params['num']) ? $params['num'] : CQ_CATEGORY_PAGING_NUMBER;
         // reach max num
         if ($num >= CQ_CATEGORY_MAX_FICHES) {
             return null;
