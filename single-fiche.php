@@ -29,7 +29,7 @@ while (have_posts()):
                 Découvre les autres fiches de la catégorie '<?php echo $fiche_category->name; ?>'</a>
         </div>
         <?php if ($fichePosts->have_posts()): ?>
-            <h2 class="text-center my-4 cq-font">Les articles associés</h2>
+            <h2 class="text-center my-4 cq-font"><?php echo ngettext("L'article associé", "Les articles associés", $fichePosts->post_count); ?></h2>
             <div class="article-card-shuffle-container d-flex flex-wrap align-items-center justify-content-center mb-3">
                 <?php
                 while ($fichePosts->have_posts()) :
