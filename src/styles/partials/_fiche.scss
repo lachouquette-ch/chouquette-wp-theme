@@ -110,6 +110,12 @@ a.fiche-social {
   }
 }
 
+.fiche-content {
+  a {
+    @extend .link-secondary;
+  }
+}
+
 .fiche-price:not(.fiche-price-selected) {
   color: $chouquette-light-grey;
 }

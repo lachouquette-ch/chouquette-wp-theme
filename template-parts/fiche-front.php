@@ -4,7 +4,7 @@
     </div>
     <div class="card-body d-flex flex-column position-relative">
         <h5 class="card-title text-center"><?php echo $fiche->post_title; ?></h5>
-        <p class="card-text"><?php echo strip_tags($fiche->post_content); ?></p>
+        <p class="fiche-content card-text"><?php echo $fiche->post_content; ?></p>
         <?php if ($is_chouquettise): ?>
             <div class="card-text d-flex justify-content-around mt-auto">
                 <?php if (!empty($fiche_fields[CQ_FICHE_PHONE])): ?>
