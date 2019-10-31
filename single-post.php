@@ -61,37 +61,38 @@ while (have_posts()) :
             </div>
         </div>
 
-        <div class="cq-single-post-similar container mt-5">
-            <h3 class="mb-3 text-center">Tu vas aussi aimer...</h3>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <?php
-                    $args = array(
-                        'posts_per_page' => 6,
-                        'post__not_in' => array(get_the_ID()),
-                        'no_found_rows' => true
-                    );
-                    if (!empty($tag_ids)) {
-                        $args['tag__in'] = $tag_ids;
-                    }
-                    $tops_posts = new WP_Query($args);
-                    if ($tops_posts->have_posts()) :
-                        while ($tops_posts->have_posts()) :
-                            $tops_posts->the_post();
-                            echo '<div class="swiper-slide">';
-                            get_template_part('template-parts/article-card');
-                            echo '</div>';
-                        endwhile;
-                        // Restore original Post Data
-                        wp_reset_postdata();
-                    endif;
-                    ?>
-                </div>
-                <!-- Add Arrows -->
-                <div class="swiper-button-next swiper-button-black"></div>
-                <div class="swiper-button-prev swiper-button-black"></div>
-            </div>
-        </div>
+        <?php
+        $args = array(
+            'posts_per_page' => 6,
+            'post__not_in' => array(get_the_ID()),
+            'no_found_rows' => true
+        );
+        if (!empty($tag_ids)) {
+            $args['tag__in'] = $tag_ids;
+        }
+        $tops_posts = new WP_Query($args);
+        if ($tops_posts->have_posts()) :
+            echo '<div class="cq-single-post-similar container mt-5">';
+            echo '<h3 class="mb-3 text-center">Tu vas aussi aimer...</h3>';
+            echo '<div class="swiper-container">';
+            echo '<div class="swiper-wrapper">';
+            while ($tops_posts->have_posts()) :
+                $tops_posts->the_post();
+                echo '<div class="swiper-slide">';
+                get_template_part('template-parts/article-card');
+                echo '</div>';
+            endwhile;
+            // Restore original Post Data
+            wp_reset_postdata();
+
+            echo '</div>';
+            // Add Arrows
+            echo '<div class="swiper-button-next swiper-button-black"></div>';
+            echo '<div class="swiper-button-prev swiper-button-black"></div>';
+            echo '</div>';
+            echo '</div>';
+        endif;
+        ?>
 
         <?php if (comments_open() || get_comments_number()) : ?>
             <div class="cq-single-post-comments container mt-5">

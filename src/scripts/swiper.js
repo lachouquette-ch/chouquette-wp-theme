@@ -4,7 +4,6 @@ $(function () {
     var swiper = new Swiper('.swiper-container', {
         grabCursor: true,
         centeredSlides: true,
-        loop: true,
         slidesPerView: 1,
         spaceBetween: 10,
         autoplay: {
