@@ -31,7 +31,7 @@ get_template_part('template-parts/fiche-modals');
                                 <option title="" value="">Je veux ...</option>
                                 <?php
                                 foreach ($search_categories as $search_category) {
-                                    $attr_selected = isset($default_category) && $default_category->slug == $search_category->slug ? 'selected' : '';
+                                    $attr_selected = !empty($default_category) && $default_category->slug == $search_category->slug ? 'selected' : '';
                                     echo "<option title='{$search_category->name}' value='{$search_category->slug}' {$attr_selected}>{$search_category->name}</option>";
                                 }
                                 ?>
