@@ -111,6 +111,9 @@ EOT;
 endif;
 
 if (!function_exists('chouquette_recaptcha')) :
+
+    class NoRecaptchaException extends Exception {}
+
     /**
      * Verify recaptcha and execute proper callback
      *
@@ -148,7 +151,7 @@ if (!function_exists('chouquette_recaptcha')) :
                 $on_failure($recaptcha);
             }
         } else {
-            throw new Exception("Couldn't find recaptcha in POST");
+            throw new NoRecaptchaException("Couldn't find recaptcha in POST");
         }
     }
 endif;
