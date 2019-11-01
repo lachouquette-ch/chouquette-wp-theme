@@ -22,7 +22,7 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
-        main: './main.js',
+        app: './app.js',
         index: './scripts/partials/index.js'
     },
     output: {
