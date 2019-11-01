@@ -1,4 +1,4 @@
-/* JS vendor imports */
+/* Bootstrap imports */
 require("popper.js");
 require("lettering.js");
 require("bootstrap");

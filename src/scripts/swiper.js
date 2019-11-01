@@ -1,3 +1,5 @@
+import Swiper from 'swiper/js/swiper.min'; // using src will fail on IE11
+
 /* 3rd parties intialization */
 $(function () {
     // activate swiper

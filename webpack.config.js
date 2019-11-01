@@ -22,15 +22,20 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
-        app: './app.js'
+        main: './main.js',
+        index: './scripts/partials/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "[name].js"
     },
-    devtool: 'source-map',
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            },
             {
                 test: /\.scss$/,
                 use: [
@@ -70,6 +75,7 @@ module.exports = {
             }
         }
     },
+    // devtool: 'source-map', add for production ?
     devtool: 'inline-source-map',
     devServer: {
         hot: true,
