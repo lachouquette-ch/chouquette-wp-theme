@@ -27,7 +27,9 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: "[name].js"
+        filename: "[name].js",
+        libraryTarget: 'var',
+        library: "[name]"
     },
     module: {
         rules: [
@@ -76,7 +78,7 @@ module.exports = {
         }
     },
     // devtool: 'source-map', add for production ?
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     devServer: {
         hot: true,
         open: true,

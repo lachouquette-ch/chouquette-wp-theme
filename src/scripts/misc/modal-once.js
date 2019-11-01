@@ -1,4 +1,5 @@
-import Cookies from 'jscookie';
+import Cookies from 'js-cookie';
+import jQuery from 'jquery';
 
 class ModalOnce {
     constructor(cookieName, modalId) {
@@ -12,16 +13,16 @@ class ModalOnce {
 
     accept(duration = 800, expires = 365) {
         Cookies.set(this.cookieName, 1, {expires: expires});
-        $(this.modalId).hide(duration);
+        jQuery(this.modalId).hide(duration);
     }
 
     show(duration = 1200) {
         if (!this.isAccepted()) {
-            $(this.modalId).show(duration);
+            jQuery(this.modalId).show(duration);
         }
 
-        $(this.modalId).on('shown.bs.modal', function () {
-            $(`${this.modalId} input:first-of-type`).focus();
+        jQuery(this.modalId).on('shown.bs.modal', function () {
+            jQuery(`${this.modalId} input:first-of-type`).focus();
         })
     }
 
@@ -31,4 +32,6 @@ class ModalOnce {
 }
 
 export const confidentialityModal = new ModalOnce("confidentialityWarningAccepted", "#confidentialityWarning");
+window.confidentialityModal = confidentialityModal;
 export const newsletterModal = new ModalOnce("newsletterModalShown", "#newsletterModal");
+window.newsletterModal = newsletterModal;
