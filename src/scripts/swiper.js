@@ -1,9 +1,7 @@
 import Swiper from 'swiper/js/swiper.min'; // using src will fail on IE11
 
-/* 3rd parties intialization */
-$(function () {
-    // activate swiper
-    var swiper = new Swiper('.swiper-container', {
+export default function buildAndStartPostSwiper() {
+    return new Swiper('.swiper-container', {
         grabCursor: true,
         centeredSlides: true,
         loop: true,
@@ -38,4 +36,4 @@ $(function () {
             }
         }
     });
-});
+}

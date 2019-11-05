@@ -1,6 +1,10 @@
-require("../swiper");
-
 import Vue from 'vue';
+import $ from 'jquery';
+import buildAndStartPostSwiper from  "../swiper";
+
+$(function () {
+    const swiper = buildAndStartPostSwiper();
+});
 
 var app = new Vue({
     el: '#app',
