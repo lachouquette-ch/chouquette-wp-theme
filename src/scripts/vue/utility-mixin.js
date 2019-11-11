@@ -16,3 +16,5 @@ const VUE_UTILITY_MIXIN = {
         this.$_params = new URLSearchParams(queryParams);
     }
 }
+
+export default VUE_UTILITY_MIXIN;

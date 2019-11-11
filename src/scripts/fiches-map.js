@@ -1,37 +1,37 @@
-var map = null; // google map
+require('./partials/fiche-modals');
 
-function bootstrapMap() {
-    map = new google.maps.Map(document.getElementById('fichesMap'), {
-        zoom: 15,
-        clickableIcons: false,
-        disableDefaultUI: true,
-        fullscreenControl: true,
-        gestureHandling: 'greedy',
-        restriction: {
-            latLngBounds: SWITZERLAND_BOUNDS,
-            strictBounds: false,
-        },
-        styles: MAP_STYLES,
-        center: LAUSANNE_LOCALISATION,
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_TOP
-        }
-    });
+import Vue from 'vue';
+import $ from 'jquery';
+import axios from 'axios';
+import MarkerClusterer from '@google/markerclusterer';
 
-    google.maps.event.addListenerOnce(map, "tilesloaded", function (event) {
-        var legend = $("#fichesMapLegend").children(0);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend.get(0));
-        var reset = $("#fichesMapReset").children(0);
-        map.controls[google.maps.ControlPosition.LEFT_TOP].push(reset.get(0));
-    });
+import GoogleMaps, * as MapConst from './misc/map';
+import VUE_CRITERIA_MIXIN from "./vue/criteria-mixin";
+import VUE_UTILITY_MIXIN from "./vue/utility-mixin";
+import VUE_FICHE_MIXIN from "./vue/fiche-mixin";
 
-    app.addFichesToMap();
-};
+let map;
+$(function () {
+    let mapElement = document.getElementById('fichesMap');
 
-var app = new Vue({
+    GoogleMaps.loadGoogleMapsApi()
+        .then(googleMaps => {
+            map = GoogleMaps.createMap(googleMaps, mapElement);
+
+            google.maps.event.addListenerOnce(map, "tilesloaded", () => {
+                var legend = $("#fichesMapLegend").children(0);
+                map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend.get(0));
+                var reset = $("#fichesMapReset").children(0);
+                map.controls[google.maps.ControlPosition.LEFT_TOP].push(reset.get(0));
+            });
+
+            app.addFichesToMap();
+        });
+});
+
+const app = new Vue({
     el: '#app',
-    mixins: [VUE_CRITERIAS_MIXIN, VUE_UTILITY_MIXIN, VUE_FICHE_MIXIN],
+    mixins: [VUE_CRITERIA_MIXIN, VUE_UTILITY_MIXIN, VUE_FICHE_MIXIN],
     data: function () {
         return {
             category: null,
@@ -87,7 +87,7 @@ var app = new Vue({
                     app.bounds = new google.maps.LatLngBounds();
                     response.data.forEach(function (fiche) {
                         // create marker
-                        if (_.isEmpty(fiche.location)) {
+                        if ($.isEmptyObject(fiche.location)) {
                             $("#" + fiche.id + " button").hide();
                             return;
                         }
@@ -97,7 +97,7 @@ var app = new Vue({
                         app.infoWindows.set(fiche.id, infoWindow);
 
                         var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon});
-                        marker.defaultZIndex = fiche.chouquettise ? Z_INDEX_CHOUQUETTISE : Z_INDEX_DEFAULT;
+                        marker.defaultZIndex = fiche.chouquettise ? MapConst.Z_INDEX_CHOUQUETTISE : MapConst.Z_INDEX_DEFAULT;
                         marker.setZIndex(marker.defaultZIndex); // to start
                         app.markers.set(fiche.id, marker);
                         app.bounds.extend(marker.getPosition());
@@ -112,7 +112,7 @@ var app = new Vue({
                             // work on map
                             app.clearMap();
                             app.currentMarker = this;
-                            app.currentMarker.setZIndex(Z_INDEX_SELECTED);
+                            app.currentMarker.setZIndex(MapConst.Z_INDEX_SELECTED);
                             app.currentInfoWindow = infoWindow;
                             app.currentInfoWindow.open(map, app.currentMarker);
                         });
@@ -154,12 +154,12 @@ var app = new Vue({
 
             app.currentMarker = app.markers.get(ficheId);
             // zoom and center map
-            map.setZoom(ZOOM_LEVEL_ACTIVED);
+            map.setZoom(MapConst.ZOOM_LEVEL_ACTIVED);
             map.setCenter(app.currentMarker.getPosition());
             // set zIndex
-            app.currentMarker.setZIndex(Z_INDEX_SELECTED);
+            app.currentMarker.setZIndex(MapConst.Z_INDEX_SELECTED);
             // start animation
-            bounce(app.currentMarker);
+            GoogleMaps.bounceMarker(app.currentMarker);
 
             // close current infoWindow
             app.currentInfoWindow = app.infoWindows.get(ficheId);

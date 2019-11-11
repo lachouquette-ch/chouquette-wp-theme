@@ -26,7 +26,7 @@ appModule.module.rules.push(
     {
         "test": /\.scss$/,
         "use": [
-            isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
+            MiniCssExtractPlugin.loader,
             "css-loader",
             "sass-loader"
         ]
@@ -39,8 +39,9 @@ appModule.plugins.unshift(cleanWebpack);
 appModule.plugins.push(miniCssExtract);
 
 const indexModule = basicModuleConfiguration("index", "./src/scripts/index.js");
+const fichesMapModule = basicModuleConfiguration("fichesMap", "./src/scripts/fiches-map.js");
 
-module.exports = [appModule, indexModule];
+module.exports = [appModule, indexModule, fichesMapModule];
 
 /**
  * Build module configuration for webpack

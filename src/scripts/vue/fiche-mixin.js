@@ -1,3 +1,8 @@
+import $ from 'jquery';
+import Hammer from 'hammerjs';
+
+import {SWITZERLAND_BOUNDS, MAP_STYLES} from '../misc/map';
+
 const VUE_FICHE_MIXIN = {
     methods: {
         ficheFlip: function (element) {
@@ -90,3 +95,5 @@ const VUE_FICHE_MIXIN = {
         });
     }
 };
+
+export default VUE_FICHE_MIXIN;

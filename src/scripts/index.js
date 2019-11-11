@@ -6,7 +6,7 @@ $(function () {
     const swiper = buildAndStartPostSwiper();
 });
 
-var app = new Vue({
+const app = new Vue({
     el: '#app',
     data: function () {
         return {

@@ -1,3 +1,9 @@
+require("bootstrap");
+
+import $ from 'jquery';
+
+import ReCaptcha from '../misc/recaptcha';
+
 $('#ficheReportModal').on('show.bs.modal', function (e) {
     // get data-id attribute of the clicked element
     var ficheTitle = $(e.relatedTarget).data('fiche-title');
@@ -22,8 +28,8 @@ $('#ficheReportForm').submit(function (event) {
     // we stoped it
     event.preventDefault();
     // needs for recaptacha ready
-    grecaptcha.ready(function () {
-        grecaptcha.execute(CQ_RECAPTCHA_SITE, {action: 'ficheReport'}).then(function (token) {
+    ReCaptcha.load().then(recaptcha => {
+        recaptcha.execute('ficheReport').then((token) => {
             // add token to form
             $('#ficheReportForm').prepend('<input type="hidden" name="recaptcha-response" value="' + token + '">');
             // submit form now
@@ -36,8 +42,8 @@ $('#ficheContactForm').submit(function (event) {
     // we stoped it
     event.preventDefault();
     // needs for recaptacha ready
-    grecaptcha.ready(function () {
-        grecaptcha.execute(CQ_RECAPTCHA_SITE, {action: 'ficheContact'}).then(function (token) {
+    ReCaptcha.load().then(recaptcha => {
+        recaptcha.execute('ficheContact').then((token) => {
             // add token to form
             $('#ficheContactForm').prepend('<input type="hidden" name="recaptcha-response" value="' + token + '">');
             // submit form now

@@ -1,3 +1,5 @@
+import axios from 'axios/index';
+
 const VUE_CRITERIAS_MIXIN = {
     data: function () {
         return {
@@ -75,3 +77,5 @@ const VUE_CRITERIAS_MIXIN = {
         }
     }
 }
+
+export default VUE_CRITERIAS_MIXIN;

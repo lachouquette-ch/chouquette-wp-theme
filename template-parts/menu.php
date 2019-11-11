@@ -44,7 +44,3 @@
         </div>
     </div>
 </div>
-
-<?php
-
-wp_enqueue_script('menu', get_template_directory_uri() . '/src/scripts/partials/menu.js', null, CQ_THEME_VERSION, true);

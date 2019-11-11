@@ -44,9 +44,7 @@ define('CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne');
 define('CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne');
 
 // TODO should be in wp-config.php
-define('CQ_RECAPTCHA_SITE', '6LeGzZoUAAAAAMfFh3ybAsEBM_ocOUWbPnDRbg0U');
 define('CQ_RECAPTCHA_SECRET', '6LeGzZoUAAAAAF35rYtWWthF9Wb_WDB1QPJ3hYG4');
-define('CQ_GOOGLEMAPS_KEY', 'AIzaSyCL4mYyxlnp34tnC57WyrU_63BJhuRoeKI');
 
 define('CQ_FICHE_LOCATION', 'location');
 define('CQ_FICHE_PHONE', 'telephone');
@@ -164,19 +162,6 @@ if (!function_exists('chouquette_scripts')) :
     }
 endif;
 add_action('wp_enqueue_scripts', 'chouquette_scripts');
-
-/**
- * Hack to add async and defer for google maps
- */
-if (!function_exists('google_maps_add_async_defer_attribute')) :
-    function google_maps_add_async_defer_attribute($tag, $handle, $src)
-    {
-        if ('google-maps' !== $handle)
-            return $tag;
-        return "<script type='text/javascript' defer='defer' src='${src}'></script>";
-    }
-endif;
-add_filter('script_loader_tag', 'google_maps_add_async_defer_attribute', 10, 3);
 
 /**
  * PHPMailer configuration

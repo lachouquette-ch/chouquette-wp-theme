@@ -36,7 +36,6 @@
 
 <script>
     // Global variables
-    CQ_RECAPTCHA_SITE = "<?php echo CQ_RECAPTCHA_SITE ?>";
     CQ_CATEGORY_PAGING_NUMBER = <?php echo CQ_CATEGORY_PAGING_NUMBER ?>;
     CQ_IMG_PATH = "<?php echo get_template_directory_uri() . '/images' ?>"
 </script>

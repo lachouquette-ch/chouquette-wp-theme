@@ -31,6 +31,9 @@ $(function () {
     $("#newsletterModal").on("shown.bs.modal", function () {
         $(this).find("input:first-of-type").focus();
     })
+    $('#searchModal').on('shown.bs.modal', function () {
+        $('#searchModal input:first-of-type').focus();
+    })
 
     confidentialityOnce.asyncShow(() => confidentialityElt.show(1200));
     if (confidentialityOnce.hasBeenShown()) {
