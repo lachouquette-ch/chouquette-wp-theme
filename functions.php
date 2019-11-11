@@ -185,17 +185,13 @@ if (!function_exists('chouquette_scripts')) :
 
         wp_register_script('google-maps-custom', get_template_directory_uri() . '/src/scripts/google-maps.js', null, CQ_THEME_VERSION, true);
 
-        wp_register_script('confidentiality', get_template_directory_uri() . '/src/scripts/modal-once.js', ['vendor', 'cookie'], CQ_THEME_VERSION, true);
-
         /* scripts (mandatory) */
 
         wp_enqueue_script('jquery', "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js", null, null, true);
 
         wp_enqueue_script('fontawesome', "https://kit.fontawesome.com/bc0fb004f1.js", null, null, false);
 
-        wp_enqueue_script('vendor', get_template_directory_uri() . '/dist/vendor.js', null, CQ_THEME_VERSION, true);
-
-        wp_enqueue_script('script', get_template_directory_uri() . '/dist/app.js', CQ_THEME_VERSION, true);
+        wp_enqueue_script('script', get_template_directory_uri() . '/dist/main.js', CQ_THEME_VERSION, true);
 
         // https://codex.wordpress.org/Function_Reference/comment_reply_link
         if (is_singular() && comments_open() && get_option('thread_comments')) {

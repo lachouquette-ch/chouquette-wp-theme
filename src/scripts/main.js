@@ -1,14 +1,46 @@
-import {confidentialityModal, newsletterModal} from './misc/modal-once';
+// Polyfill (import once !)
+import "@babel/polyfill";
+
+/* Bootstrap imports */
+require("popper.js");
+require("lettering.js");
+require("bootstrap");
+
+/* CSS imports */
+require("../styles/main.scss");
+
+/* Run global app script */
+import ShowOnce from './misc/show-once';
 import $ from 'jquery';
 
-$(function () {
-    removeEmptyFieldsFromForms();
+const confidentialityOnce = new ShowOnce("confidentialityWarningAccepted");
+const newsletterOnce = new ShowOnce("newsletterModalShown");
 
+let confidentialityElt;
+export function closeConfidentiality() {
+    confidentialityElt.hide(800);
+    confidentialityOnce.setAsShown();
+}
+
+$(function () {
     // trigger modals
-    confidentialityModal.show();
-    if (confidentialityModal.isAccepted()) {
-        newsletterModal.show();
+    confidentialityElt = $("#confidentialityWarning");
+
+    // force focus for modal
+    const newsLetterElt = $("#newsletterModal");
+    $("#newsletterModal").on("shown.bs.modal", function () {
+        $(this).find("input:first-of-type").focus();
+    })
+
+    confidentialityOnce.asyncShow(() => confidentialityElt.show(1200));
+    if (confidentialityOnce.hasBeenShown()) {
+        newsletterOnce.asyncShow(() => {
+            newsLetterElt.modal("show");
+            newsletterOnce.setAsShown();
+        }, 1500);
     }
+
+    removeEmptyFieldsFromForms();
 })
 
 function removeEmptyFieldsFromForms() {
@@ -28,7 +60,7 @@ function removeEmptyFieldsFromForms() {
         $("form").find(":input").prop("disabled", false);
     }
 
-    jQuery(window).bind("onunload", cleanForm);
+    $(window).bind("onunload", cleanForm);
     // for BFCache navigator (Firefox/Safari)
-    jQuery(window).bind("pagehide", cleanForm);
+    $(window).bind("pagehide", cleanForm);
 }

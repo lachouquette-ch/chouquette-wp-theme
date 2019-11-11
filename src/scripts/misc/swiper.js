@@ -1,4 +1,4 @@
-import Swiper from 'swiper/js/swiper.min'; // using src will fail on IE11
+import Swiper from 'swiper';
 
 export default function buildAndStartPostSwiper() {
     return new Swiper('.swiper-container', {

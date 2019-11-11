@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import $ from 'jquery';
-import buildAndStartPostSwiper from  "../swiper";
+import buildAndStartPostSwiper from "./misc/swiper";
 
 $(function () {
     const swiper = buildAndStartPostSwiper();
