@@ -1,4 +1,4 @@
-import axios from 'axios/index';
+import axios from 'axios';
 
 const VUE_CRITERIAS_MIXIN = {
     data() {

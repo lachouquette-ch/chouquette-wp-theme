@@ -89,7 +89,7 @@ const app = new Vue({
                         // create marker
                         if ($.isEmptyObject(fiche.location)) {
                             $("#" + fiche.id + " button").hide();
-                            return;
+                            continue;
                         }
 
                         // create info window
