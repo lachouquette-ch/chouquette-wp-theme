@@ -51,7 +51,7 @@
                     <label class="mb-0">Horaires :</label>
                     <div class="dropup d-inline-block fiche-planning">
                         <a class="link-secondary link-no-decoration dropdown-toggle" href="#horaires" role="button" id="<?php echo 'planning' . $fiche->ID; ?>" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"><?php echo $raw_planning[date('N') - 1]; ?></i></a>
+                           aria-haspopup="true" aria-expanded="false"><?php echo $raw_planning[date('N') - 1]; ?></a>
                         <div class="dropdown-menu" aria-labelledby="<?php echo 'planning' . $fiche->ID; ?>">
                             <ul>
                                 <li><label class="mb-0">Lundi</label> <?php echo $raw_planning[0]; ?></li>

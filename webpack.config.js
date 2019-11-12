@@ -67,8 +67,14 @@ function basicModuleConfiguration(moduleEntryName, moduleEntryPath) {
             rules: [
                 {
                     test: /\.js$/,
-                    exclude: /node_modules/,
-                    loader: 'babel-loader'
+                    include: [
+                        path.resolve(__dirname, 'src'),
+                        path.resolve(__dirname, 'node_modules/@google/markerclusterer'),
+                        path.resolve(__dirname, 'node_modules/load-google-maps-api')
+                    ],
+                    use: {
+                        loader: 'babel-loader'
+                    }
                 },
                 {
                     "enforce": "pre",
