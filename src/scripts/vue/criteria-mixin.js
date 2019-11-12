@@ -1,35 +1,33 @@
 import axios from 'axios/index';
 
 const VUE_CRITERIAS_MIXIN = {
-    data: function () {
+    data() {
         return {
             criterias: [],
         }
     },
     computed: {
         // for select only (mobile)
-        criteriaCount: function () {
-            var count = 0;
-            this.criterias.forEach(function (criteria) {
+        criteriaCount() {
+            let count = 0;
+            for (const criteria of this.criterias) {
                 count += criteria.selectedTerms.length;
-            })
+            }
             return count;
         },
         // for checkbox only (desktop)
-        checkedCount: function () {
-            var count = 0;
-            this.criterias.forEach(function (criteria) {
-                var checkedTerms = criteria.terms.filter(function (term) {
-                    return term.checked;
-                });
+        checkedCount() {
+            let count = 0;
+            for (const criteria of this.criterias) {
+                let checkedTerms = criteria.terms.filter(term => term.checked);
                 count += checkedTerms.length;
-            })
+            }
             return count;
         }
     },
     methods: {
         // get text for critiera button
-        criteriaLabel: function (selectedCriterias) {
+        criteriaLabel(selectedCriterias) {
             if (selectedCriterias > 1) {
                 return selectedCriterias + " critères sélectionnés";
             } else if (selectedCriterias == 1) {
@@ -39,7 +37,7 @@ const VUE_CRITERIAS_MIXIN = {
             }
         },
         // get criterias from remote based on given category
-        refreshCriterias: function (category) {
+        refreshCriterias(category) {
             var self = this;
             axios.get('/wp-json/cq/v1/category/taxonomy?cat=' + category)
                 .then(function (response) {
@@ -56,23 +54,21 @@ const VUE_CRITERIAS_MIXIN = {
                 })
         },
         // uncheck add criterias
-        resetCriterias: function () {
-            this.criterias.forEach(function (taxonomy) {
+        resetCriterias() {
+            for (const taxonomy of this.criterias) {
                 taxonomy.selectedTerms = [];
-                taxonomy.terms.forEach(function (term) {
+                for (let term of taxonomy.terms) {
                     term.checked = false;
-                });
-            })
+                }
+            }
         },
         // properly remove uncheck term
-        toggleCheckCritera: function (term) {
+        toggleCheckCritera(term) {
             if (!term.checked) {
-                this.criterias.forEach(function (taxonomy) {
-                    taxonomy.selectedTerms = taxonomy.selectedTerms.filter(function (element) {
-                        return element != term.slug;
-                    });
-                });
-                console.log("unchecked");
+                for (const taxonomy of this.criterias) {
+                    taxonomy.selectedTerms = taxonomy.selectedTerms.filter(element => element != term.slug);
+                }
+                ;
             }
         }
     }

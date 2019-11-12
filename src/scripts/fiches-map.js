@@ -32,7 +32,7 @@ $(function () {
 const app = new Vue({
     el: '#app',
     mixins: [VUE_CRITERIA_MIXIN, VUE_UTILITY_MIXIN, VUE_FICHE_MIXIN],
-    data: function () {
+    data() {
         return {
             category: null,
             location: null,
@@ -45,11 +45,11 @@ const app = new Vue({
         }
     },
     methods: {
-        updateCriterias: function (event) {
+        updateCriterias(event) {
             var value = event.target.value;
             this.refreshCriterias(value ? value : this.category);
         },
-        resetMap: function () {
+        resetMap() {
             this.clearMap();
 
             if (app.markers.size > 1) {
@@ -62,14 +62,14 @@ const app = new Vue({
                 app.currentInfoWindow.open(map, app.currentMarker);
             }
         },
-        toggleMap: function () {
+        toggleMap() {
             $(".category-map").toggleClass("open");
             $(".category-map > button").attr('aria-expanded', function (i, attr) {
                 return attr == 'true' ? 'false' : 'true'
             });
         },
         // stop current animation and close current info window
-        clearMap: function () {
+        clearMap() {
             if (app.currentMarker) {
                 // stop animation
                 app.currentMarker.setAnimation(null);
@@ -81,11 +81,11 @@ const app = new Vue({
             // reset index
         },
         // get fiches from URL and add it to map
-        addFichesToMap: function () {
+        addFichesToMap() {
             axios.get(this.ficheApiURL + location.search)
                 .then(function (response) {
                     app.bounds = new google.maps.LatLngBounds();
-                    response.data.forEach(function (fiche) {
+                    for (const fiche of response.data) {
                         // create marker
                         if ($.isEmptyObject(fiche.location)) {
                             $("#" + fiche.id + " button").hide();
@@ -116,7 +116,7 @@ const app = new Vue({
                             app.currentInfoWindow = infoWindow;
                             app.currentInfoWindow.open(map, app.currentMarker);
                         });
-                    });
+                    }
 
                     // add marker clusterer
                     new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: CQ_IMG_PATH + '/maps_cluster/m'});
@@ -127,7 +127,7 @@ const app = new Vue({
                 });
         },
         // highlight fiche on fiches list
-        highlightFiche: function (ficheId) {
+        highlightFiche(ficheId) {
             // only for mobile
             if (!app._colEnabled() && $("#fichesMap").is(":visible")) { // must be on mobile view
                 this.toggleMap();
@@ -137,12 +137,12 @@ const app = new Vue({
             $("article.fiche").removeClass("highlight");
 
             // goto fiche
-            var elmnt = document.getElementById('target' + ficheId);
+            const elmnt = document.getElementById('target' + ficheId);
             elmnt.scrollIntoView(true, {behavior: "smooth"});
             elmnt.parentElement.classList.add("highlight");
         },
         // locate on fiche on the map, display info window and activate animation
-        locateFiche: function (ficheId) {
+        locateFiche(ficheId) {
             this.clearMap();
 
             if (!app._colEnabled() && !$("#fichesMap").hasClass("open")) { // must be on mobile view
@@ -166,7 +166,7 @@ const app = new Vue({
             app.currentInfoWindow.open(map, app.currentMarker);
         }
     },
-    mounted: function () {
+    mounted() {
         // get selections
         this.location = document.getElementById("search-loc").value;
         this.category = document.getElementById("search-cat").value;

@@ -5,7 +5,7 @@ import {SWITZERLAND_BOUNDS, MAP_STYLES} from '../misc/map';
 
 const VUE_FICHE_MIXIN = {
     methods: {
-        ficheFlip: function (element) {
+        ficheFlip(element) {
             var fiche;
             if ($(element).hasClass('fiche')) {
                 fiche = $(element);
@@ -29,7 +29,7 @@ const VUE_FICHE_MIXIN = {
                 this.bootstrapFicheMap(fiche);
             }
         },
-        bootstrapFicheMap: function (ficheElement) {
+        bootstrapFicheMap(ficheElement) {
             // get map container
             const mapContainer = ficheElement.find(".fiche-map");
 
@@ -42,7 +42,7 @@ const VUE_FICHE_MIXIN = {
             const ficheIcon = ficheElement.attr("data-fiche-icon");
 
             if (fichePosition) {
-                var ficheMap = new google.maps.Map(mapContainer.get(0), {
+                const ficheMap = new google.maps.Map(mapContainer.get(0), {
                     center: fichePosition,
                     clickableIcons: false,
                     disableDefaultUI: true,
@@ -71,10 +71,10 @@ const VUE_FICHE_MIXIN = {
             }
         }
     },
-    mounted: function () {
+    mounted() {
         // handle fiche heights
         var self = this;
-        $('.fiche').each(function (index, element) {
+        $('.fiche').each((index, element) => {
             // compute each fiche height
             var frontHeight = $(element).find('.fiche-front .card').height();
             var backHeight = $(element).find('.fiche-back .card').height();
