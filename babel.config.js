@@ -5,7 +5,9 @@ module.exports = {
       {
         "targets": {
           "ie": "11"
-        }
+        },
+        "useBuiltIns": "entry",
+        "corejs": 3
       }
     ]
   ]

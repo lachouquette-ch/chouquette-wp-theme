@@ -1,5 +1,6 @@
-// Polyfill (import once !)
-import "@babel/polyfill";
+// Import polyfills (import once !)
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 /* Bootstrap imports */
 require("popper.js");
