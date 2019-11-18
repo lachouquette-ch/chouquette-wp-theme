@@ -56,6 +56,6 @@ get_template_part('template-parts/fiche-modals');
     </div>
 <?php
 
-wp_enqueue_script('search', get_template_directory_uri() . '/src/scripts/partials/search.js', ['vue', 'google-maps', 'hammer'], CQ_THEME_VERSION, true);
+wp_enqueue_script('search', get_template_directory_uri() . '/dist/search.js', null, CQ_THEME_VERSION, true);
 
 get_footer();

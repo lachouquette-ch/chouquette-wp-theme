@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Hammer from 'hammerjs';
 
-import {SWITZERLAND_BOUNDS, MAP_STYLES} from '../misc/map';
+import GoogleMaps, {SWITZERLAND_BOUNDS, MAP_STYLES} from '../misc/map';
 
 const VUE_FICHE_MIXIN = {
     methods: {
@@ -42,32 +42,25 @@ const VUE_FICHE_MIXIN = {
             const ficheIcon = ficheElement.attr("data-fiche-icon");
 
             if (fichePosition) {
-                const ficheMap = new google.maps.Map(mapContainer.get(0), {
-                    center: fichePosition,
-                    clickableIcons: false,
-                    disableDefaultUI: true,
-                    gestureHandling: "none",
-                    restriction: {
-                        latLngBounds: SWITZERLAND_BOUNDS,
-                        strictBounds: false,
-                    },
-                    scaleControl: true,
-                    styles: MAP_STYLES,
-                    zoom: 18,
-                    zoomControl: true,
-                    zoomControlOptions: {
-                        position: google.maps.ControlPosition.RIGHT_TOP
-                    }
-                });
-                // add marker
-                new google.maps.Marker({
-                    animation: google.maps.Animation.DROP,
-                    clickable: false,
-                    icon: ficheIcon,
-                    map: ficheMap,
-                    position: fichePosition,
-                    title: ficheName,
-                });
+                GoogleMaps.loadGoogleMapsApi()
+                    .then(googleMaps => {
+                        const ficheMap = GoogleMaps.createMap(googleMaps, mapContainer.get(0));
+                        ficheMap.setOptions({
+                            gestureHandling: "none",
+                            fullscreenControl: false
+                        });
+
+                        // add marker
+                        const ficheMarker = new google.maps.Marker({
+                            animation: google.maps.Animation.DROP,
+                            clickable: false,
+                            icon: ficheIcon,
+                            map: ficheMap,
+                            position: fichePosition,
+                            title: ficheName,
+                        });
+                        ficheMap.setCenter(ficheMarker.getPosition());
+                    });
             }
         }
     },

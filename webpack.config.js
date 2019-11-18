@@ -41,8 +41,9 @@ appModule.plugins.push(miniCssExtract);
 const indexModule = basicModuleConfiguration("index", "./src/scripts/index.js");
 const fichesMapModule = basicModuleConfiguration("fichesMap", "./src/scripts/fiches-map.js");
 const categoryServicesModule = basicModuleConfiguration("categoryServices", "./src/scripts/category-services.js");
+const searchModule = basicModuleConfiguration("search", "./src/scripts/search.js");
 
-module.exports = [appModule, indexModule, fichesMapModule, categoryServicesModule];
+module.exports = [appModule, indexModule, fichesMapModule, categoryServicesModule, searchModule];
 
 /**
  * Build module configuration for webpack
