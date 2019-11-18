@@ -1,8 +1,6 @@
 const VUE_UTILITY_MIXIN = {
-    data() {
-        return {
-            $_params: null
-        }
+    data: {
+        $_params: null
     },
     methods: {
         // hack to know if on mobile or not

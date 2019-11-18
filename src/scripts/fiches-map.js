@@ -32,17 +32,15 @@ $(function () {
 const app = new Vue({
     el: '#app',
     mixins: [VUE_CRITERIA_MIXIN, VUE_UTILITY_MIXIN, VUE_FICHE_MIXIN],
-    data() {
-        return {
-            category: null,
-            location: null,
-            ficheApiURL: '',
-            currentMarker: null,
-            markers: new Map(),
-            currentInfoWindow: null,
-            infoWindows: new Map(),
-            bounds: null
-        }
+    data: {
+        category: null,
+        location: null,
+        ficheApiURL: '',
+        currentMarker: null,
+        markers: new Map(),
+        currentInfoWindow: null,
+        infoWindows: new Map(),
+        bounds: null
     },
     methods: {
         updateCriterias(event) {

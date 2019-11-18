@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 const VUE_CRITERIAS_MIXIN = {
-    data() {
-        return {
-            criterias: [],
-        }
+    data: {
+        criterias: [],
     },
     computed: {
         // for select only (mobile)
