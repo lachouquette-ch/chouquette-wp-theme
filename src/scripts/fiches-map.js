@@ -2,7 +2,6 @@ require('./partials/fiche-modals');
 
 import Vue from 'vue';
 import $ from 'jquery';
-import axios from 'axios';
 import MarkerClusterer from '@google/markerclusterer';
 
 import GoogleMaps, * as MapConst from './misc/map';
@@ -80,10 +79,11 @@ const app = new Vue({
         },
         // get fiches from URL and add it to map
         addFichesToMap() {
-            axios.get(this.ficheApiURL + location.search)
-                .then(function (response) {
+            fetch(this.ficheApiURL + location.search)
+                .then(response => response.json())
+                .then(fiches => {
                     app.bounds = new google.maps.LatLngBounds();
-                    for (const fiche of response.data) {
+                    for (const fiche of fiches) {
                         // create marker
                         if ($.isEmptyObject(fiche.location)) {
                             $("#" + fiche.id + " button").hide();
@@ -119,10 +119,7 @@ const app = new Vue({
                     // add marker clusterer
                     new MarkerClusterer(map, Array.from(app.markers.values()), {imagePath: CQ_IMG_PATH + '/maps_cluster/m'});
                 })
-                .then(function () {
-                    // reset
-                    app.resetMap();
-                });
+                .then(() => app.resetMap());
         },
         // highlight fiche on fiches list
         highlightFiche(ficheId) {

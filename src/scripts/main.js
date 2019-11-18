@@ -1,6 +1,7 @@
 // Import polyfills (import once !)
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import "whatwg-fetch";
 
 /* Bootstrap imports */
 require("popper.js");

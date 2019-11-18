@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const VUE_CRITERIAS_MIXIN = {
     data: {
         criterias: [],
@@ -37,9 +35,10 @@ const VUE_CRITERIAS_MIXIN = {
         // get criterias from remote based on given category
         refreshCriterias(category) {
             var self = this;
-            axios.get('/wp-json/cq/v1/category/taxonomy?cat=' + category)
-                .then(function (response) {
-                    response.data.forEach(function (taxonomy) {
+            fetch('/wp-json/cq/v1/category/taxonomy?cat=' + category)
+                .then(response => response.json())
+                .then(taxonomies => {
+                    for (const taxonomy of taxonomies) {
                         taxonomy.selectedTerms = [];
                         taxonomy.terms.forEach(function (term) {
                             if (self.$_params.getAll(taxonomy.name).includes(term.slug)) {
@@ -47,8 +46,8 @@ const VUE_CRITERIAS_MIXIN = {
                                 term.checked = true;
                             }
                         });
-                    });
-                    self.criterias = response.data;
+                    }
+                    self.criterias = taxonomies;
                 })
         },
         // uncheck add criterias
