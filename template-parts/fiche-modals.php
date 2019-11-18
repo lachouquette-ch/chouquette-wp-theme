@@ -10,11 +10,20 @@
             </div>
             <div class="modal-body">
                 <form id="ficheReportForm" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                    <label>Une erreur, une remarque, une suggestion sur la fiche ? Merci de nous en faire part <i class="far fa-smile"></i></label>
                     <div class="form-group">
-                        <label for="ficheReportText">Une erreur, une remarque, une suggestion sur la fiche ? Merci de nous en faire part <i class="far fa-smile"></i></label>
-                        <textarea class="form-control" name="report-text" id="ficheReportText" rows="10" required></textarea>
+                        <label for="ficheReportName">Ton prénom / nom *</label>
+                        <input class="form-control" id="ficheReportName" name="report-name" required>
                     </div>
-                    <input type="hidden" name="action" value="fiche_report"> <!-- trigger fiche_contact -->
+                    <div class="form-group">
+                        <label for="ficheReportMail">Ton mail *</label>
+                        <input type="email" class="form-control" id="ficheReportMail" name="report-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ficheReportText">Ton commentaire *</label>
+                        <textarea class="form-control" name="report-text" id="ficheReportText" rows="8" required></textarea>
+                    </div>
+                    <input type="hidden" name="action" value="fiche_report"> <!-- trigger fiche_report -->
                     <input id="ficheReportModalId" type="hidden" name="fiche-id" value="">
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>

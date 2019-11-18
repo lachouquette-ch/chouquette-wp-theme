@@ -140,6 +140,16 @@
   }
 }
 
+// NEW STYLE (using only gutenberg without formating in backoffice)
+
+.cq-single-post-content-text {
+  .wp-block-image {
+    margin: 1.5rem auto;
+  }
+}
+
+// OLD STYLE (previous posts trying to format in backoffice)
+
 .cq-single-post-content-text {
 
   /* Customs */
