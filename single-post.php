@@ -135,6 +135,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
-wp_enqueue_script('single-post', get_template_directory_uri() . '/src/scripts/partials/single-post.js', ['recaptcha', 'swiper-custom', 'vue', 'google-maps', 'hammer'], CQ_THEME_VERSION, true);
+wp_enqueue_script('single-post', get_template_directory_uri() . '/dist/singlePost.js', null, CQ_THEME_VERSION, true);
 
 get_footer();
