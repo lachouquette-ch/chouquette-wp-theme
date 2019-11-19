@@ -8,28 +8,26 @@ $(function () {
 
 const app = new Vue({
     el: '#app',
-    data: function () {
-        return {
-            loc: '',
-            cat: '',
-            search: ''
-        }
+    data: {
+        loc: '',
+        cat: '',
+        search: ''
     },
     computed: {
         // helper to create proper grid columns
-        action: function () {
+        action() {
             if (this.cat) {
                 return 'category/' + this.cat;
             } else if (this.loc) {
                 return 'location/' + this.loc;
             }
         },
-        searchName: function () {
+        searchName() {
             return (this.cat || this.loc) ? 'search' : 's';
         }
     },
     methods: {
-        doSearch: function () {
+        doSearch() {
             $("select[name='cat']").attr('disabled', true);
         },
     }
