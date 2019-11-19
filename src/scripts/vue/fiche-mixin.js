@@ -1,3 +1,5 @@
+require('../partials/fiche-modals');
+
 import $ from 'jquery';
 import Hammer from 'hammerjs';
 

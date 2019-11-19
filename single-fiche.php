@@ -43,6 +43,6 @@ while (have_posts()):
 <?php
 endwhile;
 
-wp_enqueue_script('single-fiche', get_template_directory_uri() . '/src/scripts/partials/single-fiche.js', ['recaptcha', 'swiper-custom', 'vue', 'google-maps', 'hammer'], CQ_THEME_VERSION, true);
+wp_enqueue_script('single-fiche', get_template_directory_uri() . '/dist/singleFiche.js', null, CQ_THEME_VERSION, true);
 
 get_footer();

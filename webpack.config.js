@@ -42,8 +42,9 @@ const indexModule = basicModuleConfiguration("index", "./src/scripts/index.js");
 const fichesMapModule = basicModuleConfiguration("fichesMap", "./src/scripts/fiches-map.js");
 const categoryServicesModule = basicModuleConfiguration("categoryServices", "./src/scripts/category-services.js");
 const searchModule = basicModuleConfiguration("search", "./src/scripts/search.js");
+const singleFicheModule = basicModuleConfiguration("singleFiche", "./src/scripts/single-fiche.js");
 
-module.exports = [appModule, indexModule, fichesMapModule, categoryServicesModule, searchModule];
+module.exports = [appModule, indexModule, fichesMapModule, categoryServicesModule, searchModule, singleFicheModule];
 
 /**
  * Build module configuration for webpack

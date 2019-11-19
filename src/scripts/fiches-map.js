@@ -1,5 +1,3 @@
-require('./partials/fiche-modals');
-
 import Vue from 'vue';
 import $ from 'jquery';
 import MarkerClusterer from '@google/markerclusterer';
