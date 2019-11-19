@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'heading_pro_thin';
-  src: url('/wp-content/themes/chouquette/fonts/heading-pro-thin.woff2') format('woff2'),
-  url('/wp-content/themes/chouquette/fonts/heading-pro-thin.woff') format('woff');
+  src: url('#{$theme-baseurl}/fonts/heading-pro-thin.woff2') format('woff2'),
+  url('#{$theme-baseurl}/fonts/heading-pro-thin.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 
@@ -9,16 +9,16 @@
 
 @font-face {
   font-family: 'heading_pro_light';
-  src: url('/wp-content/themes/chouquette/fonts/heading-pro-light.woff2') format('woff2'),
-  url('/wp-content/themes/chouquette/fonts/heading-pro-light.woff') format('woff');
+  src: url('#{$theme-baseurl}/fonts/heading-pro-light.woff2') format('woff2'),
+  url('#{$theme-baseurl}/fonts/heading-pro-light.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'heading_pro_bold';
-  src: url('/wp-content/themes/chouquette/fonts/heading-pro-bold.woff2') format('woff2'),
-  url('/wp-content/themes/chouquette/fonts/heading-pro-bold.woff') format('woff');
+  src: url('#{$theme-baseurl}/fonts/heading-pro-bold.woff2') format('woff2'),
+  url('#{$theme-baseurl}/fonts/heading-pro-bold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
