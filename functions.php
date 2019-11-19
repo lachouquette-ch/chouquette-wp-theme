@@ -147,12 +147,8 @@ add_action('after_setup_theme', 'chouquette_setup');
 if (!function_exists('chouquette_scripts')) :
     function chouquette_scripts()
     {
-        /* styles */
 
-        wp_enqueue_style('style', get_template_directory_uri() . '/dist/style.css', null, CQ_THEME_VERSION, 'all');
-
-        wp_enqueue_script('fontawesome', "https://kit.fontawesome.com/bc0fb004f1.js", null, null, false);
-
+        // default javascript function
         wp_enqueue_script('script', get_template_directory_uri() . '/dist/main.js', CQ_THEME_VERSION, true);
 
         // https://codex.wordpress.org/Function_Reference/comment_reply_link

@@ -18,8 +18,8 @@ const autoprefixer = require('autoprefixer');
 const appModule = basicModuleConfiguration("main", "./src/scripts/main.js");
 appModule.module.rules.push(
     {
-        "test": /\.scss$/,
-        "use": [
+        test: /\.scss$/,
+        use: [
             "style-loader",
             "css-loader",
             "sass-loader"
@@ -27,10 +27,17 @@ appModule.module.rules.push(
     },
     {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=fonts/[name].[ext]'
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                    name: "/fonts/[name].[ext]",
+                    publicPath: "/wp-content/themes/chouquette/dist"
+                }
+            }
+        ]
     });
 appModule.plugins.unshift(cleanWebpack);
-appModule.plugins.push(miniCssExtract);
 
 const indexModule = basicModuleConfiguration("index", "./src/scripts/index.js");
 const fichesMapModule = basicModuleConfiguration("fichesMap", "./src/scripts/fiches-map.js");
@@ -75,10 +82,10 @@ function basicModuleConfiguration(moduleEntryName, moduleEntryPath) {
                     }
                 },
                 {
-                    "enforce": "pre",
-                    "test": /\.(js|jsx)$/,
-                    "exclude": /node_modules/,
-                    "use": "eslint-loader"
+                    test: /\.(js|jsx)$/,
+                    enforce: "pre",
+                    exclude: /node_modules/,
+                    use: "eslint-loader"
                 }
             ]
         },

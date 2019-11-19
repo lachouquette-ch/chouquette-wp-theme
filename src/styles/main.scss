@@ -1,14 +1,25 @@
-// Variables and Mixins
+/* Variables and Mixins */
+
 @import "modules/variables";
 @import "modules/helpers";
 
-// Third party style
+/* Third party style */
+
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Lobster+Two|Shadows+Into+Light+Two|Lato&display=swap');
+// Fontawesome
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts" !default;
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+
+// Swiper
 @import "~swiper/swiper.scss";
 @import "~swiper/components/navigation/navigation.scss";
 
-// Components
+/* Components */
+
 @import "partials/base";
 @import "partials/menu";
 @import "partials/footer";
