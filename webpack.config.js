@@ -12,12 +12,6 @@ const webpackProvide = new webpack.ProvidePlugin({
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const cleanWebpack = new CleanWebpackPlugin(['dist']);
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const miniCssExtract = new MiniCssExtractPlugin({
-    filename: "style.css",
-    chunkFilename: "[id].css",
-});
-
 const autoprefixer = require('autoprefixer');
 
 // module build
@@ -26,7 +20,7 @@ appModule.module.rules.push(
     {
         "test": /\.scss$/,
         "use": [
-            MiniCssExtractPlugin.loader,
+            "style-loader",
             "css-loader",
             "sass-loader"
         ]
@@ -95,7 +89,7 @@ function basicModuleConfiguration(moduleEntryName, moduleEntryPath) {
         resolve: {
             alias: {
                 vue: 'vue/dist/vue.esm.js',
-                swiper: 'swiper/js/swiper.min.js' // using src will fail on IE11
+                swiperjs: 'swiper/js/swiper.min.js' // using src will fail on IE11
             }
         }
     }

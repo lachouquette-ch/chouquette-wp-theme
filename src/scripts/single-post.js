@@ -3,6 +3,11 @@ import $ from 'jquery';
 
 import VUE_UTILITY_MIXIN from "./vue/utility-mixin";
 import VUE_FICHE_MIXIN from "./vue/fiche-mixin";
+import buildAndStartSwiper from "./misc/swiper";
+
+$(function () {
+    const swiper = buildAndStartSwiper();
+});
 
 const app = new Vue({
     el: '#app',

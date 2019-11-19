@@ -1,6 +1,6 @@
-import Swiper from 'swiper';
+import Swiper from 'swiperjs';
 
-export default function buildAndStartPostSwiper() {
+export default function buildAndStartSwiper() {
     return new Swiper('.swiper-container', {
         grabCursor: true,
         centeredSlides: true,
