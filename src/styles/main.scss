@@ -2,9 +2,11 @@
 @import "modules/variables";
 @import "modules/helpers";
 
+// Third party style
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Lobster+Two|Shadows+Into+Light+Two|Lato&display=swap');
 @import "~swiper/swiper.scss";
+@import "~swiper/components/navigation/navigation.scss";
 
 // Components
 @import "partials/base";
