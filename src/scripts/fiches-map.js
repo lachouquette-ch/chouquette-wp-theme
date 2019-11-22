@@ -89,17 +89,17 @@ const app = new Vue({
                         }
 
                         // create info window
-                        var infoWindow = new google.maps.InfoWindow({content: fiche.infoWindow});
+                        const infoWindow = new google.maps.InfoWindow({content: fiche.infoWindow});
                         app.infoWindows.set(fiche.id, infoWindow);
 
-                        var marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon});
+                        const marker = new google.maps.Marker({position: fiche.location, icon: fiche.icon});
                         marker.defaultZIndex = fiche.chouquettise ? MapConst.Z_INDEX_CHOUQUETTISE : MapConst.Z_INDEX_DEFAULT;
                         marker.setZIndex(marker.defaultZIndex); // to start
                         app.markers.set(fiche.id, marker);
                         app.bounds.extend(marker.getPosition());
 
                         // action on marker
-                        marker.addListener('click', function () {
+                        marker.addListener('click', () => {
                             // only for column display
                             if (app._colEnabled()) {
                                 app.highlightFiche(fiche.id);
@@ -107,7 +107,7 @@ const app = new Vue({
 
                             // work on map
                             app.clearMap();
-                            app.currentMarker = this;
+                            app.currentMarker = marker;
                             app.currentMarker.setZIndex(MapConst.Z_INDEX_SELECTED);
                             app.currentInfoWindow = infoWindow;
                             app.currentInfoWindow.open(map, app.currentMarker);
