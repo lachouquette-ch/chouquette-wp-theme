@@ -1,3 +1,8 @@
+/* Bootstrap imports (once) */
+import 'popper.js';
+import 'lettering.js';
+import 'bootstrap';
+
 import Vue from 'vue';
 
 import VUE_UTILITY_MIXIN from "./vue/utility-mixin";

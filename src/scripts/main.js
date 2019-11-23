@@ -6,11 +6,6 @@ import "whatwg-fetch";
 import ShowOnce from './misc/show-once';
 import $ from 'jquery';
 
-/* Bootstrap imports (once) */
-require("popper.js");
-require("lettering.js");
-require("bootstrap");
-
 /* CSS imports */
 require("../styles/main.scss");
 

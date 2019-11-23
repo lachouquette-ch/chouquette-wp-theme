@@ -4,8 +4,8 @@ import ReCaptcha from '../misc/recaptcha';
 
 $('#ficheReportModal').on('show.bs.modal', element => {
     // get data-id attribute of the clicked element
-    var ficheTitle = $(element.relatedTarget).data('fiche-title');
-    var ficheId = $(element.relatedTarget).data('fiche-id');
+    let ficheTitle = $(element.relatedTarget).data('fiche-title');
+    let ficheId = $(element.relatedTarget).data('fiche-id');
 
     // populate modal
     $(element.currentTarget).find('#ficheReportModalTitle').text(ficheTitle);
@@ -14,8 +14,8 @@ $('#ficheReportModal').on('show.bs.modal', element => {
 
 $('#ficheContactModal').on('show.bs.modal', element => {
     // get data-id attribute of the clicked element
-    var ficheTitle = $(element.relatedTarget).data('fiche-title');
-    var ficheId = $(element.relatedTarget).data('fiche-id');
+    let ficheTitle = $(element.relatedTarget).data('fiche-title');
+    let ficheId = $(element.relatedTarget).data('fiche-id');
 
     // populate modal
     $(element.currentTarget).find('#ficheContactModalTitle').text(ficheTitle);

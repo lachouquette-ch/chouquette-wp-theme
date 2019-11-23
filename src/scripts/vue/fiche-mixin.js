@@ -1,9 +1,9 @@
-require('../partials/fiche-modals');
+import '../partials/fiche-modals';
 
 import $ from 'jquery';
 import Hammer from 'hammerjs';
 
-import GoogleMaps, {SWITZERLAND_BOUNDS, MAP_STYLES} from '../misc/map';
+import GoogleMaps from '../misc/map';
 
 const VUE_FICHE_MIXIN = {
     methods: {
