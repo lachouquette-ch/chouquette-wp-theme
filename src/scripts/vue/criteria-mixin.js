@@ -65,10 +65,9 @@ const VUE_CRITERIAS_MIXIN = {
                 for (const taxonomy of this.criterias) {
                     taxonomy.selectedTerms = taxonomy.selectedTerms.filter(element => element != term.slug);
                 }
-                ;
             }
         }
     }
-}
+};
 
 export default VUE_CRITERIAS_MIXIN;

@@ -13,6 +13,6 @@ const VUE_UTILITY_MIXIN = {
         var queryParams = location.search.replace(/%5B%5D/g, ''); // remove []
         this.$_params = new URLSearchParams(queryParams);
     }
-}
+};
 
 export default VUE_UTILITY_MIXIN;

@@ -25,7 +25,7 @@ if (!function_exists('chouquette_posts_fiche_contact')) :
                             chouquette_ref_redirect('failure', "Problème de validation de ton message (recaptcha). Merci de réessayer plus tard.");
                         }
                     );
-                } catch (\NoRecaptchaException $e) {
+                } catch (NoRecaptchaException $e) {
                     chouquette_ref_redirect('failure', "Le Recaptcha n'a pas été envoyé.");
                 }
             }
@@ -73,7 +73,7 @@ if (!function_exists('chouquette_posts_contact')) :
                         chouquette_ref_redirect('failure', "Problème de validation de ton message (recaptcha). Merci de réessayer plus tard.");
                     }
                 );
-            } catch (\NoRecaptchaException $e) {
+            } catch (NoRecaptchaException $e) {
                 chouquette_ref_redirect('failure', "Le Recaptcha n'a pas été envoyé.");
             }
         }
@@ -113,7 +113,7 @@ if (!function_exists('chouquette_posts_fiche_report')) :
                         chouquette_ref_redirect('failure', "Problème de validation de ton message (recaptcha). Merci de réessayer plus tard.");
                     }
                 );
-            } catch (\NoRecaptchaException $e) {
+            } catch (NoRecaptchaException $e) {
                 chouquette_ref_redirect('failure', "Le Recaptcha n'a pas été envoyé.");
             }
         }
