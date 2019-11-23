@@ -2,18 +2,17 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "whatwg-fetch";
+/* Run global app script */
+import ShowOnce from './misc/show-once';
+import $ from 'jquery';
 
-/* Bootstrap imports */
+/* Bootstrap imports (once) */
 require("popper.js");
 require("lettering.js");
 require("bootstrap");
 
 /* CSS imports */
 require("../styles/main.scss");
-
-/* Run global app script */
-import ShowOnce from './misc/show-once';
-import $ from 'jquery';
 
 const confidentialityOnce = new ShowOnce("confidentialityWarningAccepted");
 const newsletterOnce = new ShowOnce("newsletterModalShown");

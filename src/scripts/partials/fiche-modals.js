@@ -1,5 +1,3 @@
-require("bootstrap");
-
 import $ from 'jquery';
 
 import ReCaptcha from '../misc/recaptcha';
