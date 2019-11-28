@@ -69,7 +69,7 @@ if (!function_exists('chouquette_mail')) :
     {
         /* Message body */
         $body_template = <<<EOT
-            <html>
+            <html lang="fr">
             <head>
                 <title>%s</title>
             </head>
@@ -78,7 +78,7 @@ if (!function_exists('chouquette_mail')) :
                 <p><em>Cet email vous a été envoyé depuis </em><a href="%s">%s</a></p>
                 <div style="text-align: center">
                     <a href="%s" name="%s">
-                    <img src="%s">
+                    <img src="%s" alt="%s" />
                     <p>%s</p>
                     </a>
                 </div>
@@ -89,10 +89,12 @@ EOT;
         $custom_logo_id = get_theme_mod('custom_logo');
         $logo = wp_get_attachment_image_src($custom_logo_id, 'thumbnail');
         $body = sprintf($body_template,
-            $subject, nl2br(stripslashes($message)),
+            $subject,
+            nl2br(stripslashes($message)),
             home_url('/'), home_url('/'),
             home_url('/'), get_bloginfo('name'),
-            $logo[0], get_bloginfo('description'));
+            $logo[0], get_bloginfo('name'),
+            get_bloginfo('description'));
 
         /* Headers */
         $headers = array(

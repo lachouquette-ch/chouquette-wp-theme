@@ -68,8 +68,7 @@
     margin: 1rem;
 
     @include media-breakpoint-down(md) {
-      margin: 0;
-      margin-bottom: 1rem;
+      margin: 0 0 1rem;
     }
   }
 

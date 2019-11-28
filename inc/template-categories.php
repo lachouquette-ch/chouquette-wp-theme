@@ -105,10 +105,10 @@ if (!function_exists('chouquette_category_get_marker_icon')) :
     /**
      * Prints the taxonomy logo (if any)
      *
-     * @param object $taxonomy the taxonomy. Should have a 'logo' attribute (array) with the id of the image
-     * @param string $color the color. Only 'white', 'black' or 'yellow'
-     * @param string $size the WP size. Default is thumbnail
-     * @param array $classes the classes to add to the img tag
+     * @param object $category the category
+     * @param string $is_chouquettise if the post is chouquettise
+     *
+     * @return the logo URL
      */
     function chouquette_category_get_marker_icon(object $category, bool $is_chouquettise)
     {

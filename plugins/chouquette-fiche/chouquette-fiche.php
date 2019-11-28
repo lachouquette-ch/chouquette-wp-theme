@@ -85,4 +85,3 @@ if (!function_exists('chouquette_google_map_api')):
 
     add_filter('acf/fields/google_map/api', 'chouquette_google_map_api');
 endif;
-?>

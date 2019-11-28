@@ -8,6 +8,10 @@
 if (!function_exists('chouquette_fiche_is_chouquettise')) :
     /**
      * Return if fiche is chouquettise
+     *
+     * @param $fiche_id the id of the fiche
+     *
+     * @return true of false if the fiche is chouquettise
      */
     function chouquette_fiche_is_chouquettise(int $fiche_id)
     {
@@ -46,7 +50,10 @@ if (!function_exists('chouquette_fiche_flatten_terms')) :
      * Flatten fiche terms into single array
      *
      * @param $taxonomies fiche taxonomies including terms from chouquette_get_fiche_taxonomies function
+     *
      * @return array of term names
+     *
+     * @throws Exception if no taxonomy is given
      */
     function chouquette_fiche_flatten_terms(array $taxonomies)
     {
