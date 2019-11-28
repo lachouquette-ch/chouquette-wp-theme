@@ -5,6 +5,8 @@ import "whatwg-fetch";
 /* Run global app script */
 import ShowOnce from './misc/show-once';
 import $ from 'jquery';
+/* Bootstrap imports */
+import 'bootstrap/js/src/modal';
 
 /* CSS imports */
 require("../styles/main.scss");
