@@ -193,3 +193,5 @@ const app = new Vue({
         });
     }
 });
+
+export {app}
