@@ -19,6 +19,6 @@
     </div>
 <?php
 
-wp_enqueue_script('404', get_template_directory_uri() . '/dist/default.js', null, CQ_THEME_VERSION, true);
+wp_enqueue_script('error', get_template_directory_uri() . '/dist/other.js', null, CQ_THEME_VERSION, true);
 
 get_footer();
