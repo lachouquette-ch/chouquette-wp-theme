@@ -13,4 +13,6 @@ while (have_posts()) :
 <?php
 endwhile;
 
+wp_enqueue_script('page', get_template_directory_uri() . '/dist/other.js', null, CQ_THEME_VERSION, true);
+
 get_footer();

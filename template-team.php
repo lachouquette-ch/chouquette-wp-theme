@@ -39,4 +39,6 @@ foreach ($members as $index => $member) {
 }
 echo '</div>';
 
+wp_enqueue_script('template-team', get_template_directory_uri() . '/dist/other.js', null, CQ_THEME_VERSION, true);
+
 get_footer();

@@ -17,4 +17,8 @@
             <p>Sinon t'as toujours les catégories dans le menu pour t'aider à naviguer <i class="fas fa-ship"></i></p>
         </div>
     </div>
-<?php get_footer();
+<?php
+
+wp_enqueue_script('404', get_template_directory_uri() . '/dist/default.js', null, CQ_THEME_VERSION, true);
+
+get_footer();

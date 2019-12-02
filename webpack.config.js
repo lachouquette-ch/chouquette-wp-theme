@@ -45,8 +45,10 @@ const categoryServicesModule = basicModuleConfiguration("categoryServices", "./s
 const searchModule = basicModuleConfiguration("search", "./src/scripts/search.js");
 const singleFicheModule = basicModuleConfiguration("singleFiche", "./src/scripts/single-fiche.js");
 const singlePostModule = basicModuleConfiguration("singlePost", "./src/scripts/single-post.js");
+const otherModule = basicModuleConfiguration("other", "./src/scripts/other.js");
+const templateContactModule = basicModuleConfiguration("templateContact", "./src/scripts/template-contact.js");
 
-module.exports = [appModule, indexModule, fichesMapModule, categoryServicesModule, searchModule, singleFicheModule, singlePostModule];
+module.exports = [appModule, indexModule, fichesMapModule, categoryServicesModule, searchModule, singleFicheModule, singlePostModule, otherModule, templateContactModule];
 
 /**
  * Build module configuration for webpack
