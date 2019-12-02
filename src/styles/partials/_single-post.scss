@@ -171,17 +171,17 @@
 
   /* Alignements */
 
-  .aligncenter {
+  .aligncenter:not(.wp-block-gallery) {
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .alignright {
+  .alignright:not(.wp-block-gallery) {
     float: right;
   }
 
-  .alignleft {
+  .alignleft:not(.wp-block-gallery) {
     float: left;
   }
 
