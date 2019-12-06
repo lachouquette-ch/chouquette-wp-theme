@@ -149,7 +149,7 @@ if (!function_exists('chouquette_scripts')) :
     {
 
         // default javascript function
-        wp_enqueue_script('script', get_template_directory_uri() . '/dist/main.js', CQ_THEME_VERSION, true);
+        wp_enqueue_script('script', get_template_directory_uri() . '/dist/main.js', null, CQ_THEME_VERSION, true);
 
         // https://codex.wordpress.org/Function_Reference/comment_reply_link
         if (is_singular() && comments_open() && get_option('thread_comments')) {
