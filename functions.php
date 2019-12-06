@@ -147,6 +147,8 @@ add_action('after_setup_theme', 'chouquette_setup');
 if (!function_exists('chouquette_scripts')) :
     function chouquette_scripts()
     {
+        // style
+        wp_enqueue_style('style', get_template_directory_uri() . '/dist/style.css', null, CQ_THEME_VERSION, 'all');
 
         // default javascript function
         wp_enqueue_script('script', get_template_directory_uri() . '/dist/main.js', null, CQ_THEME_VERSION, true);

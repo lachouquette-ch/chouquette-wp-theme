@@ -12,6 +12,12 @@ const webpackProvide = new webpack.ProvidePlugin({
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const cleanWebpack = new CleanWebpackPlugin(['dist']);
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const miniCssExtract = new MiniCssExtractPlugin({
+    filename: "style.css",
+    chunkFilename: "[id].css",
+});
+
 const autoprefixer = require('autoprefixer');
 
 // module build
@@ -20,7 +26,7 @@ appModule.module.rules.push(
     {
         test: /\.scss$/,
         use: [
-            "style-loader",
+            MiniCssExtractPlugin.loader,
             "css-loader",
             "sass-loader"
         ]
@@ -37,7 +43,7 @@ appModule.module.rules.push(
             }
         ]
     });
-appModule.plugins.unshift(cleanWebpack);
+appModule.plugins.unshift(cleanWebpack, miniCssExtract);
 
 const indexModule = basicModuleConfiguration("index", "./src/scripts/index.js");
 const fichesMapModule = basicModuleConfiguration("fichesMap", "./src/scripts/fiches-map.js");
