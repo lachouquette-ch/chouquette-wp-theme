@@ -145,6 +145,10 @@
 .cq-single-post-content-text {
   .wp-block-image {
     margin: 1.5rem auto;
+
+    figure.aligncenter > figcaption {
+      display: block;
+    }
   }
 }
 

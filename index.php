@@ -96,19 +96,41 @@
             <div class="text-center">
                 <h2 class="mb-4">Nos derniers articles</h2>
             </div>
-            <?php
-            $latest_posts = new WP_Query('posts_per_page=6');
-            if ($latest_posts->have_posts()) :
-                ?>
-                <div class="article-card-shuffle-container d-flex flex-wrap align-items-center justify-content-center">
-                    <?php
-                    while ($latest_posts->have_posts()) :
-                        $latest_posts->the_post();
+            <div class="article-card-shuffle-container d-flex flex-wrap align-items-center justify-content-center">
+                <?php
+                // sticky first
+                $args = array(
+                    'posts_per_page' => 6,
+                    'post__in' => get_option('sticky_posts'),
+                    'ignore_sticky_posts' => 1,
+                    'orderby' => 'modified',
+                    'order' => 'DESC'
+                );
+                $sticky_posts = new WP_Query($args);
+                if ($sticky_posts->have_posts()) {
+                    while ($sticky_posts->have_posts()) {
+                        $sticky_posts->the_post();
                         get_template_part('template-parts/article-card');
-                    endwhile;
-                    ?>
-                </div>
-            <?php endif; ?>
+                    }
+                }
+
+                // lastest if any slot left
+                $remaining_slots = 6 - $sticky_posts->post_count;
+                if ($remaining_slots) {
+                    $args = array(
+                        'posts_per_page' => $remaining_slots,
+                        'ignore_sticky_posts' => 1,
+                    );
+                    $latest_posts = new WP_Query($args);
+                    if ($latest_posts->have_posts()) {
+                        while ($latest_posts->have_posts()) {
+                            $latest_posts->the_post();
+                            get_template_part('template-parts/article-card');
+                        }
+                    }
+                }
+                ?>
+            </div>
         </div>
 
         <div id="newsletter" class="home-newsletter container-fluid my-5">
