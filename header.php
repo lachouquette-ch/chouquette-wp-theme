@@ -34,6 +34,10 @@
         $canonical_url = add_query_arg('s', $wp->query_vars['s'], home_url('/'));
         echo "<link rel='canonical' href='$canonical_url'/>";
     }
+    if ($_GET['redirect']) {
+        echo "<link rel='canonical' href='$canonical_url'/>";
+    }
+
     // need to add og:url since yoast canonical is disabled (cf. template-pagination.php)
     echo "<meta property='og:url' content='$canonical_url'/>";
     ?>
