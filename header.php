@@ -34,7 +34,7 @@
         $canonical_url = add_query_arg('s', $wp->query_vars['s'], home_url('/'));
         echo "<link rel='canonical' href='$canonical_url'/>";
     }
-    if ($_GET['redirect']) {
+    if (isset($_GET['redirect'])) {
         echo "<link rel='canonical' href='$canonical_url'/>";
     }
 
