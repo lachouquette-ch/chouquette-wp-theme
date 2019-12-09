@@ -36,8 +36,8 @@
     "webpack-dev-server": "^3.1.14"
   },
   "scripts": {
-    "build": "webpack --verbose --progress --colors --optimize-minimize",
-    "watch": "webpack --verbose --progress --colors --watch"
+    "build": "webpack --mode=production --verbose --progress --colors --optimize-minimize",
+    "watch": "webpack --mode=development --verbose --progress --colors --watch"
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
