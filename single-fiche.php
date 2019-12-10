@@ -17,8 +17,9 @@ while (have_posts()):
                 'key' => CQ_FICHE_SELECTOR, // name of custom field
                 'value' => '"' . $fiche->ID . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
                 'compare' => 'LIKE'
-            )
-        )
+            ),
+        ),
+        'ignore_sticky_posts' => 1
     ));
     ?>
     <div id="app" class="container-fluid cq-single-fiche mx-auto py-4">
