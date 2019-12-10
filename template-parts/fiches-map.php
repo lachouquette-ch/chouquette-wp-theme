@@ -19,7 +19,7 @@ get_template_part('template-parts/fiche-modals');
         <div class="row">
             <div class="col-md-6 p-0 category-result-col">
                 <h1 class="text-center my-4 cq-font"><?php echo single_cat_title(); ?></h1>
-                <form class="mb-4 px-4 <?php echo empty($_GET['id']) ? '' : 'd-none' ?>">
+                <form v-on:submit.prevent="submitSearch($event)" class="mb-4 px-4 <?php echo empty($_GET['id']) ? '' : 'd-none' ?>">
                     <input id="search-cat" type="hidden" value="<?php echo $default_category->slug ?? '' ?>">
                     <input id="search-loc" type="hidden" value="<?php echo $default_location->slug ?? '' ?>">
 
@@ -57,12 +57,12 @@ get_template_part('template-parts/fiche-modals');
                         <div v-for="criteria in criterias" class="form-group">
                             <label :for="criteria.name">{{ criteria.label }}</label>
                             <select :id="criteria.name" class="form-control d-md-none" :name="criteria.name + '[]'" multiple="multiple" v-model="criteria.selectedTerms" size="3">
-                                <option v-for="term in criteria.terms" :value="term.slug" v-on:change="toggleCheckCritera(term)">{{ term.name }}</option>
+                                <option v-for="term in criteria.terms" :value="term.slug">{{ term.name }}</option>
                             </select>
                             <div class="category-criteria-checkbox d-none d-md-block">
                                 <div v-for="term in criteria.terms" class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked" v-on:change="toggleCheckCritera(term)"> {{ term.name }}
+                                        <input class="form-check-input" type="checkbox" :name="criteria.name + '[]'" :value="term.slug" v-model="term.checked" v-on:change="toggleCheckCritera(criteria, term.slug)"> {{ term.name }}
                                     </label>
                                 </div>
                             </div>

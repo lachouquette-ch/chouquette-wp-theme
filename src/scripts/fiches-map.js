@@ -82,7 +82,7 @@ const app = new Vue({
         },
         // get fiches from URL and add it to map
         addFichesToMap() {
-            fetch(this.ficheApiURL + location.search)
+            fetch(this.ficheApiURL + window.location.search)
                 .then(response => response.json())
                 .then(fiches => {
                     app.bounds = new google.maps.LatLngBounds();
@@ -162,6 +162,27 @@ const app = new Vue({
             // close current infoWindow
             app.currentInfoWindow = app.infoWindows.get(ficheId);
             app.currentInfoWindow.open(map, app.currentMarker);
+        },
+        // change query param before submit request
+        submitSearch(event) {
+            var searchParams = new URLSearchParams();
+
+            const queryArgs = $(event.target).serializeArray();
+            for (const arg of queryArgs) {
+                // skip criterias
+                if (arg.name.startsWith('cq_')) continue;
+                // skip empty values
+                if (arg.value.length > 0) {
+                    searchParams.append(arg.name, arg.value);
+                }
+            };
+            for (const criteriaGroup of this.criterias) {
+                if (criteriaGroup.selectedTerms.length) {
+                    searchParams.append(criteriaGroup.name, criteriaGroup.selectedTerms.join(','));
+                }
+            }
+            const targetURL = `${location.pathname}?${searchParams.toString()}`;
+            window.location.assign(targetURL);
         }
     },
     mounted() {

@@ -10,8 +10,14 @@ const VUE_UTILITY_MIXIN = {
     },
     created() {
         // create instance of URLSearch
-        var queryParams = location.search.replace(/%5B%5D/g, ''); // remove []
-        this.$_params = new URLSearchParams(queryParams);
+        this.$_params = new URLSearchParams(window.location.search);
+        for (const [key, value] of this.$_params.entries()) {
+            if (value.includes(',')) {
+                value.split(',').map(term => {
+                    this.$_params.append(key, term)
+                });
+            }
+        }
     }
 };
 

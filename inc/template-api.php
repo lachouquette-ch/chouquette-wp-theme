@@ -147,9 +147,17 @@ add_action('rest_api_init', function () {
 
 function cq_filter_criterias_params(array $queryParams)
 {
-    return array_filter($queryParams, function ($key) {
+    $result = [];
+
+    $criterias = array_filter($queryParams, function ($key) {
         return substr_compare($key, 'cq_', 0, 3) == false;
     }, ARRAY_FILTER_USE_KEY);
+
+    foreach ($criterias as $criteria => $terms) {
+        $result[$criteria] = explode(',', $terms);
+    }
+
+    return $result;
 }
 
 function cq_get_locations_for_id(int $id)

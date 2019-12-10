@@ -60,11 +60,11 @@ const VUE_CRITERIAS_MIXIN = {
             }
         },
         // properly remove uncheck term
-        toggleCheckCritera(term) {
-            if (!term.checked) {
-                for (const taxonomy of this.criterias) {
-                    taxonomy.selectedTerms = taxonomy.selectedTerms.filter(element => element != term.slug);
-                }
+        toggleCheckCritera(criteria, term) {
+            if (criteria.selectedTerms.includes(term)) {
+                criteria.selectedTerms = criteria.selectedTerms.filter(element => element != term);
+            } else {
+                criteria.selectedTerms.push(term);
             }
         }
     }
