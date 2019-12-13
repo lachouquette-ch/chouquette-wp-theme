@@ -121,17 +121,25 @@ if (!function_exists('chouquette_fiche_get_all')) :
      *
      * @param int|WP_Post|null $post Post ID or post object of null to get globa $post
      *
-     * @return array of posts (fiches). Empty array if none.
+     * @return array of posts (fiches) sorted (chouquettise last). Empty array if none.
      */
     function chouquette_fiche_get_all($post = null)
     {
         $fiches = get_field(CQ_FICHE_SELECTOR, $post);
+
         if (!$fiches) {
             return [];
         } elseif (!is_array($fiches)) {
-            $fiches = array($fiches);
+            return array($fiches);
         } else {
-            return $fiches;
+            // sort fiches (chouquettises last)
+            $fiches_chouquettises = array_filter($fiches, function ($fiche) {
+                return chouquette_fiche_is_chouquettise($fiche->ID);
+            });
+            $fiches_not_chouquettises = array_filter($fiches, function ($fiche) {
+                return !chouquette_fiche_is_chouquettise($fiche->ID);
+            });
+            return array_merge($fiches_not_chouquettises, $fiches_chouquettises);
         }
     }
 endif;

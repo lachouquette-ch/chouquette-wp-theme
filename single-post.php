@@ -114,7 +114,7 @@ while (have_posts()) :
                     <div class="cq-single-post-fiches-wrapper" v-cloak>
                         <div id="fichesAccordion">
                             <?php foreach ($linkFiches as $fiche): ?>
-                                <button class="w-100 btn btn-dark d-block cq-toggle" type="button" data-toggle="collapse" data-target="#fiche<?php echo $fiche->ID; ?>"
+                                <button class="w-100 btn <?php echo chouquette_fiche_is_chouquettise($fiche->ID) ? 'btn-yellow' : 'btn-dark'; ?> d-block cq-toggle" type="button" data-toggle="collapse" data-target="#fiche<?php echo $fiche->ID; ?>"
                                         aria-expanded="true" aria-controls="collapseOne">
                                     <i class="fa mr-2 float-left"></i><?php echo $fiche->post_title; ?>
                                 </button>
