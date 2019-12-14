@@ -1,8 +1,8 @@
 <?php get_header(); ?>
     <div class="container cq-404 py-5 text-center">
         <div class="cq-404-msg mb-5">
-            <p><i class="fas fa-sign-out-alt"></i> Bye bye</p>
-            <p>Cet article, fiche ou page a été retiré de ce site.</p>
+            <p>Désolé ce lien a été supprimé <i class="far fa-sad-tear"></i></p>
+            <p>La Chouquette veille à ce que ton site soit toujours à jour <i class="far fa-thumbs-up"></i>.</p>
         </div>
         <div>
             <p>Envie de découvrir les nouveautés Chouquette ? <a class='link-secondary' title='Les nouveautés Chouquette' href="/">C'est par ici !</a></p>
