@@ -50,6 +50,7 @@
     "lettering.js": "^0.8.2",
     "load-google-maps-api": "^2.0.1",
     "popper.js": "^1.14.7",
+    "postcss-loader": "^3.0.0",
     "recaptcha-v3": "^1.7.0",
     "swiper": "^5.2.0",
     "vue": "^2.6.10",

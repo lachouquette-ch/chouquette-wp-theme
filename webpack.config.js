@@ -28,6 +28,7 @@ appModule.module.rules.push(
         use: [
             MiniCssExtractPlugin.loader,
             "css-loader",
+            "postcss-loader",
             "sass-loader"
         ]
     },
@@ -43,7 +44,7 @@ appModule.module.rules.push(
             }
         ]
     });
-appModule.plugins.unshift(cleanWebpack, miniCssExtract);
+appModule.plugins.unshift(cleanWebpack, miniCssExtract, autoprefixer);
 
 const indexModule = basicModuleConfiguration("index", "./src/scripts/index.js");
 const fichesMapModule = basicModuleConfiguration("fichesMap", "./src/scripts/fiches-map.js");
