@@ -41,7 +41,7 @@ define('CQ_TAXONOMY_LOCATION', 'cq_location');
 define('CQ_TAXONOMY_CRITERIA', 'cq_criteria');
 
 define('CQ_SN_FACEBOOK', 'https://www.facebook.com/lachouquettelausanne');
-define('CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquettelausanne');
+define('CQ_SN_INSTAGRAM', 'https://www.instagram.com/lachouquette.ch');
 
 // TODO should be in wp-config.php
 define('CQ_RECAPTCHA_SECRET', '6LeGzZoUAAAAAF35rYtWWthF9Wb_WDB1QPJ3hYG4');
