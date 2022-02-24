@@ -44,3 +44,30 @@ if (!function_exists('lachouquette_setup')) :
     }
 endif;
 add_action('after_setup_theme', 'lachouquette_setup');
+
+/**
+ * Add new system text field to customization panel
+ */
+if (!function_exists('lachouquette_extra')) :
+    function lachouquette_extra($wp_customize)
+    {
+        $wp_customize->add_section('la_chouquette_section', array(
+            'title' => __('Extra La Chouquette'),
+            'description' => __('Champs de configuration du thème pour La Chouquette'),
+            'priority' => 30,
+        ));
+
+        $wp_customize->add_setting('la_chouquette_system_text', array(
+            'default' => '',
+        ));
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'system_text', array(
+            'type' => 'textarea',
+            'section' => 'la_chouquette_section',
+            'settings' => 'la_chouquette_system_text',
+            'label' => __('Texte système'),
+            'description' => __('Texte (HTML) qui sera affiché en haut de chaque page. Ce module est désactivé sur le champ est vide'),
+        )));
+    }
+    add_action('customize_register', 'lachouquette_extra');
+endif;
